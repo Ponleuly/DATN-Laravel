@@ -44,7 +44,7 @@
 					@endforeach
 		      	</div>
 				<div class="row">
-					<div class="d-flex justify-content-end">
+					<div class="d-flex justify-content-center">
 						<!--- To show data by pagination --->
 						{{$allProducts->links()}}
                 	</div>
