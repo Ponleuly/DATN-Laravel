@@ -787,7 +787,7 @@ a {
       color: #CC2936;
       border-radius: 50%;
     }
-      .footer-section .custom-social li a:hover {
+      .footer-section .custom-social li a:hover span{
         background: #CC2936;
         color: #ffffff; }
   .footer-section .border-top {
