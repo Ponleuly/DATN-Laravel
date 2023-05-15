@@ -76,6 +76,7 @@ class ProductDetailController extends Controller
         $productGroups = Products_Attributes::where('product_id', $productId)->get();
         $productCategory = Products_Attributes::where('product_id', $productId)->first();
         $sizeStock = 0;
+        $allStock = $product_view->product_stock;
         $headCode = trim($code, " 0..9");
         $productCode = Products::where('product_code', 'LIKE', '%' . $headCode . '%')->get();
         //==== Calculate total quantity of each size ====//
@@ -83,10 +84,13 @@ class ProductDetailController extends Controller
             $sizeStock += $row->size_quantity;
         }
         $stockLeft = $sizeStock;
+        $status = Products::where('product_code', $code)->first();
         //===== Update product status if product stock sold out ======//
         if ($stockLeft == 0) {
-            $status = Products::where('product_code', $code)->first();
             $status->product_status = 3; // is sold out
+            $status->update();
+        }elseif ($stockLeft > 0 && $stockLeft < $allStock){
+            $status->product_status = 2; // is selling
             $status->update();
         }
         return view(
