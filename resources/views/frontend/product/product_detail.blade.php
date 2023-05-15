@@ -46,16 +46,25 @@
     <div class="untree_co-section">
 		<div class="container">
             @if(Session::has('alert'))
+                <script>
+                    var type = 0;
+                    var message = "<?php echo Session::get('alert'); ?>";
+                </script>
+		        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+
+            <!--
                 <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
                     {{Session::get('alert')}}
                     <a href="{{url('login')}}" class="alert-link">  Click here </a> to sign in.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+            -->
                 @elseif(Session::has('message'))
-                    <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                        {{Session::get('message')}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                    <script>
+                        var type = 1;
+                        var message = "<?php echo Session::get('message'); ?>";
+                    </script>
+		            <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
             @endif
 
 		    <!--------------Start </form> ---------------------->

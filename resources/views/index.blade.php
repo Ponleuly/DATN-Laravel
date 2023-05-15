@@ -17,6 +17,10 @@
 		<link rel="stylesheet" href="{{url('frontend/js/custom.js')}}">
 		<link rel="stylesheet" href="{{url('frontend/js/tiny-slider.js')}}">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<!-- Sweet alert -->
+		<link rel="stylesheet" href="{{url('frontend/js/sweetAlert.js')}}">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 		<!-- Styles -->
 		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 		<?php
