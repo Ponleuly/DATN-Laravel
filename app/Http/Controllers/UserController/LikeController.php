@@ -33,18 +33,18 @@ class LikeController extends Controller
                 $add_like['user_id'] = $user_id;
                 Likes::create($add_like);
                 return redirect()->back()->with(
-                    'message',
-                    'Products is added to favorite successfully!',
+                    'success',
+                    'Product added to favorite successfully.',
                 );
             }
             return redirect()->back()->with(
-                'message',
-                'Products is removed from favorite !',
+                'success',
+                'Product removed from favorite successfully.',
             );
         } else {
             return redirect()->back()->with(
-                'alert',
-                'Please sign in ! To add products to favorite.',
+                'info',
+                'Please sign in!',
             );
         }
     }
@@ -55,19 +55,27 @@ class LikeController extends Controller
 
         return redirect()->back()
             ->with(
-                'message',
-                'Product is removed from favorite successfully!',
+                'success',
+                'Product removed from favorite successfully.',
             );
         //return dd($rowId);
     }
-    public function remove_all_like()
-    {
-        Likes::where('user_id', Auth::user()->id)->delete();
+    public function remove_all_like($var)
+    {   if ($var == 0){
         return redirect()->back()
-            ->with(
-                'message',
-                'All products is removed from favorite list successfully!',
-            );
-        //return dd($rowId);
+        ->with(
+            'question',
+            'remove-all-like/1',
+        );
+    }else if ($var == 1){
+        Likes::where('user_id', Auth::user()->id)->delete();
+        return redirect()->back()    
+        ->with(
+            'success',
+            'All products removed from favorite list successfully.',
+        );
+    //return dd($rowId);
+    }
+       
     }
 }

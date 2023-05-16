@@ -93,8 +93,8 @@ class CartController extends Controller
         if ($request->action == 'addtocart') {
             return redirect()->back()
                 ->with(
-                    'message',
-                    'Product is added to cart successfully!',
+                    'success',
+                    'Product added to cart successfully.',
                 );
         } else if ($request->action == 'buynow') {
             return redirect('/cart');

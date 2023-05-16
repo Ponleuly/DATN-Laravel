@@ -19,19 +19,26 @@
 
 	<div class="untree_co-section ">
         <div class="container">
-            <!--------------- Alert ------------------------>
-            @if(Session::has('alert'))
-                <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
-                    {{Session::get('alert')}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @elseif(Session::has('message'))
-                    <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                        {{Session::get('message')}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+            @if(Session::has('info'))
+                <script>
+                    var type = 'info';
+                    var text = "<?php echo Session::get('info'); ?>";
+                </script>
+		        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+
+                @elseif(Session::has('success'))
+                    <script>
+                        var type = 'success';
+                        var text = "<?php echo Session::get('success'); ?>";
+                    </script>
+		            <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                @elseif(Session::has('question'))
+                    <script>
+                        var type = 'question';
+                        var text = "<?php echo Session::get('question'); ?>";
+                    </script>
+		            <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
             @endif
-            <!---------------End Alert ------------------------>
             <hr class="line-color">
             @if($likes_count > 0)
                 @foreach ($likes as $like)
@@ -159,9 +166,10 @@
 			@endif
             <div class="row my-5">
                 <div class="col-md-12 d-flex justify-content-between">
-                    <a href="{{url('remove-all-like')}}" class="btn btn-block py-1 px-5 fw-semibold rounded-0 me-1">
+                    <a href="{{url('remove-all-like/0')}}" class="btn btn-block py-1 px-5 fw-semibold rounded-0 me-1">
                         <span>Remove All</span>
                     </a>
+                    
                     <a href="{{url('shop')}}" class="btn btn-block py-1 px-5 fw-semibold rounded-0 ms-1">
                         <span>Continue Shopping</span>
                     </a>
