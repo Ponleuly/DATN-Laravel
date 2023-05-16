@@ -5,18 +5,34 @@
     <div class="row justify-content-center">
         <div class="col-md-8 p-5">
             <!--------------- Alert ------------------------>
-            @if(Session::has('alert'))
-                <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
-                    {{Session::get('alert')}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @elseif(Session::has('message'))
-                    <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                        {{Session::get('message')}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+			@if(Session::has('error'))
+                <script>
+                    var type = 'error';
+                    var text = "<?php echo Session::get('error'); ?>";
+                </script>
+                <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                @elseif(Session::has('info'))
+                    <script>
+                        var type = 'info';
+                        var text = "<?php echo Session::get('info'); ?>";
+                    </script>
+                    <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+
+                    @elseif(Session::has('success'))
+                        <script>
+                            var type = 'success';
+                            var text = "<?php echo Session::get('success'); ?>";
+                        </script>
+                        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                    @elseif(Session::has('question'))
+                        <script>
+                            var type = 'question';
+                            var text = "<?php echo Session::get('question'); ?>";
+                        </script>
+                        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
             @endif
-            <!---------------End Alert ------------------------>
+            <!------------------End Alert ------------------------>
+
             <div class="card border-danger">
                 <div class="card-header">{{ $title ?? "" }} {{ __('Login') }}</div>
 

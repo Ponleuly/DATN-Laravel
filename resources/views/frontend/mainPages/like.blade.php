@@ -19,25 +19,30 @@
 
 	<div class="untree_co-section ">
         <div class="container">
-            @if(Session::has('info'))
-                <script>
-                    var type = 'info';
-                    var text = "<?php echo Session::get('info'); ?>";
-                </script>
-		        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
-
-                @elseif(Session::has('success'))
+            @if(Session::has('error'))
+				<script>
+					var type = 'error';
+					var text = "<?php echo Session::get('error'); ?>";
+				</script>
+				<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                @elseif(Session::has('info'))
                     <script>
-                        var type = 'success';
-                        var text = "<?php echo Session::get('success'); ?>";
+                        var type = 'info';
+                        var text = "<?php echo Session::get('info'); ?>";
                     </script>
-		            <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
-                @elseif(Session::has('question'))
-                    <script>
-                        var type = 'question';
-                        var text = "<?php echo Session::get('question'); ?>";
-                    </script>
-		            <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                    <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                    @elseif(Session::has('success'))
+                        <script>
+                            var type = 'success';
+                            var text = "<?php echo Session::get('success'); ?>";
+                        </script>
+                        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                    @elseif(Session::has('question'))
+                        <script>
+                            var type = 'question';
+                            var text = "<?php echo Session::get('question'); ?>";
+                        </script>
+                        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
             @endif
             <hr class="line-color">
             @if($likes_count > 0)
@@ -166,10 +171,15 @@
 			@endif
             <div class="row my-5">
                 <div class="col-md-12 d-flex justify-content-between">
-                    <a href="{{url('remove-all-like/0')}}" class="btn btn-block py-1 px-5 fw-semibold rounded-0 me-1">
-                        <span>Remove All</span>
-                    </a>
-                    
+                    @if($likes_count == 0)
+                        <a href="{{url('remove-all-like/0')}}" class="btn btn-block py-1 px-5 fw-semibold rounded-0 me-1 disabled">
+                            <span>Remove All</span>
+                        </a>
+                        @else 
+                            <a href="{{url('remove-all-like/0')}}" class="btn btn-block py-1 px-5 fw-semibold rounded-0 me-1">
+                                <span>Remove All</span>
+                            </a>
+                    @endif
                     <a href="{{url('shop')}}" class="btn btn-block py-1 px-5 fw-semibold rounded-0 ms-1">
                         <span>Continue Shopping</span>
                     </a>

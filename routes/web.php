@@ -73,8 +73,7 @@ Route::controller(LikeController::class)->group(function () {
    Route::get('like', 'like')->name('like')->middleware('authUser');
    Route::get('add-like/{product_id}/{user_id}', 'add_like')->name('add-like');
    Route::get('remove-like/{id}', 'remove_like')->name('remove-like');
-   Route::get('remove-all-like/{var}', 'remove_all_like')->name('remove-all-like');
-   //Route::get('remove-/{var}', 'remove_all_like')->name('remove-all-like');
+   Route::get('remove-all-like/{num}', 'remove_all_like')->name('remove-all-like');
 });
 Route::controller(HomeController::class)->group(function () {
    Route::get('/', 'home')->name('home');
@@ -97,7 +96,7 @@ Route::controller(CartController::class)->group(function () {
    Route::post('add-to-cart/{id}', 'add_to_cart')->name('add-to-cart');
    Route::put('update-cart/{id}', 'update_cart')->name('update-cart');
    Route::get('remove-from-cart/{id}', 'remove_from_cart')->name('remove-from-cart');
-   Route::get('remove-all-cart', 'remove_all_cart')->name('remove-all-cart');
+   Route::get('remove-all-cart/{num}', 'remove_all_cart')->name('remove-all-cart');
    Route::get('checkout', 'checkout')->name('checkout');
    Route::post('place-order', 'place_order')->name('place-order');
    Route::get('download-invoice/{id}', 'download_invoice')->name('download-invoice');

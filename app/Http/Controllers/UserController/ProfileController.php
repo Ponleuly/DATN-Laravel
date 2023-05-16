@@ -35,7 +35,7 @@ class ProfileController extends Controller
         $update_user->address = $request->input('address');
         $update_user->update();
         return redirect('profile')
-            ->with('message', 'Profile updated successfully !');
+            ->with('success', 'Profile updated successfully !');
 
 
         //return dd($request->toArray());
@@ -64,14 +64,14 @@ class ProfileController extends Controller
                 $user['password'] = bcrypt($input['password']);
                 $user->update();
             } else {
-                return redirect()->back()->with('alert', 'Current password does not matched !');
+                return redirect()->back()->with('error', 'Current password does not matched !');
             }
         } else {
             return redirect()->back();
         }
 
         return redirect('profile')
-            ->with('message', 'Password has been changed successfully !');
+            ->with('success', 'Password has been changed successfully !');
     }
 
     public function purchase_history()

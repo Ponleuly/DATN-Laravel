@@ -3,7 +3,9 @@
 (function (){
     var txt = text; // get from alert message controller
     var typeAlert = type;
-    if (typeAlert == 'info'){
+    if (typeAlert == 'error'){
+        errorAlert(txt);
+    }else if (typeAlert == 'info'){
         infoAlert(txt);
     }else if(typeAlert == 'success'){
         successAlert(txt);
@@ -11,6 +13,25 @@
         questionAlert(txt);
     }
 })()
+// Info fun
+function errorAlert(txt){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        })
+        Toast.fire({
+            icon: 'error',
+            title: txt,
+            color:'#dc3545',
+        })
+}
 // Info fun
 function infoAlert(txt){
     const Toast = Swal.mixin({
@@ -50,9 +71,7 @@ function successAlert(txt){
         })
 }
 // Question fun
-
-    function questionAlert(txt){
-    
+function questionAlert(txt){
     Swal.fire({
         position: 'top',
         title: 'Are you sure to remove all products from list?',
@@ -60,7 +79,7 @@ function successAlert(txt){
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: '<a class="text-decoration-none text-white" href="/'+ txt + '">Yes</a>',//'Yes, delete it!
+        confirmButtonText: '<a class="text-decoration-none text-white" href="/'+ txt + '">Yes</a>',
       })/*.then((result) => {
         if (result.isConfirmed) {
           Swal.fire(
@@ -71,46 +90,3 @@ function successAlert(txt){
         }
       })*/ //No more success alert after choose yes
 }
-/*
-(function (){
-    var str = message; // get from alert message controller
-    var typeAlert = type;
-    if (typeAlert == 0){
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 10000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'info',
-            title: str,
-            //background: 'success',\
-            color:'#0dcaf0',
-            })
-    }else if(typeAlert == 1){
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 10000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: str,
-            color: '#198754',
-            })
-    }
-}
-)()
-*/

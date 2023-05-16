@@ -14,18 +14,34 @@
         <div class="container">
             <div class="row">
                 <!--------------- Alert ------------------------>
-                    @if(Session::has('alert'))
-                        <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
-                            {{Session::get('alert')}}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @elseif(Session::has('message'))
-                            <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                                {{Session::get('message')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                    @endif
-                <!---------------End Alert ------------------------>
+				@if(Session::has('error'))
+                    <script>
+                        var type = 'error';
+                        var text = "<?php echo Session::get('error'); ?>";
+                    </script>
+                    <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                    @elseif(Session::has('info'))
+                        <script>
+                            var type = 'info';
+                            var text = "<?php echo Session::get('info'); ?>";
+                        </script>
+                        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+
+                        @elseif(Session::has('success'))
+                            <script>
+                                var type = 'success';
+                                var text = "<?php echo Session::get('success'); ?>";
+                            </script>
+                            <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                        @elseif(Session::has('question'))
+                            <script>
+                                var type = 'question';
+                                var text = "<?php echo Session::get('question'); ?>";
+                            </script>
+                            <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                @endif
+                <!------------------End Alert ------------------------>
+
                 <div class="col-md-12 border p-5 p-lg-5 bg-white">
 
                     <div class="row">

@@ -139,7 +139,7 @@ class CartController extends Controller
         }
         return redirect()->back()
             ->with(
-                'message',
+                'success',
                 'Item is updated successfully!',
             );
 
@@ -159,7 +159,7 @@ class CartController extends Controller
         //=== Return with calling method coupon_cal to get discount value ======///
         return $this->coupon_cal($code, $userId, $routeName)
             ->with(
-                'message',
+                'success',
                 'Your promo code is applied !',
             );;
     }
@@ -186,13 +186,13 @@ class CartController extends Controller
             if ($current->gt($start) && $current->gt($end)) {
                 //$status = 0; //expired
                 return redirect($routeName)->with(
-                    'alert',
+                    'error',
                     'Your promo code is expired !',
                 );
             } elseif ($current->lt($start) && $current->lt($end)) {
                 //$status = 0; //expired
                 return redirect($routeName)->with(
-                    'alert',
+                    'info',
                     'This promo code is start from ' . $start . ' to ' . $end
                 );
             } elseif ($current->gte($start) && $current->lt($end)) {
@@ -261,7 +261,7 @@ class CartController extends Controller
                 //=== If there is no discount product in cart ===//
                 if ($discount == 0) {
                     return redirect($routeName)->with(
-                        'alert',
+                        'info',
                         'This promo code is not availabled to this product !',
                     );
                 }
@@ -273,7 +273,7 @@ class CartController extends Controller
             }
         } else {
             return redirect($routeName)->with(
-                'alert',
+                'error',
                 'Your promo code not found !',
             );
         }
@@ -450,14 +450,14 @@ class CartController extends Controller
                     return $this->coupon_cal($code, $userId, $routeName)
                         ->withInput($input)
                         ->with(
-                            'message',
+                            'success',
                             'Your promo code is applied !',
                         );
                 } elseif ($request->action == 'delivery') {
                     return redirect('checkout')
                         ->withInput($input)
                         ->with(
-                            'message',
+                            'success',
                             'Delivery method is applied !',
                         );
                 }
@@ -480,14 +480,14 @@ class CartController extends Controller
                     return $this->coupon_cal($code, $userId, $routeName)
                         ->withInput($input)
                         ->with(
-                            'message',
+                            'success',
                             'Your promo code is applied !',
                         );
                 } elseif ($request->action == 'delivery') {
                     return redirect('checkout')
                         ->withInput($input)
                         ->with(
-                            'message',
+                            'success',
                             'Delivery method is applied !',
                         );
                 }
@@ -542,8 +542,8 @@ class CartController extends Controller
         }
         return redirect()->back()
             ->with(
-                'message',
-                'Product is removed from cart successfully!',
+                'success',
+                'Product removed from cart successfully!',
             );
         //return dd($rowId);
     }
@@ -551,18 +551,27 @@ class CartController extends Controller
 
 
 
-    public function remove_all_cart()
+    public function remove_all_cart($num)
     {
-        if (Auth::check() && Auth::user()->role == 1) {
-            Carts::where('user_id', Auth::user()->id)->delete();
-        } else {
-            Cart::destroy();
-        }
-        return redirect()->back()
+        if ($num == 0){ // 0 is condiction for showing question are you sure?
+            return redirect()->back()
             ->with(
-                'message',
-                'All products is removed from cart successfully!',
+                'question',
+                'remove-all-cart/1', // redirect to page with new url/1 then show question
             );
+        }else if($num == 1){ // 1 is condiction if user click yes then remove all from cart
+            if (Auth::check() && Auth::user()->role == 1) {
+                Carts::where('user_id', Auth::user()->id)->delete();
+            } else {
+                Cart::destroy();
+            }
+            return redirect()->back()
+                ->with(
+                    'success',
+                    'All products removed from cart successfully.',
+                );
+        }
+        
         //return dd($rowId);
     }
 }

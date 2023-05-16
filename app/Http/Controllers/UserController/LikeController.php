@@ -44,7 +44,7 @@ class LikeController extends Controller
         } else {
             return redirect()->back()->with(
                 'info',
-                'Please sign in!',
+                'Please sign in to add product to favorite !',
             );
         }
     }
@@ -60,14 +60,14 @@ class LikeController extends Controller
             );
         //return dd($rowId);
     }
-    public function remove_all_like($var)
-    {   if ($var == 0){
+    public function remove_all_like($num)
+    {   if ($num == 0){
         return redirect()->back()
         ->with(
             'question',
             'remove-all-like/1',
         );
-    }else if ($var == 1){
+    }else if ($num == 1){
         Likes::where('user_id', Auth::user()->id)->delete();
         return redirect()->back()    
         ->with(

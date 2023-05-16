@@ -32,8 +32,8 @@ class HomeController extends Controller
     {
         $input  = $request->all();
         Subscribers::create($input);
-        return redirect()->back()
-            ->with('sub-message', 'You are subscribered successfully !');
+        return redirect()->route('home')
+            ->with('success', 'You subscribered to get email from shop !');
     }
 
     public function search_product()

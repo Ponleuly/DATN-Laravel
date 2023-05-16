@@ -42,7 +42,7 @@ class AuthUserController extends Controller
             return redirect()->back();
         }
         return redirect('login')
-            ->with('message', 'You are signed up successfully !');
+            ->with('success', 'You are signed up successfully !');
         //return dd($request->toArray());
     }
 
@@ -66,7 +66,7 @@ class AuthUserController extends Controller
             return redirect('home');
         } else {
             return redirect('login')
-                ->with('alert', 'Login failed ! Invalid email or password.');
+                ->with('error', 'Login failed ! Invalid email or password.');
         }
     }
     public function userLogout()
