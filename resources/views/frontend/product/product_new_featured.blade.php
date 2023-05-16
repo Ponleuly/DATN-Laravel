@@ -61,7 +61,7 @@
 			@endforeach
 		</div>
 		<div class="row mt-4">
-			<div class="d-flex justify-content-end">
+			<div class="d-flex justify-content-center">
 				<!--- To show data by pagination --->
 				{{$products->links()}}
 			</div>

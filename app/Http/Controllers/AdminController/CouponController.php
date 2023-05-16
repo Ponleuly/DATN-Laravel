@@ -20,6 +20,22 @@ class CouponController extends Controller
         $coupons = Coupons::orderByDesc('id')->paginate(4);
         $count = 1;
         $search_text = '';
+        $allCoupon = Coupons::orderByDesc('id')->get();
+        $currentTime = Carbon::now();
+        foreach($allCoupon as $coupon){
+            //$end_date = date('Y-m-d  H:i:s', strtotime($request->end_date));
+            $start_date = Carbon::create($coupon->start_date);
+            $end_date = Carbon::create($coupon->end_date);
+            if ($currentTime->gt($start_date) && $currentTime->gt($end_date)) {
+                $status = 0; //expired
+            } elseif ($currentTime->gte($start_date) && $currentTime->lt($end_date)) {
+                $status = 1; //active
+            } elseif ($currentTime->lt($start_date) && $currentTime->lt($end_date)) {
+                $status = 2; //future
+            }
+            $coupon->coupon_status = $status;
+            $coupon->update();
+        }
         return view(
             'adminfrontend.pages.coupons.coupon_list',
             compact(
@@ -44,13 +60,14 @@ class CouponController extends Controller
             )
         );
     }
-
+    
     public function coupon_view($id)
     {
         $coupon = Coupons::where('id', $id)->first();
         $groups = Groups::orderBy('id')->get();
         $categories = Categories::orderBy('id')->get();
         $subcategories = Categories_Subcategories::orderBy('id')->get();
+        
         return view(
             'adminfrontend.pages.coupons.coupon_view',
             compact(
