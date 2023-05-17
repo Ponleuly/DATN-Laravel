@@ -282,7 +282,7 @@ class CartController extends Controller
 
 
 
-    public function checkout()
+    public function checkout($discount)
     {
         if (Auth::check() && Auth::user()->role == 1) {
             $carts = Carts::where('user_id', Auth::user()->id)->get();
@@ -297,19 +297,16 @@ class CartController extends Controller
             compact(
                 'carts',
                 'deliveries',
-                'payments'
+                'payments',
+                'discount'
             )
         );
     }
 
 
 
-
     public function place_order(Request $request)
     {
-        //====================== Place Order without input Coupon code ==============//
-        if ($request->action == 'placeorder') {
-
             if (Auth::check() && Auth::user()->role == 1) {
 
                 // Count order row
@@ -428,71 +425,9 @@ class CartController extends Controller
                     'shopName'
                 )
             );
-            //return dd($orderDetails->toArray());
-        }
-        //====================== If Submit input Coupon code ============================//
-        elseif ($request->action == 'apply' || $request->action == 'delivery') {
-            if (Auth::check() && Auth::user()->role == 1) {
-                $userId = Auth::user()->id;
-                //==== Convert input to uppercase ===//
-                $code = Str::upper($request->code);
-                //==== passing route name to $routeName ===//
-                $routeName = 'checkout';
-                $input = $request->all();
-                // Convert discount valeu string to number if there is coupon apllied
-                $dis = preg_replace('/[^0-9]/', '', $request->discount);
-                //=== Passing total discount to discount value by each product ====//
-                $discount = $dis / 100;
-                $input['discount'] = $discount;
-
-                //=== Return with calling method coupon_cal to get discount value ======//
-                if ($request->action == 'apply') {
-                    return $this->coupon_cal($code, $userId, $routeName)
-                        ->withInput($input)
-                        ->with(
-                            'success',
-                            'Your promo code is applied !',
-                        );
-                } elseif ($request->action == 'delivery') {
-                    return redirect('checkout')
-                        ->withInput($input)
-                        ->with(
-                            'success',
-                            'Delivery method is applied !',
-                        );
-                }
-            } else {
-                $userId = 0;
-                //==== Convert input to uppercase ===//
-                $code = Str::upper($request->code);
-                //==== passing route name to $routeName ===//
-                $routeName = 'checkout';
-                //=== Return with calling method coupon_cal to get discount value ======//
-                //== Get input request in old page ===//
-                $input = $request->all();
-
-                // Convert discount valeu string to number if there is coupon apllied
-                $dis = preg_replace('/[^0-9]/', '', $request->discount);
-                //=== Passing total discount to discount value by each product ====//
-                $discount = $dis / 100;
-                $input['discount'] = $discount;
-                if ($request->action == 'apply') {
-                    return $this->coupon_cal($code, $userId, $routeName)
-                        ->withInput($input)
-                        ->with(
-                            'success',
-                            'Your promo code is applied !',
-                        );
-                } elseif ($request->action == 'delivery') {
-                    return redirect('checkout')
-                        ->withInput($input)
-                        ->with(
-                            'success',
-                            'Delivery method is applied !',
-                        );
-                }
-            }
-        }
+            
+        //return dd($request->toArray());
+        
     }
 
     //======================================================================================================================//

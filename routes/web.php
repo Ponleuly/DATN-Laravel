@@ -97,7 +97,7 @@ Route::controller(CartController::class)->group(function () {
    Route::put('update-cart/{id}', 'update_cart')->name('update-cart');
    Route::get('remove-from-cart/{id}', 'remove_from_cart')->name('remove-from-cart');
    Route::get('remove-all-cart/{num}', 'remove_all_cart')->name('remove-all-cart');
-   Route::get('checkout', 'checkout')->name('checkout');
+   Route::get('checkout/dis={discount}', 'checkout')->name('checkout');
    Route::post('place-order', 'place_order')->name('place-order');
    Route::get('download-invoice/{id}', 'download_invoice')->name('download-invoice');
 });

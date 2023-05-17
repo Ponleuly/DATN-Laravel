@@ -360,7 +360,7 @@
 												<strong>Subtotal</strong>
 											</td>
 											<td class="text-black text-end border-bottom-0">
-												<strong>{{number_format($subtotal, 2)}} $</strong>
+												<strong>$ {{number_format($subtotal, 2)}}</strong>
 											</td>
 										</tr>
 										<tr>
@@ -368,14 +368,7 @@
 												<strong>Discount</strong>
 											</td>
 											<td class="text-black font-weight-bold d-flex justify-content-end">
-												<input
-													class="form-control form-control-sm w-75 text-end pe-0 border-0 bg-white text-danger"
-													name="discount"
-													value="$ {{number_format($discount, 2)}}"
-													aria-label=".form-control-sm example"
-													readonly
-													placeholder="$"
-												>
+												<strong>$ {{number_format($discount, 2)}}</strong>
 											</td>
 										</tr>
 										<tr>
@@ -383,20 +376,20 @@
 												<strong>Total</strong>
 											</td>
 											<td class="text-danger text-end h6 fw-bold border-bottom-0">
-												<strong>{{$total = number_format(($subtotal - $discount) ,2)}} $</strong>
+												<strong>$ {{$total = number_format(($subtotal - $discount) ,2)}}</strong>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 
 								<div class="d-grid">
-									<button
+									<a
 										class="btn btn-block px-4 py-2 fw-semibold rounded-0"
-										onclick="location.href='{{ url('checkout') }}'"
+										href="{{url('checkout/dis='.number_format($discount, 2))}}"
 										{{($carts_count == 0)? 'disabled':'' }}
 										>
 										CHECKOUT
-									</button>
+									</a>
 								</div>
 		                	</div>
 		            	</div>

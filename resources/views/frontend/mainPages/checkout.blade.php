@@ -99,7 +99,6 @@
 										}
 										$c_note =  Request::old('c_note');
 										$ship = Request::old('delivery_fee');
-										$dis = Request::old('discount');
 									}
 									else{
 										$c_name =  Request::old('c_name');
@@ -108,7 +107,6 @@
 										$c_address =  Request::old('c_address');
 										$c_note =  Request::old('c_note');
 										$ship = Request::old('delivery_fee');
-										$dis = Request::old('discount');
 									}
 								@endphp
 								<div class="form-group row mb-3">
@@ -187,17 +185,6 @@
 								<h2 class="h3 mb-3 text-black">Delivery Methods</h2>
 								@foreach ($deliveries as $delivery)
 									<div class="row d-flex  align-items-baseline mb-3">
-										<div class="col-md-2">
-											<button
-												type="submit"
-												name="action"
-												value="delivery"
-												class="btn btn-outline-secondary btn-sm pt-1 rounded-0 "
-												style="font-size: 12px"
-												>
-												Choose
-											</button>
-										</div>
 										<div class="col-md-6">
 											<div class="form-check">
 												<input
@@ -210,6 +197,7 @@
 														checked
 													@endif
 													required
+													onclick = "delMethod()";
 												>
 												<label
 													class="form-check-label text-dark fs-6"
@@ -229,45 +217,18 @@
 											</label>
 										</div>
 									</div>
+									
 								@endforeach
 							</div>
 						</div>
 						<!------------------------End Delivery Informations--------------------------------->
 
-						<!------------------------ Your Cart --------------------------------->
+<!----------------------------------------- Your Cart --------------------------------------------->
 						<div class="col-md-6">
-							<div class="row mb-2">
-								<div class="col-md-12">
-									<div class="p-3 p-lg-4 border bg-white">
-										<h2 class="h3 mb-3 text-black">Coupon</h2>
-										<div class="input-group mb-2">
-											<input
-												type="text"
-												class="form-control rounded-0 text-uppercase"
-												id="coupon"
-												name="code"
-												placeholder="Enter your promo code"
-												aria-label="coupon"
-												aria-describedby="button-addon2"
-												delivery_select=""
-											>
-											<button
-												class="btn btn-outline-secondary px-3 fw-semibold rounded-0"
-												type="submit"
-												id="button-addon2"
-												name="action"
-												value="apply"
-												>
-												Apply
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
 							<div class="row mb-5">
 								<div class="col-md-12">
 									<div class="p-3 p-lg-4 border bg-white">
-										<!--------------------- Payment Method --------------------------->
+			<!------------------------------------ Payment Method ------------------------------------------>
 										<h2 class="h3 mb-3 text-black">Payment Methods</h2>
 										@foreach ($payments as $payment)
 											<div class="border p-3 mb-3">
@@ -304,8 +265,7 @@
 												</div>
 											</div>
 										@endforeach
-										<!---------------------End Payment Method --------------------------->
-
+		<!--------------------------------------------End Payment Method ----------------------------------------------------------->
 										<h2 class="h3 mb-3 text-black">Your Cart</h2>
 										<table class="table site-block-order-table mb-3">
 											<thead>
@@ -321,10 +281,6 @@
 													$subtotal = 0;
 													$total = 0;
 													$deliveryFee = $ship;
-													$discount = 0; // Need to create discount method
-													// Check if there is a old discount in session after choose delivery method
-													$discount  = ($dis)? $dis :  Session::get('discount');
-
 												@endphp
 												@foreach ($carts as $cart)
 													@php
@@ -405,7 +361,7 @@
 														<td class="border-bottom-0"></td>
 														<td class="border-bottom-0"></td>
 														<td class="text-black text-end border-bottom-0">
-															<strong>$ {{number_format($subtotal, 2)}}</strong>
+															<strong  id="subTotal">$ {{number_format($subtotal, 2)}}</strong>
 														</td>
 													</tr>
 
@@ -428,14 +384,14 @@
 														<td ></td>
 														<td ></td>
 														<td class="text-black font-weight-bold d-flex justify-content-end" >
-
 															<input
 																class="form-control form-control-sm w-75 text-end pe-0 ps-0 border-0 bg-white text-danger fw-bold"
 																name="discount"
-																value="$ {{number_format(($discount)? $discount : $dis, 2)}}"
+																value="$ {{number_format($discount, 2)}}"
 																aria-label=".form-control-sm example"
 																readonly
 																placeholder="$"
+																id="discount"
 															>
 														</td>
 													</tr>
@@ -446,8 +402,8 @@
 														<td class="border-bottom-0"></td>
 														<td class="border-bottom-0"></td>
 														<td class="border-bottom-0"></td>
-														<td class="text-danger text-end h6 border-bottom-0">
-															<strong>
+														<td class="text-danger text-end h5 border-bottom-0">
+															<strong id="totalPaid">
 																$ {{$total  = number_format((($subtotal + number_format($deliveryFee, 2)) - $discount) ,2)}}
 															</strong>
 														</td>
@@ -471,7 +427,6 @@
 												<button
 													type="submit"
 													class="btn btn-block px-4 py-2 fw-semibold  rounded-0"
-													name="action"
 													value="placeorder"
 													>
 													Place Order
@@ -489,12 +444,25 @@
 				<!---/// onclick="location.href='{{ url('thankyou') }}'" ///-->
 		</div>
 	</div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
+    
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script>
-        //if ($("input[type='radio'].deliveryMethod").is(':checked')) {
-            //var delivery_fee = $("input[type='radio'].deliveryMethod:checked").val();
-            //alert(card_type);
-        //}
-    </script>
+		function delMethod() {
+			var delPrice = $("input[type='radio'][name='delivery_fee']:checked").val();
+			var del = document.getElementById("deliveryFee");
+			var sub = document.getElementById("subTotal").innerText;
+			var dis = document.getElementById("discount").value;
+			var total = document.getElementById("totalPaid").innerText;
+			var Total = document.getElementById("totalPaid");
+			
+			del.innerHTML = "$ " + delPrice;
+			// remove first 2 digit of string then use parseFloat to convert to number
+			var subTotal = parseFloat(sub.substr(2)); 
+			var discount = parseFloat(dis.substr(2));
+
+			var paid = (subTotal + parseFloat(delPrice)) - discount;
+			Total.innerText = "$ " + paid.toFixed(2); //toFixed(2) to get .00
+		}
+		
+	</script>
 @endsection()
