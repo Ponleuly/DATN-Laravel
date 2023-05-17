@@ -65,7 +65,7 @@ class ProductSizeController extends Controller
         $input = $request->all();
         Sizes::create($input);
         return redirect('/admin/product-size-add')
-            ->with('success', 'Product size ' . $request->size_number . ' is added successfully!');
+            ->with('message', 'Product size ' . $request->size_number . ' is added successfully!');
     }
 
     /**
@@ -110,7 +110,7 @@ class ProductSizeController extends Controller
 
         return redirect('admin/product-size-list')
             ->with(
-                'success',
+                'message',
                 'Product size ' . '"' . $update_size->size_number . '"' .
                     ' is updated successfully !'
             );
@@ -129,7 +129,7 @@ class ProductSizeController extends Controller
 
         return redirect('admin/product-size-list')
             ->with(
-                'success',
+                'message',
                 'Product size ' . '"' . $delete_size->size_number . '"' .
                     ' is deleted successfully !'
             );
