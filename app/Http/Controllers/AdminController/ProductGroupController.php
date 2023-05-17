@@ -52,7 +52,7 @@ class ProductGroupController extends Controller
         foreach ($group_cmp as $group) {
             if (ucfirst($request->group_name) == ucfirst($group->group_name)) {
                 return redirect('/admin/product-group-add')
-                    ->with('alert', 'Product group ' . $request->group_name . ' already existed !');
+                    ->with('alert', 'Product group ' . '"' .$request->group_name . '"' . ' already existed !');
             }
         }
         $input  = $request->all();
@@ -60,14 +60,13 @@ class ProductGroupController extends Controller
 
         // After inputed -> go back to category page
         return redirect('/admin/product-group-add')
-            ->with('message', 'Product group ' . ucfirst($request->group_name) . ' is added successfully!');
+            ->with('message', 'Product group ' . ucfirst($request->group_name) . ' added successfully !');
     }
 
 
     public function product_group_edit($id)
     {
         $group = Groups::where('id', $id)->first();
-
         return view(
             'adminfrontend.pages.groups.product_group_edit',
             compact(
@@ -83,7 +82,7 @@ class ProductGroupController extends Controller
         foreach ($group_cmp as $group) {
             if (ucfirst($request->group_name) == ucfirst($group->group_name)) {
                 return redirect()->back()
-                    ->with('alert', 'Product group ' . $request->group_name . ' already existed !');
+                    ->with('alert', 'Product group '. '"' . $request->group_name . '"' . ' already existed !');
             }
         }
         $update_group_name = Groups::where('id', $id)->first();
@@ -94,7 +93,7 @@ class ProductGroupController extends Controller
             ->with(
                 'message',
                 'Product group ' . '"' . $update_group_name->group_name . '"' .
-                    ' is updated successfully !'
+                    ' updated successfully !'
             );
     }
 
@@ -108,7 +107,7 @@ class ProductGroupController extends Controller
             ->with(
                 'message',
                 'Product group ' . '"' . $delete_group->group_name . '"' .
-                    ' is deleted successfully !'
+                    ' deleted successfully !'
             );
     }
 }

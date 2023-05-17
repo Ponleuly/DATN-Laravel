@@ -340,9 +340,10 @@
 												placeholder="Enter your promo code"
 												aria-label="coupon"
 												aria-describedby="button-addon2"
+												{{($carts_count == 0)? 'disabled':'' }}
 											>
 											<button
-												class="btn btn-outline-secondary px-3 fw-semibold rounded-0"
+												class="btn btn-outline-secondary px-3 fw-semibold rounded-0 "
 												type="submit"
 												id="button-addon2"
 												>
@@ -389,22 +390,13 @@
 								</table>
 
 								<div class="d-grid">
-									@if($carts_count == 0)
-										<button
-											class="btn btn-block px-4 py-2 fw-semibold rounded-0"
-											onclick="location.href='{{ url('checkout') }}'"
-											disabled
-											>
-											CHECKOUT
-										</button>
-									@else
-										<button
-											class="btn btn-block px-4 py-2 fw-semibold rounded-0"
-											onclick="location.href='{{ url('checkout') }}'"
-											>
-											CHECKOUT
-										</button>
-									@endif
+									<button
+										class="btn btn-block px-4 py-2 fw-semibold rounded-0"
+										onclick="location.href='{{ url('checkout') }}'"
+										{{($carts_count == 0)? 'disabled':'' }}
+										>
+										CHECKOUT
+									</button>
 								</div>
 		                	</div>
 		            	</div>

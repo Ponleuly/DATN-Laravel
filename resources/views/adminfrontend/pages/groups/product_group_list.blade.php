@@ -7,20 +7,19 @@
         <div class="row justify-content-center">
             <div class="col-md-12 my-3 mb-md-0">
                 <!--------------- Alert ------------------------>
-                    @if(Session::has('alert'))
-                        <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
-                            {{Session::get('alert')}}
+                @if(Session::has('alert'))
+                    <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
+                        {{Session::get('alert')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @elseif(Session::has('message'))
+                        <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
+                            {{Session::get('message')}}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        @elseif(Session::has('message'))
-                            <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                                {{Session::get('message')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                    @endif
+                @endif
                 <!---------------End Alert ------------------------>
             </div>
-
             <!------------------------------------------------------------------------------------>
             <div class="col-lg-12">
                 <div class="card-style mb-30">

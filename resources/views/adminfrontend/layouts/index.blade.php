@@ -27,8 +27,11 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp">
         <!-- Tag input in sub category--->
-        <link rel="stylesheet" href="{{url('frontend/assets/css/bootstrap-tagsinput.css')}}" />
-
+        <link rel="stylesheet" href="{{url('frontend/assets/css/bootstrap-tagsinput.css')}}">
+        <!-- Sweet alert -->
+		<link rel="stylesheet" href="{{url('frontend/js/sweetAlert.js')}}"/>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 
     </head>
     <body>
