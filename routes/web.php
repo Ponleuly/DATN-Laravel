@@ -26,6 +26,8 @@ use App\Http\Controllers\AdminController\AdminFrontendController;
 use App\Http\Controllers\AdminController\ProductDetailController;
 use App\Http\Controllers\AdminController\ProductCategoryController;
 use App\Http\Controllers\AdminController\PaymentController;
+use App\Http\Controllers\PaymentController\StripeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -266,3 +268,11 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::get('/payment-search', 'payment_search')->name('payment-search');
    });
 });
+Route::get(
+   '/stripe',
+   [StripeController::class, 'stripe']
+)->name('stripe');
+Route::post(
+   '/stripe',
+   [StripeController::class, 'stripePost']
+)->name('stripe');

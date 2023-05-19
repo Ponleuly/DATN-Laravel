@@ -279,16 +279,16 @@
 								<div class="col-md-6 mb-3 mb-md-0"> <!--remove-all-cart/0 ==> 0 is condiction to show question--->
 									@if($carts_count == 0 )
 										<a
-											href="{{url('remove-all-cart/0')}}" 
+											href="{{url('remove-all-cart/0')}}"
 											class="btn btn-black btn-sm btn-block rounded-0 px-5 py-2 fw-semibold disabled"
-											> 
+											>
 											Remove All
 										</a>
-										@else 
+										@else
 											<a
-												href="{{url('remove-all-cart/0')}}" 
+												href="{{url('remove-all-cart/0')}}"
 												class="btn btn-black btn-sm btn-block rounded-0 px-5 py-2 fw-semibold"
-												> 
+												>
 												Remove All
 											</a>
 									@endif
@@ -384,9 +384,9 @@
 
 								<div class="d-grid">
 									<a
-										class="btn btn-block px-4 py-2 fw-semibold rounded-0"
+										class="btn btn-block px-4 py-2 fw-semibold rounded-0
+											{{($carts_count == 0)? 'disabled':'' }}"
 										href="{{url('checkout/dis='.number_format($discount, 2))}}"
-										{{($carts_count == 0)? 'disabled':'' }}
 										>
 										CHECKOUT
 									</a>

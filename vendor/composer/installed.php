@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '05203d0515f6b87fe6772d6aa5aa106b1d9c5909',
+        'reference' => 'f64e7953abb5a7cb4dc5c0a9aae4ca061f5b70ea',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -394,7 +394,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '05203d0515f6b87fe6772d6aa5aa106b1d9c5909',
+            'reference' => 'f64e7953abb5a7cb4dc5c0a9aae4ca061f5b70ea',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1021,6 +1021,15 @@
             'install_path' => __DIR__ . '/../spatie/laravel-ignition',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'stripe/stripe-php' => array(
+            'pretty_version' => 'v10.13.0',
+            'version' => '10.13.0.0',
+            'reference' => '4ad20dd0a95b2761aecea3d2b2354cc3a99abf9b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../stripe/stripe-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/console' => array(
             'pretty_version' => 'v6.1.6',
