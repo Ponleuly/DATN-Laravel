@@ -307,6 +307,7 @@ class CartController extends Controller
 
     public function place_order(Request $request)
     {
+        /*
             if (Auth::check() && Auth::user()->role == 1) {
 
                 // Count order row
@@ -425,8 +426,8 @@ class CartController extends Controller
                     'shopName'
                 )
             );
-            
-        //return dd($request->toArray());
+        */
+        return dd($request->toArray());
         
     }
 

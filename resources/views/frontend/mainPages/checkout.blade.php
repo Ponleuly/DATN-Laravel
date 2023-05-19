@@ -223,49 +223,11 @@
 						</div>
 						<!------------------------End Delivery Informations--------------------------------->
 
-<!----------------------------------------- Your Cart --------------------------------------------->
+						<!----------------------------------------- Your Cart --------------------------------------------->
 						<div class="col-md-6">
 							<div class="row mb-5">
 								<div class="col-md-12">
 									<div class="p-3 p-lg-4 border bg-white">
-			<!------------------------------------ Payment Method ------------------------------------------>
-										<h2 class="h3 mb-3 text-black">Payment Methods</h2>
-										@foreach ($payments as $payment)
-											<div class="border p-3 mb-3">
-												<div class="form-check ">
-													<input
-														class="form-check-input big-radio me-2"
-														type="radio"
-														name="payment"
-														value="{{$payment->payment_title}}"
-														id="{{$payment->payment_title}}"
-														@if ($loop->first)
-															checked
-														@endif
-													>
-													<label class="form-check-label" for="{{$payment->payment_title}}">
-														<h3 class="h6 mb-0 mt-1">
-															<a
-																class="d-block"
-																data-bs-toggle="collapse"
-																href="#collapsemethod{{$payment->id}}"
-																role="button"
-																aria-expanded="false"
-																aria-controls="collapsemethod{{$payment->id}}"
-																>
-																{{$payment->payment_title}}
-															</a>
-														</h3>
-													</label>
-												</div>
-												<div class="collapse" id="collapsemethod{{$payment->id}}">
-													<div class="py-2">
-														<p class="mb-0">{!! $payment->payment_detail !!}</p>
-													</div>
-												</div>
-											</div>
-										@endforeach
-		<!--------------------------------------------End Payment Method ----------------------------------------------------------->
 										<h2 class="h3 mb-3 text-black">Your Cart</h2>
 										<table class="table site-block-order-table mb-3">
 											<thead>
@@ -351,7 +313,7 @@
 											</tbody>
 											<!---------------------End Cart product table --------------->
 
-											<!---------------------Toal table --------------------------->
+											<!---------------------Total table --------------------------->
 											<tbody>
 													<tr>
 														<td class="text-black font-weight-bold border-bottom-0 ">
@@ -413,7 +375,131 @@
 										</table>
 										<!--------------------- End Toal table --------------------------->
 
-										
+										<!------------------------------------ Payment Method ------------------------------------------>
+										<h2 class="h3 mb-3 text-black">Payment Methods</h2>
+										@foreach ($payments as $payment)
+											<div class="border p-3 mb-3">
+												<div class="form-check ">
+													<input
+														class="form-check-input big-radio me-2"
+														type="radio"
+														name="payment"
+														value="{{$payment->payment_title}}"
+														id="{{$payment->payment_title}}"
+														@if ($loop->first)
+															checked
+														@endif
+													>
+													<label class="form-check-label" for="{{$payment->payment_title}}">
+														<h3 class="h6 mb-0 mt-1">
+															<a
+																class="d-block"
+																data-bs-toggle="collapse"
+																href="#collapsemethod{{$payment->id}}"
+																role="button"
+																aria-expanded="false"
+																aria-controls="collapsemethod{{$payment->id}}"
+																>
+																{{$payment->payment_title}}
+															</a>
+														</h3>
+													</label>
+												</div>
+												<div class="collapse" id="collapsemethod{{$payment->id}}">
+													<div class="py-2">
+														<p class="mb-2">{!! $payment->payment_detail !!}</p>
+														<div class="form-group row mb-3">
+															<div class="col-md-12">
+																<label for="payment_email" class="text-black mb-1">Payment Confirmation Email <span class="text-danger">*</span></label>
+																<input
+																	type="email"
+																	class="form-control rounded-0"
+																	id="payment_email"
+																	name="payment_email"
+																	value="{{$c_email}}"
+																	placeholder="example@gmail.com"
+																	required
+																>
+															</div>
+														</div>
+
+														<div class="form-group row mb-3">
+															<div class="col-md-12">
+																<label for="holder_name" class="text-black mb-1">Card Holder's Name <span class="text-danger">*</span></label>
+																<input
+																	type="text"
+																	class="form-control rounded-0"
+																	id="holder_name"
+																	name="holder_name"
+																	placeholder="Card Owner Name"
+																	required
+																>
+															</div>
+														</div>
+
+														<div class="form-group row mb-3">
+															<div class="col-md-12">
+																<label for="mm class="text-black mb-1">Card Number<span class="text-danger">*</span></label>
+																<input
+																	type="text"
+																	class="form-control rounded-0"
+																	id="card_numbere"
+																	name="card_numbere"
+																	placeholder="0000 0000 0000 0000"
+																	required
+																	maxlength="16"
+																>
+															</div>
+														</div>
+
+														<div class="form-group row mb-3">
+															<div class="col-md-6">
+																<label for="month" class="text-black mb-1">Expiration Date<span class="text-danger">*</span></label>
+																<div class="row">
+																	<div class="col-4">
+																		<input
+																		type="text"
+																		class="form-control rounded-0"
+																		id="month"
+																		name="month"
+																		placeholder="MM"
+																		required
+																		>
+																	</div>
+																	<div class="col-5 ms-0 ps-0">
+																		<input
+																		type="text"
+																		class="form-control rounded-0"
+																		id="year"
+																		name="year"
+																		placeholder="YYYY"
+																		required
+																	>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<label for="cvc" class="text-black mb-1">CVC/CVV<span class="text-danger">*</span></label>
+																	<div class="col-6">
+																		<input
+																		type="password"
+																		class="form-control rounded-0"
+																		id="month"
+																		name="month"
+																		maxlength="4"
+																		placeholder="Ex. 789"
+																		required
+																		>
+																	</div>
+																	
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										@endforeach
+		<!--------------------------------------------End Payment Method ----------------------------------------------------------->
+
 										<div class="row ">
 											<div class="col-md-6">
 												<a

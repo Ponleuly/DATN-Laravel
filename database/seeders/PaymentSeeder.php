@@ -20,21 +20,23 @@ class PaymentSeeder extends Seeder
         DB::table('payments')->insert([
             [
                 'id' => 1,
-                'payment_title' => "Cash",
+                'payment_title' => "COD",
                 'payment_detail' => "Pay money after get product.",
                 'created_at' => Carbon::now()
             ],
             [
                 'id' => 2,
-                'payment_title' => "Bank Transfer",
-                'payment_detail' => 
-                    "<p>Customer please transfer to bank acount below :</p>
+                'payment_title' => "Credit Card",
+                'payment_detail' => "Please fill your card informations below.",
+                /*
+                    "<p>Please transfer to bank acount below :</p>
                         <ul>
                             <li>Bank: <strong>Agribank</strong></li>
                             <li>Account: <strong>1303206422785</strong></li>
                             <li>Account's name: <strong>LY PONLEU</strong></li>
                             <li>Remark: <strong>Customer's name + Orders code</strong></li>
                         </ul>",
+                */
                 'created_at' => Carbon::now()
             ],
         ]);
