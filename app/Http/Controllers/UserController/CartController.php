@@ -307,128 +307,130 @@ class CartController extends Controller
 
     public function place_order(Request $request)
     {
-        /*
-            if (Auth::check() && Auth::user()->role == 1) {
+        if (Auth::check() && Auth::user()->role == 1) {
 
-                // Count order row
-                $order_count = Orders::all()->count();
-                $dis = preg_replace('/[^0-9]/', '', $request->discount);
-                //=== Passing total discount to discount value by each product ====//
-                $discount = $dis / 100;
-                // Store data to table orders
-                Orders::create([
-                    'invoice_code' => '#iv' . sprintf('%04d', ++$order_count),
-                    'order_status' => 1, // set t default status = 1 is pending, 2=processing, 3=derliverd, 4=cancel
-                    'user_id' => Auth::user()->id,
-                    'discount' => number_format($discount, 2),
-                    'payment_method' => $request->payment,
-                    'delivery_fee' => $request->delivery_fee,
+            // Count order row
+            $order_count = Orders::all()->count();
+            $dis = preg_replace('/[^0-9]/', '', $request->discount);
+            //=== Passing total discount to discount value by each product ====//
+            $discount = $dis / 100;
+            // Store data to table orders
+            Orders::create([
+                'invoice_code' => '#iv' . sprintf('%04d', ++$order_count),
+                'order_status' => 1, // set t default status = 1 is pending, 2=processing, 3=derliverd, 4=cancel
+                'user_id' => Auth::user()->id,
+                'discount' => number_format($discount, 2),
+                'payment_method' => $request->payment,
+                'delivery_fee' => $request->delivery_fee,
+            ]);
+            // Get customer id
+            $order = Orders::latest()->first();
+            $orderId = $order->id;
+
+            $input = $request->all();
+            $input['order_id'] = $orderId;
+            //==== Store data to table customer =====//
+            Customers::create($input);
+            // Get data from Carts model
+            $carts = Carts::where('user_id', Auth::user()->id)->get();
+            foreach ($carts as $cart) {
+
+                // Store data to table orderDetails
+                Orders_Details::create([
+                    'order_id' => $orderId,
+                    'product_id' => $cart->product_id,
+                    'product_price' => $cart->rela_product_cart->product_saleprice,
+                    'product_quantity' => $cart->product_quantity,
+                    'size_id' => $cart->size_id,
                 ]);
-                // Get customer id
-                $order = Orders::latest()->first();
-                $orderId = $order->id;
+            }
 
-                $input = $request->all();
-                $input['order_id'] = $orderId;
-                //==== Store data to table customer =====//
-                Customers::create($input);
-                // Get data from Carts model
-                $carts = Carts::where('user_id', Auth::user()->id)->get();
-                foreach ($carts as $cart) {
+            // Remove all products in carts after user completed order
+            Carts::where('user_id', Auth::user()->id)->delete();
+        } else {
+            // Count order row
+            $order_count = Orders::all()->count();
+            //=== Get total discount without string $ ====//
+            $dis = preg_replace('/[^0-9]/', '', $request->discount);
+            //=== Passing total discount to discount value by each product ====//
+            $discount = $dis / 100;
+            // Store data to table orders
+            Orders::create([
+                'invoice_code' => '#iv' . sprintf('%04d', ++$order_count),
+                'order_status' => 1, // set t default status = 1 is pending, 2=processing, 3=derliverd, 4=cancel
+                'user_id' => 0,
+                'discount' => number_format($discount, 2),
+                'payment_method' => $request->payment,
+                'delivery_fee' => $request->delivery_fee,
+            ]);
 
-                    // Store data to table orderDetails
-                    Orders_Details::create([
-                        'order_id' => $orderId,
-                        'product_id' => $cart->product_id,
-                        'product_price' => $cart->rela_product_cart->product_saleprice,
-                        'product_quantity' => $cart->product_quantity,
-                        'size_id' => $cart->size_id,
-                    ]);
-                }
-
-                // Remove all products in carts after user completed order
-                Carts::where('user_id', Auth::user()->id)->delete();
+            // Get order id
+            $order = Orders::latest()->first();
+            $orderId = $order->id;
+            //==== Store data to table customer =====//
+            $input = $request->all();
+            $input['order_id'] = $orderId;
+            Customers::create($input);
+            // Get data from Cart if customer not signin
+            $carts = Cart::content();
+            foreach ($carts as $cart) {
+                // Store data to table orderDetails
+                Orders_Details::create([
+                    'order_id' => $orderId,
+                    'product_id' => $cart->id,
+                    'product_price' => $cart->price,
+                    'product_quantity' => $cart->qty,
+                    'size_id' => $cart->options->size,
+                ]);
+            }
+            // Remove all products in Cart after user completed order
+            Cart::destroy();
+        }
+        //===================== Update product stock after ordered =======================//
+        $placeOrder = Orders::latest()->first();
+        $orderId = $placeOrder->id;
+        $orderDetails = Orders_Details::where('order_id', $orderId)->get();
+        foreach ($orderDetails as $orderDetail) {
+            $sizeId = $orderDetail->size_id;
+            $quantity = $orderDetail->product_quantity;
+            $productId = $orderDetail->product_id;
+            $productSize_qty = Products_Sizes::where('product_id', $productId)
+                ->where('size_id', $sizeId)->first();
+            $stock_qty = ($productSize_qty->size_quantity) - $quantity;
+            // If total quantity of order bigger than or equal to size stock ==> stock = 0
+            if ($stock_qty <= 0) {
+                $productSize_qty->size_quantity = 0;
             } else {
-                // Count order row
-                $order_count = Orders::all()->count();
-                //=== Get total discount without string $ ====//
-                $dis = preg_replace('/[^0-9]/', '', $request->discount);
-                //=== Passing total discount to discount value by each product ====//
-                $discount = $dis / 100;
-                // Store data to table orders
-                Orders::create([
-                    'invoice_code' => '#iv' . sprintf('%04d', ++$order_count),
-                    'order_status' => 1, // set t default status = 1 is pending, 2=processing, 3=derliverd, 4=cancel
-                    'user_id' => 0,
-                    'discount' => number_format($discount, 2),
-                    'payment_method' => $request->payment,
-                    'delivery_fee' => $request->delivery_fee,
-                ]);
-
-                // Get order id
-                $order = Orders::latest()->first();
-                $orderId = $order->id;
-                //==== Store data to table customer =====//
-                $input = $request->all();
-                $input['order_id'] = $orderId;
-                Customers::create($input);
-                // Get data from Cart if customer not signin
-                $carts = Cart::content();
-                foreach ($carts as $cart) {
-                    // Store data to table orderDetails
-                    Orders_Details::create([
-                        'order_id' => $orderId,
-                        'product_id' => $cart->id,
-                        'product_price' => $cart->price,
-                        'product_quantity' => $cart->qty,
-                        'size_id' => $cart->options->size,
-                    ]);
-                }
-                // Remove all products in Cart after user completed order
-                Cart::destroy();
+                $productSize_qty->size_quantity = ($productSize_qty->size_quantity) - $quantity;
             }
-            //===================== Update product stock after ordered =======================//
-            $placeOrder = Orders::latest()->first();
-            $orderId = $placeOrder->id;
-            $orderDetails = Orders_Details::where('order_id', $orderId)->get();
-            foreach ($orderDetails as $orderDetail) {
-                $sizeId = $orderDetail->size_id;
-                $quantity = $orderDetail->product_quantity;
-                $productId = $orderDetail->product_id;
-                $productSize_qty = Products_Sizes::where('product_id', $productId)
-                    ->where('size_id', $sizeId)->first();
-                $stock_qty = ($productSize_qty->size_quantity) - $quantity;
-                // If total quantity of order bigger than or equal to size stock ==> stock = 0
-                if ($stock_qty <= 0) {
-                    $productSize_qty->size_quantity = 0;
-                } else {
-                    $productSize_qty->size_quantity = ($productSize_qty->size_quantity) - $quantity;
-                }
-                $productSize_qty->update();
-            }
+            $productSize_qty->update();
+        }
 
-            //=============== Get data to display on user invoice =======================S//
-            $order = Orders::where('id', $orderId)->first();
-            $customer = Customers::where('id', $orderId)->first();
-            $orderDetails = Orders_Details::where('order_id', $orderId)->get();
-            $count = 1;
-            $contacts = Contacts::orderBy('id')->get();
-            $shopName = Settings::all()->first();    
+        //=============== Get data to display on user invoice =======================S//
+        $order = Orders::where('id', $orderId)->first();
+        $customer = Customers::where('id', $orderId)->first();
+        $orderDetails = Orders_Details::where('order_id', $orderId)->get();
+        $count = 1;
+        $contacts = Contacts::orderBy('id')->get();
+        $shopName = Settings::all()->first();
 
-            return view(
-                'frontend.mainPages.thankyou',
-                compact(
-                    'count',
-                    'order',
-                    'customer',
-                    'orderDetails',
-                    'contacts',
-                    'shopName'
-                )
-            );
-        */
-        return dd($request->toArray());
-        
+        //================= Payment Credit Card =======================//
+        if ($request->payment == 'Credit Card') {
+            return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->totalPaid, 2));
+        }
+        return view(
+            'frontend.mainPages.thankyou',
+            compact(
+                'count',
+                'order',
+                'customer',
+                'orderDetails',
+                'contacts',
+                'shopName'
+            )
+        );
+
+        //return dd($request->toArray());
     }
 
     //======================================================================================================================//
@@ -444,7 +446,7 @@ class CartController extends Controller
         $orderDetails = Orders_Details::where('order_id', $id)->get();
         $count = 1;
         $contacts = Contacts::orderBy('id')->get();
-        $shopName = Settings::all()->first();    
+        $shopName = Settings::all()->first();
 
         $data = [
             'count' => $count,
@@ -452,7 +454,7 @@ class CartController extends Controller
             'customer' => $customer,
             'orderDetails' => $orderDetails,
             'contacts' => $contacts,
-            'shopName'=> $shopName,
+            'shopName' => $shopName,
         ];
         $pdf = Pdf::loadView('adminfrontend.pages.orders.order_invoice', $data);
 
@@ -489,13 +491,13 @@ class CartController extends Controller
 
     public function remove_all_cart($num)
     {
-        if ($num == 0){ // 0 is condiction for showing question are you sure?
+        if ($num == 0) { // 0 is condiction for showing question are you sure?
             return redirect()->back()
-            ->with(
-                'question',
-                'remove-all-cart/1', // redirect to page with new url/1 then show question
-            );
-        }else if($num == 1){ // 1 is condiction if user click yes then remove all from cart
+                ->with(
+                    'question',
+                    'remove-all-cart/1', // redirect to page with new url/1 then show question
+                );
+        } else if ($num == 1) { // 1 is condiction if user click yes then remove all from cart
             if (Auth::check() && Auth::user()->role == 1) {
                 Carts::where('user_id', Auth::user()->id)->delete();
             } else {
@@ -507,7 +509,7 @@ class CartController extends Controller
                     'All products removed from cart successfully.',
                 );
         }
-        
+
         //return dd($rowId);
     }
 }

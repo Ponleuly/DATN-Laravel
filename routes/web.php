@@ -268,11 +268,5 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::get('/payment-search', 'payment_search')->name('payment-search');
    });
 });
-Route::get(
-   '/stripe',
-   [StripeController::class, 'stripe']
-)->name('stripe');
-Route::post(
-   '/stripe',
-   [StripeController::class, 'stripePost']
-)->name('stripe');
+Route::get('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'paymentForm'])->name('payment');
+Route::post('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'payment'])->name('payment');

@@ -68,6 +68,8 @@
 					action="{{url('place-order')}}"
 					method="POST"
 					enctype="multipart/form-data"
+
+
 					>
                 	@csrf <!-- to make form active -->
 					<div class="row">
@@ -217,7 +219,7 @@
 											</label>
 										</div>
 									</div>
-									
+
 								@endforeach
 							</div>
 						</div>
@@ -347,7 +349,7 @@
 														<td ></td>
 														<td class="text-black font-weight-bold d-flex justify-content-end" >
 															<input
-																class="form-control form-control-sm w-75 text-end pe-0 ps-0 border-0 bg-white text-danger fw-bold"
+																class="form-control form-control-sm w-100 text-end pe-0 ps-0 border-0 bg-white text-danger fw-bold"
 																name="discount"
 																value="$ {{number_format($discount, 2)}}"
 																aria-label=".form-control-sm example"
@@ -364,13 +366,18 @@
 														<td class="border-bottom-0"></td>
 														<td class="border-bottom-0"></td>
 														<td class="border-bottom-0"></td>
-														<td class="text-danger text-end h5 border-bottom-0">
-															<strong id="totalPaid">
-																$ {{$total  = number_format((($subtotal + number_format($deliveryFee, 2)) - $discount) ,2)}}
-															</strong>
+														<td class="text-danger text-end border-bottom-0 d-flex justify-content-end">
+															<input
+																class="form-control w-100 text-end pe-0 ps-0 border-0 bg-white text-danger fw-bold"
+																name="totalPaid"
+																value="$ {{$total  = number_format((($subtotal + number_format($deliveryFee, 2)) - $discount) ,2)}}"
+																aria-label=".form-control-sm example"
+																readonly
+																placeholder="$"
+																id="totalPaid"
+															>
 														</td>
 													</tr>
-
 											</tbody>
 										</table>
 										<!--------------------- End Toal table --------------------------->
@@ -408,6 +415,7 @@
 												<div class="collapse" id="collapsemethod{{$payment->id}}">
 													<div class="py-2">
 														<p class="mb-2">{!! $payment->payment_detail !!}</p>
+														<!---
 														<div class="form-group row mb-3">
 															<div class="col-md-12">
 																<label for="payment_email" class="text-black mb-1">Payment Confirmation Email <span class="text-danger">*</span></label>
@@ -439,7 +447,7 @@
 
 														<div class="form-group row mb-3">
 															<div class="col-md-12">
-																<label for="mm class="text-black mb-1">Card Number<span class="text-danger">*</span></label>
+																<label for="card_number" class="text-black mb-1">Card Number<span class="text-danger">*</span></label>
 																<input
 																	type="text"
 																	class="form-control rounded-0"
@@ -491,14 +499,15 @@
 																		required
 																		>
 																	</div>
-																	
+
 															</div>
-														</div>
+
+														</div>-->
 													</div>
 												</div>
 											</div>
 										@endforeach
-		<!--------------------------------------------End Payment Method ----------------------------------------------------------->
+										<!--------------------------------------------End Payment Method ----------------------------------------------------------->
 
 										<div class="row ">
 											<div class="col-md-6">
@@ -530,7 +539,7 @@
 				<!---/// onclick="location.href='{{ url('thankyou') }}'" ///-->
 		</div>
 	</div>
-    
+
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script>
 		function delMethod() {
@@ -538,17 +547,18 @@
 			var del = document.getElementById("deliveryFee");
 			var sub = document.getElementById("subTotal").innerText;
 			var dis = document.getElementById("discount").value;
-			var total = document.getElementById("totalPaid").innerText;
+			var total = document.getElementById("totalPaid").value;
 			var Total = document.getElementById("totalPaid");
-			
+
 			del.innerHTML = "$ " + delPrice;
 			// remove first 2 digit of string then use parseFloat to convert to number
-			var subTotal = parseFloat(sub.substr(2)); 
+			var subTotal = parseFloat(sub.substr(2));
 			var discount = parseFloat(dis.substr(2));
 
 			var paid = (subTotal + parseFloat(delPrice)) - discount;
-			Total.innerText = "$ " + paid.toFixed(2); //toFixed(2) to get .00
+			Total.value = "$ " + paid.toFixed(2); //toFixed(2) to get .00
 		}
-		
+
 	</script>
+
 @endsection()
