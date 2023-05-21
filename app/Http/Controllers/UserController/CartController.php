@@ -418,6 +418,7 @@ class CartController extends Controller
         if ($request->payment == 'Credit Card') {
             return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->totalPaid, 2));
         }
+        /*
         return view(
             'frontend.mainPages.thankyou',
             compact(
@@ -429,7 +430,7 @@ class CartController extends Controller
                 'shopName'
             )
         );
-
+        */
         //return dd($request->toArray());
     }
 

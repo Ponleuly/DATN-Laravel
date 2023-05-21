@@ -68,8 +68,7 @@
 					action="{{url('place-order')}}"
 					method="POST"
 					enctype="multipart/form-data"
-
-
+					id="checkout"
 					>
                 	@csrf <!-- to make form active -->
 					<div class="row">
@@ -178,7 +177,7 @@
 										name="c_note"
 										id="c_note"
 										cols="30"
-										rows="5"
+										rows="3"
 										class="form-control rounded-0"
 										placeholder="Write here..."
 										>{{$c_note}}</textarea>
@@ -231,7 +230,7 @@
 								<div class="col-md-12">
 									<div class="p-3 p-lg-4 border bg-white">
 										<h2 class="h3 mb-3 text-black">Your Cart</h2>
-										<table class="table site-block-order-table mb-3">
+										<table class="table site-block-order-table mb-2">
 											<thead>
 												<th>Products</th>
 												<th class="text-center">Size</th>
@@ -366,7 +365,7 @@
 														<td class="border-bottom-0"></td>
 														<td class="border-bottom-0"></td>
 														<td class="border-bottom-0"></td>
-														<td class="text-danger text-end border-bottom-0 d-flex justify-content-end">
+														<td class="text-danger text-end border-bottom-2 border-danger d-flex justify-content-end">
 															<input
 																class="form-control w-100 text-end pe-0 ps-0 border-0 bg-white text-danger fw-bold"
 																name="totalPaid"
@@ -385,132 +384,26 @@
 										<!------------------------------------ Payment Method ------------------------------------------>
 										<h2 class="h3 mb-3 text-black">Payment Methods</h2>
 										@foreach ($payments as $payment)
-											<div class="border p-3 mb-3">
-												<div class="form-check ">
-													<input
-														class="form-check-input big-radio me-2"
-														type="radio"
-														name="payment"
-														value="{{$payment->payment_title}}"
-														id="{{$payment->payment_title}}"
-														@if ($loop->first)
-															checked
-														@endif
-													>
-													<label class="form-check-label" for="{{$payment->payment_title}}">
-														<h3 class="h6 mb-0 mt-1">
-															<a
-																class="d-block"
-																data-bs-toggle="collapse"
-																href="#collapsemethod{{$payment->id}}"
-																role="button"
-																aria-expanded="false"
-																aria-controls="collapsemethod{{$payment->id}}"
-																>
-																{{$payment->payment_title}}
-															</a>
-														</h3>
-													</label>
-												</div>
-												<div class="collapse" id="collapsemethod{{$payment->id}}">
-													<div class="py-2">
-														<p class="mb-2">{!! $payment->payment_detail !!}</p>
-														<!---
-														<div class="form-group row mb-3">
-															<div class="col-md-12">
-																<label for="payment_email" class="text-black mb-1">Payment Confirmation Email <span class="text-danger">*</span></label>
-																<input
-																	type="email"
-																	class="form-control rounded-0"
-																	id="payment_email"
-																	name="payment_email"
-																	value="{{$c_email}}"
-																	placeholder="example@gmail.com"
-																	required
-																>
-															</div>
-														</div>
-
-														<div class="form-group row mb-3">
-															<div class="col-md-12">
-																<label for="holder_name" class="text-black mb-1">Card Holder's Name <span class="text-danger">*</span></label>
-																<input
-																	type="text"
-																	class="form-control rounded-0"
-																	id="holder_name"
-																	name="holder_name"
-																	placeholder="Card Owner Name"
-																	required
-																>
-															</div>
-														</div>
-
-														<div class="form-group row mb-3">
-															<div class="col-md-12">
-																<label for="card_number" class="text-black mb-1">Card Number<span class="text-danger">*</span></label>
-																<input
-																	type="text"
-																	class="form-control rounded-0"
-																	id="card_numbere"
-																	name="card_numbere"
-																	placeholder="0000 0000 0000 0000"
-																	required
-																	maxlength="16"
-																>
-															</div>
-														</div>
-
-														<div class="form-group row mb-3">
-															<div class="col-md-6">
-																<label for="month" class="text-black mb-1">Expiration Date<span class="text-danger">*</span></label>
-																<div class="row">
-																	<div class="col-4">
-																		<input
-																		type="text"
-																		class="form-control rounded-0"
-																		id="month"
-																		name="month"
-																		placeholder="MM"
-																		required
-																		>
-																	</div>
-																	<div class="col-5 ms-0 ps-0">
-																		<input
-																		type="text"
-																		class="form-control rounded-0"
-																		id="year"
-																		name="year"
-																		placeholder="YYYY"
-																		required
-																	>
-																	</div>
-																</div>
-															</div>
-															<div class="col-md-6">
-																<label for="cvc" class="text-black mb-1">CVC/CVV<span class="text-danger">*</span></label>
-																	<div class="col-6">
-																		<input
-																		type="password"
-																		class="form-control rounded-0"
-																		id="month"
-																		name="month"
-																		maxlength="4"
-																		placeholder="Ex. 789"
-																		required
-																		>
-																	</div>
-
-															</div>
-
-														</div>-->
-													</div>
-												</div>
+											<div class="form-check form-check-inline">
+												<input
+													class="form-check-input big-radio me-2"
+													type="radio"
+													name="payment"
+													value="{{$payment->payment_title}}"
+													id="{{$payment->payment_title}}"
+													required
+												>
+												<label class="form-check-label text-dark" for="{{$payment->payment_title}}">
+													<h3 class="h6 mb-2 mt-1">
+														{{$payment->payment_title}}
+													</h3>
+												</label>
 											</div>
 										@endforeach
+										<hr>
 										<!--------------------------------------------End Payment Method ----------------------------------------------------------->
-
-										<div class="row ">
-											<div class="col-md-6">
+										<div class="row">
+											<div class="col-md-6 mt-3">
 												<a
 													href="{{url('cart')}}"
 													class="btn btn-block px-4 py-2 fw-semibold  rounded-0"
@@ -518,11 +411,13 @@
 													Back
 												</a>
 											</div>
-											<div class="col-md-6 d-flex justify-content-end">
+											<div class="col-md-6 d-flex justify-content-end mt-3">
 												<button
 													type="submit"
 													class="btn btn-block px-4 py-2 fw-semibold  rounded-0"
 													value="placeorder"
+
+													id="btn-submit"
 													>
 													Place Order
 												</button>
@@ -542,6 +437,7 @@
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script>
+
 		function delMethod() {
 			var delPrice = $("input[type='radio'][name='delivery_fee']:checked").val();
 			var del = document.getElementById("deliveryFee");
@@ -560,5 +456,71 @@
 		}
 
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="sweetalert2.all.min.js"></script>
+	<script src="sweetalert2.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js">
+	<script>
+		$('#btn-submit').on('click',function(e) {
+			let name = document.forms["checkout"]["c_name"].value;
+			let phone = document.forms["checkout"]["c_phone"].value;
+			let email = document.forms["checkout"]["c_email"].value;
+			let address = document.forms["checkout"]["c_address"].value;
+			let delivery = document.forms["checkout"]["delivery_fee"].value;
+			let payment = document.forms["checkout"]["payment"].value;
 
+			if (name == "" || phone == "" || email =="" || address == "" || delivery == "" ||payment =="") {
+				name.setAttribute("required", "");
+				phone.setAttribute("required", "");
+				email.setAttribute("required", "");
+				address.setAttribute("required", "");
+				delivery.setAttribute("required", "");
+				payment.setAttribute("required", "");
+			}
+			event.preventDefault();
+			let form = $(this).parents('form');
+			Swal.fire({
+				position: 'top',
+				title: 'Are you sure to place order?',
+				text: "You are about to process payment",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, Place Order',
+				cancelButtonText: 'No, Cancel',
+				reverseButtons: true
+			}).then((result) => {
+			if (result.isConfirmed) {
+				form.submit();
+			}else{
+				swal("Cancelled", "AMC Record is safe :)", "error");
+			}
+			});
+
+			/*
+			swal({
+				position: 'top',
+				title: "Are you sure?",
+				text: "All data related to this AMC ID will be parmanently deleted",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, DELETE it!",
+				cancelButtonText: "No, cancel please!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			},
+			function(isConfirm){
+				if (isConfirm) {
+					form.submit();
+					} else {
+					swal("Cancelled", "AMC Record is safe :)", "error");
+
+				}
+			});
+			*/
+		});
+	</script>
 @endsection()

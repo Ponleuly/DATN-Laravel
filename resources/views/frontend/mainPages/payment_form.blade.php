@@ -4,6 +4,55 @@
 	use App\Models\Products;
 	use App\Models\Products_Sizes;
 ?>
+<style>
+	    #cartTable td {
+	      padding:6px;
+	    }
+	    #cartTable td:nth-of-type(2){
+	      text-align:right
+	    }
+
+	    #ticket:before {
+	      content:"";
+	      background:#fff;
+	      width:32px;
+	      height:32px;
+	      position:absolute;
+	      top:-16px;
+	      left:-16px;
+	      border-radius:100%;
+	    }
+	    #ticket:after {
+	      content:"";
+	      background:#fff;
+	      width:32px;
+	      height:32px;
+	      position:absolute;
+	      top:-16px;
+	      right:-16px;
+	      border-radius:100%;
+	    }
+	    #ticket {
+	      background:#dde8f0;
+	      border-top:1px dashed #bdbdbd;
+	      position:relative;
+	      border-bottom-left-radius:12px;
+	      border-bottom-right-radius:12px;
+	    }
+	    #cardNumber {
+	      padding-right:60px;
+	    }
+	    #cardType {
+	      width:58px;
+	      height:36px;
+	      background:url('/static_files/images/cardLogos.png') no-repeat;
+	      background-size:auto 100%;
+	      background-position: -59px;
+	      position:absolute;
+	      right:10px;
+	      top:5px;
+	    }
+</style>
 @extends('index')
 @section('content')
     <!-- Start breabcrumb Section -->
@@ -68,8 +117,8 @@
                 id="payment-form"
                 >
                 @csrf
-                <div class="row">
-                    <div class="col-md-6 mb-5 mb-md-0">
+                <div class="row justify-content-center">
+                    <div class="col-md-4 mb-5 mb-md-0" >
                         <div class="p-3 p-lg-4 border bg-white">
 							<h2 class="h3 mb-3 text-black">Payment Details</h2>
                             <div class="form-group row mb-3">
@@ -160,12 +209,6 @@
                             	</div>
                             </div>
 
-                            <div class="form-group row mb-3">
-						    	<div class="col-md-12">
-									<strong>Total Paid : $ {{$totalPaid}}</strong>
-								</div>
-							</div>
-
                             <div class="row ">
 								<div class="col-md-6">
 									<a
@@ -180,10 +223,68 @@
 										type="submit"
 										class="btn btn-block px-4 py-2 fw-semibold  rounded-0"
 										>
-										Payment
+										Pay Now
 									</button>
 								</div>
 							</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="p-3 p-lg-4 border bg-white">
+							<h2 class="h3 mb-3 text-black">Your Invoice</h2>
+                            <div style="background:#eff4f8;border-radius:16px;">
+                                <div class="p-4">
+                                <table class="w-100" id="cartTable">
+                                <tr>
+                                    <td><span class="text-secondary">Order </span></td>
+                                    <td><strong>#{{$invoiceCode}}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="text-secondary">Amount</span></td>
+                                    <td><strong>$ {{$amount}}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="text-secondary">Delivery Fee</span></td>
+                                    <td><strong>$ {{$deliveryFee}}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="text-secondary">Discount</span></td>
+                                    <td><strong>$ {{$discount}}</strong></td>
+                                </tr>
+                                </table>
+                                <!--
+                                <table class="w-100" id="cartTable">
+                                <tr>
+                                    <td><span class="text-secondary">Order #</span></td>
+                                    <td><strong>231198</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="text-secondary">Product</span></td>
+                                    <td><strong>DB Subscription</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="text-secondary">Tax (10%)</span></td>
+                                    <td><strong>12.88</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="text-secondary">Total</span></td>
+                                    <td><strong class="text-primary">$ 422.88</strong></td>
+                                </tr>
+                                </table>-->
+                                </div>
+                            <div id="ticket">
+                                <div class="d-flex p-4 align-items-center justify-content-between">
+                                <div>
+                                    <small class="text-secondary">Total Paid</small>
+                                    <div class="fs-2"><strong>$ {{$totalPaid}}</strong></div>
+                                </div>
+                                <div>
+                                    <img src="/static_files/svgs/shop.svg" width="48" alt="">
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
