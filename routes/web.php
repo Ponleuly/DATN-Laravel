@@ -179,13 +179,15 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
    Route::controller(OrderController::class)->group(function () {
-      Route::get('/order-list', 'order_list')->name('order-list');
+      Route::get('/order-list/page={page}', 'order_list_page')->name('order-list');
       Route::get('/order-details/{id}', 'order_details')->name('order-details');
       Route::get('/order-invoice/{id}', 'order_invoice')->name('order-invoice');
       Route::get('/download-invoice/{id}', 'download_invoice')->name('download-invoice');
       Route::get('/order-status-action/{order_id}/{status_id}', 'order_status_action')->name('order-status-action');
       Route::get('/order-search', 'order_search')->name('order-search');
       Route::get('/order-delete/{id}', 'order_delete')->name('order-delete');
+
+
    });
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {

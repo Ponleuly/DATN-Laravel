@@ -70,7 +70,7 @@
                     </a>
                     <ul id="ddmenu_2" class="collapse dropdown-nav">
                         <li>
-                            <a  href="{{url('admin/order-list')}}"
+                            <a  href="{{url('admin/order-list/page=10')}}"
                                 class="{{Request::is('admin/order-list')? 'active':''}}">
                                 Orders List
                             </a>

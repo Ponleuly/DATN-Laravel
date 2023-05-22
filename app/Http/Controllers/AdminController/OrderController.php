@@ -16,9 +16,14 @@ use App\Models\Settings;
 class OrderController extends Controller
 {
 
-    public function order_list()
+    public function order_list_page($page)
     {
-        $orders = Orders::orderByDesc('id')->paginate(8); // Showing only 8 ordered per page
+        if ($page == 'all') {
+            $orders = Orders::all()->count();
+            $page = $orders;
+        }
+            
+        $orders = Orders::orderByDesc('id')->paginate($page); // Showing only 8 ordered per page
         $count = 1;
         $search_text = '';
         return view(
@@ -26,9 +31,11 @@ class OrderController extends Controller
             compact(
                 'count',
                 'orders',
-                'search_text'
+                'search_text',
+                'page'
             )
         );
+        //return dd($orders);
     }
     public function order_search()
     {

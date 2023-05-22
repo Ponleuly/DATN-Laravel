@@ -33,6 +33,52 @@
                     <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
                         <div class="left">
                             <h6 class="text-medium mb-20">Orders List</h6>
+                            <div class="row">
+                                <div class="col-5">
+                                    <p>Show:</p>
+                                </div>
+                                <div class="col-7">
+                                    <select
+                                        class="form-select form-select-sm"
+                                        aria-label="Default select example"
+                                        >
+                                        <option
+                                            value ="5"
+                                            onClick="window.location=
+                                            '{{url('/admin/order-list/page=5')}}'"
+                                            {{($page==5)? 'selected':''}}
+                                            >
+                                            5
+                                        </option>
+                                        <option
+                                            value ="10"
+                                            onClick="window.location =
+                                            '{{url('/admin/order-list/page=10')}}'"
+                                            {{($page==10)? 'selected':''}}
+
+                                            >
+                                            10
+                                        </option>
+                                        <option
+                                            value ="20"
+                                            onClick="window.location =
+                                            '{{url('/admin/order-list/page=20')}}'"
+                                            {{($page==20)? 'selected':''}}
+
+                                            >
+                                            20
+                                        </option>
+                                        <option
+                                            value ="all"
+                                            onClick="window.location =
+                                            '{{url('/admin/order-list/page=all')}}'"
+                                            {{($page>20)? 'selected':''}}
+                                            >
+                                            All
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="right">
                              <form  action="{{url('admin/order-search')}}">
