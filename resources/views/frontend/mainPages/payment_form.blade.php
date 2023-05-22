@@ -292,11 +292,10 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
         $(function() {
             var $form = $(".require-validation");
-            var stripe = Stripe('pk_test_51N90wcBEnyaI46yLKeMwR80I4ppz2po8Zwi2NVESFoos56l6xMdvGwMdUFyYKOhivnXs9Ph3jlJziInmwXTrxE7G00jyNmiL9C');
             $('form.require-validation').bind('submit', function(e) {
                 var $form =
                     $(".require-validation"),
