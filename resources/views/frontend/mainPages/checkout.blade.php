@@ -483,7 +483,7 @@
 			Swal.fire({
 				position: 'top',
 				title: 'Are you sure to place order?',
-				text: "You are about to process payment",
+				text: "Plese make sure with all your informations !",
 				icon: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
@@ -498,29 +498,6 @@
 				swal("Cancelled", "AMC Record is safe :)", "error");
 			}
 			});
-
-			/*
-			swal({
-				position: 'top',
-				title: "Are you sure?",
-				text: "All data related to this AMC ID will be parmanently deleted",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText: "Yes, DELETE it!",
-				cancelButtonText: "No, cancel please!",
-				closeOnConfirm: false,
-				closeOnCancel: false
-			},
-			function(isConfirm){
-				if (isConfirm) {
-					form.submit();
-					} else {
-					swal("Cancelled", "AMC Record is safe :)", "error");
-
-				}
-			});
-			*/
 		});
 	</script>
 @endsection()

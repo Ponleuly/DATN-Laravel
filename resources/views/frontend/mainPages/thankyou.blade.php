@@ -21,6 +21,34 @@
 @section('content')
 	<div class="untree_co-section">
 		<div class="container">
+            <!--------------- Alert ------------------------>
+				@if(Session::has('error'))
+					<script>
+						var type = 'error';
+						var text = "<?php echo Session::get('error'); ?>";
+					</script>
+					<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+					@elseif(Session::has('info'))
+						<script>
+							var type = 'info';
+							var text = "<?php echo Session::get('info'); ?>";
+						</script>
+						<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+
+						@elseif(Session::has('success'))
+							<script>
+								var type = 'success';
+								var text = "<?php echo Session::get('success'); ?>";
+							</script>
+							<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+						@elseif(Session::has('question'))
+							<script>
+								var type = 'question';
+								var text = "<?php echo Session::get('question'); ?>";
+							</script>
+							<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+            	@endif
+			<!------------------End Alert ------------------------>
 			<div class="row">
 				<div class="col-md-12 text-center pt-2">
 				<span class="display-3 thankyou-icon text-danger">

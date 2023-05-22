@@ -406,19 +406,25 @@ class CartController extends Controller
             $productSize_qty->update();
         }
 
+        //================= Payment Credit Card =======================//
+        if ($request->payment == 'Credit Card') {
+            return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->totalPaid, 2));
+        } else {
+            return $this->order_completed(substr($order->invoice_code, 1));
+        }
+    }
+
+    //======================================================================================================================//
+    public function order_completed($code)
+    {
         //=============== Get data to display on user invoice =======================S//
-        $order = Orders::where('id', $orderId)->first();
-        $customer = Customers::where('id', $orderId)->first();
+        $order = Orders::where('invoice_code', '#' . $code)->first();
+        $orderId = $order->id;
+        $customer = Customers::where('order_id', $orderId)->first();
         $orderDetails = Orders_Details::where('order_id', $orderId)->get();
         $count = 1;
         $contacts = Contacts::orderBy('id')->get();
         $shopName = Settings::all()->first();
-
-        //================= Payment Credit Card =======================//
-        if ($request->payment == 'Credit Card') {
-            return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->totalPaid, 2));
-        }
-        
         return view(
             'frontend.mainPages.thankyou',
             compact(
@@ -430,11 +436,8 @@ class CartController extends Controller
                 'shopName'
             )
         );
-        
-        //return dd($request->toArray());
+        //return dd($customer);
     }
-
-    //======================================================================================================================//
 
 
 

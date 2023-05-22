@@ -235,55 +235,36 @@
 							<h2 class="h3 mb-3 text-black">Your Invoice</h2>
                             <div style="background:#eff4f8;border-radius:16px;">
                                 <div class="p-4">
-                                <table class="w-100" id="cartTable">
-                                <tr>
-                                    <td><span class="text-secondary">Order </span></td>
-                                    <td><strong>#{{$invoiceCode}}</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="text-secondary">Amount</span></td>
-                                    <td><strong>$ {{$amount}}</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="text-secondary">Delivery Fee</span></td>
-                                    <td><strong>$ {{$deliveryFee}}</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="text-secondary">Discount</span></td>
-                                    <td><strong>$ {{$discount}}</strong></td>
-                                </tr>
-                                </table>
-                                <!--
-                                <table class="w-100" id="cartTable">
-                                <tr>
-                                    <td><span class="text-secondary">Order #</span></td>
-                                    <td><strong>231198</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="text-secondary">Product</span></td>
-                                    <td><strong>DB Subscription</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="text-secondary">Tax (10%)</span></td>
-                                    <td><strong>12.88</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="text-secondary">Total</span></td>
-                                    <td><strong class="text-primary">$ 422.88</strong></td>
-                                </tr>
-                                </table>-->
+                                    <table class="w-100" id="cartTable">
+                                        <tr>
+                                            <td><span class="text-secondary">Order </span></td>
+                                            <td><strong>#{{$invoiceCode}}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="text-secondary">Amount</span></td>
+                                            <td><strong>$ {{$amount}}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="text-secondary">Delivery Fee</span></td>
+                                            <td><strong>$ {{$deliveryFee}}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="text-secondary">Discount</span></td>
+                                            <td><strong>$ {{$discount}}</strong></td>
+                                        </tr>
+                                    </table>
                                 </div>
-                            <div id="ticket">
-                                <div class="d-flex p-4 align-items-center justify-content-between">
-                                <div>
-                                    <small class="text-secondary">Total Paid</small>
-                                    <div class="fs-2"><strong>$ {{$totalPaid}}</strong></div>
+                                <div id="ticket">
+                                    <div class="d-flex p-4 align-items-center justify-content-between">
+                                    <div>
+                                        <small class="text-secondary">Total Paid</small>
+                                        <div class="fs-2"><strong>$ {{$totalPaid}}</strong></div>
+                                    </div>
+                                    <div>
+                                        <img src="/static_files/svgs/shop.svg" width="48" alt="">
+                                    </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <img src="/static_files/svgs/shop.svg" width="48" alt="">
-                                </div>
-                                </div>
-                            </div>
                             </div>
                         </div>
                     </div>

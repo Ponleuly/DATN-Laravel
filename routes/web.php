@@ -102,6 +102,7 @@ Route::controller(CartController::class)->group(function () {
    Route::get('checkout/dis={discount}', 'checkout')->name('checkout');
    Route::post('place-order', 'place_order')->name('place-order');
    Route::get('download-invoice/{id}', 'download_invoice')->name('download-invoice');
+   Route::get('order-completed/invoice={code}', 'order_completed')->name('order-completed');
 });
 /*================================================= End User Frontend route ====================================================*/
 
@@ -186,8 +187,6 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::get('/order-status-action/{order_id}/{status_id}', 'order_status_action')->name('order-status-action');
       Route::get('/order-search', 'order_search')->name('order-search');
       Route::get('/order-delete/{id}', 'order_delete')->name('order-delete');
-
-
    });
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
