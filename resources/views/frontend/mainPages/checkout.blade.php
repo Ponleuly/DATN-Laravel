@@ -489,7 +489,7 @@
 				confirmButtonColor: '#3085d6',
 				cancelButtonColor: '#d33',
 				confirmButtonText: 'Yes, Place Order',
-				cancelButtonText: 'No, Cancel',
+				cancelButtonText: 'Check Again',
 				reverseButtons: true
 			}).then((result) => {
 			if (result.isConfirmed) {

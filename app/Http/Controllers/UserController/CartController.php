@@ -308,7 +308,6 @@ class CartController extends Controller
     public function place_order(Request $request)
     {
         if (Auth::check() && Auth::user()->role == 1) {
-
             // Count order row
             $order_count = Orders::all()->count();
             $dis = preg_replace('/[^0-9]/', '', $request->discount);
@@ -326,7 +325,6 @@ class CartController extends Controller
             // Get customer id
             $order = Orders::latest()->first();
             $orderId = $order->id;
-
             $input = $request->all();
             $input['order_id'] = $orderId;
             //==== Store data to table customer =====//
@@ -334,7 +332,6 @@ class CartController extends Controller
             // Get data from Carts model
             $carts = Carts::where('user_id', Auth::user()->id)->get();
             foreach ($carts as $cart) {
-
                 // Store data to table orderDetails
                 Orders_Details::create([
                     'order_id' => $orderId,
@@ -410,8 +407,9 @@ class CartController extends Controller
         if ($request->payment == 'Credit Card') {
             return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->totalPaid, 2));
         } else {
-            return $this->order_completed(substr($order->invoice_code, 1));
+            return redirect('order-completed/invoice=' . substr($order->invoice_code, 1));
         }
+        //return $this->order_completed(substr($order->invoice_code, 1));
     }
 
     //======================================================================================================================//
@@ -426,7 +424,7 @@ class CartController extends Controller
         $contacts = Contacts::orderBy('id')->get();
         $shopName = Settings::all()->first();
         return view(
-            'frontend.mainPages.thankyou',
+            'frontend.mainPages.order_completed',
             compact(
                 'count',
                 'order',
@@ -438,8 +436,12 @@ class CartController extends Controller
         );
         //return dd($customer);
     }
-
-
+    public function order_canceled($code)
+    {
+        return view(
+            'frontend.mainPages.order_completed',
+        );
+    }
 
 
     //====================== Download Invoice ============================//

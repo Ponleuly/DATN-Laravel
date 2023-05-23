@@ -84,7 +84,6 @@
                                 </table>
                                 <div class="d-flex justify-content-end">
                                     <!--- To show data by pagination --->
-                                    {{$orders->links()}}
                                 </div>
                             </div>
 @endsection

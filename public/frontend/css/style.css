@@ -882,15 +882,17 @@ textarea {
 .thankyou-icon {
   position: relative;
   color: #CC2936; }
+  /*
   .thankyou-icon:before {
     position: absolute;
     content: "";
     width: 65px;
     height: 65px;
+    top: 20px;
     border-radius: 50%;
     background: rgba(204, 41, 54, 0.25);
   }
-
+*/
 .big-radio{
   width:1.5em;
   height:1.5em;
