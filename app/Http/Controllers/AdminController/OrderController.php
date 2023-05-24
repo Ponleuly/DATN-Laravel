@@ -22,7 +22,7 @@ class OrderController extends Controller
             $orders = Orders::all()->count();
             $page = $orders;
         }
-            
+
         $orders = Orders::orderByDesc('id')->paginate($page); // Showing only 8 ordered per page
         $count = 1;
         $search_text = '';
@@ -42,12 +42,14 @@ class OrderController extends Controller
         $search_text = $_GET['search_order'];
         $orders = Orders::where('invoice_code', 'LIKE', '%' . $search_text . '%')->get();
         $count = 1;
+        $page = $orders->count();
         return view(
             'adminfrontend.pages.orders.order_list',
             compact(
                 'orders',
                 'count',
-                'search_text'
+                'search_text',
+                'page'
             )
 
         );
@@ -60,7 +62,7 @@ class OrderController extends Controller
         $orderDetails = Orders_Details::where('order_id', $id)->get();
         $count = 1;
         $contacts = Contacts::orderBy('id')->get();
-        $shopName = Settings::all()->first();    
+        $shopName = Settings::all()->first();
 
         return view(
             'adminfrontend.pages.orders.order_details',
@@ -83,7 +85,7 @@ class OrderController extends Controller
         $orderDetails = Orders_Details::where('order_id', $id)->get();
         $count = 1;
         $contacts = Contacts::orderBy('id')->get();
-        $shopName = Settings::all()->first();    
+        $shopName = Settings::all()->first();
 
         return view(
             'adminfrontend.pages.orders.order_invoice',
@@ -107,14 +109,14 @@ class OrderController extends Controller
         $orderDetails = Orders_Details::where('order_id', $id)->get();
         $count = 1;
         $contacts = Contacts::orderBy('id')->get();
-        $shopName = Settings::all()->first();    
+        $shopName = Settings::all()->first();
         $data = [
             'count' => $count,
             'order' =>  $order,
             'customer' => $customer,
             'orderDetails' => $orderDetails,
             'contacts' => $contacts,
-            'shopName'=> $shopName,
+            'shopName' => $shopName,
         ];
         $pdf = Pdf::loadView('adminfrontend.pages.orders.order_invoice', $data);
 

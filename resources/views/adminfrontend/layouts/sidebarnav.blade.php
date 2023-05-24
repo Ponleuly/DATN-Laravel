@@ -6,7 +6,7 @@
         <div class="navbar-logo">
             <a href="{{url('admin/dashboard')}}">
                 @php
-                    $shopName = Settings::all()->first();    
+                    $shopName = Settings::all()->first();
                 @endphp
                 <h3 class="text-primary fw-bold">{{$shopName->website_name}}</h3>
             </a>
@@ -39,7 +39,7 @@
                     </a>
                     <ul id="ddmenu_1" class="collapse dropdown-nav">
                         <li>
-                            <a  href="{{url('admin/product-detail-list')}}"
+                            <a  href="{{url('admin/product-detail-list/page=10')}}"
                                 class="{{Request::is('admin/product-detail-list')? 'active':''}}">
                                 Product List
                             </a>

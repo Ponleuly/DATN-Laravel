@@ -32,7 +32,7 @@
                 <div class="card-style mb-30">
                     <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
                         <div class="left">
-                            <h6 class="text-medium mb-20">Orders List</h6>
+                            <h4 class="text-medium mb-20">Orders List</h4>
                             <div class="row">
                                 <div class="col-5">
                                     <p>Show:</p>
@@ -71,8 +71,8 @@
                                         <option
                                             value ="all"
                                             onClick="window.location =
-                                            '{{url('/admin/order-list/page=all')}}'"
-                                            {{($page>20)? 'selected':''}}
+                                            '{{url('admin/order-list/page=all')}}'"
+                                            {{Request::is('admin/order-list/page=all')? 'selected':''}}
                                             >
                                             All
                                         </option>
@@ -213,7 +213,7 @@
                                     <div class="d-flex">
                                             <a
                                                 class="btn btn-outline-danger rounded-0 mt-2"
-                                                href="{{url('admin/order-list')}}"
+                                                href="{{url('admin/order-list/page=10')}}"
                                                 role="button"
                                                 >
                                                 <p class="text-sm">Back to List</p>

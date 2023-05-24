@@ -28,7 +28,53 @@
                     <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
                         <div class="col-md-6">
                             <div class="left">
-                                <h6 class="text-medium mb-20">Products List</h6>
+                                <h4 class="text-medium mb-20">Products List</h4>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <p>Show:</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <select
+                                            class="form-select form-select-sm"
+                                            aria-label="Default select example"
+                                            >
+                                            <option
+                                                value ="5"
+                                                onClick="window.location=
+                                                '{{url('admin/product-detail-list/page=5')}}'"
+                                                {{($page==5)? 'selected':''}}
+                                                >
+                                                5
+                                            </option>
+                                            <option
+                                                value ="10"
+                                                onClick="window.location =
+                                                '{{url('admin/product-detail-list/page=10')}}'"
+                                                {{($page==10)? 'selected':''}}
+
+                                                >
+                                                10
+                                            </option>
+                                            <option
+                                                value ="20"
+                                                onClick="window.location =
+                                                '{{url('admin/product-detail-list/page=20')}}'"
+                                                {{($page==20)? 'selected':''}}
+
+                                                >
+                                                20
+                                            </option>
+                                            <option
+                                                value ="all"
+                                                onClick="window.location =
+                                                '{{url('admin/product-detail-list/page=all')}}'"
+                                                {{Request::is('admin/product-detail-list/page=all')? 'selected':''}}
+                                                >
+                                                All
+                                            </option>
+                                        </select>
+                                    </div>
+                            </div>
                             </div>
                         </div>
                         <div class="col-md-6">

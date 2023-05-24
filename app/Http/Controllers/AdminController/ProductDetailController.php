@@ -35,9 +35,13 @@ class ProductDetailController extends Controller
     }
 
 
-    public function product_detail_list()
+    public function product_detail_list($page)
     {
-        $products = Products::orderByDesc('id')->paginate(6);
+        if ($page == 'all') {
+            $products = Products::all()->count();
+            $page = $products;
+        }
+        $products = Products::orderByDesc('id')->paginate($page);
         $count = 1;
         $search_text = '';
         return view(
@@ -45,7 +49,8 @@ class ProductDetailController extends Controller
             compact(
                 'products',
                 'count',
-                'search_text'
+                'search_text',
+                'page'
             )
 
         );
@@ -89,7 +94,7 @@ class ProductDetailController extends Controller
         if ($stockLeft == 0) {
             $status->product_status = 3; // is sold out
             $status->update();
-        }elseif ($stockLeft > 0 && $stockLeft < $allStock){
+        } elseif ($stockLeft > 0 && $stockLeft < $allStock) {
             $status->product_status = 2; // is selling
             $status->update();
         }
