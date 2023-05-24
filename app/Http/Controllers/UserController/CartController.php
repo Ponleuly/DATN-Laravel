@@ -438,6 +438,10 @@ class CartController extends Controller
     }
     public function order_canceled($code)
     {
+        $order = Orders::where('invoice_code', '#' . $code)->first();
+        $orderId = $order->id;
+        $cancelOrder = Orders::where('id', $orderId)->first();
+        $cancelOrder->delete();
         return view(
             'frontend.mainPages.order_completed',
         );
