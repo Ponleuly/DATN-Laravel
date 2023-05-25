@@ -136,7 +136,7 @@
                                         $total = $totalAmount + $deliveryFee - $discount;
                                          // Get delivery statuses
                                         $statuses = Orders_Statuses::orderBy('id')->get();
-                                        $status_name = Orders_Statuses::where('status', Str::ucfirst($order->order_status))->first();
+                                        //$status_cmp = Orders_Statuses::where('status', $order->order_status)->first();
                                     @endphp
                                     <tr class="text-center">
                                         <td><p class="text-sm">{{$count++}}</p></td>
@@ -150,14 +150,12 @@
                                         <td>
                                             <button
                                                 type="button"
-                                                class="btn btn-sm py-1 px-2
-                                                    {{($order->order_status == $status_name)?  'btn-warning' : ''}}
-                                                    {{($order->order_status == $status_name)?  'btn-primary' : ''}}
-                                                    {{($order->order_status == $status_name)?  'btn-success' : ''}}
-                                                    {{($order->order_status == $status_name)?  'btn-danger' : ''}}
-                                                    "
-                                                    style="width: 90px"
-                                                >
+                                                class="btn btn-sm py-1 px-2"
+                                                style="width: 90px; color:#fff ;background:
+                                                     @foreach ($statuses as $status_name)
+                                                        {{($order->order_status == $status_name->status)?  $status_name->status_color : ''}}
+                                                    @endforeach
+                                                ">
                                                 {{$order->order_status}}
                                             </button>
                                         </td>
@@ -165,14 +163,15 @@
                                             <select
                                                 class="form-select form-select-sm"
                                                 aria-label="Default select example"
+                                                id="orderStatus"
+                                                name="orderStatus"
                                                 >
-                                                @foreach ($statuses as $status)
+                                                @foreach ($statuses as $status_name)
                                                     <option
-                                                        value ="{{$status->id}}"
-                                                        {{($status->id == $order->order_status)? 'selected': ''}}
-                                                        onClick="window.location = '{{url('admin/order-status-action/'.$order->id .'/'.$status->status)}}'"
+                                                        value ="{{url('admin/order-status-action/'.$order->id .'/'.$status_name->status)}}"
+                                                        {{($status_name->status == $order->order_status)? 'selected': ''}}
                                                         >
-                                                        {{($status->status)}}
+                                                        {{($status_name->status)}}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -226,10 +225,20 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
-        $('#showPage').bind('change', function () { // bind change event to select
-            var url = $(this).val(); // get selected value
-            if (url != '') { // require a URL
-                window.location = url; // redirect
+        // Get "id" of select option, if there are only one select
+        $('#showPage').on('change', function () { // bind change event to select
+            var url_show_page = $(this).val(); // get selected value
+            if (url_show_page != '') { // require a url_show_page
+                window.location = url_show_page; // redirect
+            }
+            return false;
+        });
+        // Get "name" of select opption if there is many selects like each order have 1 select(with many option)
+        $("[name='orderStatus']").on('change', function () { // bind change event to select
+            var url_order_status = $(this).val(); // get selected value
+            if (url_order_status != '') { // require a url_order_status
+                window.location = url_order_status; // redirect
+                //alert(url_order_status);
             }
             return false;
         });
