@@ -11,6 +11,7 @@ class Orders_Statuses extends Model
     protected $table = 'orders_statuses';
     protected $fillable = [
         'status',
+        'status_color',
     ];
     public function rela_order_status()
     {

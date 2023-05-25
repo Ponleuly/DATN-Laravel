@@ -5,7 +5,6 @@
 	use App\Models\Invoices;
 	use App\Models\Orders_Statuses;
 	use App\Models\Customers;
-
 ?>
 @extends('adminfrontend.layouts.index')
 @section('admincontent')
@@ -26,7 +25,6 @@
                     @endif
                 <!---------------End Alert ------------------------>
             </div>
-
             <!------------------------------------------------------------------------------------>
             <div class="col-lg-12">
                 <div class="card-style mb-30">
@@ -138,7 +136,7 @@
                                         $total = $totalAmount + $deliveryFee - $discount;
                                          // Get delivery statuses
                                         $statuses = Orders_Statuses::orderBy('id')->get();
-                                        $status_name = Orders_Statuses::where('id', $order->order_status)->first();
+                                        $status_name = Orders_Statuses::where('status', Str::ucfirst($order->order_status))->first();
                                     @endphp
                                     <tr class="text-center">
                                         <td><p class="text-sm">{{$count++}}</p></td>
@@ -153,15 +151,14 @@
                                             <button
                                                 type="button"
                                                 class="btn btn-sm py-1 px-2
-                                                    {{($order->order_status == 1)?  'btn-warning' : ''}}
-                                                    {{($order->order_status == 2)?  'btn-primary' : ''}}
-                                                    {{($order->order_status == 3)?  'btn-success' : ''}}
-                                                    {{($order->order_status == 4)?  'btn-danger' : ''}}
-                                                    {{($order->order_status > 4)?  'btn-secondary' : ''}}
+                                                    {{($order->order_status == $status_name)?  'btn-warning' : ''}}
+                                                    {{($order->order_status == $status_name)?  'btn-primary' : ''}}
+                                                    {{($order->order_status == $status_name)?  'btn-success' : ''}}
+                                                    {{($order->order_status == $status_name)?  'btn-danger' : ''}}
                                                     "
                                                     style="width: 90px"
                                                 >
-                                                {{$status_name->status}}
+                                                {{$order->order_status}}
                                             </button>
                                         </td>
                                         <td>
@@ -173,9 +170,9 @@
                                                     <option
                                                         value ="{{$status->id}}"
                                                         {{($status->id == $order->order_status)? 'selected': ''}}
-                                                        onClick="window.location = '{{url('admin/order-status-action/'.$order->id .'/'.$status->id)}}'"
+                                                        onClick="window.location = '{{url('admin/order-status-action/'.$order->id .'/'.$status->status)}}'"
                                                         >
-                                                        {{$status->status}}
+                                                        {{($status->status)}}
                                                     </option>
                                                 @endforeach
                                             </select>

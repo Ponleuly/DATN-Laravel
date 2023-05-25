@@ -128,12 +128,12 @@ class OrderController extends Controller
 
 
     //============= Update invoice status ============//
-    public function order_status_action($orderId, $statusId)
+    public function order_status_action($orderId, $statusName)
     {
         $orderStatus = Orders::where('id', $orderId)->first();
-        $orderStatus['order_status'] = $statusId;
+        $orderStatus['order_status'] = $statusName;
         $orderStatus->update();
-        if ($statusId == 3) {
+        if ($statusName == 'Delivered') {
             $deliveryFee = $orderStatus->delivery_fee;
             $discount = $orderStatus->discount;
             $totalAmount = 0;
@@ -150,7 +150,7 @@ class OrderController extends Controller
         }
 
         // ==== If order is cancenled, update product size quantity
-        if ($statusId == 4) {
+        if ($statusName == 'Canceled') {
             $order_details = Orders_Details::where('order_id', $orderId)->get();
             foreach ($order_details as $order_detail) {
                 $productSize = Products_Sizes::where('product_id', $order_detail->product_id)

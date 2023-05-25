@@ -49,19 +49,25 @@ class OrderStatusController extends Controller
 
     public function order_status_store(Request $request)
     {
+        $statusAll = Orders_Statuses::all();
+        foreach ($statusAll as $status) {
+            if (ucfirst($request->status) == ucfirst($status->status)) {
+                return redirect('admin/order-status-add')
+                    ->with('alert', 'Order status ' . '"' . ucfirst($status->status) . '"' . ' already existed !');
+            }
+        }
         $input  = $request->all();
         Orders_Statuses::create($input);
-
         // After inputed -> go back to category page
         return redirect('admin/order-status-add')
             ->with('message', 'Order status option ' . $request->status . ' is added successfully!');
+        //return dd($request->toArray());
     }
 
 
     public function order_status_edit($id)
     {
         $order_status = Orders_Statuses::where('id', $id)->first();
-
         return view(
             'adminfrontend.pages.order_statuses.status_edit',
             compact(
@@ -75,6 +81,7 @@ class OrderStatusController extends Controller
     {
         $update_order_status = Orders_Statuses::where('id', $id)->first();
         $update_order_status->status = $request->input('status');
+        $update_order_status->status_color = $request->input('status_color');
         $update_order_status->update();
 
         return redirect('/admin/order-status-list')

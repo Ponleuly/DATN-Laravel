@@ -19,58 +19,75 @@
                             </div>
                     @endif
                     <!---------------End Alert ------------------------>
-
-                    <h4 class="mb-2 text-black">Add Statuses Option</h4>
-                    <div class="p-3 p-lg-4 border bg-white">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <a
-                                    class="btn btn-outline-primary rounded-0"
-                                    href="{{url('admin/order-status-add')}}"
-                                    role="button">
-                                    Add Status
-                                </a>
+                </div>
+            </div>
+                    <!------------------------------------------------------------------------------------>
+            <div class="col-lg-12">
+                <div class="card-style mb-30">
+                    <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
+                         <div class="col-md-6">
+                            <div class="left">
+                                <h4 class="text-medium mb-20">Order Statuses</h4>
                             </div>
-                            <div class="col-md-6">
-                                <form  action="{{url('admin/order-status-search')}}">
-                                    <div class="input-group w-75 ms-auto">
-                                        <input
-                                            type="text"
-                                            name="search_order_status"
-                                            class="form-control rounded-0"
-                                            placeholder="Enter status title here..."
-                                            aria-label="Recipient's username"
-                                            aria-describedby="search"
-                                            value="{{$search_text}}"
-                                        >
-                                        <button
-                                            class="btn btn-outline-primary rounded-0"
-                                            type="submit"
-                                            id="search"
-                                            >
-                                            Search
-                                        </button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="right">
+                                <div class="row">
+                                    <div class="col-md-3 mb-2 ">
+                                        <a
+                                            class="btn btn-outline-primary rounded-0 py-1"
+                                            href="{{url('/admin/order-status-add')}}"
+                                            role="button">
+                                            <p class="text-sm">Add Status</p>
+                                        </a>
                                     </div>
-                                </form>
+                                    <div class="col-md-9 ">
+                                        <form  action="{{url('admin/order-status-search')}}">
+                                            <div class="input-group input-group-sm w-100">
+                                                <input
+                                                    type="text"
+                                                    name="search_order_status"
+                                                    class="form-control rounded-0 text-sm"
+                                                    placeholder="Enter status title here..."
+                                                    aria-label="Sizing example input"
+                                                    aria-describedby="inputGroup-sizing-default"
+                                                    value="{{$search_text}}"
+                                                >
+                                                <button
+                                                    class="btn btn-outline-primary rounded-0 text-sm"
+                                                    type="submit"
+                                                    id="search"
+                                                    >
+                                                    Search
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-3 p-3 p-lg-4 border bg-white">
-                        <table class="table table-hover">
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table top-selling-table table-hover">
                             <thead>
-                                <tr class="text-light bg-primary text-center">
-                                    <th scope="col">#</th>
-                                    <th scope="col">STATUS</th>
-                                    <th scope="col">DATE</th>
-                                    <th scope="col">ACTIONS</th>
+                                <tr class="text-center">
+                                    <th><h6 class="text-sm text-medium">#</h6></th>
+                                    <th class="min-width"><h6 class="text-sm text-medium">Status</h6></th>
+                                    <th class="min-width"><h6 class="text-sm text-medium">Date</h6></th>
+                                    <th class="min-width"><h6 class="text-sm text-medium">Actions</h6></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($statuses as $status)
                                     <tr class="text-center">
-                                        <th scope="row">{{$count++}}</th>
-                                        <td>{{$status->status}}</td>
-                                        <td>{{$status->created_at->diffForHumans()}}</td>
+                                        <td><p class="text-sm">{{$count++}}</p></td>
+                                        <td>
+                                            <p class="text-sm" style="color:{{$status->status_color}}">
+                                                {{$status->status}}
+                                            </p>
+                                        </td>
+                                        <td><p class="text-sm">{{$status->created_at->diffForHumans()}}</p></td>
                                         <td>
                                             <a
                                                 class="text-light py-1 pb-0 px-2 rounded-0 edit-btn"
@@ -78,7 +95,7 @@
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Edit Product"
+                                                title="Edit Status"
                                                 >
                                                 <span class="material-icons-round" style="font-size: 16px">edit</span>
                                             </a>
@@ -88,7 +105,7 @@
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Delete Product"
+                                                title="Delete Status"
                                                 >
                                                 <span class="material-icons-round" style="font-size: 16px">delete</span>
                                             </a>
@@ -99,13 +116,13 @@
                         </table>
                         <div class="d-flex justify-content-end">
                             @if($search_text != '')
-                                <div class="d-flex mt-4" style="padding-top: 2px">
+                                <div class="d-flex">
                                     <a
                                         class="btn btn-outline-danger rounded-0 mt-2"
                                         href="{{url('admin/order-status-list')}}"
                                         role="button"
                                         >
-                                        Back to List
+                                        <p class="text-sm">Back to List</p>
                                     </a>
                                 </div>
                             @endif

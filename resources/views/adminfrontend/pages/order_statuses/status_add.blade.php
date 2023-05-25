@@ -32,6 +32,36 @@
                                             name="status"
                                             placeholder="Status..."
                                         >
+                                        <label for=""><p class="text-label">Status Color</p></label><br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status_color" id="primary" value="#0d6efd" checked>
+                                            <label class="form-check-label bg-primary" for="primary" style="color:#0d6efd">AAAA</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status_color" id="secondary" value="#6c757d">
+                                            <label class="form-check-label bg-secondary" for="secondary" style="color:#6c757d">AAAA</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status_color" id="success" value="#198754">
+                                            <label class="form-check-label bg-success" for="success" style="color:#198754">AAAA</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status_color" id="danger" value="#dc3545">
+                                            <label class="form-check-label bg-danger" for="danger" style="color:#dc3545">AAAA</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status_color" id="warning" value="#ffc107">
+                                            <label class="form-check-label bg-warning" for="warning" style="color:#ffc107">AAAA</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status_color" id="info" value="#0dcaf0">
+                                            <label class="form-check-label bg-info" for="info" style="color:#0dcaf0">AAAA</label>
+                                        </div>
+                                         <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status_color" id="dark" value="#212529">
+                                            <label class="form-check-label bg-dark" for="dark" style="color:#212529">AAAA</label>
+                                        </div>
 
                                         <div class="d-flex mt-4">
                                             <a

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('orders_statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('status');
+            $table->string('status_color', 10);
             $table->timestamps();
         });
     }
