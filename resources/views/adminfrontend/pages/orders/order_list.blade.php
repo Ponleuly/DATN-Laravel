@@ -31,81 +31,82 @@
             <div class="col-lg-12">
                 <div class="card-style mb-30">
                     <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
-                        <div class="left">
-                            <h4 class="text-medium mb-20">Orders List</h4>
-                            <div class="row">
-                                <div class="col-5">
-                                    <p>Show:</p>
-                                </div>
-                                <div class="col-7">
-                                    <select
-                                        class="form-select form-select-sm"
-                                        aria-label="Default select example"
-                                        >
-                                        <option
-                                            value ="5"
-                                            onClick="window.location=
-                                            '{{url('/admin/order-list/page=5')}}'"
-                                            {{($page==5)? 'selected':''}}
+                        <div class="col-6">
+                            <div class="left">
+                                <h4 class="text-medium mb-20">Orders List</h4>
+                                <div class="row align-items-baseline">
+                                    <div class="col-3 d-flex flex-row align-items-baseline" style="min-width:200px">
+                                        <p class="text-sm pe-2">Show </p>
+                                        <select
+                                            class="form-select form-select-sm"
+                                            style="width:65px"
+                                            aria-label="Default select example"
+                                            id="showPage"
                                             >
-                                            5
-                                        </option>
-                                        <option
-                                            value ="10"
-                                            onClick="window.location =
-                                            '{{url('/admin/order-list/page=10')}}'"
-                                            {{($page==10)? 'selected':''}}
+                                            <option
+                                                value ="{{url('/admin/order-list/page=5')}}"
+                                                {{($page==5)? 'selected':''}}
+                                                >
+                                                5
+                                            </option>
+                                            <option
+                                                value ="{{url('/admin/order-list/page=10')}}"
+                                                {{($page==10)? 'selected':''}}
+                                                >
+                                                10
+                                            </option>
+                                            <option
+                                                value ="{{url('/admin/order-list/page=20')}}"
+                                                {{($page==20)? 'selected':''}}
+                                                >
+                                                20
+                                            </option>
+                                            <option
+                                                value ="{{url('admin/order-list/page=all')}}"
+                                                {{Request::is('admin/order-list/page=all')? 'selected':''}}
+                                                >
+                                                All
+                                            </option>
+                                        </select>
+                                        <p class="text-sm px-2">entries </p>
+                                    </div>
 
-                                            >
-                                            10
-                                        </option>
-                                        <option
-                                            value ="20"
-                                            onClick="window.location =
-                                            '{{url('/admin/order-list/page=20')}}'"
-                                            {{($page==20)? 'selected':''}}
-
-                                            >
-                                            20
-                                        </option>
-                                        <option
-                                            value ="all"
-                                            onClick="window.location =
-                                            '{{url('admin/order-list/page=all')}}'"
-                                            {{Request::is('admin/order-list/page=all')? 'selected':''}}
-                                            >
-                                            All
-                                        </option>
-                                    </select>
                                 </div>
+                                @if($search_text!='')
+                                    <p class="text-md mt-2">Found
+                                        <strong class="text-danger">{{$page}}</strong> orders for your search:
+                                    </p>
+                                @endif
                             </div>
                         </div>
-                        <div class="right">
-                             <form  action="{{url('admin/order-search')}}">
-                                <div class="input-group input-group-sm w-100">
-                                    <input
-                                        type="text"
-                                        name="search_order"
-                                        class="form-control rounded-0 text-sm"
-                                        placeholder="Enter order code here..."
-                                        aria-label="Sizing example input"
-                                        aria-describedby="inputGroup-sizing-default"
-                                        value="{{$search_text}}"
-                                    >
-                                    <button
-                                        class="btn btn-outline-primary rounded-0 text-sm"
-                                        type="submit"
-                                        id="search"
+                        <div class="col-6 d-flex justify-content-end">
+                            <div class="right">
+                                <form  action="{{url('admin/order-search')}}">
+                                    <div class="input-group input-group-sm w-100 ">
+                                        <input
+                                            type="text"
+                                            name="search_order"
+                                            class="form-control rounded-0 text-sm"
+                                            placeholder="Enter order code here..."
+                                            aria-label="Sizing example input"
+                                            aria-describedby="inputGroup-sizing-default"
+                                            value="{{$search_text}}"
                                         >
-                                        Search
-                                    </button>
-                                </div>
-                            </form>
+                                        <button
+                                            class="btn btn-outline-primary rounded-0 text-sm"
+                                            type="submit"
+                                            id="search"
+                                            >
+                                            Search
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <hr>
                     <div class="table-responsive">
-                        <table class="table top-selling-table table-hover">
+                        <table class="table top-selling-table table-hover" id="sampleTable">
                             <thead>
                                 <tr class="text-center">
                                     <th><h6 class="text-sm text-medium">#</h6></th>
@@ -211,13 +212,13 @@
                                 {{$orders->links()}}
                                 @else
                                     <div class="d-flex">
-                                            <a
-                                                class="btn btn-outline-danger rounded-0 mt-2"
-                                                href="{{url('admin/order-list/page=10')}}"
-                                                role="button"
-                                                >
-                                                <p class="text-sm">Back to List</p>
-                                            </a>
+                                        <a
+                                            class="btn btn-outline-danger rounded-0 mt-2"
+                                            href="{{url('admin/order-list/page=10')}}"
+                                            role="button"
+                                            >
+                                            <p class="text-sm">Back to List</p>
+                                        </a>
                                     </div>
                             @endif
                         </div>
@@ -226,4 +227,14 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        $('#showPage').bind('change', function () { // bind change event to select
+            var url = $(this).val(); // get selected value
+            if (url != '') { // require a URL
+                window.location = url; // redirect
+            }
+            return false;
+        });
+    </script>
 @endsection()

@@ -23,7 +23,7 @@ class OrderController extends Controller
             $page = $orders;
         }
 
-        $orders = Orders::orderByDesc('id')->paginate($page); // Showing only 8 ordered per page
+        $orders = Orders::orderByDesc('id')->paginate($page);
         $count = 1;
         $search_text = '';
         return view(
@@ -40,6 +40,9 @@ class OrderController extends Controller
     public function order_search()
     {
         $search_text = $_GET['search_order'];
+        if ($search_text == '') {
+            return redirect()->back()->with('alert', 'Please fill order code to search !');
+        }
         $orders = Orders::where('invoice_code', 'LIKE', '%' . $search_text . '%')->get();
         $count = 1;
         $page = $orders->count();
@@ -49,7 +52,7 @@ class OrderController extends Controller
                 'orders',
                 'count',
                 'search_text',
-                'page'
+                'page',
             )
 
         );

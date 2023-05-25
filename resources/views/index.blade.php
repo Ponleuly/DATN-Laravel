@@ -27,7 +27,7 @@
 			use App\Models\Settings;
 		?>
 		@php
-			$shopName = Settings::all()->first();    
+			$shopName = Settings::all()->first();
 		@endphp
 		<title>{{$shopName->website_name}}</title>
 	</head>
