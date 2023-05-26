@@ -61,13 +61,12 @@
                                                 </td>
                                                 <td
                                                     class="text-center
-                                                        {{($order->order_status == 1)?  'text-warning' : ''}}
-                                                        {{($order->order_status == 2)?  'text-primary' : ''}}
-                                                        {{($order->order_status == 3)?  'text-success' : ''}}
-                                                        {{($order->order_status == 4)?  'text-danger' : ''}}
-                                                        "
-                                                    >
-                                                    {{$status_name->status}}
+                                                        {{($order->order_status == 'Pending')?  'text-warning' : ''}}
+                                                        {{($order->order_status == 'Processing')?  'text-primary' : ''}}
+                                                        {{($order->order_status == 'Delivered')?  'text-success' : ''}}
+                                                        {{($order->order_status == 'Canceled')?  'text-danger' : ''}}
+                                                    ">
+                                                    {{$order->order_status}}
                                                 </td>
                                                 <td class="text-center">
                                                     <a

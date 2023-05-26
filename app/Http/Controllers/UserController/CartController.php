@@ -307,6 +307,7 @@ class CartController extends Controller
 
     public function place_order(Request $request)
     {
+        // If customer is member and loged in
         if (Auth::check() && Auth::user()->role == 1) {
             // Count order row
             $order_count = Orders::all()->count();
@@ -316,11 +317,12 @@ class CartController extends Controller
             // Store data to table orders
             Orders::create([
                 'invoice_code' => '#iv' . sprintf('%04d', ++$order_count),
-                'order_status' => 1, // set t default status = 1 is pending, 2=processing, 3=derliverd, 4=cancel
+                'order_status' => 'Pending', // set t default is pending, processing, derliverd, canceled
                 'user_id' => Auth::user()->id,
                 'discount' => number_format($discount, 2),
                 'payment_method' => $request->payment,
                 'delivery_fee' => $request->delivery_fee,
+                'total_paid' => substr($request->total_paid, 2),
             ]);
             // Get customer id
             $order = Orders::latest()->first();
@@ -344,7 +346,7 @@ class CartController extends Controller
 
             // Remove all products in carts after user completed order
             Carts::where('user_id', Auth::user()->id)->delete();
-        } else {
+        } else { // If customer is guest and not loged in
             // Count order row
             $order_count = Orders::all()->count();
             //=== Get total discount without string $ ====//
@@ -354,11 +356,12 @@ class CartController extends Controller
             // Store data to table orders
             Orders::create([
                 'invoice_code' => '#iv' . sprintf('%04d', ++$order_count),
-                'order_status' => 1, // set t default status = 1 is pending, 2=processing, 3=derliverd, 4=cancel
-                'user_id' => 0,
+                'order_status' => 'Pending', // set t default status = 1 is pending, 2=processing, 3=derliverd, 4=cancel
+                'user_id' => 0, // if cumstomer is guest, other if is cumstomer is member
                 'discount' => number_format($discount, 2),
                 'payment_method' => $request->payment,
                 'delivery_fee' => $request->delivery_fee,
+                'total_paid' => substr($request->total_paid, 2),
             ]);
 
             // Get order id
@@ -409,7 +412,9 @@ class CartController extends Controller
         } else {
             return redirect('order-completed/invoice=' . substr($order->invoice_code, 1));
         }
-        //return $this->order_completed(substr($order->invoice_code, 1));
+
+        return $this->order_completed(substr($order->invoice_code, 1));
+        //return dd($request->toArray());
     }
 
     //======================================================================================================================//

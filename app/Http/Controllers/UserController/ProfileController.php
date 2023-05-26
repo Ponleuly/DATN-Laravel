@@ -4,6 +4,8 @@ namespace App\Http\Controllers\UserController;
 
 use App\Models\User;
 use App\Models\Orders;
+use App\Models\Contacts;
+use App\Models\Settings;
 use App\Models\Customers;
 use Illuminate\Http\Request;
 use App\Models\Orders_Details;
@@ -109,13 +111,18 @@ class ProfileController extends Controller
         $customer = Customers::where('id', $orderId)->first();
         $orderDetails = Orders_Details::where('order_id', $orderId)->get();
         $count = 1;
+        $shopName = Settings::all()->first();
+        $contacts = Contacts::orderBy('id')->get();
+
         return view(
             'frontend.userProfile.order_history',
             compact(
                 'count',
                 'order',
                 'customer',
-                'orderDetails'
+                'orderDetails',
+                'shopName',
+                'contacts'
             )
         );
     }

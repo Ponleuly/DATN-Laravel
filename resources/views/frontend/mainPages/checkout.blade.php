@@ -368,7 +368,7 @@
 														<td class="text-danger text-end border-bottom-2 border-danger d-flex justify-content-end">
 															<input
 																class="form-control w-100 text-end pe-0 ps-0 border-0 bg-white text-danger fw-bold"
-																name="totalPaid"
+																name="total_paid"
 																value="$ {{$total  = number_format((($subtotal + number_format($deliveryFee, 2)) - $discount) ,2)}}"
 																aria-label=".form-control-sm example"
 																readonly

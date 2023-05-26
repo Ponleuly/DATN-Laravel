@@ -17,12 +17,6 @@ return new class extends Migration
             $table->increments('id');
             $table->string('invoice_code');
             $table->string('order_status');
-            /*$table->foreign('order_status')
-                ->references('id')
-                ->on('orders_statuses')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            */
             $table->unsignedDecimal('discount');
             $table->unsignedDecimal('delivery_fee');
             $table->unsignedDecimal('total_paid')->nullable();

@@ -170,31 +170,47 @@
                                             <button
                                                 type="button"
                                                 class="btn btn-sm py-1 px-2
-                                                    {{($order->order_status == 1)?  'btn-warning' : ''}}
-                                                    {{($order->order_status == 2)?  'btn-primary' : ''}}
-                                                    {{($order->order_status == 3)?  'btn-success' : ''}}
-                                                    {{($order->order_status == 4)?  'btn-danger' : ''}}
-                                                    {{($order->order_status > 4)?  'btn-secondary' : ''}}
+                                                    {{($order->order_status == 'Pending')?  'btn-warning' : ''}}
+                                                    {{($order->order_status == 'Processing')?  'btn-primary' : ''}}
+                                                    {{($order->order_status == 'Delivered')?  'btn-success' : ''}}
+                                                    {{($order->order_status == 'Canceled')?  'btn-danger' : ''}}
                                                     "
                                                     style="width: 90px"
                                                 >
-                                                {{$status_name->status}}
+                                                {{$order->order_status}}
                                             </button>
                                         </td>
                                         <td>
                                             <select
                                                 class="form-select form-select-sm"
                                                 aria-label="Default select example"
+                                                id="orderStatus"
+                                                name="orderStatus"
                                                 >
-                                                @foreach ($statuses as $status)
-                                                    <option
-                                                        value ="{{$status->id}}"
-                                                        {{($status->id == $order->order_status)? 'selected': ''}}
-                                                        onClick="window.location = '{{url('admin/order-status-action/'.$order->id .'/'.$status->id)}}'"
-                                                        >
-                                                        {{$status->status}}
-                                                    </option>
-                                                @endforeach
+                                                <option
+                                                    value ="{{url('admin/order-status-action/'.$order->id .'/pending')}}"
+                                                    {{($order->order_status == 'Pending')? 'selected': ''}}
+                                                    >
+                                                    Pending
+                                                </option>
+                                                <option
+                                                    value ="{{url('admin/order-status-action/'.$order->id .'/processing')}}"
+                                                    {{($order->order_status == 'Processing')? 'selected': ''}}
+                                                    >
+                                                    Processing
+                                                </option>
+                                                <option
+                                                    value ="{{url('admin/order-status-action/'.$order->id .'/delivered')}}"
+                                                    {{($order->order_status == 'Deliverd')? 'selected': ''}}
+                                                    >
+                                                    Delivered
+                                                </option>
+                                                <option
+                                                    value ="{{url('admin/order-status-action/'.$order->id .'/canceled')}}"
+                                                    {{($order->order_status == 'Canceled')? 'selected': ''}}
+                                                    >
+                                                   Canceled
+                                                </option>
                                             </select>
                                         </td>
                                         <td>
@@ -220,4 +236,16 @@
         </div>
     </div>
     <!-- end container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        // Get "name" of select opption if there is many selects like each order have 1 select(with many option)
+        $("[name='orderStatus']").on('change', function () { // bind change event to select
+            var url_order_status = $(this).val(); // get selected value
+            if (url_order_status != '') { // require a url_order_status
+                window.location = url_order_status; // redirect
+                //alert(url_order_status);
+            }
+            return false;
+        });
+    </script>
 @endsection()
