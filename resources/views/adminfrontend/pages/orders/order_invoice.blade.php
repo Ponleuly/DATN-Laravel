@@ -26,7 +26,7 @@
                     <div class="col-xl-3">
                         <ul class="list-unstyled">
                             <li class="text-muted">
-                                <p class="fs-6 fw-bold mb-1">CONTACT</p> 
+                                <p class="fs-6 fw-bold mb-1">CONTACT</p>
                             </li>
                             @foreach ($contacts as $contact)
                                 <li class="text-muted">
@@ -53,10 +53,26 @@
                         <div class="col-xl-9">
                             <ul class="list-unstyled">
                                 <li class="text-muted"><p class="fs-5 fw-bold mb-1">CUSTOMER</p></li>
-                                <li class="text-muted">{{$customer->c_name}}</li>
-                                <li class="text-muted">{{$customer->c_phone}}</li>
-                                <li class="text-muted">{{$customer->c_email}}</li>
-                                <li class="text-muted">{{$customer->c_address}}</li>
+                                <li class="text-muted">
+                                    <p class="text-muted fw-bold mb-1">Name :
+                                        <span class="fw-normal">{{$customer->c_name}}</span>
+                                    </p>
+                                </li>
+                                <li class="text-muted">
+                                    <p class="text-muted fw-bold mb-1">Phone :
+                                        <span class="fw-normal">{{$customer->c_phone}}</span>
+                                    </p>
+                                </li>
+                                <li class="text-muted">
+                                    <p class="text-muted fw-bold mb-1">Email :
+                                        <span class="fw-normal">{{$customer->c_email}}</span>
+                                    </p>
+                                </li>
+                                <li class="text-muted col-md-8">
+                                    <p class="text-muted fw-bold mb-1">Address :
+                                        <span class="fw-normal text-sm">{{$customer->c_address}}</span>
+                                    </p>
+                                </li>
                             </ul>
                         </div>
                         <div class="col-xl-3 ">
@@ -80,12 +96,12 @@
                                 <li class="text-muted">
                                     <p class="text-muted fw-bold">Status :
                                         <span class="fw-normal
-                                                {{($order->status == 1)?  'text-warning' : ''}}
-                                                {{($order->status == 2)?  'text-primary' : ''}}
-                                                {{($order->status == 3)?  'text-success' : ''}}
-                                                {{($order->status == 4)?  'text-danger' : ''}}
+                                                {{($order->order_status == 'Pending')?  'text-warning' : ''}}
+                                                {{($order->order_status == 'Processing')?  'text-primary' : ''}}
+                                                {{($order->order_status == 'Delivered')?  'text-success' : ''}}
+                                                {{($order->order_status == 'Canceled')?  'text-danger' : ''}}
                                             ">
-                                            {{$order->rela_order_status->status}}
+                                            {{$order->order_status}}
                                         </span>
                                     </p>
                                 </li>
@@ -173,7 +189,6 @@
                         <div class="col-xl-10 text-danger">
                             <p>Thanks for your purchase !</p>
                         </div>
-
                     </div>
                 </div>
             </div>

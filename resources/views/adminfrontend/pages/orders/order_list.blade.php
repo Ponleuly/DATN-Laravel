@@ -35,40 +35,27 @@
                                 <div class="row align-items-baseline">
                                     <div class="col-3 d-flex flex-row align-items-baseline" style="min-width:200px">
                                         <p class="text-sm pe-2">Show </p>
-                                        <select
-                                            class="form-select form-select-sm"
-                                            style="width:65px"
-                                            aria-label="Default select example"
-                                            id="showPage"
-                                            >
-                                            <option
-                                                value ="{{url('/admin/order-list/page=5')}}"
-                                                {{($page==5)? 'selected':''}}
-                                                >
-                                                5
+                                        <select class="form-select form-select-sm"
+                                                style="width:65px"
+                                                aria-label="Default select example"
+                                                id="showPage"
+                                        >
+                                            <option value ="{{url('/admin/order-list/page=5')}}"
+                                                {{($page==5)? 'selected':''}}>5
                                             </option>
-                                            <option
-                                                value ="{{url('/admin/order-list/page=10')}}"
-                                                {{($page==10)? 'selected':''}}
-                                                >
-                                                10
+                                            <option value ="{{url('/admin/order-list/page=10')}}"
+                                                {{($page==10)? 'selected':''}}>10
                                             </option>
-                                            <option
-                                                value ="{{url('/admin/order-list/page=20')}}"
-                                                {{($page==20)? 'selected':''}}
-                                                >
-                                                20
+                                            <option value ="{{url('/admin/order-list/page=20')}}"
+                                                {{($page==20)? 'selected':''}}>20
                                             </option>
-                                            <option
-                                                value ="{{url('admin/order-list/page=all')}}"
+                                            <option value ="{{url('admin/order-list/page=all')}}"
                                                 {{Request::is('admin/order-list/page=all')? 'selected':''}}
-                                                >
-                                                All
+                                                >All
                                             </option>
                                         </select>
                                         <p class="text-sm px-2">entries </p>
                                     </div>
-
                                 </div>
                                 @if($search_text!='')
                                     <p class="text-md mt-2">Found
@@ -135,8 +122,6 @@
                                         }
                                         $total = $totalAmount + $deliveryFee - $discount;
                                          // Get delivery statuses
-                                        $statuses = Orders_Statuses::orderBy('id')->get();
-                                        //$status_cmp = Orders_Statuses::where('status', $order->order_status)->first();
                                     @endphp
                                     <tr class="text-center">
                                         <td><p class="text-sm">{{$count++}}</p></td>
@@ -150,12 +135,14 @@
                                         <td>
                                             <button
                                                 type="button"
-                                                class="btn btn-sm py-1 px-2"
-                                                style="width: 90px; color:#fff ;background:
-                                                     @foreach ($statuses as $status_name)
-                                                        {{($order->order_status == $status_name->status)?  $status_name->status_color : ''}}
-                                                    @endforeach
-                                                ">
+                                                class="btn btn-sm py-1 px-2
+                                                    {{($order->order_status == 'Pending')?  'btn-warning' : ''}}
+                                                    {{($order->order_status == 'Processing')?  'btn-primary' : ''}}
+                                                    {{($order->order_status == 'Delivered')?  'btn-success' : ''}}
+                                                    {{($order->order_status == 'Canceled')?  'btn-danger' : ''}}
+                                                "
+                                                style="width: 90px;"
+                                                >
                                                 {{$order->order_status}}
                                             </button>
                                         </td>
@@ -166,14 +153,30 @@
                                                 id="orderStatus"
                                                 name="orderStatus"
                                                 >
-                                                @foreach ($statuses as $status_name)
-                                                    <option
-                                                        value ="{{url('admin/order-status-action/'.$order->id .'/'.$status_name->status)}}"
-                                                        {{($status_name->status == $order->order_status)? 'selected': ''}}
-                                                        >
-                                                        {{($status_name->status)}}
-                                                    </option>
-                                                @endforeach
+                                                <option
+                                                    value ="{{url('admin/order-status-action/'.$order->id .'/pending')}}"
+                                                    {{($order->order_status == 'Pending')? 'selected': ''}}
+                                                    >
+                                                    Pending
+                                                </option>
+                                                <option
+                                                    value ="{{url('admin/order-status-action/'.$order->id .'/processing')}}"
+                                                    {{($order->order_status == 'Processing')? 'selected': ''}}
+                                                    >
+                                                    Processing
+                                                </option>
+                                                <option
+                                                    value ="{{url('admin/order-status-action/'.$order->id .'/delivered')}}"
+                                                    {{($order->order_status == 'Deliverd')? 'selected': ''}}
+                                                    >
+                                                    Delivered
+                                                </option>
+                                                <option
+                                                    value ="{{url('admin/order-status-action/'.$order->id .'/canceled')}}"
+                                                    {{($order->order_status == 'Canceled')? 'selected': ''}}
+                                                    >
+                                                   Canceled
+                                                </option>
                                             </select>
                                         </td>
                                         <td style="width:100px">
