@@ -39,7 +39,7 @@
                     </a>
                     <ul id="ddmenu_1" class="collapse dropdown-nav">
                         <li>
-                            <a  href="{{url('admin/product-detail-list/page=10')}}"
+                            <a  href="{{url('admin/product-detail-list/show=10')}}"
                                 class="{{Request::is('admin/product-detail-list')? 'active':''}}">
                                 Product List
                             </a>
@@ -70,17 +70,19 @@
                     </a>
                     <ul id="ddmenu_2" class="collapse dropdown-nav">
                         <li>
-                            <a  href="{{url('admin/order-list/page=10')}}"
+                            <a  href="{{url('admin/order-list/show=10/by-code=ASC')}}"
                                 class="{{Request::is('admin/order-list')? 'active':''}}">
                                 Orders List
                             </a>
                         </li>
+                        <!--
                         <li>
                             <a  href="{{url('admin/order-status-list')}}"
                                 class="{{Request::is('admin/order-status-list')? 'active':''}}">
                                 Order Statuses Option
                             </a>
                         </li>
+                        -->
                     </ul>
                 </li>
                 <!---------------------------------------------------------->

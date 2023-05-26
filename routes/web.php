@@ -161,7 +161,7 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
    Route::controller(ProductDetailController::class)->group(function () {
-      Route::get('/product-detail-list/page={page}', 'product_detail_list')->name('product-detail-list');
+      Route::get('/product-detail-list/show={res}', 'product_detail_list')->name('product-detail-list');
       Route::get('/product-detail-view/{code}', 'product_detail_view')->name('product-detail-view');
       Route::get('/product-detail-add', 'product_detail_add')->name('product-detail-add');
       Route::post('/product-detail-add', 'product_detail_store')->name('product-detail-add');
@@ -186,7 +186,8 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
    Route::controller(OrderController::class)->group(function () {
-      Route::get('/order-list/page={page}', 'order_list_page')->name('order-list');
+      //Route::get('/order-list/show={res}', 'order_list_page')->name('order-list');
+      Route::get('/order-list/show={res}/by-{title}={sort}', 'order_list_page')->name('order-list');
       Route::get('/order-details/{id}', 'order_details')->name('order-details');
       Route::get('/order-invoice/{id}', 'order_invoice')->name('order-invoice');
       Route::get('/download-invoice/{id}', 'download_invoice')->name('download-invoice');

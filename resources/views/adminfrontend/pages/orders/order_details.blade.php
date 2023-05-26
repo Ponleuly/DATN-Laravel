@@ -88,7 +88,7 @@
                             </div>
                             <div class="form-group mb-2">
                                 <button
-                                    type="submit"
+
                                     onclick="printDiv('printableArea')"
                                     class="btn btn-danger rounded-0 me-2"
                                     >
@@ -123,25 +123,18 @@
         </form>
     </div>
     <!----------- For Click to print page ----------->
-     <script>
-        function printDiv(divName) {
-            var printContents = document.getElementById(divName).innerHTML;
-            var originalContents = document.body.innerHTML;
+    <script src="{{url('frontend/assets/js/print_invoice.js')}}"></script>
+    <!----------- End For Click to print page ----------->
 
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-        }
-    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         // Get "name" of select opption if there is many selects like each order have 1 select(with many option)
         $("[name='orderStatus']").on('change', function () { // bind change event to select
             var url_order_status = $(this).val(); // get selected value
-            if (url_order_status != '') { // require a url_order_status
+            //if (url_order_status != '') { // require a url_order_status
                 window.location = url_order_status; // redirect
                 //alert(url_order_status);
-            }
+           // }
             return false;
         });
     </script>

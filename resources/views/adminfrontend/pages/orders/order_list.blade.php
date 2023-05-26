@@ -38,19 +38,19 @@
                                         <select class="form-select form-select-sm"
                                                 style="width:65px"
                                                 aria-label="Default select example"
-                                                id="showPage"
+                                                id="showResult"
                                         >
-                                            <option value ="{{url('/admin/order-list/page=5')}}"
-                                                {{($page==5)? 'selected':''}}>5
+                                            <option value ="{{url('/admin/order-list/show=5/by-'.$title.'='.$sort)}}"
+                                                {{($res==5)? 'selected':''}}>5
                                             </option>
-                                            <option value ="{{url('/admin/order-list/page=10')}}"
-                                                {{($page==10)? 'selected':''}}>10
+                                            <option value ="{{url('/admin/order-list/show=10/by-'.$title.'='.$sort)}}"
+                                                {{($res==10)? 'selected':''}}>10
                                             </option>
-                                            <option value ="{{url('/admin/order-list/page=20')}}"
-                                                {{($page==20)? 'selected':''}}>20
+                                            <option value ="{{url('/admin/order-list/show=20/by-'.$title.'='.$sort)}}"
+                                                {{($res==20)? 'selected':''}}>20
                                             </option>
-                                            <option value ="{{url('admin/order-list/page=all')}}"
-                                                {{Request::is('admin/order-list/page=all')? 'selected':''}}
+                                            <option value ="{{url('admin/order-list/show=all/by-'.$title.'='.$sort)}}"
+                                                {{Request::is('admin/order-list/show=all/*')? 'selected':''}}
                                                 >All
                                             </option>
                                         </select>
@@ -59,7 +59,7 @@
                                 </div>
                                 @if($search_text!='')
                                     <p class="text-md mt-2">Found
-                                        <strong class="text-danger">{{$page}}</strong> orders for your search:
+                                        <strong class="text-danger">{{$res}}</strong> orders for your search:
                                     </p>
                                 @endif
                             </div>
@@ -94,16 +94,35 @@
                         <table class="table top-selling-table table-hover" id="sampleTable">
                             <thead>
                                 <tr class="text-center">
-                                    <th><h6 class="text-sm text-medium">#</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Order Date</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Code</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Customer</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Phone</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Payment</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Total</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Status</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Action</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Invoice</h6></th>
+                                    <th class="text-center">
+                                        <a
+                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-code='.(($sort=='ASC')? 'DESC':'ASC'))}}"
+                                            class="d-flex align-baseline justify-content-center"
+                                            >
+                                            <h6 class="text-sm text-medium">Code</h6>
+                                            <p class="text-black-50 {{Request::is('admin/order-list/show=*/by-code*')? 'text-danger':''}}">
+                                                <span class="material-icons-round">swap_vert</span>
+                                            </p>
+                                        </a>
+                                    </th>
+                                    <th class="min-width"><h6 class="text-medium">Order Date</h6></th>
+                                    <th class="min-width">
+                                        <a
+                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-customer='.(($sort=='ASC')? 'DESC':'ASC'))}}"
+                                            class="d-flex align-baseline justify-content-center"
+                                            >
+                                            <h6 class="text-medium">Customer</h6>
+                                            <p class="text-black-50 {{Request::is('admin/order-list/show=*/by-customer*')? 'text-danger':''}}">
+                                                <span class="material-icons-round">swap_vert</span>
+                                            </p>
+                                        </a>
+                                    </th>
+                                    <th class="min-width"><h6 class="text-medium">Phone</h6></th>
+                                    <th class="min-width"><h6 class="text-medium">Payment</h6></th>
+                                    <th class="min-width"><h6 class="text-medium">Total</h6></th>
+                                    <th class="min-width"><h6 class="text-medium">Status</h6></th>
+                                    <th class="min-width"><h6 class="text-medium">Action</h6></th>
+                                    <th class="min-width"><h6 class="text-medium">Invoice</h6></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,9 +143,22 @@
                                          // Get delivery statuses
                                     @endphp
                                     <tr class="text-center">
-                                        <td><p class="text-sm">{{$count++}}</p></td>
-                                        <td><p class="text-sm">{{date('Y-m-d  H:i', strtotime($order->created_at))}}</p></td>
+                                        <!--
+                                        <td>
+                                            <p class="text-sm">
+                                                 $loop->index is index of items per page,
+                                                    Ex.currentPage=1, perPage=5 => index=[0,1,2,3,4]
+                                                    Ex.currentPage=2, perPage=5 => index=[0,1,2,3,4]
+                                                    // number of index depend on perPage and not change although currentPage is changed
+                                                    Ex.currentPage=1, perPage=10 => index=[0,1,2,3,4,....9]
+
+                                                /* ($orders->currentPage()-1) * $orders->perPage() + $loop->index + 1
+
+                                            </p>
+                                        </td>
+                                        --->
                                         <td><p class="text-sm">{{$order->invoice_code}}</p></td>
+                                        <td><p class="text-sm">{{date('Y-m-d  H:i', strtotime($order->created_at))}}</p></td>
                                         <td><p class="text-sm">{{$order->rela_customer_order->c_name}}</p></td>
                                         <td><p class="text-sm">{{$order->rela_customer_order->c_phone}}</p></td>
                                         <td><p class="text-sm"> {{$order->payment_method}}</p></td>
@@ -167,7 +199,7 @@
                                                 </option>
                                                 <option
                                                     value ="{{url('admin/order-status-action/'.$order->id .'/delivered')}}"
-                                                    {{($order->order_status == 'Deliverd')? 'selected': ''}}
+                                                    {{($order->order_status == 'Delivered')? 'selected': ''}}
                                                     >
                                                     Delivered
                                                 </option>
@@ -205,21 +237,35 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="d-flex justify-content-end">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
                             @if($search_text == '')
-                                <!--- To show data by pagination --->
-                                {{$orders->links()}}
-                                @else
-                                    <div class="d-flex">
-                                        <a
-                                            class="btn btn-outline-danger rounded-0 mt-2"
-                                            href="{{url('admin/order-list/page=10')}}"
-                                            role="button"
-                                            >
-                                            <p class="text-sm">Back to List</p>
-                                        </a>
-                                    </div>
+                            <p class="text-sm">
+                                Showing {{($orders->currentPage()-1)* $orders->perPage()+($orders->total() ? 1:0)}}
+                                to {{($orders->currentPage()-1)*$orders->perPage()+count($orders)}}
+                                of {{$orders->total()}}  results
+                            </p>
                             @endif
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="d-flex justify-content-end">
+                                @if($search_text == '')
+                                    <!--- To show data by pagination --->
+                                    {{$orders->links()}}</span>
+                                    @else
+                                        <div class="d-flex">
+                                            <a
+                                                class="btn btn-outline-danger rounded-0 mt-2"
+                                                href="{{url('admin/order-list/page=10')}}"
+                                                role="button"
+                                                >
+                                                <p class="text-sm">Back to List</p>
+                                            </a>
+                                        </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -229,7 +275,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         // Get "id" of select option, if there are only one select
-        $('#showPage').on('change', function () { // bind change event to select
+        $('#showResult').on('change', function () { // bind change event to select
             var url_show_page = $(this).val(); // get selected value
             if (url_show_page != '') { // require a url_show_page
                 window.location = url_show_page; // redirect

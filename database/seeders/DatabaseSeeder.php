@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             NewsSeeder::class,
             SubscriberSeeder::class,
             PaymentSeeder::class,
+            totalPaidSeeder::class,
         ]);
     }
 }

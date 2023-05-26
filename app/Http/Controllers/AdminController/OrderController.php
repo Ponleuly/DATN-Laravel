@@ -16,23 +16,26 @@ use App\Models\Settings;
 class OrderController extends Controller
 {
 
-    public function order_list_page($page)
+    public function order_list_page($res, $title, $sort)
     {
-        if ($page == 'all') {
+        if ($res == 'all') {
             $orders = Orders::all()->count();
-            $page = $orders;
+            $res = $orders;
         }
-
-        $orders = Orders::orderByDesc('id')->paginate($page);
-        $count = 1;
+        if ($title == 'code') {
+            $orders = Orders::orderBy('id', $sort)->paginate($res);
+        } else if ($title == 'customer') {
+            $orders = Orders::orderBy('id', $sort)->paginate($res);
+        }
         $search_text = '';
         return view(
             'adminfrontend.pages.orders.order_list',
             compact(
-                'count',
                 'orders',
                 'search_text',
-                'page'
+                'res',
+                'title',
+                'sort'
             )
         );
         //return dd($orders);
@@ -45,14 +48,14 @@ class OrderController extends Controller
         }
         $orders = Orders::where('invoice_code', 'LIKE', '%' . $search_text . '%')->get();
         $count = 1;
-        $page = $orders->count();
+        $res = $orders->count();
         return view(
             'adminfrontend.pages.orders.order_list',
             compact(
                 'orders',
                 'count',
                 'search_text',
-                'page',
+                'res',
             )
 
         );

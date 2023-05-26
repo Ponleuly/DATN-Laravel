@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Orders;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
