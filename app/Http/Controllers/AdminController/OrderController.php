@@ -26,6 +26,20 @@ class OrderController extends Controller
             $orders = Orders::orderBy('id', $sort)->paginate($res);
         } else if ($title == 'totalpaid') {
             $orders = Orders::orderBy('total_paid', $sort)->paginate($res);
+        }elseif($title == 'date'){
+            $orders = Orders::orderBy('created_at', $sort)->paginate($res);
+        }elseif($title == 'customer'){
+            /*
+            $orders = Customers::join('orders', 'orders.id', '=', 'customers.order_id')
+            ->orderBy('customers.c_name', $sort)
+            ->paginate($res,['orders.*','customers.c_name']); // get orders table with column c_name 
+            */
+            //==== Join orders table and customers table by order_id 
+            // then sort join_table by c_name with 'asc' or 'desc'
+            // then get orders table that sorted by c_name with paginate =====//
+            $orders = Orders::join('customers', 'customers.order_id', '=', 'orders.id')
+            ->orderBy('customers.c_name', $sort)
+            ->paginate($res,['orders.*']);
         }
         $search_text = '';
         return view(
@@ -37,8 +51,11 @@ class OrderController extends Controller
                 'title',
                 'sort'
             )
+
         );
         //return dd($orders);
+        //return dd($orders->toArray());
+
     }
     public function order_search()
     {
@@ -49,6 +66,8 @@ class OrderController extends Controller
         $orders = Orders::where('invoice_code', 'LIKE', '%' . $search_text . '%')->get();
         $count = 1;
         $res = $orders->count();
+        $title = '';
+        $sort = '';
         return view(
             'adminfrontend.pages.orders.order_list',
             compact(
@@ -56,6 +75,8 @@ class OrderController extends Controller
                 'count',
                 'search_text',
                 'res',
+                'title',
+                'sort'
             )
 
         );

@@ -96,36 +96,82 @@
                                 <tr>
                                     <th class="min-width text-start">
                                         <a
-                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-code='.(($sort=='ASC')? 'DESC':'ASC'))}}"
+                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-code='.(($sort=='asc')? 'desc':'asc'))}}"
                                             class="d-inline-flex align-items-center"
                                             >
-                                            <h6 class="text-medium" style="float:left">Code</h6>
-                                            <span class="text-black-50 d-flex justify-content-between
-                                                {{Request::is('admin/order-list/show=*/by-code*')? 'text-danger':''}}"  style="float:right">
-                                                <i class="bi bi-sort-alpha-up-alt" style="vertical-align: middle;"></i>
+                                            <h6 class="text-medium">Code</h6>
+                                            <span class="text-black-50 ms-3
+                                                {{Request::is('admin/order-list/show=*/by-code*')? 'text-danger':''}}"  
+                                                >
+                                                @if($title=='code' && $sort=='asc')
+                                                    <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='code' && $sort=='desc')
+                                                    <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
                                             </span>
                                         </a>
                                     </th>
-                                    <th class="min-width"><h6 class="text-medium">Order Date</h6></th>
-                                    <th class="min-width"><h6 class="text-medium">Customer</h6></th>
+                                    <th class="min-width"><h6 class="text-medium">
+                                        <a
+                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-date='.(($sort=='asc')? 'desc':'asc'))}}"
+                                            class="d-inline-flex align-items-center"
+                                            >
+                                            <h6 class="text-medium">Order Date</h6>
+                                            <span class="text-black-50 ms-5
+                                                {{Request::is('admin/order-list/show=*/by-date*')? 'text-danger':''}}"  
+                                                >
+                                                @if($title=='date' && $sort=='asc')
+                                                    <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='date' && $sort=='desc')
+                                                    <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    </th>
+                                    <th class="min-width"><h6 class="text-medium">
+                                        <a
+                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-customer='.(($sort=='asc')? 'desc':'asc'))}}"
+                                            class="d-inline-flex align-items-center"
+                                            >
+                                            <h6 class="text-medium me-5">Customer</h6>
+                                            <span class="text-black-50 ms-5
+                                                {{Request::is('admin/order-list/show=*/by-customer*')? 'text-danger':''}}">
+                                                @if($title=='customer' && $sort=='asc')
+                                                    <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='customer' && $sort=='desc')
+                                                    <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    </th>
                                     <th class="min-width"><h6 class="text-medium">Phone</h6></th>
                                     <th class="min-width"><h6 class="text-medium">Payment</h6></th>
                                     <th class="min-width ">
                                         <a
-                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-totalpaid='.(($sort=='ASC')? 'DESC':'ASC'))}}"
-                                            class="d-flex align-baseline justify-content-center icon-align"
-
+                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-totalpaid='.(($sort=='asc')? 'desc':'asc'))}}"
+                                            class="d-inline-flex align-items-center"
                                             >
-                                            <h6 class="text-medium">Total
-                                                <span class="text-black-50
-                                                    {{Request::is('admin/order-list/show=*/by-totalpaid*')? 'text-danger':''}}">
-                                                    <i class="bi bi-sort-alpha-up-alt" style="font-size: 16px;"></i>
-                                                </span>
-                                            </h6>
+                                            <h6 class="text-medium">Total</h6>
+                                            <span class="text-black-50 ms-3
+                                                {{Request::is('admin/order-list/show=*/by-totalpaid*')? 'text-danger':''}}">
+                                                @if($title=='totalpaid' && $sort=='asc')
+                                                    <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='totalpaid' && $sort=='desc')
+                                                    <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
+                                            </span>
                                         </a>
                                     </th>
-                                    <th class="min-width"><h6 class="text-medium">Status</h6></th>
-                                    <th class="min-width"><h6 class="text-medium">Action</h6></th>
+                                    <th class="min-width text-center"><h6 class="text-medium">Status</h6></th>
+                                    <th class="min-width text-center"><h6 class="text-medium">Action</h6></th>
                                     <th class="min-width"><h6 class="text-medium">Invoice</h6></th>
                                 </tr>
                             </thead>
@@ -146,7 +192,7 @@
                                         $total = $totalAmount + $deliveryFee - $discount;
                                          // Get delivery statuses
                                     @endphp
-                                    <tr class="text-center">
+                                    <tr>
                                         <!--
                                         <td>
                                             <p class="text-sm">
@@ -168,10 +214,10 @@
                                         <td><p class="text-sm"> {{$order->payment_method}}</p></td>
 
                                         <td><p class="text-sm">$ {{number_format($total, 2)}}</p></td>
-                                        <td>
+                                        <td class="text-center">
                                             <button
                                                 type="button"
-                                                class="btn btn-sm py-1 px-2
+                                                class="btn btn-sm py-1 px-2 
                                                     {{($order->order_status == 'Pending')?  'btn-warning' : ''}}
                                                     {{($order->order_status == 'Processing')?  'btn-primary' : ''}}
                                                     {{($order->order_status == 'Delivered')?  'btn-success' : ''}}
@@ -182,7 +228,7 @@
                                                 {{$order->order_status}}
                                             </button>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <select
                                                 class="form-select form-select-sm"
                                                 aria-label="Default select example"
