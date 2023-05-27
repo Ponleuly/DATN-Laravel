@@ -93,33 +93,37 @@
                     <div class="table-responsive">
                         <table class="table top-selling-table table-hover" id="sampleTable">
                             <thead>
-                                <tr class="text-center">
-                                    <th class="text-center">
+                                <tr>
+                                    <th class="min-width text-start">
                                         <a
                                             href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-code='.(($sort=='ASC')? 'DESC':'ASC'))}}"
-                                            class="d-flex align-baseline justify-content-center"
+                                            class="d-inline-flex align-items-center"
                                             >
-                                            <h6 class="text-sm text-medium">Code</h6>
-                                            <p class="text-black-50 {{Request::is('admin/order-list/show=*/by-code*')? 'text-danger':''}}">
-                                                <span class="material-icons-round">swap_vert</span>
-                                            </p>
+                                            <h6 class="text-medium" style="float:left">Code</h6>
+                                            <span class="text-black-50 d-flex justify-content-between
+                                                {{Request::is('admin/order-list/show=*/by-code*')? 'text-danger':''}}"  style="float:right">
+                                                <i class="bi bi-sort-alpha-up-alt" style="vertical-align: middle;"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="min-width"><h6 class="text-medium">Order Date</h6></th>
-                                    <th class="min-width">
-                                        <a
-                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-customer='.(($sort=='ASC')? 'DESC':'ASC'))}}"
-                                            class="d-flex align-baseline justify-content-center"
-                                            >
-                                            <h6 class="text-medium">Customer</h6>
-                                            <p class="text-black-50 {{Request::is('admin/order-list/show=*/by-customer*')? 'text-danger':''}}">
-                                                <span class="material-icons-round">swap_vert</span>
-                                            </p>
-                                        </a>
-                                    </th>
+                                    <th class="min-width"><h6 class="text-medium">Customer</h6></th>
                                     <th class="min-width"><h6 class="text-medium">Phone</h6></th>
                                     <th class="min-width"><h6 class="text-medium">Payment</h6></th>
-                                    <th class="min-width"><h6 class="text-medium">Total</h6></th>
+                                    <th class="min-width ">
+                                        <a
+                                            href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-totalpaid='.(($sort=='ASC')? 'DESC':'ASC'))}}"
+                                            class="d-flex align-baseline justify-content-center icon-align"
+
+                                            >
+                                            <h6 class="text-medium">Total
+                                                <span class="text-black-50
+                                                    {{Request::is('admin/order-list/show=*/by-totalpaid*')? 'text-danger':''}}">
+                                                    <i class="bi bi-sort-alpha-up-alt" style="font-size: 16px;"></i>
+                                                </span>
+                                            </h6>
+                                        </a>
+                                    </th>
                                     <th class="min-width"><h6 class="text-medium">Status</h6></th>
                                     <th class="min-width"><h6 class="text-medium">Action</h6></th>
                                     <th class="min-width"><h6 class="text-medium">Invoice</h6></th>
@@ -272,6 +276,8 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         // Get "id" of select option, if there are only one select

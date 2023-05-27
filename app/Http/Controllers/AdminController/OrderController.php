@@ -24,8 +24,8 @@ class OrderController extends Controller
         }
         if ($title == 'code') {
             $orders = Orders::orderBy('id', $sort)->paginate($res);
-        } else if ($title == 'customer') {
-            $orders = Orders::orderBy('id', $sort)->paginate($res);
+        } else if ($title == 'totalpaid') {
+            $orders = Orders::orderBy('total_paid', $sort)->paginate($res);
         }
         $search_text = '';
         return view(
