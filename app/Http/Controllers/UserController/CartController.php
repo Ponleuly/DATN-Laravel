@@ -408,7 +408,7 @@ class CartController extends Controller
 
         //================= Payment Credit Card =======================//
         if ($request->payment == 'Credit Card') {
-            return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->totalPaid, 2));
+            return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->total_paid, 2));
         } else {
             return redirect('order-completed/invoice=' . substr($order->invoice_code, 1));
         }

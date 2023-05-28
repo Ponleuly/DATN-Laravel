@@ -192,10 +192,11 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::get('/order-invoice/{id}', 'order_invoice')->name('order-invoice');
       Route::get('/download-invoice/{id}', 'download_invoice')->name('download-invoice');
       Route::get('/order-status-action/{order_id}/{status_name}', 'order_status_action')->name('order-status-action');
-      Route::get('/order-search', 'order_search')->name('order-search');
+      Route::get('/order-search/show={res}/by-{title}={sort}', 'order_search')->name('order-search');
       Route::get('/order-delete/{id}', 'order_delete')->name('order-delete');
    });
 });
+/*
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
    Route::controller(OrderStatusController::class)->group(function () {
       Route::get('order-status-list', 'order_status_list')->name('order-status-list');
@@ -207,6 +208,7 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::get('/order-status-search', 'order_status_search')->name('order-status-search');
    });
 });
+*/
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
    Route::controller(CustomerController::class)->group(function () {
       Route::get('/customer-list', 'customer_list')->name('customer-list');

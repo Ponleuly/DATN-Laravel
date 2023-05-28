@@ -25,7 +25,7 @@ class OrderSeeder extends Seeder
                 'order_status' => 'Pending',
                 'discount' =>  floatval(rand(2, 4)),
                 'delivery_fee' => rand(0, 1) ? 2 : 4,
-                'payment_method' => rand(0, 1) ? 'Credit Card' : 'Cash',
+                'payment_method' => rand(0, 1) ? 'Credit Card' : 'COD',
                 'created_at' => Carbon::now()
 
                 //'customer_id ' => Str::random(10) . '@gmail.com',

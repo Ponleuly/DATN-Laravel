@@ -40,6 +40,10 @@ class OrderController extends Controller
             $orders = Orders::join('customers', 'customers.order_id', '=', 'orders.id')
             ->orderBy('customers.c_name', $sort)
             ->paginate($res,['orders.*']);
+        }elseif($title == 'payment'){
+            $orders = Orders::orderBy('payment_method', $sort)->paginate($res);
+        }elseif($title == 'status'){
+            $orders = Orders::where('order_status', $sort)->paginate($res);
         }
         $search_text = '';
         return view(
@@ -57,7 +61,7 @@ class OrderController extends Controller
         //return dd($orders->toArray());
 
     }
-    public function order_search()
+    public function order_search($res, $title, $sort)
     {
         $search_text = $_GET['search_order'];
         if ($search_text == '') {
@@ -65,9 +69,9 @@ class OrderController extends Controller
         }
         $orders = Orders::where('invoice_code', 'LIKE', '%' . $search_text . '%')->get();
         $count = 1;
-        $res = $orders->count();
-        $title = '';
-        $sort = '';
+        //$res = $orders->count();
+        //$title = '';
+        //$sort = '';
         return view(
             'adminfrontend.pages.orders.order_list',
             compact(
@@ -80,6 +84,8 @@ class OrderController extends Controller
             )
 
         );
+        
+        return dd($orders->toArray());
     }
     //======  Order Details =======//
     public function order_details($id)
