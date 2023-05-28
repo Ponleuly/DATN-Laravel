@@ -89,6 +89,7 @@
                         <div class="col-6 d-flex justify-content-end">
                             <div class="right">
                                 <form  action="{{url('admin/order-search/show='.(($res>20)? 'all':$res).'/by-'.$title.'='.$sort)}}">
+                                    
                                     <div class="input-group input-group-sm w-100 ">
                                         <input
                                             type="text"
