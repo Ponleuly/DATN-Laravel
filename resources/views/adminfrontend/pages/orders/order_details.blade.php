@@ -53,7 +53,7 @@
                                                 aria-label="Default select example"
                                                 id="orderStatus"
                                                 name="orderStatus"
-                                                style="width: 130px;"
+                                                style="width: 140px;"
                                                 >
                                                 <option
                                                     value ="{{url('admin/order-status-action/'.$order->id .'/pending')}}"
