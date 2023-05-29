@@ -72,7 +72,6 @@ class ProductDetailController extends Controller
                 'title',
                 'sort'
             )
-
         );
     }
 
@@ -102,19 +101,21 @@ class ProductDetailController extends Controller
     {
         $product_view = Products::where('product_code', $code)->first();
         $productId = $product_view->id;
-
         $productSize = Products_Sizes::where('product_id', $productId)->get();
         $productGroups = Products_Attributes::where('product_id', $productId)->get();
         $productCategory = Products_Attributes::where('product_id', $productId)->first();
-        $sizeStock = 0;
         $allStock = $product_view->product_stock;
         $headCode = trim($code, " 0..9");
         $productCode = Products::where('product_code', 'LIKE', '%' . $headCode . '%')->get();
+        //$sizeStock = 0;
         //==== Calculate total quantity of each size ====//
+        /*
         foreach ($productSize as $row) {
             $sizeStock += $row->size_quantity;
         }
         $stockLeft = $sizeStock;
+        */
+        $stockLeft = $product_view->product_stockleft;
         $status = Products::where('product_code', $code)->first();
         //===== Update product status if product stock sold out ======//
         if ($stockLeft == 0) {
@@ -122,6 +123,9 @@ class ProductDetailController extends Controller
             $status->update();
         } elseif ($stockLeft > 0 && $stockLeft < $allStock) {
             $status->product_status = 2; // is selling
+            $status->update();
+        }else{
+            $status->product_status = 1; // is selling
             $status->update();
         }
         return view(
@@ -136,8 +140,6 @@ class ProductDetailController extends Controller
 
         );
     }
-
-
 
     public function product_detail_store(Request $request)
     {
@@ -192,6 +194,7 @@ class ProductDetailController extends Controller
         // =========== Store Total stock ==================//
         $stock = Products::latest()->first();
         $stock->product_stock = $total_stock;
+        $stock->product_stockleft = $total_stock;
         $stock->update();
         //========= Storing data for table products_attributes ======//
         /*
@@ -213,7 +216,6 @@ class ProductDetailController extends Controller
 
         //return dd($total_stock);
     }
-
 
 
     public function product_detail_edit($id)
@@ -240,7 +242,6 @@ class ProductDetailController extends Controller
 
         //return dd($colors->toArray());
     }
-
 
 
 
@@ -302,7 +303,6 @@ class ProductDetailController extends Controller
 
         //========= Update data for table products_sizes ======//
         $productSize = Products_Sizes::where('product_id', $productId)->get();
-
         if ($request->size_id) {
             //==== Delete all data on table products_sizes if request has new size_id and value
             for ($i = 0; $i < count($productSize); $i++) {
@@ -310,6 +310,7 @@ class ProductDetailController extends Controller
                 $deleteSize->delete();
             }
             $total_stock = 0;
+            $new_stock = 0;
             foreach ($request->size_id as $key => $sizeId) {
                 $update_product->rela_product_size()->create(
                     [
@@ -319,12 +320,20 @@ class ProductDetailController extends Controller
                     ]
                 );
                 $total_stock += $request->size_quantity[$key] ?? 0;
+                $new_stock = $request->size_quantity[$key] ?? 0;
             }
         }
         // =========== Update Total stock ==================//
         $stock = Products::where('id', $id)->first();
-        $stock->product_stock = $total_stock;
+        $stock->product_stock += $new_stock;
+        $stockleft = 0;
+        $productSize = Products_Sizes::where('product_id', $stock->id)->get();
+        foreach ($productSize as $size) {
+           $stockleft  += $size->size_quantity;
+        }
+        $stock->product_stockleft = $stockleft;
         $stock->update();
+
         //=============================================================================//
 
         //========= Update data for table products_groups ======//
@@ -340,9 +349,10 @@ class ProductDetailController extends Controller
             $attribute['category_id'] = $request->category_id;
             Products_Attributes::create($attribute);
         }
-        return redirect('/admin/product-detail-list')
+        return redirect('admin/product-detail-list/show=10/by-name=asc')
             ->with('message', 'Product ' . $request->product_name . ' is updated successfully!');
-    }
+            //return dd($new_stock);
+        }
 
 
     public function product_detail_delete($id)

@@ -241,7 +241,7 @@
                                         <div class="form-group mb-2">
                                             <div class="col-md-12">
                                                 <div class="d-flex ">
-                                                    <a class="btn btn-outline-danger rounded-0 mt-2" href="{{url('/admin/product-detail-list')}}" role="button">Back to list</a>
+                                                    <a class="btn btn-outline-danger rounded-0 mt-2" href="{{url('admin/product-detail-list/show=10/by-name=asc')}}" role="button">Back to list</a>
                                                     <a class="btn btn-primary rounded-0 ms-auto mt-2" href="{{url('/admin/product-detail-edit/'.$product_view->id)}}" role="button">Edit Product</a>
                                                 </div>
                                             </div>

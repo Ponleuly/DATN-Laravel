@@ -27,6 +27,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_ba0001_1.jpg',
                 'product_color' => '#000091',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -41,6 +42,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_ba0002_1.jpg',
                 'product_color' => '#000000',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -55,6 +57,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_ba0003_1.jpg',
                 'product_color' => '#408080',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -69,6 +72,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_va0001_1.jpg',
                 'product_color' => '#ff8000',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -83,6 +87,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_va0002_1.jpg',
                 'product_color' => '#804000',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -97,6 +102,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_va0003_1.jpg',
                 'product_color' => '#808040',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -111,6 +117,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_ua0001_1.jpg',
                 'product_color' => '#64b1ff',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -125,6 +132,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_ua0002_1.jpg',
                 'product_color' => '#800040',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -139,6 +147,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_ua0003_1.jpg',
                 'product_color' => '#ffff00',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -153,6 +162,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_ua0004_1.jpg',
                 'product_color' => '#008000',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -167,6 +177,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_pa0001_1.jpg',
                 'product_color' => '#008040',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 1,
                 'created_at' => Carbon::now()
             ],
@@ -180,6 +191,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_pa0002_1.jpg',
                 'product_color' => '#eeeeee',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 1,
                 'created_at' => Carbon::now()
             ],
@@ -193,6 +205,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_pa0003_1.jpg',
                 'product_color' => '#c0c0c0',
                 'product_stock' => 120,
+                'product_stockleft' => 120,
                 'product_status' => 1,
                 'created_at' => Carbon::now()
             ],
@@ -207,6 +220,7 @@ class ProductSeeder extends Seeder
                 'product_color' => '#ebebeb',
                 'product_status' => 3,
                 'product_stock' => 10,
+                'product_stockleft' => 10,
                 'created_at' => Carbon::now()
             ],
 
@@ -220,6 +234,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_hac0002_1.jpg',
                 'product_color' => '#0080ff',
                 'product_stock' => 10,
+                'product_stockleft' => 10,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],
@@ -234,6 +249,7 @@ class ProductSeeder extends Seeder
                 'product_imgcover' => 'Pro_hac0003_1.jpg',
                 'product_color' => '#ffe1c4',
                 'product_stock' => 10,
+                'product_stockleft' => 10,
                 'product_status' => 2,
                 'created_at' => Carbon::now()
             ],

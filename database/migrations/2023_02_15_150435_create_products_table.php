@@ -25,8 +25,9 @@ return new class extends Migration
 
             $table->string('product_imgcover', 100);
             $table->string('product_color', 10);
-            $table->tinyInteger('product_stock')->nullable();
-            $table->unsignedInteger('product_status')->default('1');
+            $table->unsignedInteger('product_stock')->nullable();
+            $table->unsignedInteger('product_stockleft')->nullable();
+            $table->tinyInteger('product_status')->default('1');
 
             $table->timestamps();
         });

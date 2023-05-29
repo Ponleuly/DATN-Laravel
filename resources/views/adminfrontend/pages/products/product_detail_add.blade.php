@@ -225,7 +225,7 @@
                                         <div class="d-flex mt-4" style="padding-top: 2px">
                                             <a
                                                 class="btn btn-outline-danger rounded-0 mt-2"
-                                                href="{{url('/admin/product-detail-list')}}"
+                                                href="{{url('admin/product-detail-list/show=10/by-name=asc')}}"
                                                 role="button"
                                                 >
                                                 Back to List
