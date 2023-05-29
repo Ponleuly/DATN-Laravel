@@ -161,7 +161,7 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
    Route::controller(ProductDetailController::class)->group(function () {
-      Route::get('/product-detail-list/show={res}', 'product_detail_list')->name('product-detail-list');
+      Route::get('/product-detail-list/show={res}/by-{title}={sort}', 'product_detail_list')->name('product-detail-list');
       Route::get('/product-detail-view/{code}', 'product_detail_view')->name('product-detail-view');
       Route::get('/product-detail-add', 'product_detail_add')->name('product-detail-add');
       Route::post('/product-detail-add', 'product_detail_store')->name('product-detail-add');
@@ -170,7 +170,7 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::get('/product-detail-delete/{id}', 'product_detail_delete');
       Route::get('/product-detail-status/{product_id}/{status_id}', 'product_detail_status')
          ->name('product-detail-status');
-      Route::get('/product-search', 'product_search')->name('product-search');
+      Route::get('product-search/show={res}/by-{title}={sort}', 'product_search')->name('product-search');
    });
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {

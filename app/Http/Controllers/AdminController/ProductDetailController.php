@@ -35,41 +35,67 @@ class ProductDetailController extends Controller
     }
 
 
-    public function product_detail_list($page)
+    public function product_detail_list($res, $title, $sort)
     {
-        if ($page == 'all') {
+        if ($res == 'all') {
             $products = Products::all()->count();
-            $page = $products;
+            $res = $products;
         }
-        $products = Products::orderByDesc('id')->paginate($page);
-        $count = 1;
+        if($title == 'name'){
+            $products = Products::orderBy('product_name', $sort)->paginate($res);
+        }elseif($title == 'price'){
+            $products = Products::orderBy('product_price', $sort)->paginate($res);
+        }elseif($title == 'stock'){
+            $products = Products::orderBy('product_stock', $sort)->paginate($res);
+        }elseif($title == 'date'){
+            $products = Products::orderBy('created_at', $sort)->paginate($res);
+        }elseif($title == 'status'){
+            if($sort == 'new'){
+                $products = Products::where('product_status', 1)->paginate($res);
+            }elseif($sort == 'selling'){
+                $products = Products::where('product_status', 2)->paginate($res);
+            }elseif($sort == 'soldout'){
+                $products = Products::where('product_status', 3)->paginate($res);
+            }elseif($sort == 'asc'){
+                $products = Products::orderBy('product_status', $sort)->paginate($res);
+            }elseif($sort == 'desc'){
+                $products = Products::orderBy('product_status', $sort)->paginate($res);
+            }
+        }
         $search_text = '';
         return view(
             'adminfrontend.pages.products.product_detail_list',
             compact(
                 'products',
-                'count',
                 'search_text',
-                'page'
+                'res',
+                'title',
+                'sort'
             )
 
         );
     }
 
-    public function product_search()
+    public function product_search($res, $title, $sort)
     {
         $search_text = $_GET['search_product'];
+        if ($search_text == '') {
+            return redirect()->back()->with('alert', 'Please fill product name to search !');
+        }
         $products = Products::where('product_name', 'LIKE', '%' . $search_text . '%')->get();
         $count = 1;
         return view(
             'adminfrontend.pages.products.product_detail_list',
             compact(
                 'products',
-                'count',
-                'search_text'
+                'search_text',
+                'res',
+                'title',
+                'sort',
+                'count'
             )
-
         );
+        //return dd($products);
     }
 
     public function product_detail_view($code)
@@ -115,9 +141,7 @@ class ProductDetailController extends Controller
 
     public function product_detail_store(Request $request)
     {
-
         $input  = $request->all();
-
         //========= Storing data for table products ======//
         if ($request->hasFile('product_imgcover')) {
             $destination_path = 'product_img/imgcover/';

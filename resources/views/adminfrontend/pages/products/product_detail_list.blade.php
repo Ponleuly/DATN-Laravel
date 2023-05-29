@@ -29,52 +29,55 @@
                         <div class="col-md-6">
                             <div class="left">
                                 <h4 class="text-medium mb-20">Products List</h4>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <p>Show:</p>
-                                    </div>
-                                    <div class="col-2">
-                                        <select
-                                            class="form-select form-select-sm"
-                                            aria-label="Default select example"
+                                <div class="row align-items-baseline">
+                                    <div class="col-3 d-flex flex-row align-items-baseline" style="min-width:200px">
+                                        <p class="text-sm pe-2">Show </p>
+                                        <select class="form-select form-select-sm"
+                                                style="width:65px"
+                                                aria-label="Default select example"
+                                                id="showResult"
                                             >
-                                            <option
-                                                value ="5"
-                                                onClick="window.location=
-                                                '{{url('admin/product-detail-list/page=5')}}'"
-                                                {{($page==5)? 'selected':''}}
-                                                >
-                                                5
+                                            <option value ="{{url('admin/product-detail-list/show=5/by-'. $title.'='.$sort)}}"
+                                                {{($title == 5)? 'selected':''}}>5
                                             </option>
-                                            <option
-                                                value ="10"
-                                                onClick="window.location =
-                                                '{{url('admin/product-detail-list/page=10')}}'"
-                                                {{($page==10)? 'selected':''}}
-
-                                                >
-                                                10
+                                            <option value ="{{url('admin/product-detail-list/show=10/by-'.$title.'='.$sort)}}"
+                                                {{($res==10)? 'selected':''}}>10
                                             </option>
-                                            <option
-                                                value ="20"
-                                                onClick="window.location =
-                                                '{{url('admin/product-detail-list/page=20')}}'"
-                                                {{($page==20)? 'selected':''}}
-
-                                                >
-                                                20
+                                            <option value ="{{url('admin/product-detail-list/show=20/by-'.$title.'='.$sort)}}"
+                                                {{($res==20)? 'selected':''}}>20
                                             </option>
-                                            <option
-                                                value ="all"
-                                                onClick="window.location =
-                                                '{{url('admin/product-detail-list/page=all')}}'"
-                                                {{Request::is('admin/product-detail-list/page=all')? 'selected':''}}
-                                                >
-                                                All
+                                            <option value ="{{url('admin/product-detail-list/show=all/by-'.$title.'='.$sort)}}"
+                                                {{Request::is('admin/product-detail-list/show=all/*')? 'selected':''}}
+                                                >All
+                                            </option>
+                                        </select>
+                                        <p class="text-sm px-2">entries </p>
+                                    </div>
+                                    <div class="col-7 d-flex flex-row align-items-baseline justify-content-end">
+                                        <p class="text-sm pe-2">Sort by</p>
+                                        <select class="form-select form-select-sm"
+                                                aria-label="Default select example"
+                                                style="width: 150px"
+                                                id="sortStatus"
+                                            >
+                                            <option selected disabled>Product status</option>
+                                            <option value ="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status=new')}}"
+                                                {{($sort == 'new')? 'selected':''}}>New
+                                            </option>
+                                            <option value ="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status=selling')}}"
+                                                {{($sort == 'selling')? 'selected':''}}>Selling
+                                            </option>
+                                            <option value ="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status=soldout')}}"
+                                                {{($sort == 'soldout')? 'selected':''}}>Sold out
                                             </option>
                                         </select>
                                     </div>
-                            </div>
+                                </div>
+                                @if($search_text!='')
+                                    <p class="text-md mt-2">Found
+                                        <strong class="text-danger">{{$products->count()}}</strong> orders for your search:
+                                    </p>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -89,7 +92,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-9 ">
-                                        <form  action="{{url('admin/product-search')}}">
+                                        <form  action="{{url('admin/product-search/show='.(($res>20)? 'all':$res).'/by-'.$title.'='.$sort)}}">
                                             <div class="input-group input-group-sm w-100">
                                                 <input
                                                     type="text"
@@ -121,15 +124,119 @@
                                 <tr class="text-center">
                                     <th><h6 class="text-sm text-medium">#</h6></th>
                                     <th class="min-width"><h6 class="text-sm text-medium">Image</h6></th>
-                                    <th class="min-width text-start"><h6 class="text-sm text-medium">Product Name</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Category</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Price</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Stock</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Stock Left</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Status</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Status Action</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Date</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Action</h6></th>
+                                    <th class="min-width text-start" >
+                                        <a
+                                            href="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-name='.(($sort=='asc')? 'desc':'asc'))}}"
+                                            class="d-inline-flex align-items-baseline"
+                                            style="width:250px"
+                                            >
+                                            <h6 class="text-medium">Product Name</h6>
+                                            <span class="text-black-50 ms-auto
+                                                {{Request::is('admin/product-detail-list/show=*/by-name*')? 'text-danger':''}}"  
+                                                >
+                                                @if($title=='name' && $sort=='asc')
+                                                    <i class="bi bi-sort-alpha-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='name' && $sort=='desc')
+                                                    <i class="bi bi-sort-alpha-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    </th>
+                                    <!--<th class="min-width"><h6 class="text-medium">Category</h6></th>-->
+                                    <th class="min-width">
+                                        <a
+                                            href="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-price='.(($sort=='asc')? 'desc':'asc'))}}"
+                                            class="d-inline-flex align-items-center"
+                                            >
+                                            <h6 class="text-medium">Price</h6>
+                                            <span class="text-black-50 ms-3
+                                                {{Request::is('admin/product-detail-list/show=*/by-price*')? 'text-danger':''}}">
+                                                @if($title=='price' && $sort=='asc')
+                                                    <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='price' && $sort=='desc')
+                                                    <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    </th>
+                                    <th class="min-width">
+                                        <a
+                                            href="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-stock='.(($sort=='asc')? 'desc':'asc'))}}"
+                                            class="d-inline-flex align-items-center"
+                                            >
+                                            <h6 class="text-medium">Stock</h6>
+                                            <span class="text-black-50 ms-3
+                                                {{Request::is('admin/product-detail-list/show=*/by-stock*')? 'text-danger':''}}">
+                                                @if($title=='stock' && $sort=='asc')
+                                                    <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='stock' && $sort=='desc')
+                                                    <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    </th>
+                                    <th class="min-width">
+                                        <a
+                                            href="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-stockleft='.(($sort=='asc')? 'desc':'asc'))}}"
+                                            class="d-inline-flex align-items-center"
+                                            >
+                                            <h6 class="text-medium">Stock Left</h6>
+                                            <span class="text-black-50 ms-3
+                                                {{Request::is('admin/product-detail-list/show=*/by-stockleft*')? 'text-danger':''}}">
+                                                @if($title=='stockleft' && $sort=='asc')
+                                                    <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='stockleft' && $sort=='desc')
+                                                    <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    <th class="min-width">
+                                        <a
+                                            href="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status='.(($sort=='asc')? 'desc':'asc'))}}"
+                                            class="d-inline-flex align-items-baseline"
+                                            >
+                                            <h6 class="text-medium">Status</h6>
+                                            <span class="text-black-50 ms-3
+                                                {{Request::is('admin/product-detail-list/show=*/by-status*')? 'text-danger':''}}"  
+                                                >
+                                                @if($title=='status' && $sort=='asc')
+                                                    <i class="bi bi-sort-alpha-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='status' && $sort=='desc')
+                                                    <i class="bi bi-sort-alpha-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    </th>
+                                    <th class="min-width"><h6 class="text-medium">Status Action</h6></th>
+                                    <th class="min-width">
+                                        <a
+                                            href="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-date='.(($sort=='asc')? 'desc':'asc'))}}"
+                                            class="d-inline-flex align-items-center"
+                                            >
+                                            <h6 class="text-medium">Date</h6>
+                                            <span class="text-black-50 ms-3
+                                                {{Request::is('admin/product-detail-list/show=*/by-date*')? 'text-danger':''}}">
+                                                @if($title=='date' && $sort=='asc')
+                                                    <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
+                                                    @elseif($title=='date' && $sort=='desc')
+                                                    <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
+                                                    @else 
+                                                    <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    </th>
+                                    <th class="min-width"><h6 class="text-medium">Action</h6></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -143,8 +250,22 @@
                                             $stockLeft  += $row->size_quantity;
                                         }
                                     @endphp
-                                    <tr class="text-center">
-                                        <td><p class="text-sm">{{$count++}}</p></td>
+                                    <tr class="text-center"> 
+                                        <td>
+                                            <p class="text-sm">
+                                                <!--$loop->index is index of items per page,
+                                                    Ex.currentPage=1, perPage=5 => index=[0,1,2,3,4]
+                                                    Ex.currentPage=2, perPage=5 => index=[0,1,2,3,4]
+                                                    // number of index depend on perPage and not change although currentPage is changed
+                                                    Ex.currentPage=1, perPage=10 => index=[0,1,2,3,4,....9]
+                                                -->
+                                                @if($search_text == '')
+                                                    {{($products->currentPage()-1) * $products->perPage() + $loop->index + 1}}
+                                                    @else
+                                                        {{$count++}}
+                                                @endif
+                                            </p>
+                                        </td>
                                         <td>
                                             <img
                                                 src="/product_img/imgcover/{{$product->product_imgcover}}"
@@ -152,11 +273,13 @@
                                             >
                                         </td>
                                         <td><p class="text-sm text-start">{{$product->product_name}}</p></td>
+                                        <!--
                                         <td>
                                             <p class="text-sm">
                                                 {{($categoryAttribute)? $categoryAttribute->rela_product_category->category_name: 'Deleted'}}
                                             </p>
                                         </td>
+                                        -->
                                         <td><p class="text-sm">$ {{$product->product_saleprice}}</p></td>
                                         <td><p class="text-sm">{{$product->product_stock}}</p></td>
                                         <td><p class="text-sm">{{$stockLeft}}</p></td>
@@ -179,30 +302,27 @@
                                             <select
                                                 class="form-select form-select-sm"
                                                 aria-label="Default select example"
+                                                id="productStatus"
+                                                name="productStatus"
+                                                style="width: 100px"
                                                 >
                                                 <option
-                                                    value ="{{$product->product_status}}"
+                                                    value ="{{url('admin/product-detail-status/'.$product->id .'/1')}}"
                                                     {{($product->product_status == 1)? 'selected': ''}}
-                                                    onClick="window.location =
-                                                    '{{url('admin/product-detail-status/'.$product->id .'/1')}}'"
                                                     >
                                                     New
                                                 </option>
                                                 <option
-                                                    value ="{{$product->product_status}}"
+                                                    value ="{{url('admin/product-detail-status/'.$product->id .'/2')}}"
                                                     {{($product->product_status == 2)? 'selected': ''}}
-                                                    onClick="window.location =
-                                                    '{{url('admin/product-detail-status/'.$product->id .'/2')}}'"
                                                     >
                                                     Selling
                                                 </option>
                                                 <option
-                                                    value ="{{$product->product_status}}"
+                                                    value ="{{url('admin/product-detail-status/'.$product->id .'/3')}}"
                                                     {{($product->product_status == 3)? 'selected': ''}}
-                                                    onClick="window.location =
-                                                    '{{url('admin/product-detail-status/'.$product->id .'/3')}}'"
                                                     >
-                                                    Sold Out
+                                                    Sold out
                                                 </option>
                                             </select>
                                         </td>
@@ -243,25 +363,69 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="d-flex justify-content-end">
-                            @if($search_text == '')
-                                <!--- To show data by pagination --->
-                                {{$products->links()}}
-                                @else
-                                    <div class="d-flex">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @if($search_text == '') 
+                            <p class="text-sm">
+                                Showing {{($products->currentPage()-1)* $products->perPage()+($products->total() ? 1:0)}}
+                                to {{($products->currentPage()-1)*$products->perPage()+count($products)}}
+                                of {{$products->total()}}  results
+                            </p>
+                            @endif
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="d-flex justify-content-end">
+                                @if($search_text == '')
+                                    <!--- To show data by pagination --->
+                                    {{$products->links()}}</span>
+                                    
+                                    @else
+                                        <div class="d-flex">
                                             <a
                                                 class="btn btn-outline-danger rounded-0 mt-2"
-                                                href="{{url('admin/product-detail-list')}}"
+                                                href="{{url('admin/product-detail-list/show=10/by-name=asc')}}"
                                                 role="button"
                                                 >
                                                 <p class="text-sm">Back to List</p>
                                             </a>
-                                    </div>
-                            @endif
+                                        </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        // Get "id" of select option, if there are only one select
+        $('#showResult').on('change', function () { // bind change event to select
+            var url_show_page = $(this).val(); // get selected value
+            if (url_show_page != '') { // require a url_show_page
+                window.location = url_show_page; // redirect
+            }
+            return false;
+        });
+        $('#sortStatus').on('change', function () { // bind change event to select
+            var url_sort_status = $(this).val(); // get selected value
+            if (url_sort_status != '') { // require a url_sort_status
+                window.location = url_sort_status; // redirect
+            }
+            return false;
+        });
+        // Get "name" of select opption if there is many selects like each order have 1 select(with many option)
+        $("[name='productStatus']").on('change', function () { // bind change event to select
+            var url_product_status = $(this).val(); // get selected value
+            if (url_product_status != '') { // require a url_product_status
+                window.location = url_product_status; // redirect
+                //alert(url_product_status);
+            }
+            return false;
+        });
+    </script>
 @endsection()

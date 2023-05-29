@@ -89,7 +89,6 @@
                         <div class="col-6 d-flex justify-content-end">
                             <div class="right">
                                 <form  action="{{url('admin/order-search/show='.(($res>20)? 'all':$res).'/by-'.$title.'='.$sort)}}">
-                                    
                                     <div class="input-group input-group-sm w-100 ">
                                         <input
                                             type="text"
@@ -331,7 +330,7 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-                            @if($search_text == '')
+                            @if($search_text == '') 
                             <p class="text-sm">
                                 Showing {{($orders->currentPage()-1)* $orders->perPage()+($orders->total() ? 1:0)}}
                                 to {{($orders->currentPage()-1)*$orders->perPage()+count($orders)}}
