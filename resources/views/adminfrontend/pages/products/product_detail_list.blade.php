@@ -170,7 +170,7 @@
                                             >
                                             <h6 class="text-medium">Stock</h6>
                                             <span class="text-black-50 ms-3
-                                                {{Request::is('admin/product-detail-list/show=*/by-stock*')? 'text-danger':''}}">
+                                                {{Request::is('admin/product-detail-list/show=*/by-stock=*')? 'text-danger':''}}">
                                                 @if($title=='stock' && $sort=='asc')
                                                     <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='stock' && $sort=='desc')
@@ -282,7 +282,7 @@
                                         -->
                                         <td><p class="text-sm">$ {{$product->product_saleprice}}</p></td>
                                         <td><p class="text-sm">{{$product->product_stock}}</p></td>
-                                        <td><p class="text-sm">{{$stockLeft}}</p></td>
+                                        <td><p class="text-sm">{{$product->product_stockleft}}</p></td>
                                         <td>
                                             <button
                                                 type="button"

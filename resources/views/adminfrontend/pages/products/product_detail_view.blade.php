@@ -126,7 +126,7 @@
                                             <h5 class="text-black fw-bold mt-1">Stock Left: </h5>
                                         </div>
                                         <div class="col-9 ms-0 ps-0">
-                                            <p>{{$stockLeft}}</p>
+                                            <p>{{$product_view->product_stockleft}}</p>
                                         </div>
                                     </div>
                                     <div class="row mb-2">

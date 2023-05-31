@@ -47,6 +47,8 @@ class ProductDetailController extends Controller
             $products = Products::orderBy('product_price', $sort)->paginate($res);
         }elseif($title == 'stock'){
             $products = Products::orderBy('product_stock', $sort)->paginate($res);
+        }elseif($title == 'stockleft'){
+            $products = Products::orderBy('product_stockleft', $sort)->paginate($res);
         }elseif($title == 'date'){
             $products = Products::orderBy('created_at', $sort)->paginate($res);
         }elseif($title == 'status'){
@@ -132,7 +134,6 @@ class ProductDetailController extends Controller
             'adminfrontend.pages.products.product_detail_view',
             compact(
                 'product_view',
-                'stockLeft',
                 'productCode',
                 'productGroups',
                 'productCategory'
@@ -310,7 +311,6 @@ class ProductDetailController extends Controller
                 $deleteSize->delete();
             }
             $total_stock = 0;
-            $new_stock = 0;
             foreach ($request->size_id as $key => $sizeId) {
                 $update_product->rela_product_size()->create(
                     [
@@ -320,18 +320,13 @@ class ProductDetailController extends Controller
                     ]
                 );
                 $total_stock += $request->size_quantity[$key] ?? 0;
-                $new_stock = $request->size_quantity[$key] ?? 0;
+                
             }
         }
         // =========== Update Total stock ==================//
         $stock = Products::where('id', $id)->first();
-        $stock->product_stock += $new_stock;
-        $stockleft = 0;
-        $productSize = Products_Sizes::where('product_id', $stock->id)->get();
-        foreach ($productSize as $size) {
-           $stockleft  += $size->size_quantity;
-        }
-        $stock->product_stockleft = $stockleft;
+        $stock->product_stock = $total_stock;
+        $stock->product_stockleft = $total_stock;
         $stock->update();
 
         //=============================================================================//
@@ -359,7 +354,7 @@ class ProductDetailController extends Controller
     {
         $delete_product = Products::where('id', $id)->first();
         $delete_product->delete();
-        return redirect('/admin/product-detail-list')
+        return redirect('admin/product-detail-list/show=10/by-name=asc')
             ->with(
                 'message',
                 'Product ' . '"' . $delete_product->product_name . '"' .

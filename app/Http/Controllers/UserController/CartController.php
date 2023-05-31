@@ -21,10 +21,11 @@ use App\Models\Payments;
 use App\Models\Settings;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Http\Controllers\AdminController\OrderController;
+
 
 class CartController extends Controller
 {
-
     public function cart()
     {
         if (Auth::check() && Auth::user()->role == 1) {
@@ -45,10 +46,9 @@ class CartController extends Controller
     }
 
 
-
-
     public function add_to_cart(Request $request, $id)
     {
+
         //========== If User Sign in then save to Carts table============== //
         if (Auth::check() && Auth::user()->role == 1) {
             $user_id = Auth::user()->id;
@@ -57,19 +57,41 @@ class CartController extends Controller
                 ->where('product_id', $id)
                 ->where('size_id', $request->size_id)
                 ->first();
+            $pro_size_qty = Products_Sizes::where('product_id', $id)
+                ->where('size_id', $request->size_id)->first();
+            //return dd($update_qty->product_quantity);
             if ($update_qty) {
-                $update_qty->product_quantity += $request->product_quantity;
-                $update_qty->update();
+                //=== Alert if size quantity > size stock
+                if(($request->product_quantity + $update_qty->product_quantity) > $pro_size_qty->size_quantity){
+                    return redirect()->back()
+                        ->with(
+                            'error',
+                            'Only '.$pro_size_qty->size_quantity. ' products left with this size.',
+                        );
+                }else{
+                    $update_qty->product_quantity += $request->product_quantity;
+                    $update_qty->update();
+                }
+                
             } else {
-                $product = Products::findOrFail($id);
-                $input = $request->all();
-                $input['user_id'] = $user_id;
-                $input['product_id'] = $id;
-                $input['size_id'] = $request->size_id;
-                $input['product_quantity'] = $request->product_quantity;
-                $input['product_price'] =  $product->product_saleprice;
+                //=== Alert if size quantity > size stock
+                if($request->product_quantity > $pro_size_qty->size_quantity){
+                    return redirect()->back()
+                        ->with(
+                            'error',
+                            'Only '.$pro_size_qty->size_quantity. ' products left with this size.',
+                        );
+                }else{
+                    $product = Products::findOrFail($id);
+                    $input = $request->all();
+                    $input['user_id'] = $user_id;
+                    $input['product_id'] = $id;
+                    $input['size_id'] = $request->size_id;
+                    $input['product_quantity'] = $request->product_quantity;
+                    $input['product_price'] =  $product->product_saleprice;
 
-                Carts::create($input);
+                    Carts::create($input);
+                }
             }
         }
         //========== If User is guest then save data to Cart (Cart is a model from package) ==============//
@@ -103,9 +125,6 @@ class CartController extends Controller
     }
 
 
-
-
-
     public function update_cart(Request $request, $cartId)
     {
         if (Auth::check() && Auth::user()->role == 1) {
@@ -134,7 +153,6 @@ class CartController extends Controller
                     ],
                 ]
             );
-
             // return dd($prouductId);
         }
         return redirect()->back()
@@ -142,12 +160,8 @@ class CartController extends Controller
                 'success',
                 'Item is updated successfully!',
             );
-
         //return dd(Cart::content());
     }
-
-
-
 
     // ============================ Coupon Apply ===========================================//
     public function coupon_apply(Request $request, $userId)
@@ -163,10 +177,6 @@ class CartController extends Controller
                 'Your promo code is applied !',
             );;
     }
-
-
-
-
 
     //================= Create Method to return discount value ================================//
     //======= Method will get parameter code, userId, routeName====//
@@ -199,7 +209,6 @@ class CartController extends Controller
                 //$status = 1; //active
                 $discount = 0;
                 $subtotal = 0;
-
                 // ============================= Get User Cart =========================//
                 if (Auth::check() && Auth::user()->role == 1) {
                     $carts = Carts::where('user_id', $userId)->get();
@@ -280,8 +289,6 @@ class CartController extends Controller
     }
 
 
-
-
     public function checkout($discount)
     {
         if (Auth::check() && Auth::user()->role == 1) {
@@ -302,8 +309,6 @@ class CartController extends Controller
             )
         );
     }
-
-
 
     public function place_order(Request $request)
     {
@@ -404,8 +409,17 @@ class CartController extends Controller
                 $productSize_qty->size_quantity = ($productSize_qty->size_quantity) - $quantity;
             }
             $productSize_qty->update();
+            //============ Update product stockleft after order==============//
+            $stockLeft = 0;
+            $productSize = Products_Sizes::where('product_id', $productId)->get();
+            foreach ($productSize as $row) {
+                $stockLeft  += $row->size_quantity;
+            }
         }
-
+        //============ Update product stockleft after order ==============//
+        $pro_stockleft = Products::where('id', $productId)->first();
+        $pro_stockleft->product_stockleft = $stockLeft;
+        $pro_stockleft->update(); 
         //================= Payment Credit Card =======================//
         if ($request->payment == 'Credit Card') {
             return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->total_paid, 2));
@@ -445,8 +459,10 @@ class CartController extends Controller
     {
         $order = Orders::where('invoice_code', '#' . $code)->first();
         $orderId = $order->id;
-        $cancelOrder = Orders::where('id', $orderId)->first();
-        $cancelOrder->delete();
+        //============ Update product size qty ===========//
+        app('App\Http\Controllers\AdminController\OrderController')->pro_qty_plus($orderId);
+        // ========== Delete order if credit card is canceled ===========//
+        $order->delete();
         return view(
             'frontend.mainPages.order_completed',
         );

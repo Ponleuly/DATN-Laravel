@@ -29,11 +29,11 @@ class OrderController extends Controller
         }elseif($title == 'date'){
             $orders = Orders::orderBy('created_at', $sort)->paginate($res);
         }elseif($title == 'customer'){
-            /*
+        /*
             $orders = Customers::join('orders', 'orders.id', '=', 'customers.order_id')
             ->orderBy('customers.c_name', $sort)
             ->paginate($res,['orders.*','customers.c_name']); // get orders table with column c_name 
-            */
+        */   
             //==== Join orders table and customers table by order_id 
             // then sort join_table by c_name with 'asc' or 'desc'
             // then get orders table that sorted by c_name with paginate =====//
@@ -57,10 +57,8 @@ class OrderController extends Controller
             )
 
         );
-        //return dd($orders);
-        //return dd($orders->toArray());
-
     }
+
     public function order_search($res, $title, $sort)
     {
         $search_text = $_GET['search_order'];
@@ -130,7 +128,6 @@ class OrderController extends Controller
     }
 
 
-
     public function download_invoice($id)
     {
         $order = Orders::where('id', $id)->first();
@@ -169,6 +166,16 @@ class OrderController extends Controller
                 $price = $orderDetail->product_price;
                 $qty = $orderDetail->product_quantity;
                 $totalAmount += $price * $qty;
+                
+                /*
+                //===== update product size quantity ======//
+                $proId = $orderDetail->product_id;
+                $sizeId = $orderDetail->size_id;
+                $pro_size_qty = Products_Sizes::where('product_id', $proId)
+                ->where('size_id', $sizeId)->first();
+                $pro_size_qty->size_quantity -= $orderDetail->product_quantity;
+                $pro_size_qty->update();
+                */
             }
             $total = $totalAmount + $deliveryFee - $discount;
             $orderStatus['total_paid'] = $total;
@@ -185,8 +192,8 @@ class OrderController extends Controller
                 $size_qty = $productSize->size_quantity;
                 $productSize->size_quantity = $size_qty + $order_qty;
                 $productSize->update();
+
             }
-            //return dd($order_details->toArray());
         }
 
         return redirect()->back()
@@ -198,11 +205,40 @@ class OrderController extends Controller
         $delete_order = Orders::where('id', $id)->first();
         $delete_order->delete();
 
-        return redirect('/admin/order-list')
+        return redirect('admin/order-list/show=10/by-code=desc')
             ->with(
                 'message',
                 'Order ' . '"' . $delete_order->invoice_code . '"' .
                     ' is deleted successfully !'
             );
+    }
+    
+    //===== update product size quantity plus ======//
+    public function pro_qty_plus($orderId){
+        $order = Orders::where('id', $orderId)->first();
+        $order_details = Orders_Details::where('order_id', $order->id)->get();
+            foreach ($order_details as  $order_detail) {
+                $proId = $order_detail->product_id;
+                $sizeId = $order_detail->size_id;
+                $pro_size_qty = Products_Sizes::where('product_id', $proId)
+                                ->where('size_id', $sizeId)->first();
+                $pro_size_qty->size_quantity += $order_detail->product_quantity;
+                $pro_size_qty->update();
+            }
+    }
+
+    //===== update product size quantity sub ======//
+    public function pro_qty_sub($orderId){
+        $order = Orders::where('id', $orderId)->first();
+        $order_details = Orders_Details::where('order_id', $orderId)->get();
+        foreach ($order_details as $order_detail) {
+            $proId = $order_detail->product_id;
+            $sizeId = $order_detail->size_id;
+            $pro_size_qty = Products_Sizes::where('product_id', $proId)
+                            ->where('size_id', $sizeId)->first();
+            $pro_size_qty->size_quantity -= $order_detail->product_quantity;
+            $pro_size_qty->update();
+
+        }
     }
 }
