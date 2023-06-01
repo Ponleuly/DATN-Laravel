@@ -200,7 +200,7 @@
                                                     {{($quantity->size_quantity == 0)? 'disabled':''}}
                                                     >
                                                     {{$size->rela_product_size->size_number}}
-                                                    {{($quantity->size_quantity == 0)? '(Out of stock)':''}}
+                                                    {{($quantity->size_quantity == 0)? '(Out of stock)': ''}}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -213,7 +213,7 @@
                                                 type="number"
                                                 name="product_quantity"
                                                 id="quantity"
-                                                value="" max="5" min="1"
+                                                value="" max="10" min="1"
                                                 required
                                             >
                                         </div>

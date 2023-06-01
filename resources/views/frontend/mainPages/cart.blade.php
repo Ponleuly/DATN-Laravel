@@ -194,7 +194,7 @@
 														type="number"
 														name="product_quantity"
 														class="form-control form-control-sm rounded-0"
-														value="{{$quantity}}" max="5" min="1"
+														value="{{$quantity}}" max="10" min="1"
 														placeholder=""
 														aria-label="Example text with button addon"
 														aria-describedby="button-addon1"

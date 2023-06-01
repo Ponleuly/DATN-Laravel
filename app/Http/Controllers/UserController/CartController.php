@@ -35,6 +35,7 @@ class CartController extends Controller
             $carts = Cart::content();
             $carts_count = $carts->count();
         }
+        //return dd($carts);
         return view(
             'frontend.mainPages.cart',
             compact(
@@ -59,27 +60,33 @@ class CartController extends Controller
                 ->first();
             $pro_size_qty = Products_Sizes::where('product_id', $id)
                 ->where('size_id', $request->size_id)->first();
-            //return dd($update_qty->product_quantity);
+            // If found product with the same size in cart
             if ($update_qty) {
                 //=== Alert if size quantity > size stock
                 if(($request->product_quantity + $update_qty->product_quantity) > $pro_size_qty->size_quantity){
                     return redirect()->back()
                         ->with(
                             'error',
-                            'Only '.$pro_size_qty->size_quantity. ' products left with this size.',
+                            'Only '.$pro_size_qty->size_quantity. 
+                            ' products left. Your cart already have '
+                            . $update_qty->product_quantity.
+                            ' products with size '. $pro_size_qty->rela_product_size->size_number. '.',
                         );
                 }else{
                     $update_qty->product_quantity += $request->product_quantity;
                     $update_qty->update();
                 }
                 
-            } else {
+            }
+            //  If there is no the same size of product in cart
+            else {
                 //=== Alert if size quantity > size stock
                 if($request->product_quantity > $pro_size_qty->size_quantity){
                     return redirect()->back()
                         ->with(
                             'error',
-                            'Only '.$pro_size_qty->size_quantity. ' products left with this size.',
+                            'Only '.$pro_size_qty->size_quantity. 
+                            ' products with size '. $pro_size_qty->rela_product_size->size_number. '.',
                         );
                 }else{
                     $product = Products::findOrFail($id);
@@ -97,19 +104,55 @@ class CartController extends Controller
         //========== If User is guest then save data to Cart (Cart is a model from package) ==============//
         else {
             $product = Products::findOrFail($id);
-            Cart::add(
-                [
-                    'id' => $product->id,
-                    'name' => $product->product_name,
-                    'price' => $product->product_saleprice,
-                    'qty' => $request->product_quantity,
-                    'weight' => 0, //defualt column in Cart
-                    'options' => [
-                        'image' => $product->product_imgcover,
-                        'size' => $request->size_id
-                    ],
-                ]
-            );
+            $pro_size_qty = Products_Sizes::where('product_id', $id)
+                ->where('size_id', $request->size_id)->first();
+            $carts = Cart::content();
+            foreach($carts as $cart){
+                    //=== Check if found any product the same size in cart ===//
+                if ($cart->id == $id && $cart->options->size == $request->size_id){
+                      //===== Check qty of the same size product in cart > product size stock ? ===//
+                    if(($cart->qty + $request->product_quantity) > $pro_size_qty->size_quantity){
+                        return redirect()->back()
+                                ->with(
+                                    'error',
+                                    'Only '.$pro_size_qty->size_quantity. 
+                                    ' products left. Your cart already have '
+                                    . $cart->qty.
+                                    ' products with size '. $pro_size_qty->rela_product_size->size_number. '.',
+                        );
+                    }
+                }else{
+                    if ($request->product_quantity > $pro_size_qty->size_quantity){
+                        return redirect()->back()
+                                ->with(
+                                    'error',
+                                    'Only '.$pro_size_qty->size_quantity. 
+                                    ' products with size '. $pro_size_qty->rela_product_size->size_number. '.',
+                        );
+                    }
+                }
+            }
+            if ($request->product_quantity > $pro_size_qty->size_quantity){
+                return redirect()->back()
+                    ->with(
+                        'error',
+                        'Only '.$pro_size_qty->size_quantity. ' products left with this size',
+                    );
+            }else{
+                Cart::add(
+                    [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'price' => $product->product_saleprice,
+                        'qty' => $request->product_quantity,
+                        'weight' => 0, //defualt column in Cart
+                        'options' => [
+                            'image' => $product->product_imgcover,
+                            'size' => $request->size_id
+                        ],
+                    ]
+                );
+            }
         }
         //=============== Check if Add to cart or Buy now =================//
         if ($request->action == 'addtocart') {
@@ -128,37 +171,66 @@ class CartController extends Controller
     public function update_cart(Request $request, $cartId)
     {
         if (Auth::check() && Auth::user()->role == 1) {
-            //$user_id = Auth::user()->id;
+            //return dd($request->toArray());
+            $item = Carts::where('id', $cartId)->first();
+            $pro_size_qty = Products_Sizes::where('product_id', $item->product_id)
+                                        ->where('size_id', $request->size_id)->first();
+            //=== Alert if size quantity > size stock
+            if($request->product_quantity  > $pro_size_qty->size_quantity){
+                return redirect()->back()
+                    ->with(
+                        'error',
+                        'Only '.$pro_size_qty->size_quantity. 
+                        ' products left with size '. $pro_size_qty->rela_product_size->size_number. '.',
+                    );
+            }else{
+                $item->size_id = $request->size_id;
+                $item->product_quantity = $request->product_quantity;
+                $item->update();
+            }
+                
+            /*
             //==== update quantity if add the same size, prudct and user incart ===//
             $update_cart = Carts::where('id', $cartId)->first();
             $update_cart->size_id = $request->size_id;
             $update_cart->product_quantity = $request->product_quantity;
             $update_cart->update();
+            */
         } else {
-            $cart = Cart::content()->where('rowId', $cartId);
-            foreach ($cart as $key => $value) {
+            
+            $item = Cart::content()->where('rowId', $cartId);
+            //return dd($cart->rowId);
+            foreach ($item as $key => $value) {
                 $prouductId = $value->id;
             }
-            $products = Products::findOrFail($prouductId);
-            foreach ($cart as $key => $value) {
-                $rowId = $value->rowId;
+            //===== Check qty of the same size product item > product size stock ? ===//
+            $pro_size_qty = Products_Sizes::where('product_id', $prouductId)
+                ->where('size_id', $request->size_id)->first();
+            if($request->product_quantity  > $pro_size_qty->size_quantity){
+                return redirect()->back()
+                          ->with(
+                            'error',
+                            'Only '.$pro_size_qty->size_quantity. 
+                            ' products left with size '. $pro_size_qty->rela_product_size->size_number. '.',
+                );
+            }else{
+                $products = Products::findOrFail($prouductId);
+                Cart::update(
+                    $cartId, // $cartId == rowId
+                    [
+                        'qty' => $request->product_quantity,
+                        'options' => [
+                            'image' => $products->product_imgcover, // return error if not update with product img
+                            'size' => $request->size_id
+                        ],
+                    ]
+                );
             }
-            Cart::update(
-                $rowId,
-                [
-                    'qty' => $request->product_quantity,
-                    'options' => [
-                        'image' => $products->product_imgcover,
-                        'size' => $request->size_id
-                    ],
-                ]
-            );
-            // return dd($prouductId);
         }
         return redirect()->back()
             ->with(
                 'success',
-                'Item is updated successfully!',
+                'Item is updated successfully !',
             );
         //return dd(Cart::content());
     }
