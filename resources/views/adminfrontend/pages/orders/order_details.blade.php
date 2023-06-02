@@ -105,7 +105,7 @@
 
                                 <a
                                     class="btn btn-outline-danger rounded-0"
-                                    href="{{url('admin/order-list/page=10')}}"
+                                    href="{{url('admin/order-list/show=10/by-code=desc')}}"
                                     role="button"
                                     >
                                     Back to List

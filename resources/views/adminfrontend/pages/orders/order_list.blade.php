@@ -123,13 +123,13 @@
                                             >
                                             <h6 class="text-medium">Code</h6>
                                             <span class="text-black-50 ms-3
-                                                {{Request::is('admin/order-list/show=*/by-code*')? 'text-danger':''}}"  
+                                                {{Request::is('admin/order-list/show=*/by-code*')? 'text-danger':''}}"
                                                 >
                                                 @if($title=='code' && $sort=='asc')
                                                     <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='code' && $sort=='desc')
                                                     <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -142,13 +142,13 @@
                                             >
                                             <h6 class="text-medium">Order Date</h6>
                                             <span class="text-black-50 ms-5
-                                                {{Request::is('admin/order-list/show=*/by-date*')? 'text-danger':''}}"  
+                                                {{Request::is('admin/order-list/show=*/by-date*')? 'text-danger':''}}"
                                                 >
                                                 @if($title=='date' && $sort=='asc')
                                                     <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='date' && $sort=='desc')
                                                     <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -166,7 +166,7 @@
                                                     <i class="bi bi-sort-alpha-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='customer' && $sort=='desc')
                                                     <i class="bi bi-sort-alpha-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -185,7 +185,7 @@
                                                     <i class="bi bi-sort-alpha-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='payment' && $sort=='desc')
                                                     <i class="bi bi-sort-alpha-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -203,7 +203,7 @@
                                                     <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='totalpaid' && $sort=='desc')
                                                     <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -256,7 +256,7 @@
                                         <td class="text-center">
                                             <button
                                                 type="button"
-                                                class="btn btn-sm py-1 px-2 
+                                                class="btn btn-sm py-1 px-2
                                                     {{($order->order_status == 'Pending')?  'btn-warning' : ''}}
                                                     {{($order->order_status == 'Processing')?  'btn-primary' : ''}}
                                                     {{($order->order_status == 'Delivered')?  'btn-success' : ''}}
@@ -330,7 +330,7 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-                            @if($search_text == '') 
+                            @if($search_text == '')
                             <p class="text-sm">
                                 Showing {{($orders->currentPage()-1)* $orders->perPage()+($orders->total() ? 1:0)}}
                                 to {{($orders->currentPage()-1)*$orders->perPage()+count($orders)}}
@@ -343,12 +343,12 @@
                                 @if($search_text == '')
                                     <!--- To show data by pagination --->
                                     {{$orders->links()}}</span>
-                                    
+
                                     @else
                                         <div class="d-flex">
                                             <a
                                                 class="btn btn-outline-danger rounded-0 mt-2"
-                                                href="{{url('admin/order-list/show=10/by-code=asc')}}"
+                                                href="{{url('admin/order-list/show=10/by-code=desc')}}"
                                                 role="button"
                                                 >
                                                 <p class="text-sm">Back to List</p>

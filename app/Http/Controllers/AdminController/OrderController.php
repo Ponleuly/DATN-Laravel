@@ -247,6 +247,11 @@ class OrderController extends Controller
                 ->where('size_id', $sizeId)->first();
             $pro_size_qty->size_quantity -= $order_detail->product_quantity;
             $pro_size_qty->update();
+
+            //==== update table products with column product_stockleft
+            $pro_stock = Products::where('id', $proId)->first();
+            $pro_stock->product_stockleft -= $order_detail->product_quantity;
+            $pro_stock->update();
         }
     }
 }

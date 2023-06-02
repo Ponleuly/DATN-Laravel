@@ -465,6 +465,8 @@ class CartController extends Controller
         //===================== Update product stock after ordered =======================//
         $placeOrder = Orders::latest()->first();
         $orderId = $placeOrder->id;
+        app('App\Http\Controllers\AdminController\OrderController')->pro_qty_sub($orderId);
+        /*
         $orderDetails = Orders_Details::where('order_id', $orderId)->get();
         foreach ($orderDetails as $orderDetail) {
             $sizeId = $orderDetail->size_id;
@@ -472,6 +474,7 @@ class CartController extends Controller
             $productId = $orderDetail->product_id;
             $productSize_qty = Products_Sizes::where('product_id', $productId)
                 ->where('size_id', $sizeId)->first();
+            /*
             $stock_qty = ($productSize_qty->size_quantity) - $quantity;
             // If total quantity of order bigger than or equal to size stock ==> stock = 0
             if ($stock_qty <= 0) {
@@ -480,6 +483,7 @@ class CartController extends Controller
                 $productSize_qty->size_quantity = ($productSize_qty->size_quantity) - $quantity;
             }
             $productSize_qty->update();
+
             //============ Update product stockleft after order==============//
             $stockLeft = 0;
             $productSize = Products_Sizes::where('product_id', $productId)->get();
@@ -492,7 +496,7 @@ class CartController extends Controller
             $pro_stockleft->product_stockleft = $stockLeft;
             $pro_stockleft->update();
         }
-
+        */
         //================= Payment Credit Card =======================//
         if ($request->payment == 'Credit Card') {
             return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->total_paid, 2));
