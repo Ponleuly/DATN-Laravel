@@ -495,7 +495,7 @@
 			if (result.isConfirmed) {
 				form.submit();
 			}else{
-				swal("Cancelled", "AMC Record is safe :)", "error");
+				swal("Cancelled", "You are not order yet :)", "error");
 			}
 			});
 		});

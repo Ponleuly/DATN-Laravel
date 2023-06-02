@@ -78,14 +78,18 @@ function questionAlert(txt){
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: '<a class="text-decoration-none text-white" href="/'+ txt + '">Yes</a>',
-      })/*.then((result) => {
+        //confirmButtonText: '<a class="text-decoration-none text-white" href="/'+ txt + '">Yes</a>',
+        confirmButtonText:'Yes, remove all'
+      }).then((result) => {
         if (result.isConfirmed) {
+            window.location.href = txt;
+            /*
           Swal.fire(
             'Deleted!',
             'Your file has been deleted.',
             'success'
           )
+          */
         }
-      })*/ //No more success alert after choose yes
+      }) //No more success alert after choose yes
 }

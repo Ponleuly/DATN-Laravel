@@ -63,32 +63,31 @@ class CartController extends Controller
             // If found product with the same size in cart
             if ($update_qty) {
                 //=== Alert if size quantity > size stock
-                if(($request->product_quantity + $update_qty->product_quantity) > $pro_size_qty->size_quantity){
+                if (($request->product_quantity + $update_qty->product_quantity) > $pro_size_qty->size_quantity) {
                     return redirect()->back()
                         ->with(
                             'error',
-                            'Only '.$pro_size_qty->size_quantity. 
-                            ' products left. Your cart already have '
-                            . $update_qty->product_quantity.
-                            ' products with size '. $pro_size_qty->rela_product_size->size_number. '.',
+                            'Only ' . $pro_size_qty->size_quantity .
+                                ' products left. Your cart already have '
+                                . $update_qty->product_quantity .
+                                ' products with size ' . $pro_size_qty->rela_product_size->size_number . '.',
                         );
-                }else{
+                } else {
                     $update_qty->product_quantity += $request->product_quantity;
                     $update_qty->update();
                 }
-                
             }
             //  If there is no the same size of product in cart
             else {
                 //=== Alert if size quantity > size stock
-                if($request->product_quantity > $pro_size_qty->size_quantity){
+                if ($request->product_quantity > $pro_size_qty->size_quantity) {
                     return redirect()->back()
                         ->with(
                             'error',
-                            'Only '.$pro_size_qty->size_quantity. 
-                            ' products with size '. $pro_size_qty->rela_product_size->size_number. '.',
+                            'Only ' . $pro_size_qty->size_quantity .
+                                ' products with size ' . $pro_size_qty->rela_product_size->size_number . '.',
                         );
-                }else{
+                } else {
                     $product = Products::findOrFail($id);
                     $input = $request->all();
                     $input['user_id'] = $user_id;
@@ -107,38 +106,38 @@ class CartController extends Controller
             $pro_size_qty = Products_Sizes::where('product_id', $id)
                 ->where('size_id', $request->size_id)->first();
             $carts = Cart::content();
-            foreach($carts as $cart){
-                    //=== Check if found any product the same size in cart ===//
-                if ($cart->id == $id && $cart->options->size == $request->size_id){
-                      //===== Check qty of the same size product in cart > product size stock ? ===//
-                    if(($cart->qty + $request->product_quantity) > $pro_size_qty->size_quantity){
+            foreach ($carts as $cart) {
+                //=== Check if found any product the same size in cart ===//
+                if ($cart->id == $id && $cart->options->size == $request->size_id) {
+                    //===== Check qty of the same size product in cart > product size stock ? ===//
+                    if (($cart->qty + $request->product_quantity) > $pro_size_qty->size_quantity) {
                         return redirect()->back()
-                                ->with(
-                                    'error',
-                                    'Only '.$pro_size_qty->size_quantity. 
+                            ->with(
+                                'error',
+                                'Only ' . $pro_size_qty->size_quantity .
                                     ' products left. Your cart already have '
-                                    . $cart->qty.
-                                    ' products with size '. $pro_size_qty->rela_product_size->size_number. '.',
-                        );
+                                    . $cart->qty .
+                                    ' products with size ' . $pro_size_qty->rela_product_size->size_number . '.',
+                            );
                     }
-                }else{
-                    if ($request->product_quantity > $pro_size_qty->size_quantity){
+                } else {
+                    if ($request->product_quantity > $pro_size_qty->size_quantity) {
                         return redirect()->back()
-                                ->with(
-                                    'error',
-                                    'Only '.$pro_size_qty->size_quantity. 
-                                    ' products with size '. $pro_size_qty->rela_product_size->size_number. '.',
-                        );
+                            ->with(
+                                'error',
+                                'Only ' . $pro_size_qty->size_quantity .
+                                    ' products with size ' . $pro_size_qty->rela_product_size->size_number . '.',
+                            );
                     }
                 }
             }
-            if ($request->product_quantity > $pro_size_qty->size_quantity){
+            if ($request->product_quantity > $pro_size_qty->size_quantity) {
                 return redirect()->back()
                     ->with(
                         'error',
-                        'Only '.$pro_size_qty->size_quantity. ' products left with this size',
+                        'Only ' . $pro_size_qty->size_quantity . ' products left with this size',
                     );
-            }else{
+            } else {
                 Cart::add(
                     [
                         'id' => $product->id,
@@ -174,21 +173,21 @@ class CartController extends Controller
             //return dd($request->toArray());
             $item = Carts::where('id', $cartId)->first();
             $pro_size_qty = Products_Sizes::where('product_id', $item->product_id)
-                                        ->where('size_id', $request->size_id)->first();
+                ->where('size_id', $request->size_id)->first();
             //=== Alert if size quantity > size stock
-            if($request->product_quantity  > $pro_size_qty->size_quantity){
+            if ($request->product_quantity  > $pro_size_qty->size_quantity) {
                 return redirect()->back()
                     ->with(
                         'error',
-                        'Only '.$pro_size_qty->size_quantity. 
-                        ' products left with size '. $pro_size_qty->rela_product_size->size_number. '.',
+                        'Only ' . $pro_size_qty->size_quantity .
+                            ' products left with size ' . $pro_size_qty->rela_product_size->size_number . '.',
                     );
-            }else{
+            } else {
                 $item->size_id = $request->size_id;
                 $item->product_quantity = $request->product_quantity;
                 $item->update();
             }
-                
+
             /*
             //==== update quantity if add the same size, prudct and user incart ===//
             $update_cart = Carts::where('id', $cartId)->first();
@@ -197,7 +196,7 @@ class CartController extends Controller
             $update_cart->update();
             */
         } else {
-            
+
             $item = Cart::content()->where('rowId', $cartId);
             //return dd($cart->rowId);
             foreach ($item as $key => $value) {
@@ -206,14 +205,14 @@ class CartController extends Controller
             //===== Check qty of the same size product item > product size stock ? ===//
             $pro_size_qty = Products_Sizes::where('product_id', $prouductId)
                 ->where('size_id', $request->size_id)->first();
-            if($request->product_quantity  > $pro_size_qty->size_quantity){
+            if ($request->product_quantity  > $pro_size_qty->size_quantity) {
                 return redirect()->back()
-                          ->with(
-                            'error',
-                            'Only '.$pro_size_qty->size_quantity. 
-                            ' products left with size '. $pro_size_qty->rela_product_size->size_number. '.',
-                );
-            }else{
+                    ->with(
+                        'error',
+                        'Only ' . $pro_size_qty->size_quantity .
+                            ' products left with size ' . $pro_size_qty->rela_product_size->size_number . '.',
+                    );
+            } else {
                 $products = Products::findOrFail($prouductId);
                 Cart::update(
                     $cartId, // $cartId == rowId
@@ -487,11 +486,13 @@ class CartController extends Controller
             foreach ($productSize as $row) {
                 $stockLeft  += $row->size_quantity;
             }
+
+            //============ Update product stockleft after order ==============//
+            $pro_stockleft = Products::where('id', $productId)->first();
+            $pro_stockleft->product_stockleft = $stockLeft;
+            $pro_stockleft->update();
         }
-        //============ Update product stockleft after order ==============//
-        $pro_stockleft = Products::where('id', $productId)->first();
-        $pro_stockleft->product_stockleft = $stockLeft;
-        $pro_stockleft->update(); 
+
         //================= Payment Credit Card =======================//
         if ($request->payment == 'Credit Card') {
             return redirect('payment/invoicecode=' . substr($order->invoice_code, 1) . '/' . 'totalpaid=' . substr($request->total_paid, 2));
@@ -565,8 +566,6 @@ class CartController extends Controller
     }
 
 
-
-
     public function remove_from_cart($id)
     {
         if (Auth::check() && Auth::user()->role == 1) {
@@ -590,8 +589,6 @@ class CartController extends Controller
     }
 
 
-
-
     public function remove_all_cart($num)
     {
         if ($num == 0) { // 0 is condiction for showing question are you sure?
@@ -609,7 +606,7 @@ class CartController extends Controller
             return redirect()->back()
                 ->with(
                     'success',
-                    'All products removed from cart successfully.',
+                    'All products removed from cart successfully !',
                 );
         }
 
