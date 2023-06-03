@@ -273,6 +273,7 @@
                                                 aria-label="Default select example"
                                                 id="orderStatus"
                                                 name="orderStatus"
+                                                {{($order->order_status == 'Canceled')? 'disabled': ''}}
                                                 >
                                                 <option
                                                     value ="{{url('admin/order-status-action/'.$order->id .'/pending')}}"

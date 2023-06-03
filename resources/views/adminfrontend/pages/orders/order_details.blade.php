@@ -54,6 +54,7 @@
                                                 id="orderStatus"
                                                 name="orderStatus"
                                                 style="width: 140px;"
+                                                {{($order->order_status == 'Canceled')? 'disabled': ''}}
                                                 >
                                                 <option
                                                     value ="{{url('admin/order-status-action/'.$order->id .'/pending')}}"

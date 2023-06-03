@@ -154,9 +154,14 @@ class OrderController extends Controller
     //============= Update invoice status ============//
     public function order_status_action($orderId, $statusName)
     {
+        // ==== If order is cancenled, update product size quantity
+        if (ucfirst($statusName) == 'Canceled') {
+            $this->pro_qty_plus($orderId);
+        }
         $orderStatus = Orders::where('id', $orderId)->first();
         $orderStatus['order_status'] = ucfirst($statusName);
         $orderStatus->update();
+        /*
         if (ucfirst($statusName) == 'Delivered') {
             $deliveryFee = $orderStatus->delivery_fee;
             $discount = $orderStatus->discount;
@@ -167,35 +172,12 @@ class OrderController extends Controller
                 $price = $orderDetail->product_price;
                 $qty = $orderDetail->product_quantity;
                 $totalAmount += $price * $qty;
-
-                /*
-                //===== update product size quantity ======//
-                $proId = $orderDetail->product_id;
-                $sizeId = $orderDetail->size_id;
-                $pro_size_qty = Products_Sizes::where('product_id', $proId)
-                ->where('size_id', $sizeId)->first();
-                $pro_size_qty->size_quantity -= $orderDetail->product_quantity;
-                $pro_size_qty->update();
-                */
             }
             $total = $totalAmount + $deliveryFee - $discount;
             $orderStatus['total_paid'] = $total;
             $orderStatus->update();
         }
-
-        // ==== If order is cancenled, update product size quantity
-        if (ucfirst($statusName) == 'Canceled') {
-            $order_details = Orders_Details::where('order_id', $orderId)->get();
-            foreach ($order_details as $order_detail) {
-                $productSize = Products_Sizes::where('product_id', $order_detail->product_id)
-                    ->where('size_id', $order_detail->size_id)->first();
-                $order_qty = $order_detail->product_quantity;
-                $size_qty = $productSize->size_quantity;
-                $productSize->size_quantity = $size_qty + $order_qty;
-                $productSize->update();
-            }
-        }
-
+        */
         return redirect()->back()
             ->with('message', 'Order with invoice code ' . $orderStatus->invoice_code  . ' updated status successfully !');
     }

@@ -114,7 +114,6 @@
                 </div>
                 <!-- End Icon Cart -->
             </div>
-
             <div class="col-lg-12">
                 <div class="card-style mb-30">
                     <div class="title d-flex flex-wrap align-items-center justify-content-between">
@@ -158,7 +157,11 @@
                                         $status_name = Orders_Statuses::where('id', $order->order_status)->first();
                                     @endphp
                                     <tr class="text-center">
-                                        <td><p class="text-sm">{{$count++}}</p></td>
+                                        <td>
+                                            <p class="text-sm" >
+                                                {{($orders->currentPage()-1) * $orders->perPage() + $loop->index + 1}}
+                                            </p>
+                                        </td>
                                         <td><p class="text-sm">{{date('Y-m-d  H:i', strtotime($order->created_at))}}</p></td>
                                         <td><p class="text-sm">{{$order->invoice_code}}</p></td>
                                         <td><p class="text-sm">{{$order->rela_customer_order->c_name}}</p></td>
@@ -186,6 +189,7 @@
                                                 aria-label="Default select example"
                                                 id="orderStatus"
                                                 name="orderStatus"
+                                                {{($order->order_status == 'Canceled')? 'disabled': ''}}
                                                 >
                                                 <option
                                                     value ="{{url('admin/order-status-action/'.$order->id .'/pending')}}"
@@ -201,7 +205,7 @@
                                                 </option>
                                                 <option
                                                     value ="{{url('admin/order-status-action/'.$order->id .'/delivered')}}"
-                                                    {{($order->order_status == 'Deliverd')? 'selected': ''}}
+                                                    {{($order->order_status == 'Delivered')? 'selected': ''}}
                                                     >
                                                     Delivered
                                                 </option>
@@ -226,9 +230,21 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="d-flex justify-content-end">
-                            <!--- To show data by pagination --->
-                            {{$orders->links()}}
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p class="text-sm">
+                                Showing {{($orders->currentPage()-1)* $orders->perPage()+($orders->total() ? 1:0)}}
+                                to {{($orders->currentPage()-1)*$orders->perPage()+count($orders)}}
+                                of {{$orders->total()}}  results
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="d-flex justify-content-end">
+                                 {{$orders->links()}}
+                            </div>
                         </div>
                     </div>
                 </div>
