@@ -29,7 +29,7 @@
                                         <label for="product_name"><p class="text-label">Product Name</p></label>
                                         <input
                                             type="text"
-                                            class="form-control rounded-0 fw-500 mb-2"
+                                            class="form-control rounded-0 fw-500 mb-2  text-capitalize"
                                             id="product_name"
                                             name="product_name"
                                             placeholder="product name..."
@@ -114,16 +114,8 @@
                                                 <label class="form-check-label" for="{{$row->group_name}}">{{$row->group_name}}</label>
                                             </div>
                                         @endforeach
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="col-md-12 mb-2">
-                                    <div class="form-group mb-2">
-
-                                        <label for="category_id" ><p class="text-label" >Product Category</p></label>
+                                        <br>
+                                        <label for="category_id" ><p class="text-label mt-2" >Product Category</p></label>
                                         <select
                                             class="form-select rounded-0 mb-2"
                                             aria-label="category select"
@@ -150,8 +142,16 @@
                                                 <option value="{{$item1->id}}">{{$item1->sub_category}}</option>
                                             @endforeach
                                         </select>
-                                        <!-- Start Product color and quantity -->
-                                        <label for="color_id[]"><p class="text-label mt-2">Product Color</p></label><br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="col-md-12 mb-2">
+                                    <div class="form-group mb-2">
+
+                                        <!-- Start Product color hex-->
+                                        <label for="product_color"><p class="text-label ">Product Color</p></label><br>
                                         <input
                                             type="color"
                                             class="form-control form-control-color d-flex w-100 rounded-0 mb-2"
@@ -161,7 +161,19 @@
                                             placeholder="product name..."
                                             required
                                         >
-                                        <!-- End Product color and quantity -->
+                                        <!-- End Product color hex -->
+
+                                        <!-- Start Product color name-->
+                                        <label for="product_colorname"><p class="text-label mt-2">Product Color Name</p></label><br>
+                                        <input
+                                            type="text"
+                                            class="form-control rounded-0 fw-500 mb-2 text-capitalize"
+                                            id="product_colorname"
+                                            name="product_colorname"
+                                            placeholder="color name..."
+                                            required
+                                        >
+                                        <!-- End Product color name-->
 
                                         <!-- Start Product size and quantity -->
                                         <label for="size"><p class="text-label mt-2">Product Size and Quantity</p></label><br>

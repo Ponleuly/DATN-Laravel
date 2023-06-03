@@ -37,7 +37,7 @@
                                         </label>
                                         <input
                                             type="text"
-                                            class="form-control rounded-0 fw-500 mb-2"
+                                            class="form-control rounded-0 fw-500 mb-2  text-capitalize"
                                             id="product_name"
                                             name="product_name"
                                             placeholder="product name..."
@@ -114,16 +114,9 @@
                                             accept="image/png, image/jpeg, image/jpg"
                                             multiple
                                         >
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="col-md-12 mb-2">
-                                    <div class="form-group mb-2">
 
                                         <label for="product_price">
-                                            <p class="text-label">Product price ($)</p>
+                                            <p class="text-label mt-2">Product price ($)</p>
                                         </label>
                                         <input
                                             class="form-control rounded-0 fw-500 mb-2"
@@ -147,8 +140,15 @@
                                             value="{{$products->product_saleprice}}"
                                             required
                                         >
+                                    </div>
+                                </div>
+                            </div>
 
-                                        <label for="group_id"><p class="text-label mt-2">Product group</p></label><br>
+                            <div class="col-md-6">
+                                <div class="col-md-12 mb-2">
+                                    <div class="form-group mb-2">
+
+                                        <label for="group_id"><p class="text-label">Product group</p></label><br>
                                         @foreach ($groups as $row)
                                             <div class="form-check form-check-inline">
                                                 <input
@@ -222,6 +222,19 @@
                                             required
                                         >
                                         <!-- End Product color and quantity -->
+
+                                         <!-- Start Product color name-->
+                                        <label for="product_colorname"><p class="text-label mt-2">Product Color Name</p></label><br>
+                                        <input
+                                            type="text"
+                                            class="form-control rounded-0 fw-500 mb-2  text-capitalize"
+                                            id="product_colorname"
+                                            name="product_colorname"
+                                            value="{{$products->product_colorname}}"
+                                            placeholder="color name..."
+                                            required
+                                        >
+                                        <!-- End Product color name-->
 
                                         <!-- Start Product size and quantity -->
                                         <label for="size"><p class="text-label mt-2">Product size and quantity</p></label><br>

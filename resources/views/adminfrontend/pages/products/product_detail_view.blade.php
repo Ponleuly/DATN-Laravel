@@ -58,6 +58,14 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-3">
+                                            <h5 class="text-black fw-bold mt-1">Color:</h5>
+                                        </div>
+                                        <div class="col-9 ms-0 ps-0">
+                                            <p>{{$product_view->product_colorname}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
                                             <h5 class="text-black fw-bold mt-1">Price:</h5>
                                         </div>
                                         <div class="col-9 ms-0 ps-0">

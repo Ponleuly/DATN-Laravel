@@ -16,51 +16,32 @@ use Illuminate\Support\Facades\File;
 
 class ProductDetailController extends Controller
 {
-
-    public function product_detail_add()
-    {
-        $sizes = Sizes::orderBy('size_number')->get();
-        $groups = Groups::orderBy('id')->get();
-        $categories = Categories::orderBy('id')->get();
-        $subCategories = Categories_Subcategories::orderBy('id')->get();
-        return view(
-            'adminfrontend.pages.products.product_detail_add',
-            compact(
-                'sizes',
-                'groups',
-                'categories',
-                'subCategories'
-            )
-        );
-    }
-
-
     public function product_detail_list($res, $title, $sort)
     {
         if ($res == 'all') {
             $products = Products::all()->count();
             $res = $products;
         }
-        if($title == 'name'){
+        if ($title == 'name') {
             $products = Products::orderBy('product_name', $sort)->paginate($res);
-        }elseif($title == 'price'){
+        } elseif ($title == 'price') {
             $products = Products::orderBy('product_price', $sort)->paginate($res);
-        }elseif($title == 'stock'){
+        } elseif ($title == 'stock') {
             $products = Products::orderBy('product_stock', $sort)->paginate($res);
-        }elseif($title == 'stockleft'){
+        } elseif ($title == 'stockleft') {
             $products = Products::orderBy('product_stockleft', $sort)->paginate($res);
-        }elseif($title == 'date'){
+        } elseif ($title == 'date') {
             $products = Products::orderBy('created_at', $sort)->paginate($res);
-        }elseif($title == 'status'){
-            if($sort == 'new'){
+        } elseif ($title == 'status') {
+            if ($sort == 'new') {
                 $products = Products::where('product_status', 1)->paginate($res);
-            }elseif($sort == 'selling'){
+            } elseif ($sort == 'selling') {
                 $products = Products::where('product_status', 2)->paginate($res);
-            }elseif($sort == 'soldout'){
+            } elseif ($sort == 'soldout') {
                 $products = Products::where('product_status', 3)->paginate($res);
-            }elseif($sort == 'asc'){
+            } elseif ($sort == 'asc') {
                 $products = Products::orderBy('product_status', $sort)->paginate($res);
-            }elseif($sort == 'desc'){
+            } elseif ($sort == 'desc') {
                 $products = Products::orderBy('product_status', $sort)->paginate($res);
             }
         }
@@ -126,7 +107,7 @@ class ProductDetailController extends Controller
         } elseif ($stockLeft > 0 && $stockLeft < $allStock) {
             $status->product_status = 2; // is selling
             $status->update();
-        }else{
+        } else {
             $status->product_status = 1; // is selling
             $status->update();
         }
@@ -141,10 +122,28 @@ class ProductDetailController extends Controller
 
         );
     }
+    public function product_detail_add()
+    {
+        $sizes = Sizes::orderBy('size_number')->get();
+        $groups = Groups::orderBy('id')->get();
+        $categories = Categories::orderBy('id')->get();
+        $subCategories = Categories_Subcategories::orderBy('id')->get();
+        return view(
+            'adminfrontend.pages.products.product_detail_add',
+            compact(
+                'sizes',
+                'groups',
+                'categories',
+                'subCategories'
+            )
+        );
+    }
 
     public function product_detail_store(Request $request)
     {
         $input  = $request->all();
+        $input['product_name'] = ucwords($request->product_name);
+        $input['product_colorname'] = ucwords($request->product_colorname);
         //========= Storing data for table products ======//
         if ($request->hasFile('product_imgcover')) {
             $destination_path = 'product_img/imgcover/';
@@ -250,11 +249,12 @@ class ProductDetailController extends Controller
     {
         //======== Update data on table products ========//
         $update_product  = Products::where('id', $id)->first();
-        $update_product->product_name = $request->input('product_name');
+        $update_product->product_name = ucwords($request->input('product_name'));
         $update_product->product_code = $request->input('product_code');
         $update_product->product_des = $request->input('product_des');
         $update_product->product_price = $request->input('product_price');
         $update_product->product_color = $request->input('product_color');
+        $update_product->product_colorname = ucwords($request->input('product_colorname'));
         $update_product->product_saleprice = $request->input('product_saleprice');
         //========= Update data for table products ======//
         if ($request->hasFile('product_imgcover')) {
@@ -320,7 +320,6 @@ class ProductDetailController extends Controller
                     ]
                 );
                 $total_stock += $request->size_quantity[$key] ?? 0;
-                
             }
         }
         // =========== Update Total stock ==================//
@@ -346,8 +345,8 @@ class ProductDetailController extends Controller
         }
         return redirect('admin/product-detail-list/show=10/by-name=asc')
             ->with('message', 'Product ' . $request->product_name . ' is updated successfully!');
-            //return dd($new_stock);
-        }
+        //return dd($new_stock);
+    }
 
 
     public function product_detail_delete($id)

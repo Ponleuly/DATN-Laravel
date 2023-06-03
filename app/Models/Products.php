@@ -17,6 +17,7 @@ class Products extends Model
         'product_price',
         'product_saleprice',
         'product_color',
+        'product_colorname',
         'product_status',
 
     ];

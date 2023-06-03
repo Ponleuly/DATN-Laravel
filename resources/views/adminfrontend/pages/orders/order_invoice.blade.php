@@ -112,12 +112,13 @@
                     <div class="row my-2 mx-1 justify-content-center">
                         <table class="table ">
                             <thead class="text-white bg-danger">
-                                <tr class="text-center">
+                                <tr class="text-center text-sm">
                                     <th scope="col">#</th>
                                     <th scope="col" class="text-start">PRODUCTS</th>
+                                    <th scope="col">COLOR</th>
                                     <th scope="col">SIZE</th>
                                     <th scope="col">QUANTITY</th>
-                                    <th scope="col">ITEM PRICE</th>
+                                    <th scope="col">UNIT PRICE</th>
                                     <th scope="col">AMOUNT</th>
 
                                 </tr>
@@ -132,6 +133,7 @@
                                         <td class="text-start">
                                             {{$orderDetail->rela_product_order->product_name}}
                                         </td>
+                                        <td>{{$orderDetail->rela_product_order->product_colorname}}</td>
                                         <td>{{$orderDetail->rela_size_order->size_number}}</td>
                                         <td>{{$orderDetail->product_quantity}}</td>
                                         <td>$ {{$orderDetail->product_price}}</td>
