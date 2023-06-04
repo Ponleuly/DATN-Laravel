@@ -205,7 +205,7 @@
 					<div class="row">
 						@foreach ($newProducts as $product)
 							<!-- Start Column 2 -->
-							<div class="col-12 col-md-4 col-lg-4 mb-5 mb-md-0 ">
+							<div class="col-12 col-md-4 col-lg-4 mb-5">
 								<a
 									class="product-item"
 									href="{{url('product-detail/'.$product->product_code)}}"
@@ -233,8 +233,8 @@
 							<!-- End Column 2 -->
 						@endforeach
 					</div>
-					<div class="row mt-4">
-						<div class="d-flex justify-content-end">
+					<div class="row">
+						<div class="d-flex justify-content-center">
 							<!--- To show data by pagination --->
 							{{$newProducts->links()}}
 						</div>

@@ -316,16 +316,19 @@
                                             </div>
                                         </div>
                                         <!-- End Product size and quantity -->
-
-                                        <div class="d-flex mt-4" style="padding-top: 2px">
-                                            <a
-                                                class="btn btn-outline-danger rounded-0 mt-2"
-                                                href="{{url('admin/product-detail-list/show=10/by-name=asc')}}"
-                                                role="button"
-                                                >
-                                                Back to List
-                                            </a>
-                                            <button class="btn btn-primary rounded-0 ms-auto mt-2" type="submit">Update product</button>
+                                        <div class="col-md-12 mt-4">
+                                            <div class="mb-2 d-flex">
+                                                <a
+                                                    class="btn btn-outline-danger rounded-0 py-1"
+                                                    href="{{url('admin/product-detail-list/show=10/by-name=asc')}}"
+                                                    role="button">
+                                                    <p class="text-sm">Back to List</p>
+                                                </a>
+                                                <button
+                                                    class="btn btn-primary rounded-0 py-1 ms-auto text-sm"
+                                                    type="submit">Upddate Product
+                                                </button>
+                                            </div>
                                         </div>
                                         <!--formnovalidate="formnovalidate" => for textarea input with CKeditor-->
                                     </div>

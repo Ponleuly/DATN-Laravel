@@ -1122,7 +1122,19 @@ h6,
   background: #345d9d;
   color: #fff;
 }
-
+.order-icon {
+  max-width: 36px;
+  width: 100%;
+  height: 36px;
+  width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  background: rgba(74, 108, 247, 0.1);
+  color: #4a6cf7;
+  border-radius: 50%;
+}
 /* =========== tables css =========== */
 /*
 .table {
@@ -1256,6 +1268,10 @@ h6,
 .top-selling-table tr td {
   vertical-align: middle;
   padding: 10px 5px;
+}
+.top-selling-table .table-inside tr td {
+  vertical-align: middle;
+  padding: 5px 5px;
 }
 .top-selling-table tr .min-width {
   min-width: 80px;
@@ -4948,6 +4964,11 @@ h6,
   object-fit: cover;
   border-radius: 5px;
 }
+.order-img {
+  width: 45px;
+  object-fit: cover;
+  border-radius: 5px;
+}
 tr.admin-table {
   padding: 20px;
   text-align: start;
@@ -4992,4 +5013,8 @@ a.view-btn:hover {
 
 a.view-btn:hover span {
   color: #087990;
+}
+.icon-bg {
+  padding: 10px;
+  border-radius: 50%;
 }
