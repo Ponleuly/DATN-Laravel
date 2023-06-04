@@ -24,6 +24,7 @@ class CustomerSeeder extends Seeder
                 'c_phone' => fake()->phoneNumber(),
                 'c_email' => fake()->unique()->safeEmail(),
                 'c_address' => fake()->address(),
+                'c_note' => fake()->text(50),
                 'order_id' => $i,
                 'created_at' => Carbon::now()
 

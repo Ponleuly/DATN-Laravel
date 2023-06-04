@@ -289,7 +289,7 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-5">
-                                                                    <label for="size_quantity"><p class="text-label">Quantity: </p></label>
+                                                                    <label for="size_quantity"><p class="text-label">Qty: </p></label>
                                                                 </div>
                                                                 <div class="col-md-7">
                                                                     <input

@@ -148,7 +148,7 @@
                             <div class="col-6">
                                 <div class="row mb-2">
                                     <div class="col-5 text-end">
-                                        <h5 class="text-black text-sm mt-1">Sub Category : </h5>
+                                        <h5 class="text-black text-sm mt-1">Sub Cate : </h5>
                                     </div>
                                     <div class="col-7 ">
                                         <p>
@@ -196,7 +196,7 @@
                             <div class="col-6">
                                 <div class="row mb-2">
                                     <div class="col-5 text-end">
-                                        <h5 class="text-black text-sm mt-1">Description :</h5>
+                                        <h5 class="text-black text-sm mt-1">Description:</h5>
                                     </div>
                                     <div class="col-7 ">
                                         <p>{!! $product_view->product_des !!}</p>
@@ -211,10 +211,10 @@
                                 <div class="col-md-12">
                                     <div class="border border-1 p-3">
                                         <div class="row">
-                                            <div class="col-md-2 mx-0">
+                                            <div class="col-md-2 mx-0 py-1">
                                                 <div
                                                     class="py-1 text-center text-sm"
-                                                    style="background: {{$product_view->product_color}};"
+                                                    style="background: {{$product_view->product_color}}; width: 65px"
                                                     >
                                                     <a
                                                         href="{{url('/admin/product-detail-view/'.$product_view->product_code)}}"
@@ -228,10 +228,10 @@
                                                 @if($row->product_code == $product_view->product_code)
                                                     @continue
                                                 @else
-                                                <div class="col-md-2 mx-0">
+                                                <div class="col-md-2 mx-0 py-1">
                                                     <div
                                                         class="py-1 text-center text-sm"
-                                                        style="background: {{$row->product_color}};"
+                                                        style="background: {{$row->product_color}}; width: 65px"
                                                         >
                                                         <a
                                                             href="{{url('/admin/product-detail-view/'.$row->product_code)}}"

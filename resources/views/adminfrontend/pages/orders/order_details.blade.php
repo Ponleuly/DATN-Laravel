@@ -33,14 +33,17 @@
                     </div>
             @endif
         </div>
+        <!---------------End Alert ------------------------>
+
         <div class="col-12 text-center">
             <h4 class="text-medium mb-20">Order Details</h4>
         </div>
-        <!---------------End Alert ------------------------>
         <div class="col-lg-12">
-            <div class="card-style mb-30">
+            <div class="card-style mb-20">
                 <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
                     <div class="col-md-12">
+
+                        <!--------------------\\ Start Date and Status //------------------------>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class=" d-flex flex-row align-items-baseline">
@@ -50,7 +53,6 @@
                                     </h5>
                                 </div>
                                 <p class="text-muted text-sm ms-4">{{$order->invoice_code}}</p>
-
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
@@ -89,14 +91,34 @@
                                                Canceled
                                             </option>
                                         </select>
+                                       
+                                        <button
+                                            onclick="printDiv('printableArea')"
+                                            class="btn btn-primary rounded mx-2 order-icon"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Print Invoice"
+                                            style="height: 31px"
+                                            >
+                                            <i class="bi bi-printer-fill"></i>
+                                        </button>
+
+                                        <a
+                                            class="btn btn-danger rounded"
+                                            href="{{url('admin/download-invoice/'. $order->id)}}"
+                                            role="button"
+                                            style="height: 31px;"
+                                            >
+                                            <i class="bi bi-filetype-pdf"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!--------------------\\ End Date and Status //------------------------>
 
                         <hr class="bg-secondary border-2 border-top border-secondary">
 
                         <div class="row">
+                            <!--------------------\\ Start Customer Info //------------------------>
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-2">
@@ -112,6 +134,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--------------------\\ End Customer Info //------------------------>
+
+                            <!--------------------\\ Start Deliver to //------------------------>
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-2">
@@ -131,11 +156,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--------------------\\ End Deliver to //------------------------>
+
+                            <!--------------------\\ Start Order to //------------------------>
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-2">
                                         <div class="order-icon">
-                                            <i class="bi bi-cart-fill"></i>
+                                            <i class="bi bi-bag-fill"></i>
                                         </div>
                                     </div>
                                     <div class="col-10 ps-0">
@@ -163,91 +191,133 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--------------------\\ End Order to //------------------------>
                         </div>
 
                         <div class="row mt-3">
                             <div class="col-md-8">
-                                <div class="table-responsive" >
-                                    <table class="table top-selling-table table-bordered-less">
-                                        <thead class="border-top" style="border: 1px solid #d3dae0;">
-                                            <tr class="text-start">
-                                                <th><h6 class="text-medium">#</h6></th>
-                                                <th class="min-width text-center"><h6 class="text-medium">Image</h6></th>
-                                                <th class="min-width"><h6 class="text-medium">Product</h6></th>
-                                                <th class="min-width "><h6 class="text-medium">Size</h6></th>
-                                                <th class="min-width "><h6 class="text-medium">Quantity</h6></th>
-                                                <th class="min-width "><h6 class="text-medium">Unit price</h6></th>
-                                                <th class="min-width "><h6 class="text-medium">Amount</h6></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody style="border: 1px solid #d3dae0;">
-                                            @php
-                                                $totalAmount = 0;
-                                                $cnt= 1;
-                                            @endphp
-                                            @foreach ($orderDetails as $orderDetail)
-                                                <tr class="text-start text-sm">
-                                                    <th><p class="text-sm">{{$cnt++}}</p></th>
-                                                    <td class="text-center">
-                                                        <img
-                                                            src="/product_img/imgcover/{{$orderDetail->rela_product_order->product_imgcover}}"
-                                                            class="img-fluid product-thumbnail order-img"
-                                                        >
-                                                    </td>
-                                                    <td class="text-primary fw-600">
-                                                        {{$orderDetail->rela_product_order->product_name}}
-                                                    </td>
-                                                    <td>{{$orderDetail->rela_size_order->size_number}}</td>
-                                                    <td>{{$orderDetail->product_quantity}}</td>
-                                                    <td>$ {{$orderDetail->product_price}}</td>
-                                                    <td>
-                                                        @php
-                                                            $price = $orderDetail->product_price;
-                                                            $qty = $orderDetail->product_quantity;
-                                                            $amount = $price * $qty;
-                                                            $totalAmount += $amount;
-                                                        @endphp
-                                                        $ {{number_format($amount, 2)}}
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            <tr >
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td colspan="2">
-                                                    <table class="table table-borderless text-sm table-inside">
-                                                        <tr>
-                                                            <td><p>Sub total :</p></td>
-                                                            <td class="text-start">$ {{number_format($totalAmount, 2)}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><p>Delivery fee :</p></td>
-                                                            <td class="text-start">$ {{$order->delivery_fee}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><p>Discount :</p></td>
-                                                            <td class="text-start">$ {{number_format($order->discount, 2)}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Total paid :</td>
-                                                            <td class="fs-6 fw-bold text-danger text-start">
+                                <div class="card">
+                                    <div class="card-body p-0">
+                                        <!----------------------\\ Start product order table //-------------------->
+                                        <div class="table-responsive" >
+                                            <table class="table top-selling-table table-bordered-less">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th><h6 class="text-medium">#</h6></th>
+                                                        <th class="min-width text-center"><h6 class="text-medium">Image</h6></th>
+                                                        <th class="min-width text-start"><h6 class="text-medium">Product</h6></th>
+                                                        <th class="min-width "><h6 class="text-medium">Size</h6></th>
+                                                        <th class="min-width "><h6 class="text-medium">Qty</h6></th>
+                                                        <th class="min-width "><h6 class="text-medium">Unit price</h6></th>
+                                                        <th class="min-width "><h6 class="text-medium">Amount</h6></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody >
+                                                    @php
+                                                        $totalAmount = 0;
+                                                        $cnt= 1;
+                                                    @endphp
+                                                    @foreach ($orderDetails as $orderDetail)
+                                                        <tr class="text-center text-sm">
+                                                            <th><p class="text-sm px-2">{{$cnt++}}</p></th>
+                                                            <td class="text-center">
+                                                                <img
+                                                                    src="/product_img/imgcover/{{$orderDetail->rela_product_order->product_imgcover}}"
+                                                                    class="img-fluid product-thumbnail order-img"
+                                                                >
+                                                            </td>
+                                                            <td class="text-primary text-start fw-600">
+                                                                {{$orderDetail->rela_product_order->product_name}}
+                                                            </td>
+                                                            <td>{{$orderDetail->rela_size_order->size_number}}</td>
+                                                            <td>{{$orderDetail->product_quantity}}</td>
+                                                            <td>$ {{$orderDetail->product_price}}</td>
+                                                            <td>
                                                                 @php
-                                                                    $totalPaid = ($totalAmount + $order->delivery_fee) - ($order->discount);
+                                                                    $price = $orderDetail->product_price;
+                                                                    $qty = $orderDetail->product_quantity;
+                                                                    $amount = $price * $qty;
+                                                                    $totalAmount += $amount;
                                                                 @endphp
-                                                                $ {{number_format($totalPaid, 2)}}
+                                                                $ {{number_format($amount, 2)}}
                                                             </td>
                                                         </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                    @endforeach
+                                                    <tr>
+                                                        <td class=" border-bottom-0"></td>
+                                                        <td class=" border-bottom-0"></td>
+                                                        <td class=" border-bottom-0"></td>
+                                                        <td class=" border-bottom-0"></td>
+                                                        <!----------------------\\ Start Total Price table //-------------------->
+                                                        <td colspan="3"  class=" border-bottom-0">
+                                                            <table class="table table-borderless text-sm table-inside mb-0">
+                                                                <tr>
+                                                                    <td><p>Sub total :</p></td>
+                                                                    <td class="text-end pe-2">$ {{number_format($totalAmount, 2)}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><p>Delivery fee :</p></td>
+                                                                    <td class="text-end pe-2">$ {{$order->delivery_fee}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><p>Discount :</p></td>
+                                                                    <td class="text-end pe-2">$ {{number_format($order->discount, 2)}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-muted">Total paid :</td>
+                                                                    <td class="fs-6 fw-bold text-danger text-end pe-2">
+                                                                        @php
+                                                                            $totalPaid = ($totalAmount + $order->delivery_fee) - ($order->discount);
+                                                                        @endphp
+                                                                        $ {{number_format($totalPaid, 2)}}
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <!----------------------\\ End Total Price table //-------------------->
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!----------------------\\ End product order table //-------------------->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="text-sm fw-bold">Payment info</h6>
+                                        <div class="row g-0 d-flex align-baseline">
+                                            <div class="col-md-2" style="vertical-align: middle; padding: 10px 5px 10px 0">
+                                                <img src="/frontend/images/Visa.jpg" class="img-fluid rounded-start " alt="...">
+                                            </div>
+                                            <div class="col-md-10" style="padding: 10px 5px">
+                                                <p class="text-black text-sm">3242 **** **** 2423</p>
+                                            </div>
+                                        </div>
+                                        <p class="card-text text-sm">Holder's name:
+                                            <span class="text-black">
+                                                {{$customer->c_name}}
+                                            </span>
+                                        </p>
+                                        <p class="card-text text-sm">Email:
+                                            <span class="text-black">
+                                                {{$customer->c_email}}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card mt-4">
+                                    <div class="card-body">
+                                        <h6 class="text-sm fw-bold">Customer notes</h6>
+                                        <p class="card-text text-sm text-wrap">
+                                            <span class="text-black">
+                                                {{$customer->c_note}}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -264,6 +334,7 @@
                             <h4 class="mb-2 text-black">Order Details</h4>
                         </div>
                         <div class="col-md-10 d-flex justify-content-end align-items-baseline">
+                            <!--
                             <div class="row align-items-baseline px-3">
                                     <div class="d-flex flex-row align-items-baseline">
                                         <p class="text-sm pe-2">Update status: </p>
@@ -306,7 +377,9 @@
                                             </select>
                                     </div>
                             </div>
+                            -->
                             <div class="form-group mb-2">
+                                <!--
                                 <button
 
                                     onclick="printDiv('printableArea')"
@@ -322,7 +395,7 @@
                                     >
                                     Download Invoice PDF
                                 </a>
-
+                            -->
                                 <a
                                     class="btn btn-outline-danger rounded-0"
                                     href="{{url('admin/order-list/show=10/by-code=desc')}}"

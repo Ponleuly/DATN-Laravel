@@ -73,6 +73,11 @@
                                         <span class="fw-normal text-sm">{{$customer->c_address}}</span>
                                     </p>
                                 </li>
+                                <li class="text-muted col-md-8">
+                                    <p class="text-muted fw-bold mb-1">Note :
+                                        <span class="fw-normal text-sm">{{$customer->c_note}}</span>
+                                    </p>
+                                </li>
                             </ul>
                         </div>
                         <div class="col-xl-3 ">
