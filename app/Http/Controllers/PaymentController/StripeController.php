@@ -16,7 +16,6 @@ class StripeController extends Controller
     public function paymentForm($invoiceCode, $totalPaid)
     {
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
-
         //============= Get product order =======================//
         $order = Orders::where('invoice_code', '#' . $invoiceCode)->first();
         $orderId = $order->id;
@@ -49,13 +48,13 @@ class StripeController extends Controller
                 ]
             ],
             'mode' => 'payment',
-            'success_url' => 'http://127.0.0.1:8000/order-completed/invoice=' . $invoiceCode,
+            'success_url' => 'http://127.0.0.1:8000/order-completed/invoice=' . $invoiceCode . '/success?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => 'http://127.0.0.1:8000/order-canceled/invoice=' . $invoiceCode,
             'expires_at' => time() + (1800), // Configured to expire after 2 hours
         ]);
-
         return redirect($checkout_session->url);
     }
+
 
     /*
     public function payment(Request $request, $invoiceCode, $totalPaid)

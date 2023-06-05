@@ -91,7 +91,7 @@
                                                Canceled
                                             </option>
                                         </select>
-                                       
+
                                         <button
                                             onclick="printDiv('printableArea')"
                                             class="btn btn-primary rounded mx-2 order-icon"
@@ -291,8 +291,8 @@
                                             <div class="col-md-2" style="vertical-align: middle; padding: 10px 5px 10px 0">
                                                 <img src="/frontend/images/Visa.jpg" class="img-fluid rounded-start " alt="...">
                                             </div>
-                                            <div class="col-md-10" style="padding: 10px 5px">
-                                                <p class="text-black text-sm">3242 **** **** 2423</p>
+                                            <div class="col-md-10" style="padding: 12px 5px">
+                                                <p class="text-black text-sm">Visa Card **** **** **** 2423</p>
                                             </div>
                                         </div>
                                         <p class="card-text text-sm">Holder's name:
