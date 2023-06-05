@@ -27,6 +27,8 @@ use App\Http\Controllers\AdminController\ProductDetailController;
 use App\Http\Controllers\AdminController\ProductCategoryController;
 use App\Http\Controllers\AdminController\PaymentController;
 use App\Http\Controllers\PaymentController\StripeController;
+use Illuminate\Http\Request;
+use App\Models\test;
 
 /*
 |--------------------------------------------------------------------------
@@ -280,6 +282,10 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
 });
 Route::get('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'paymentForm'])->name('payment');
 Route::post('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'payment'])->name('payment');
-Route::post('webhook', function(){
-   return 'oke';
-});
+Route::post('webhook', function(Request $request){
+   if($request->type === 'charge.succeeded'){
+      test::create([
+         'amount'=> $request->data['object']['amount'],
+      ]);
+   }
+})->name('webhook');

@@ -512,9 +512,8 @@ class CartController extends Controller
     public function order_completed($code)
     {
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
-        $session = $stripe->checkout->sessions->retrieve($_GET['session_id']);
+        //$session = $stripe->checkout->sessions->retrieve($_GET['session_id']);
 
-       
         //return dd($token);
         //return dd($token);
 
