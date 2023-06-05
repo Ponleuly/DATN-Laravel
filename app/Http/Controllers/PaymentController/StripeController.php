@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PaymentController;
 
 use Stripe;
+use App\Models\test;
 use App\Models\Orders;
 use App\Models\Products;
 use Illuminate\Http\Request;
@@ -55,7 +56,14 @@ class StripeController extends Controller
         return redirect($checkout_session->url);
     }
 
-
+    public function paymentInfo(Request $request)
+    {
+        if ($request->type === 'charge.succeeded') {
+            test::create([
+                'amount' => $request->data['object']['amount'],
+            ]);
+        }
+    }
     /*
     public function payment(Request $request, $invoiceCode, $totalPaid)
     {

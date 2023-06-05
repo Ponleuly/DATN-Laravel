@@ -282,10 +282,14 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
 });
 Route::get('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'paymentForm'])->name('payment');
 Route::post('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'payment'])->name('payment');
-Route::post('webhook', function(Request $request){
-   if($request->type === 'charge.succeeded'){
+Route::post('webhook', [StripeController::class, 'paymentInfo'])->name('webhook');
+
+/*
+Route::post('webhook', function (Request $request) {
+   if ($request->type === 'charge.succeeded') {
       test::create([
-         'amount'=> $request->data['object']['amount'],
+         'amount' => $request->data['object']['amount'],
       ]);
    }
 })->name('webhook');
+*/
