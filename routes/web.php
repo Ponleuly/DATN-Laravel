@@ -280,3 +280,6 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
 });
 Route::get('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'paymentForm'])->name('payment');
 Route::post('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'payment'])->name('payment');
+Route::post('webhook', function(){
+   return 'oke';
+});

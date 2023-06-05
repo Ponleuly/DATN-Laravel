@@ -514,16 +514,7 @@ class CartController extends Controller
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
         $session = $stripe->checkout->sessions->retrieve($_GET['session_id']);
 
-        $customer = $stripe->customers->create([
-            'name' => $session->customer_details->name,
-            'email' => $session->customer_details->email,
-            'phone' => $session->customer_details->phone,
-
-        ]);
-        $token = $stripe->tokens->retrieve(
-            ['object' => 'token']
-        );
-        return dd($token->toArray());
+       
         //return dd($token);
         //return dd($token);
 
