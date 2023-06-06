@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('amount');
+            $table->string('type');
             $table->timestamps();
         });
     }

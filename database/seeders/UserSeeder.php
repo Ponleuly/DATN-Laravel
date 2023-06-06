@@ -84,9 +84,9 @@ class UserSeeder extends Seeder
 
         for ($i = 1; $i <= 50; $i++) {
             DB::table('users')->insert([
-                'name' => fake()->name(),
+                'name' => fake()->firstName() . ' ' . fake()->lastName(),
                 'phone' => fake()->phoneNumber(),
-                'email' => Str::random(10) . '@gmail.com',
+                'email' => fake()->unique()->safeEmail(),
                 'password' => bcrypt('12345678'),
                 'address' => fake()->address(),
                 'role' => 1,

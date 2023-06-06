@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
             SubscriberSeeder::class,
             PaymentSeeder::class,
             totalPaidSeeder::class,
+            CardSeeder::class
         ]);
     }
 }

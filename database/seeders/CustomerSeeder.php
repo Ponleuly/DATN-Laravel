@@ -20,7 +20,7 @@ class CustomerSeeder extends Seeder
         //Customers::factory()->count(50)->create();
         for ($i = 1; $i <= 50; $i++) {
             DB::table('customers')->insert([
-                'c_name' => fake()->name(),
+                'c_name' => fake()->firstName() . ' ' . fake()->lastName(),
                 'c_phone' => fake()->phoneNumber(),
                 'c_email' => fake()->unique()->safeEmail(),
                 'c_address' => fake()->address(),

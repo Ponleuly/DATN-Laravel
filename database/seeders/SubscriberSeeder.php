@@ -18,7 +18,7 @@ class SubscriberSeeder extends Seeder
     {
         for ($i = 1; $i <= 100; $i++) {
             DB::table('subscribers')->insert([
-                's_name' => fake()->name(),
+                's_name' => fake()->firstName() . ' ' . fake()->lastName(),
                 's_email' => fake()->unique()->safeEmail(),
                 'created_at' => Carbon::now()
 

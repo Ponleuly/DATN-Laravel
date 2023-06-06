@@ -284,21 +284,22 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card">
+                                @if($order->payment_method == 'Credit Card')
+                                <div class="card mb-4">
                                     <div class="card-body">
                                         <h6 class="text-sm fw-bold">Payment info</h6>
                                         <div class="row g-0 d-flex align-baseline">
-                                            @if($card->card_brand == 'visa')
+                                            @if(strtolower($card->card_brand) == 'visa')
                                                 <div class="col-md-2"
                                                     style="vertical-align: middle; padding:10px 5px 10px 0 ;width: 50px; height:40px"
                                                     >
                                                     <img src="/frontend/images/visa1.png" class="img-fluid rounded-start-1" alt="...">
                                                 </div>
-                                                @elseif($card->card_brand == 'mastercard')
+                                                @elseif(strtolower($card->card_brand) == 'mastercard')
                                                 <div class="col-md-2" style="vertical-align: middle; padding: 10px 5px 10px 0; width: 50px; height:40px">
                                                     <img src="/frontend/images/mastercard.png" class="img-fluid rounded-start-1" alt="...">
                                                 </div>
-                                                 @elseif($card->card_brand == 'amex')
+                                                 @elseif(strtolower($card->card_brand) == 'american express')
                                                 <div class="col-md-2" style="vertical-align: middle; padding: 10px 5px 10px 0; width: 50px; height:40px">
                                                     <img src="/frontend/images/amex1.png" class="img-fluid rounded-start-1" alt="...">
                                                 </div>
@@ -329,7 +330,8 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="card mt-4">
+                                @endif
+                                <div class="card">
                                     <div class="card-body">
                                         <h6 class="text-sm fw-bold">Customer notes</h6>
                                         <p class="card-text text-sm text-wrap">
