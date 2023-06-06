@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('holder_email');
             $table->string('holder_phone')->nullable();
             $table->string('order_code');
-            $table->decimal('amount');
             $table->timestamps();
         });
     }
