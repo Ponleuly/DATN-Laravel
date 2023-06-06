@@ -108,7 +108,7 @@ Route::controller(CartController::class)->group(function () {
       Route::get('checkout/dis={discount}', 'checkout')->name('checkout');
       Route::post('place-order', 'place_order')->name('place-order');
       Route::get('download-invoice/{id}', 'download_invoice')->name('download-invoice');
-      Route::get('order-completed/invoice={code}/success', 'order_completed')->name('order-completed');
+      Route::get('order-completed/invoice={code}', 'order_completed')->name('order-completed');
       Route::get('order-canceled/invoice={code}', 'order_canceled')->name('order-canceled');
    });
 });
@@ -281,7 +281,7 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
    });
 });
 Route::get('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'paymentForm'])->name('payment');
-Route::post('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'payment'])->name('payment');
+//Route::post('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'payment'])->name('payment');
 Route::post('webhook', [StripeController::class, 'paymentInfo'])->name('webhook');
 
 /*

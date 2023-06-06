@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use App\Models\Orders_Details;
 use App\Http\Controllers\Controller;
+use App\Models\Cards;
+use PhpParser\Node\Stmt\TryCatch;
 
 class StripeController extends Controller
 {
@@ -36,6 +38,9 @@ class StripeController extends Controller
             ];
         }
         $checkout_session = $stripe->checkout->sessions->create([
+            'payment_intent_data' => [
+                'description' => 'Order invoice code #' . $invoiceCode
+            ],
             'line_items' => [
                 [
                     'price_data' => [
@@ -49,7 +54,8 @@ class StripeController extends Controller
                 ]
             ],
             'mode' => 'payment',
-            'success_url' => 'http://127.0.0.1:8000/order-completed/invoice=' . $invoiceCode . '/success?session_id={CHECKOUT_SESSION_ID}',
+            //'success_url' => 'http://127.0.0.1:8000/order-completed/invoice=' . $invoiceCode . '/success?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => 'http://127.0.0.1:8000/order-completed/invoice=' . $invoiceCode,
             'cancel_url' => 'http://127.0.0.1:8000/order-canceled/invoice=' . $invoiceCode,
             'expires_at' => time() + (1800), // Configured to expire after 2 hours
         ]);
@@ -59,9 +65,20 @@ class StripeController extends Controller
     public function paymentInfo(Request $request)
     {
         if ($request->type === 'charge.succeeded') {
-            test::create([
-                'amount' => $request->data['object']['amount'],
-            ]);
+            try {
+                Cards::create([
+                    'payment_id' => $request->data['object']['payment_method'],
+                    'card_digit' => $request->data['object']['payment_method_details']['card']['last4'],
+                    'card_brand' => $request->data['object']['payment_method_details']['card']['brand'],
+                    'holder_name' => strtoupper($request->data['object']['billing_details']['name']),
+                    'holder_email' => $request->data['object']['billing_details']['email'],
+                    'holder_phone' => $request->data['object']['billing_details']['phone'],
+                    'order_code' => trim($request->data['object']['description'], 'Order invoice code '),
+                    'amount' => ($request->data['object']['amount']) / 100,
+                ]);
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
         }
     }
     /*

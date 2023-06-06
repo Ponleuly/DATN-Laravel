@@ -288,21 +288,43 @@
                                     <div class="card-body">
                                         <h6 class="text-sm fw-bold">Payment info</h6>
                                         <div class="row g-0 d-flex align-baseline">
-                                            <div class="col-md-2" style="vertical-align: middle; padding: 10px 5px 10px 0">
-                                                <img src="/frontend/images/Visa.jpg" class="img-fluid rounded-start " alt="...">
-                                            </div>
+                                            @if($card->card_brand == 'visa')
+                                                <div class="col-md-2"
+                                                    style="vertical-align: middle; padding:10px 5px 10px 0 ;width: 50px; height:40px"
+                                                    >
+                                                    <img src="/frontend/images/visa1.png" class="img-fluid rounded-start-1" alt="...">
+                                                </div>
+                                                @elseif($card->card_brand == 'mastercard')
+                                                <div class="col-md-2" style="vertical-align: middle; padding: 10px 5px 10px 0; width: 50px; height:40px">
+                                                    <img src="/frontend/images/mastercard.png" class="img-fluid rounded-start-1" alt="...">
+                                                </div>
+                                                 @elseif($card->card_brand == 'amex')
+                                                <div class="col-md-2" style="vertical-align: middle; padding: 10px 5px 10px 0; width: 50px; height:40px">
+                                                    <img src="/frontend/images/amex1.png" class="img-fluid rounded-start-1" alt="...">
+                                                </div>
+                                                @else
+                                                <div class="col-md-2" style="vertical-align: middle; padding: 10px 5px 10px 0; width: 50px; height:40px">
+                                                    <img src="/frontend/images/creditcard.png" class="img-fluid rounded-start-1" alt="...">
+                                                </div>
+                                            @endif
+
                                             <div class="col-md-10" style="padding: 12px 5px">
-                                                <p class="text-black text-sm">Visa Card **** **** **** 2423</p>
+                                                <p class="text-black text-sm">{{ucfirst($card->card_brand)}} **** **** {{$card->card_digit}}</p>
                                             </div>
                                         </div>
                                         <p class="card-text text-sm">Holder's name:
                                             <span class="text-black">
-                                                {{$customer->c_name}}
+                                                {{$card->holder_name}}
                                             </span>
                                         </p>
                                         <p class="card-text text-sm">Email:
                                             <span class="text-black">
-                                                {{$customer->c_email}}
+                                                {{$card->holder_email}}
+                                            </span>
+                                        </p>
+                                        <p class="card-text text-sm">Payment ID:
+                                            <span class="text-black">
+                                                {{$card->payment_id}}
                                             </span>
                                         </p>
                                     </div>

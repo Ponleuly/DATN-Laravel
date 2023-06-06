@@ -511,12 +511,6 @@ class CartController extends Controller
     //======================================================================================================================//
     public function order_completed($code)
     {
-        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
-        //$session = $stripe->checkout->sessions->retrieve($_GET['session_id']);
-
-        //return dd($token);
-        //return dd($token);
-
         //=============== Get data to display on user invoice =======================S//
         $order = Orders::where('invoice_code', '#' . $code)->first();
         $orderId = $order->id;

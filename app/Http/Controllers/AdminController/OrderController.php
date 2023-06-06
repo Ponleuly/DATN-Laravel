@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminController;
 
+use App\Models\Cards;
 use App\Models\Orders;
 use App\Models\Contacts;
 use App\Models\Invoices;
@@ -91,7 +92,7 @@ class OrderController extends Controller
         $count = 1;
         $contacts = Contacts::orderBy('id')->get();
         $shopName = Settings::all()->first();
-
+        $card = Cards::where('order_code', $order->invoice_code)->first();
         return view(
             'adminfrontend.pages.orders.order_details',
             compact(
@@ -100,7 +101,8 @@ class OrderController extends Controller
                 'customer',
                 'orderDetails',
                 'contacts',
-                'shopName'
+                'shopName',
+                'card'
             )
         );
     }
