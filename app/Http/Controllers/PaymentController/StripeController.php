@@ -74,8 +74,17 @@ class StripeController extends Controller
                     'holder_email' => $request->data['object']['billing_details']['email'],
                     'holder_phone' => $request->data['object']['billing_details']['phone'],
                     'order_code' => trim($request->data['object']['description'], 'Order invoice code '),
-                    'amount' => ($request->data['object']['amount']) / 100,
+                    'payment_status' => $request->type,
                 ]);
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        }
+        if ($request->type === 'charge.refunded') {
+            try {
+                $card = Cards::where('order_code', trim($request->data['object']['description'], 'Order invoice code '))->first();
+                $card->payment_status = $request->type;
+                $card->update();
             } catch (\Exception $e) {
                 return $e->getMessage();
             }

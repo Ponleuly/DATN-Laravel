@@ -188,13 +188,25 @@ class OrderController extends Controller
     {
         $delete_order = Orders::where('id', $id)->first();
         $delete_order->delete();
-
+        $card = Cards::where('order_code', $delete_order->invoice_code)->first();
+        $card->delete();
         return redirect('admin/order-list/show=10/by-code=desc')
             ->with(
                 'message',
                 'Order ' . '"' . $delete_order->invoice_code . '"' .
                     ' is deleted successfully !'
             );
+    }
+    public function order_customer_edit(Request $request, $id)
+    {
+        $update_customer = Customers::where('id', $id)->first();
+        $update_customer->c_name = $request->input('c_name');
+        $update_customer->c_phone = $request->input('c_phone');
+        $update_customer->c_email = $request->input('c_email');
+        $update_customer->c_address = $request->input('c_address');
+        $update_customer->update();
+        return redirect()->back()
+            ->with('message', 'Customer details updated successfully !');
     }
 
     //===== update product size quantity plus ======//

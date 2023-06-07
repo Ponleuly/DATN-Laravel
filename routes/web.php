@@ -196,6 +196,7 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::get('/order-status-action/{order_id}/{status_name}', 'order_status_action')->name('order-status-action');
       Route::get('/order-search/show={res}/by-{title}={sort}', 'order_search')->name('order-search');
       Route::get('/order-delete/{id}', 'order_delete')->name('order-delete');
+      Route::put('/order-customer-edit/{id}', 'order_customer_edit')->name('order-customer-edit');
    });
 });
 /*

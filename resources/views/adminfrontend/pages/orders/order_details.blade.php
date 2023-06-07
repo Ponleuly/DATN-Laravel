@@ -128,9 +128,90 @@
                                     </div>
                                     <div class="col-10 ps-0">
                                         <h6 class="text-sm fw-bold">Customer</h6>
+                                        <!--
+                                        <input
+                                            type="text"
+                                            class="form-control form-control-sm"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{$customer->c_name}}"
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control form-control-sm"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{$customer->c_phone}}"
+                                        >
+                                        -->
                                         <p class="text-sm text-black">{{$customer->c_name}}</p>
                                         <p class="text-sm text-black">{{$customer->c_phone}}</p>
                                         <p class="text-sm text-black">{{$customer->c_email}}</p>
+                                        <p class="text-sm text-primary fw-400"
+                                            type="button"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            data-bs-whatever="@mdo">
+                                            Edit info
+                                        </p>
+
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="exampleModalLabel">Update customer info</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="{{url('admin/order-customer-edit/'.$customer->id)}}" method="POST" enctype="multipart/form-data">
+                                                        @csrf <!-- to make form active -->
+                                                        @method('PUT')
+                                                        <div class="modal-body">
+                                                            <label for="c_name"><p class="text-sm">Customer Name</p></label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control form-control-sm text-capitalize mb-2"
+                                                                id="c_name"
+                                                                name="c_name"
+                                                                value="{{$customer->c_name}}"
+                                                                placeholder="customer name..."
+                                                            >
+
+                                                            <label for="c_phone"><p class="text-sm">Customer Phone</p></label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control form-control-sm text-capitalize mb-2"
+                                                                id="c_phone"
+                                                                name="c_phone"
+                                                                value="{{$customer->c_phone}}"
+                                                                placeholder="customer phone..."
+                                                            >
+
+                                                            <label for="c_email"><p class="text-sm">Customer Email</p></label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control form-control-sm text-capitalize mb-2"
+                                                                id="c_email"
+                                                                name="c_email"
+                                                                value="{{$customer->c_email}}"
+                                                                placeholder="customer email..."
+                                                            >
+
+                                                            <label for="c_address"><p class="text-sm">Customer Address</p></label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control form-control-sm text-capitalize mb-2"
+                                                                id="c_address"
+                                                                name="c_address"
+                                                                value="{{$customer->c_address}}"
+                                                                placeholder="customer address..."
+                                                            >
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary btn-sm py-1" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm py-1" value="submit">Save</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -328,6 +409,11 @@
                                                 {{$card->payment_id}}
                                             </span>
                                         </p>
+                                        <p class="card-text text-sm">Payment status:
+                                            <span class="text-{{($card->payment_status == 'charge.refunded')? 'danger':'success' }}">
+                                                {{$card->payment_status}}
+                                            </span>
+                                        </p>
                                     </div>
                                 </div>
                                 @endif
@@ -355,7 +441,7 @@
                     <!------------------- Download or print invoice----------------------->
                     <div class="row d-flex align-items-baseline">
                         <div class="col-md-2">
-                            <h4 class="mb-2 text-black">Order Details</h4>
+                            <h4 class="mb-2 text-black">Invoice</h4>
                         </div>
                         <div class="col-md-10 d-flex justify-content-end align-items-baseline">
                             <!--

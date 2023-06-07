@@ -17,5 +17,6 @@ class Cards extends Model
         'holder_email',
         'holder_phone',
         'order_code',
+        'payment_status',
     ];
 }
