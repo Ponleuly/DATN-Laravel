@@ -12,44 +12,39 @@
                     </div>
 		            @endif
 
-                    <h4 class="mb-2 text-black">Add Delivery Option</h4>
-                    <div class="p-3 p-lg-4 border bg-white">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group mb-2">
-                                    <div class="col-md-12">
-                                        <label for="delivery_option"><p class="text-label">Delivery Option</p></label>
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-color rounded-0 mb-2 py-2 px-2 w-100"
-                                            id="delivery_option"
-                                            name="delivery_option"
-                                            required
-                                        >
+                    <div class="card-style">
+                        <h4 class="text-medium text-center">Add Delivery Option</h4>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <div class="col-md-12">
+                                    <label for="delivery_option"><p class="text-label">Delivery Option</p></label>
+                                    <input
+                                        type="text"
+                                        class="form-control form-control-color rounded-0 mb-2 py-2 px-2 w-100"
+                                        id="delivery_option"
+                                        name="delivery_option"
+                                        required
+                                    >
 
-                                        <label for="delivery_fee"><p class="text-label">Delivery Fee</p></label>
-                                        <input
-                                            type="number"
-                                            class="form-control form-control-color rounded-0 mb-2 py-2 px-2 w-100"
-                                            id="delivery_fee"
-                                            name="delivery_fee"
-                                            required
-                                        >
+                                    <label for="delivery_fee"><p class="text-label">Delivery Fee</p></label>
+                                    <input
+                                        type="number"
+                                        class="form-control form-control-color rounded-0 mb-2 py-2 px-2 w-100"
+                                        id="delivery_fee"
+                                        name="delivery_fee"
+                                        required
+                                    >
 
-                                        <div class="d-flex mt-4">
-                                            <a
-                                                class="btn btn-outline-danger rounded-0 mt-3"
-                                                href="{{url('admin/delivery-list')}}"
-                                                role="button"
-                                                >
-                                                Back to List
-                                            </a>
-                                            <button
-                                                class="btn btn-primary rounded-0 ms-auto mt-3"
-                                                type="submit">
-                                                Add Delivery Option
-                                            </button>
-                                        </div>
+                                    <div class="d-flex mt-4 justify-content-end">
+                                        <a
+                                            class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
+                                            href="{{url('admin/delivery-list')}}"
+                                            role="button">Back
+                                        </a>
+                                        <button
+                                            class="btn btn-primary rounded-1 py-1 text-sm"
+                                            group="submit">Add
+                                        </button>
                                     </div>
                                 </div>
                             </div>

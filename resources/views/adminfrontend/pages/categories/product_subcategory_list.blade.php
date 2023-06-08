@@ -30,7 +30,7 @@ use App\Models\Categories_Subcategories;
                     <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
                          <div class="col-md-6">
                             <div class="left">
-                                <h6 class="text-medium mb-20">Sub Categories List</h6>
+                                <h4 class="text-medium mb-20">Sub Categories List</h4>
                             </div>
                         </div>
                         <div class="col-md-6">

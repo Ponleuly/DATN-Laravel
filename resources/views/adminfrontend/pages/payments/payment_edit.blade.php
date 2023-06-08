@@ -13,42 +13,38 @@
                     </div>
 		            @endif
 
-                    <h4 class="mb-2 text-black">Edit Payment</h4>
-                    <div class="p-3 p-lg-4 border bg-white">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group mb-2">
-                                    <div class="col-md-12">
-                                        <label for="payment_title"><p class="text-label">Payment Title</p></label>
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-color rounded-0 mb-2 py-2 px-2 w-100"
-                                            id="payment_title"
-                                            name="payment_title"
-                                            value="{{$payment->payment_title}}"
-                                            required
-                                        >
+                     <div class="card-style">
+                        <h4 class="text-medium text-center">Edit Payment</h4>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <div class="col-md-12">
+                                    <label for="payment_title"><p class="text-label">Payment Title</p></label>
+                                    <input
+                                        type="text"
+                                        class="form-control form-control-color rounded-0 mb-2 py-2 px-2 w-100"
+                                        id="payment_title"
+                                        name="payment_title"
+                                        value="{{$payment->payment_title}}"
+                                        required
+                                    >
 
-                                        <label for="payment_detail"><p class="text-label mt-2">Payment Detail</p></label>
-                                        <textarea
-                                            class="form-control rounded-0 fw-500"
-                                            placeholder="payment detail..."
-                                            name="payment_detail"
-                                            id="payment_detail" required>{{$payment->payment_detail}}</textarea>
+                                    <label for="payment_detail"><p class="text-label mt-2">Payment Detail</p></label>
+                                    <textarea
+                                        class="form-control rounded-0 fw-500"
+                                        placeholder="payment detail..."
+                                        name="payment_detail"
+                                        id="payment_detail" required>{{$payment->payment_detail}}</textarea>
 
-                                        <div class="d-flex mt-4">
-                                            <a
-                                                class="btn btn-outline-danger rounded-0 mt-3"
-                                                href="{{url('admin/payment-list')}}"
-                                                role="button">
-                                                Back to List
-                                            </a>
-                                            <button
-                                                class="btn btn-primary rounded-0 ms-auto mt-3"
-                                                type="submit">
-                                                Update Payment
-                                            </button>
-                                        </div>
+                                    <div class="d-flex mt-4 justify-content-end">
+                                        <a
+                                            class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
+                                            href="{{url('admin/payment-list')}}"
+                                            role="button">Back
+                                        </a>
+                                        <button
+                                            class="btn btn-primary rounded-1 py-1 text-sm"
+                                            group="submit">Save
+                                        </button>
                                     </div>
                                 </div>
                             </div>

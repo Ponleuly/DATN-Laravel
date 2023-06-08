@@ -20,8 +20,8 @@
                     @endif
                     <!---------------End Alert ------------------------>
 
-                    <h4 class="mb-2 text-black">Edit Coupon</h4>
-                    <div class="p-3 p-lg-4 border bg-white">
+                     <div class="card-style">
+                        <h4 class="text-medium text-center mb-20">Edit Coupon</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
@@ -54,9 +54,9 @@
                                                     required
                                                 >
                                             </div>
-                                            <div class="col-md-2 d-flex flex-column justify-content-center text-center">
-                                                    <p class="text-label">OR</p>
-                                                    <p class="text-label">(Input one)</p>
+                                            <div class="col-md-2 px-0 mx-0 d-flex flex-column justify-content-center text-center">
+                                                <p class="text-sm">OR</p>
+                                                <p class="text-sm">(Input one)</p>
                                             </div>
                                             <div class="col-md-5">
                                                 <label for="discount_value">
@@ -156,19 +156,15 @@
                                             @endforeach
                                         </select>
 
-                                        <div class="d-flex mt-3">
+                                        <div class="d-flex mt-4 justify-content-end">
                                             <a
-                                                class="btn btn-outline-danger rounded-0 mt-3"
+                                                class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
                                                 href="{{url('/admin/coupon-list')}}"
-                                                role="button"
-                                                >
-                                                Back to List
+                                                role="button">Back
                                             </a>
                                             <button
-                                                class="btn btn-primary rounded-0 ms-auto mt-3"
-                                                type="submit"
-                                                >
-                                                Update Coupon
+                                                class="btn btn-primary rounded-1 py-1 text-sm"
+                                                group="submit">Save
                                             </button>
                                         </div>
                                     </div>

@@ -29,7 +29,7 @@
                     <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
                         <div class="col-md-6">
                             <div class="left">
-                                <h6 class="text-medium mb-20">Categories List</h6>
+                                <h4 class="text-medium mb-20">Categories List</h4>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -74,14 +74,14 @@
                         <table class="table top-selling-table table-hover">
                             <thead>
                                 <tr class="text-center">
-                                    <th><h6 class="text-sm text-medium">#</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Image</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Category</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Sub Category</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Group</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Products</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Date</h6></th>
-                                    <th class="min-width"><h6 class="text-sm text-medium">Actions</h6></th>
+                                    <th><h6 class="text-medium">#</h6></th>
+                                    <th class="min-width"><h6 class=" text-medium">Image</h6></th>
+                                    <th class="min-width"><h6 class=" text-medium">Category</h6></th>
+                                    <th class="min-width"><h6 class=" text-medium">Sub Category</h6></th>
+                                    <th class="min-width"><h6 class=" text-medium">Group</h6></th>
+                                    <th class="min-width"><h6 class=" text-medium">Products</h6></th>
+                                    <th class="min-width"><h6 class=" text-medium">Date</h6></th>
+                                    <th class="min-width"><h6 class=" text-medium">Actions</h6></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,7 +91,7 @@
                                         $productCount =  Products_Attributes::where('category_id', $category->id)->distinct('product_id')->count();
                                     @endphp
                                     <tr class="text-center admin-table">
-                                        <th><p class="text-sm"></p>{{$count++}}</th>
+                                        <th><p class="text-sm">{{$count++}}</p></th>
                                         <td>
                                             <img
                                                 src="/product_img/imgcategory/{{$category->category_img}}"

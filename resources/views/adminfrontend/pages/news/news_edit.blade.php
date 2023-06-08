@@ -20,8 +20,8 @@
                     @endif
                     <!---------------End Alert ------------------------>
 
-                    <h4 class="mb-2 text-black">Edit News & Introducing</h4>
-                    <div class="p-3 p-lg-4 border bg-white">
+                    <div class="card-style">
+                        <h4 class="text-medium text-center">Edit News & Introducing</h4>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group mb-2">
@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="news_title">
-                                            <p class="text-label mt-2">News Title</p>
+                                            <p class="text-label mt-3">News Title</p>
                                             </label>
                                             <input
                                                 type="text"
@@ -82,18 +82,15 @@
                                                 name="news_content"
                                                 id="news_content" >{{$new->news_content}}</textarea>
 
-                                            <div class="d-flex mt-3">
+                                            <div class="d-flex mt-4 justify-content-end">
                                                 <a
-                                                    class="btn btn-outline-danger rounded-0 mt-3"
+                                                    class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
                                                     href="{{url('/admin/news-list')}}"
-                                                    role="button"
-                                                    >Back to List
+                                                    role="button">Back
                                                 </a>
                                                 <button
-                                                    class="btn btn-primary rounded-0 ms-auto mt-3"
-                                                    type="submit"
-                                                    >
-                                                    Update News
+                                                    class="btn btn-primary rounded-1 py-1 text-sm"
+                                                    group="submit">Save
                                                 </button>
                                             </div>
                                         </div>

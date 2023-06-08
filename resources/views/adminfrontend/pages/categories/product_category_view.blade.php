@@ -18,51 +18,53 @@
                     </div>
 		            @endif
 
-                    <h4 class="mb-2 text-black">Category Details</h4>
-                    <div class="p-3 p-lg-4 border bg-white">
+                    <div class="card-style">
+                        <h4 class="text-medium text-center mb-20">Category Details</h4>
                         <div class="row">
-                            @foreach ($groups as $row)
-                                <div class="col-md-6">
-                                    <div class="p-3 p-lg-4 border">
-                                        <div class="row py-2">
-                                            <div class="col-4">
-                                                <h5 class="text-black fw-bold mt-1">Group:</h5>
-                                            </div>
-                                            <div class="col-8">
-                                                <p>{{$row->rela_category_group->group_name}}</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="row py-2">
-                                            <div class="col-4">
-                                                <h5 class="text-black fw-bold mt-1">Category:</h5>
-                                            </div>
-                                            <div class="col-8">
-                                                <p>{{$category->category_name}}</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="row py-2">
-                                            <div class="col-4">
-                                                <h5 class="text-black fw-bold mt-1">Sub category:</h5>
-                                            </div>
-                                            <div class="col-8">
-                                                @foreach ($subCategories as $item)
-                                                    <p>{{$item->sub_category}}</p>
-                                                @endforeach
-                                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <img
+                                        src="/product_img/imgcategory/{{$category->category_img}}"
+                                        class="img-fluid product-thumbnail"
+                                    >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                @foreach ($groups as $row)
+                                    <div class="card mb-2">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{$row->rela_category_group->group_name}}</h5>
+                                            <p class="text-sm ">Category :
+                                                <span class="text-black">
+                                                    {{$category->category_name}}
+                                                </span>
+                                            </p>
+                                            <p class="text-sm d-flex align-baseline">Sub Cate :
+                                                <span class="text-black ms-1">
+                                                    @foreach ($subCategories as $item)
+                                                        {{$item->sub_category}} <br>
+                                                    @endforeach
+                                                </span>
+                                            </p>
                                         </div>
                                     </div>
+                                @endforeach
+                                <div class="d-flex mt-4 justify-content-end">
+                                    <a
+                                        class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
+                                        href="{{url('/admin/product-category-list')}}"
+                                        role="button">
+                                        <p class="text-sm">Back</p>
+                                    </a>
+                                    <a
+                                        class="btn btn-primary rounded-1 py-1 text-sm"
+                                        href="{{url('/admin/product-category-edit/'.$category->id)}}"
+                                        role="button">
+                                        <p class="text-sm">Edit</p>
+                                    </a>
                                 </div>
-                            @endforeach
+                            </div>
                         </div>
-                        <div class="col-md-12 mt-4">
-                            <img
-                                src="/product_img/imgcategory/{{$category->category_img}}"
-                                class="img-fluid product-thumbnail"
-                            >
-                        </div>
-
                     </div>
                 </div>
             </div>

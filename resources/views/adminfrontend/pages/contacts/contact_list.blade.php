@@ -26,7 +26,7 @@
                 <div class="card-style mb-30">
                     <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
                         <div class="left">
-                            <h6 class="text-medium mb-20">Contacts List</h6>
+                            <h4 class="text-medium mb-20">Contacts List</h4>
                         </div>
                         <div class="right">
                             <a

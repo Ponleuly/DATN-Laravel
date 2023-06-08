@@ -28,7 +28,92 @@
             <!------------------------------------------------------------------------------------>
             <div class="col-lg-12">
                 <div class="card-style mb-30">
-                    <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
+                    <div class="title">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-medium mb-20">Orders List</h4>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <form  action="{{url('admin/order-search/show='.(($res>20)? 'all':$res).'/by-'.$title.'='.$sort)}}">
+                                    <div class="input-group input-group-sm w-100 ">
+                                        <input
+                                            type="text"
+                                            name="search_order"
+                                            class="form-control rounded-0 text-sm"
+                                            placeholder="Enter order code here..."
+                                            aria-label="Sizing example input"
+                                            aria-describedby="inputGroup-sizing-default"
+                                            value="{{$search_text}}"
+                                        >
+                                        <button
+                                            class="btn btn-outline-primary rounded-0 text-sm"
+                                            type="submit"
+                                            id="search"
+                                            >
+                                            Search
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row align-items-baseline" style="min-width:200px">
+                                    <p class="text-sm pe-2">Show </p>
+                                    <select class="form-select form-select-sm"
+                                            style="width:65px"
+                                            aria-label="Default select example"
+                                            id="showResult"
+                                        >
+                                        <option value ="{{url('admin/order-list/show=5/by-'. $title.'='.$sort)}}"
+                                            {{($title == 5)? 'selected':''}}>5
+                                        </option>
+                                        <option value ="{{url('admin/order-list/show=10/by-'.$title.'='.$sort)}}"
+                                            {{($res==10)? 'selected':''}}>10
+                                        </option>
+                                        <option value ="{{url('admin/order-list/show=20/by-'.$title.'='.$sort)}}"
+                                            {{($res==20)? 'selected':''}}>20
+                                        </option>
+                                        <option value ="{{url('admin/order-list/show=all/by-'.$title.'='.$sort)}}"
+                                            {{Request::is('admin/order-list/show=all/*')? 'selected':''}}
+                                            >All
+                                        </option>
+                                    </select>
+                                    <p class="text-sm px-2">entries </p>
+                                </div>
+                                @if($search_text!='')
+                                    <p class="text-md mt-2">Found
+                                        <strong class="text-danger">{{$orders->count()}}</strong> orders for your search:
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row align-items-baseline justify-content-end">
+                                    <p class="text-sm pe-2">Sort by</p>
+                                    <select class="form-select form-select-sm"
+                                            aria-label="Default select example"
+                                            style="width: 140px"
+                                            id="sortStatus"
+                                    >
+                                        <option selected disabled>Order status</option>
+                                        <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=pending')}}"
+                                            {{($sort == 'pending')? 'selected':''}}>Pending
+                                        </option>
+                                        <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=processing')}}"
+                                            {{($sort == 'processing')? 'selected':''}}>Processing
+                                        </option>
+                                        <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=delivered')}}"
+                                            {{($sort == 'delivered')? 'selected':''}}>Delivered
+                                        </option>
+                                        <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=canceled')}}"
+                                            {{($sort == 'canceled')? 'selected':''}}>Canceled
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--
                         <div class="col-6">
                             <div class="left">
                                 <h4 class="text-medium mb-20">Orders List</h4>
@@ -110,12 +195,14 @@
                                 </form>
                             </div>
                         </div>
+                    -->
                     </div>
                     <hr>
                     <div class="table-responsive">
                         <table class="table top-selling-table table-hover" id="sampleTable">
                             <thead>
                                 <tr>
+                                    <th><h6 class="text-medium">#</h6></th>
                                     <th class="min-width text-start">
                                         <a
                                             href="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-code='.(($sort=='asc')? 'desc':'asc'))}}"
@@ -232,20 +319,22 @@
                                          // Get delivery statuses
                                     @endphp
                                     <tr>
-                                        <!--
                                         <td>
                                             <p class="text-sm">
-                                                 $loop->index is index of items per page,
+                                                <!--
+                                                    $loop->index is index of items per page,
                                                     Ex.currentPage=1, perPage=5 => index=[0,1,2,3,4]
                                                     Ex.currentPage=2, perPage=5 => index=[0,1,2,3,4]
                                                     // number of index depend on perPage and not change although currentPage is changed
                                                     Ex.currentPage=1, perPage=10 => index=[0,1,2,3,4,....9]
-
-                                                /* ($orders->currentPage()-1) * $orders->perPage() + $loop->index + 1
-
+                                                -->
+                                                @if($search_text == '')
+                                                    {{($orders->currentPage()-1) * $orders->perPage() + $loop->index + 1}}
+                                                    @else
+                                                        {{$count++}}
+                                                @endif
                                             </p>
                                         </td>
-                                        --->
                                         <td><p class="text-sm">{{$order->invoice_code}}</p></td>
                                         <td><p class="text-sm">{{date('Y-m-d  H:i', strtotime($order->created_at))}}</p></td>
                                         <td><p class="text-sm">{{$order->rela_customer_order->c_name}}</p></td>

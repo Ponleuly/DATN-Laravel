@@ -317,16 +317,16 @@
                                         </div>
                                         <!-- End Product size and quantity -->
                                         <div class="col-md-12 mt-4">
-                                            <div class="mb-2 d-flex">
+                                            <div class="mb-2 d-flex justify-content-end">
                                                 <a
-                                                    class="btn btn-outline-danger rounded-0 py-1"
+                                                    class="btn btn-outline-danger rounded-1 py-1 me-2"
                                                     href="{{url('admin/product-detail-list/show=10/by-name=asc')}}"
                                                     role="button">
-                                                    <p class="text-sm">Back to List</p>
+                                                    <p class="text-sm">Back</p>
                                                 </a>
                                                 <button
-                                                    class="btn btn-primary rounded-0 py-1 ms-auto text-sm"
-                                                    type="submit">Upddate Product
+                                                    class="btn btn-primary rounded-1 py-1 text-sm"
+                                                    type="submit">Save
                                                 </button>
                                             </div>
                                         </div>

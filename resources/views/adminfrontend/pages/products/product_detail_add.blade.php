@@ -3,16 +3,16 @@
     <div class="container-fluid">
         <!--------------- Alert ------------------------>
         @if(Session::has('alert'))
-        <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
-            {{Session::get('alert')}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @elseif(Session::has('message'))
+            <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
+                {{Session::get('alert')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @elseif(Session::has('message'))
             <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
                 {{Session::get('message')}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-       @endif
+        @endif
        <!---------------End Alert ------------------------>
 
         <form action="{{url('/admin/product-detail-add')}}" method="POST" enctype="multipart/form-data">
@@ -256,20 +256,19 @@
                                         </div>
                                         <!-- End Product size and quantity -->
                                         <div class="col-md-12 mt-4">
-                                            <div class="mb-2 d-flex">
+                                            <div class="mb-2 d-flex justify-content-end">
                                                 <a
-                                                    class="btn btn-outline-danger rounded-0 py-1"
+                                                    class="btn btn-outline-danger rounded-1 py-1 me-2"
                                                     href="{{url('admin/product-detail-list/show=10/by-name=asc')}}"
                                                     role="button">
-                                                    <p class="text-sm">Back to List</p>
+                                                    <p class="text-sm">Back</p>
                                                 </a>
                                                 <button
-                                                    class="btn btn-primary rounded-0 py-1 ms-auto text-sm"
-                                                    type="submit">Add Product
+                                                    class="btn btn-primary rounded-1 py-1 text-sm"
+                                                    type="submit">Add
                                                 </button>
                                             </div>
                                         </div>
-                                        <!--formnovalidate="formnovalidate" => for textarea input with CKeditor-->
                                     </div>
                                 </div>
                             </div>

@@ -25,63 +25,12 @@
             <!------------------------------------------------------------------------------------>
             <div class="col-lg-12">
                 <div class="card-style mb-30">
-                    <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
-                        <div class="col-md-6">
-                            <div class="left">
+                    <div class="title">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <h4 class="text-medium mb-20">Products List</h4>
-                                <div class="row align-items-baseline">
-                                    <div class="col-3 d-flex flex-row align-items-baseline" style="min-width:200px">
-                                        <p class="text-sm pe-2">Show </p>
-                                        <select class="form-select form-select-sm"
-                                                style="width:65px"
-                                                aria-label="Default select example"
-                                                id="showResult"
-                                            >
-                                            <option value ="{{url('admin/product-detail-list/show=5/by-'. $title.'='.$sort)}}"
-                                                {{($title == 5)? 'selected':''}}>5
-                                            </option>
-                                            <option value ="{{url('admin/product-detail-list/show=10/by-'.$title.'='.$sort)}}"
-                                                {{($res==10)? 'selected':''}}>10
-                                            </option>
-                                            <option value ="{{url('admin/product-detail-list/show=20/by-'.$title.'='.$sort)}}"
-                                                {{($res==20)? 'selected':''}}>20
-                                            </option>
-                                            <option value ="{{url('admin/product-detail-list/show=all/by-'.$title.'='.$sort)}}"
-                                                {{Request::is('admin/product-detail-list/show=all/*')? 'selected':''}}
-                                                >All
-                                            </option>
-                                        </select>
-                                        <p class="text-sm px-2">entries </p>
-                                    </div>
-                                    <div class="col-7 d-flex flex-row align-items-baseline justify-content-end">
-                                        <p class="text-sm pe-2">Sort by</p>
-                                        <select class="form-select form-select-sm"
-                                                aria-label="Default select example"
-                                                style="width: 150px"
-                                                id="sortStatus"
-                                            >
-                                            <option selected disabled>Product status</option>
-                                            <option value ="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status=new')}}"
-                                                {{($sort == 'new')? 'selected':''}}>New
-                                            </option>
-                                            <option value ="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status=selling')}}"
-                                                {{($sort == 'selling')? 'selected':''}}>Selling
-                                            </option>
-                                            <option value ="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status=soldout')}}"
-                                                {{($sort == 'soldout')? 'selected':''}}>Sold out
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                @if($search_text!='')
-                                    <p class="text-md mt-2">Found
-                                        <strong class="text-danger">{{$products->count()}}</strong> orders for your search:
-                                    </p>
-                                @endif
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="right">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-3 mb-2 ">
                                         <a
@@ -116,13 +65,62 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row mt-1">
+                            <div class="col-md-6">
+                                <div class="col-3 d-flex flex-row align-items-baseline" style="min-width:200px">
+                                    <p class="text-sm pe-2">Show </p>
+                                    <select class="form-select form-select-sm"
+                                            style="width:65px"
+                                            aria-label="Default select example"
+                                            id="showResult"
+                                        >
+                                        <option value ="{{url('admin/product-detail-list/show=5/by-'. $title.'='.$sort)}}"
+                                            {{($title == 5)? 'selected':''}}>5
+                                        </option>
+                                        <option value ="{{url('admin/product-detail-list/show=10/by-'.$title.'='.$sort)}}"
+                                            {{($res==10)? 'selected':''}}>10
+                                        </option>
+                                        <option value ="{{url('admin/product-detail-list/show=20/by-'.$title.'='.$sort)}}"
+                                            {{($res==20)? 'selected':''}}>20
+                                        </option>
+                                        <option value ="{{url('admin/product-detail-list/show=all/by-'.$title.'='.$sort)}}"
+                                            {{Request::is('admin/product-detail-list/show=all/*')? 'selected':''}}
+                                            >All
+                                        </option>
+                                    </select>
+                                    <p class="text-sm px-2">entries </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row align-items-baseline justify-content-end">
+                                    <p class="text-sm pe-2">Sort by</p>
+                                    <select class="form-select form-select-sm"
+                                            aria-label="Default select example"
+                                            style="width: 150px"
+                                            id="sortStatus"
+                                    >
+                                        <option selected disabled>Product status</option>
+                                        <option value ="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status=new')}}"
+                                            {{($sort == 'new')? 'selected':''}}>New
+                                        </option>
+                                        <option value ="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status=selling')}}"
+                                            {{($sort == 'selling')? 'selected':''}}>Selling
+                                        </option>
+                                        <option value ="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-status=soldout')}}"
+                                            {{($sort == 'soldout')? 'selected':''}}>Sold out
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <hr>
                     <div class="table-responsive">
                         <table class="table top-selling-table table-hover">
                             <thead>
                                 <tr class="text-center">
-                                    <th><h6 class="text-sm text-medium">#</h6></th>
+                                    <th><h6 class="text-medium">#</h6></th>
                                     <th class="min-width"><h6 class="text-sm text-medium">Image</h6></th>
                                     <th class="min-width text-start" >
                                         <a
@@ -132,13 +130,13 @@
                                             >
                                             <h6 class="text-medium">Product Name</h6>
                                             <span class="text-black-50 ms-auto
-                                                {{Request::is('admin/product-detail-list/show=*/by-name*')? 'text-danger':''}}"  
+                                                {{Request::is('admin/product-detail-list/show=*/by-name*')? 'text-danger':''}}"
                                                 >
                                                 @if($title=='name' && $sort=='asc')
                                                     <i class="bi bi-sort-alpha-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='name' && $sort=='desc')
                                                     <i class="bi bi-sort-alpha-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -157,7 +155,7 @@
                                                     <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='price' && $sort=='desc')
                                                     <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -175,7 +173,7 @@
                                                     <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='stock' && $sort=='desc')
                                                     <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -193,7 +191,7 @@
                                                     <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='stockleft' && $sort=='desc')
                                                     <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -205,13 +203,13 @@
                                             >
                                             <h6 class="text-medium">Status</h6>
                                             <span class="text-black-50 ms-3
-                                                {{Request::is('admin/product-detail-list/show=*/by-status*')? 'text-danger':''}}"  
+                                                {{Request::is('admin/product-detail-list/show=*/by-status*')? 'text-danger':''}}"
                                                 >
                                                 @if($title=='status' && $sort=='asc')
                                                     <i class="bi bi-sort-alpha-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='status' && $sort=='desc')
                                                     <i class="bi bi-sort-alpha-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -230,7 +228,7 @@
                                                     <i class="bi bi-sort-numeric-up" style="font-size: 20px;"></i>
                                                     @elseif($title=='date' && $sort=='desc')
                                                     <i class="bi bi-sort-numeric-down-alt" style="font-size: 20px;"></i>
-                                                    @else 
+                                                    @else
                                                     <i class="bi bi-funnel-fill" style="font-size: 16px;"></i>
                                                 @endif
                                             </span>
@@ -250,7 +248,7 @@
                                             $stockLeft  += $row->size_quantity;
                                         }
                                     @endphp
-                                    <tr class="text-center"> 
+                                    <tr class="text-center">
                                         <td>
                                             <p class="text-sm">
                                                 <!--$loop->index is index of items per page,
@@ -367,7 +365,7 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-                            @if($search_text == '') 
+                            @if($search_text == '')
                             <p class="text-sm">
                                 Showing {{($products->currentPage()-1)* $products->perPage()+($products->total() ? 1:0)}}
                                 to {{($products->currentPage()-1)*$products->perPage()+count($products)}}
@@ -380,7 +378,7 @@
                                 @if($search_text == '')
                                     <!--- To show data by pagination --->
                                     {{$products->links()}}</span>
-                                    
+
                                     @else
                                         <div class="d-flex">
                                             <a

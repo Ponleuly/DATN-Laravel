@@ -18,78 +18,81 @@
                             </div>
                     @endif
                     <!---------------End Alert ------------------------>
+                    <div class="card-style">
+                        <h4 class="text-medium text-center">Add Category</h4>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <div class="col-md-12">
+                                    <label for="category_img">
+                                        <p class="text-label mt-3">Category Image</p>
+                                    </label>
+                                    <input
+                                        class="form-control rounded-0 mb-2"
+                                        type="file"
+                                        id="category_img"
+                                        name="category_img"
+                                        accept="image/png, image/jpeg, image/jpg"
+                                        required
+                                    >
 
-                    <h4 class="mb-2 text-black">Add Categories</h4>
-                    <div class="p-3 p-lg-4 border bg-white">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group mb-2">
-                                    <div class="col-md-12">
-                                        <label for="category_img">
-                                            <p class="text-label mt-3">Category Image</p>
-                                        </label>
-                                        <input
-                                            class="form-control rounded-0 mb-2"
-                                            type="file"
-                                            id="category_img"
-                                            name="category_img"
-                                            accept="image/png, image/jpeg, image/jpg"
-                                            required
-                                        >
+                                    <label for="category_name"><p class="text-label mt-2">Category Name</p></label>
+                                    <input type="text"
+                                        class="form-control rounded-0 fw-500 mb-2"
+                                        id="category_name"
+                                        name="category_name"
+                                        placeholder="category name..."
+                                        required
+                                    >
 
-                                        <label for="category_name"><p class="text-label mt-2">Category Name</p></label>
-                                        <input type="text"
-                                            class="form-control rounded-0 fw-500 mb-2"
-                                            id="category_name"
-                                            name="category_name"
-                                            placeholder="category name..."
-                                            required
-                                        >
+                                    <label for="sub_category">
+                                        <p class="text-label mt-2">
+                                            Sub Category :  (Write then press enter to add new sub category)
+                                        </p>
+                                    </label>
+                                    <input
+                                        class="form-control rounded-0 fw-500 mb-2"
+                                        type="text"
+                                        data-role="tagsinput"
+                                        name="sub_category"
+                                        placeholder="sub category"
+                                    >
 
-                                        <label for="sub_category">
-                                            <p class="text-label mt-2">
-                                                Sub Category :  (Write then press enter to add new sub category)
-                                            </p>
-                                        </label>
-                                        <input
-                                            class="form-control rounded-0 fw-500 mb-2"
-                                            type="text"
-                                            data-role="tagsinput"
-                                            name="sub_category"
-                                            placeholder="sub category"
-                                        >
-
-                                        <label>
-                                            <p class="text-label mt-2">
-                                                Product Group
-                                                @if($groups_count == 0)
-                                                        <span class="text-label text-danger">(Please create product group before adding category!)</span>
-                                                    @else
-                                                        <span class="text-label">(Choose product group)</span>
+                                    <label>
+                                        <p class="text-label mt-2">
+                                            Product Group
+                                            @if($groups_count == 0)
+                                                <span class="text-label text-danger">(Please create product group before adding category!)</span>
+                                                @else
+                                                <span class="text-label">(Choose product group)</span>
+                                            @endif
+                                        </p>
+                                    </label><br>
+                                    @foreach ($groups as $row)
+                                        <div class="form-check form-check-inline">
+                                            <input
+                                                type="checkbox"
+                                                class="form-check-input"
+                                                id="{{$row->group_name}}"
+                                                value="{{$row->id}}"
+                                                name="group_id[]"
+                                                @if ($loop->first)
+                                                checked
                                                 @endif
-                                            </p>
-                                        </label><br>
-                                        @foreach ($groups as $row)
-                                            <div class="form-check form-check-inline">
-                                                <input
-                                                    type="checkbox"
-                                                    class="form-check-input"
-                                                    id="{{$row->group_name}}"
-                                                    value="{{$row->id}}"
-                                                    name="group_id[]"
-                                                    @if ($loop->first)
-                                                        checked
-                                                    @endif
-                                                >
-                                                <label class="form-check-label" for="{{$row->group_name}}">{{$row->group_name}}</label>
-                                            </div>
-
-                                        @endforeach
-
-                                        <div class="d-flex mt-4">
-                                            <a class="btn btn-outline-danger rounded-0 mt-3" href="{{url('/admin/product-category-list')}}" role="button">Back to list</a>
-                                            <button class="btn btn-primary rounded-0 ms-auto mt-3" type="submit">Add Category</button>
+                                            >
+                                            <label class="form-check-label" for="{{$row->group_name}}">{{$row->group_name}}</label>
                                         </div>
+
+                                    @endforeach
+                                    <div class="d-flex mt-4 justify-content-end">
+                                        <a
+                                            class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
+                                            href="{{url('/admin/product-category-list')}}"
+                                            role="button">Back
+                                        </a>
+                                        <button
+                                            class="btn btn-primary rounded-1 py-1 text-sm"
+                                            group="submit">Add
+                                        </button>
                                     </div>
                                 </div>
                             </div>

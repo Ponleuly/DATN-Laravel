@@ -18,9 +18,8 @@
                             </div>
                     @endif
                     <!---------------End Alert ------------------------>
-
-                    <h4 class="mb-2 text-black">Add Coupon</h4>
-                    <div class="p-3 p-lg-4 border bg-white">
+                    <div class="card-style">
+                        <h4 class="text-medium text-center mb-20">Add Coupon</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
@@ -145,19 +144,15 @@
                                             @endforeach
                                         </select>
 
-                                        <div class="d-flex mt-3">
+                                        <div class="d-flex mt-4 justify-content-end">
                                             <a
-                                                class="btn btn-outline-danger rounded-0 mt-3"
+                                                class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
                                                 href="{{url('/admin/coupon-list')}}"
-                                                role="button"
-                                                >
-                                                Back to List
+                                                role="button">Back
                                             </a>
                                             <button
-                                                class="btn btn-primary rounded-0 ms-auto mt-3"
-                                                type="submit"
-                                                >
-                                                Add Coupon
+                                                class="btn btn-primary rounded-1 py-1 text-sm"
+                                                group="submit">Add
                                             </button>
                                         </div>
                                     </div>

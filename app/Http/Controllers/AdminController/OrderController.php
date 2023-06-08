@@ -68,10 +68,11 @@ class OrderController extends Controller
             return redirect()->back()->with('alert', 'Please fill order code to search !');
         }
         $orders = Orders::where('invoice_code', 'LIKE', '%' . $search_text . '%')->get();
-
+        $count = 1;
         return view(
             'adminfrontend.pages.orders.order_list',
             compact(
+                'count',
                 'orders',
                 'search_text',
                 'res',
