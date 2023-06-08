@@ -79,7 +79,15 @@
                             <tbody>
                                 @foreach($customers as $customer)
                                     <tr>
-                                        <td><p class="text-sm">{{$count++}}</p></td>
+                                        <td>
+                                            <p class="text-sm">
+                                                @if($search_text == '')
+                                                    {{($customers->currentPage()-1) * $customers->perPage() + $loop->index + 1}}
+                                                    @else
+                                                        {{$count++}}
+                                                @endif
+                                            </p>
+                                        </td>
                                         <td><p class="text-sm">{{$customer->c_name}}</p></td>
                                         <td><p class="text-sm">{{$customer->c_phone}}</p></td>
                                         <td><p class="text-sm">{{$customer->c_email}}</p></td>
@@ -111,21 +119,36 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="d-flex justify-content-end">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
                             @if($search_text == '')
-                                <!--- To show data by pagination --->
-                                 {{$customers->links()}}
-                                @else
-                                    <div class="d-flex">
-                                        <a
-                                            class="btn btn-outline-danger rounded-0 mt-2"
-                                            href="{{url('admin/customer-list')}}"
-                                            role="button"
-                                            >
-                                            <p class="text-sm">Back to List</p>
-                                        </a>
-                                    </div>
+                            <p class="text-sm">
+                                Showing {{($customers->currentPage()-1)* $customers->perPage()+($customers->total() ? 1:0)}}
+                                to {{($customers->currentPage()-1)*$customers->perPage()+count($customers)}}
+                                of {{$customers->total()}}  results
+                            </p>
                             @endif
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="d-flex justify-content-end">
+                                @if($search_text == '')
+                                    <!--- To show data by pagination --->
+                                    {{$customers->links()}}
+
+                                    @else
+                                        <div class="d-flex">
+                                            <a
+                                                class="btn btn-outline-danger rounded-0 mt-2"
+                                                href="{{url('admin/customer-list')}}"
+                                                role="button"
+                                                >
+                                                <p class="text-sm">Back to List</p>
+                                            </a>
+                                        </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

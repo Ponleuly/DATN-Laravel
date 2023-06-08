@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Show data by pagination
-        Paginator::useBootstrap();
+        //Paginator::useBootstrap();
+        Paginator::defaultView('adminfrontend.pages.paginate');
     }
 }

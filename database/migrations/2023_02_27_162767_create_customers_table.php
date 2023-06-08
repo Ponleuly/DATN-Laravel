@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('c_phone');
             $table->string('c_email');
             $table->string('c_address');
+            $table->string('c_city');
+            $table->string('c_district');
+            $table->string('c_ward');
             $table->string('c_note')->nullable();
             $table->unsignedInteger('order_id');
             $table->foreign('order_id')

@@ -33,9 +33,9 @@
 					<li class="nav-item {{Request::is('shop')? 'active':''}}">
 						<div class="dropdown position-static">
 							<a
-								class="nav-link hover-bar"
-								href="{{url('/shop')}}
-								{{Request::is('shop')? 'active':''}}"
+								class="nav-link hover-bar {{Request::is('shop')? 'active':''}}"
+								href="{{url('/shop')}}"
+
 								>
 								<h5><strong>Shop</strong></h5>
 							</a>
@@ -53,11 +53,10 @@
 						<li class="nav-item {{Request::is('product-'.strtolower($group->group_name))? 'active':''}}">
 							<div class="dropdown position-static">
 								<a
-									class="nav-link hover-bar"
+									class="nav-link hover-bar {{Request::is('product-'.strtolower($group->group_name))? 'active':''}}"
 									role="button"
 									aria-expanded="false"
-									href="{{url('product-' .strtolower($group->group_name))}}
-									{{Request::is('product-'.strtolower($group->group_name))? 'active':''}}"
+									href="{{url('product-' .strtolower($group->group_name))}}"
 									>
 									<h5><strong>{{$group->group_name}}</strong></h5>
 								</a>

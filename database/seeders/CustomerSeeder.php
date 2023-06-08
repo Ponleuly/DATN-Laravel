@@ -23,8 +23,11 @@ class CustomerSeeder extends Seeder
                 'c_name' => fake()->firstName() . ' ' . fake()->lastName(),
                 'c_phone' => fake()->phoneNumber(),
                 'c_email' => fake()->unique()->safeEmail(),
-                'c_address' => fake()->address(),
-                'c_note' => fake()->text(50),
+                'c_address' => fake()->streetAddress(),
+                'c_city' => fake()->city(),
+                'c_district' => fake()->stateAbbr(),
+                'c_ward' => fake()->state(),
+                'c_note' => fake()->realText($maxNbChars = 50, $indexSize = 2),
                 'order_id' => $i,
                 'created_at' => Carbon::now()
 

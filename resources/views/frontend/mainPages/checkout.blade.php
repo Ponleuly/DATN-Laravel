@@ -158,19 +158,66 @@
 
 								<div class="form-group row mb-3">
 									<div class="col-md-12">
-										<label for="c_address" class="text-black mb-1">Address <span class="text-danger">*</span></label>
-										<input
-											type="text"
-											class="form-control rounded-0"
-											id="c_address"
-											name="c_address"
-											value="{{$c_address}}"
-											placeholder="House number, City ...."
-											required
-										>
+										<div class="row">
+											<div class="col-8">
+												<label for="c_address" class="text-black mb-1">Address <span class="text-danger">*</span></label>
+												<input
+													type="text"
+													class="form-control rounded-0"
+													id="c_address"
+													name="c_address"
+													value="{{$c_address}}"
+													placeholder="Street name, floor...."
+													required
+												>
+											</div>
+											<div class="col-4">
+												<label for="c_city" class="text-black mb-1">City/Province <span class="text-danger">*</span></label>
+												<input
+													type="text"
+													class="form-control rounded-0"
+													id="c_city"
+													name="c_city"
+													value="{{$c_city}}"
+													placeholder="City/Province...."
+													required
+												>
+											</div>
+										</div>
+
 									</div>
 								</div>
 
+								<div class="form-group row mb-3">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-6">
+												<label for="c_district" class="text-black mb-1">District <span class="text-danger">*</span></label>
+												<input
+													type="text"
+													class="form-control rounded-0"
+													id="c_district"
+													name="c_district"
+													value="{{$c_district}}"
+													placeholder="District...."
+													required
+												>
+											</div>
+											<div class="col-6">
+												<label for="c_ward" class="text-black mb-1">Ward <span class="text-danger">*</span></label>
+												<input
+													type="text"
+													class="form-control rounded-0"
+													id="c_ward"
+													name="c_ward"
+													value="{{$c_ward}}"
+													placeholder="Ward...."
+													required
+												>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="form-group mb-3">
 									<label for="c_note" class="text-black mb-1">Order Note</label>
 									<textarea

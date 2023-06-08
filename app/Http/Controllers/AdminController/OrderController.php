@@ -204,6 +204,10 @@ class OrderController extends Controller
         $update_customer->c_phone = $request->input('c_phone');
         $update_customer->c_email = $request->input('c_email');
         $update_customer->c_address = $request->input('c_address');
+        $update_customer->c_city = $request->input('c_city');
+        $update_customer->c_district = $request->input('c_district');
+        $update_customer->c_ward = $request->input('c_ward');
+        $update_customer->c_note = $request->input('c_note');
         $update_customer->update();
         return redirect()->back()
             ->with('message', 'Customer details updated successfully !');

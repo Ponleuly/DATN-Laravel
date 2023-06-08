@@ -128,90 +128,146 @@
                                     </div>
                                     <div class="col-10 ps-0">
                                         <h6 class="text-sm fw-bold">Customer</h6>
-                                        <!--
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-sm"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{$customer->c_name}}"
-                                        >
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-sm"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{$customer->c_phone}}"
-                                        >
-                                        -->
-                                        <p class="text-sm text-black">{{$customer->c_name}}</p>
-                                        <p class="text-sm text-black">{{$customer->c_phone}}</p>
-                                        <p class="text-sm text-black">{{$customer->c_email}}</p>
+                                        <p class="text-sm ">Name:
+                                            <span class="text-black">
+                                                {{$customer->c_name}}
+                                            </span>
+                                        </p>
+                                        <p class="text-sm ">Phone:
+                                            <span class="text-black">
+                                                {{$customer->c_phone}}
+                                            </span>
+                                        </p> <p class="text-sm ">Email:
+                                            <span class="text-black">
+                                                {{$customer->c_email}}
+                                            </span>
+                                        </p>
                                         <p class="text-sm text-primary fw-400"
                                             type="button"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal"
+                                            data-bs-target="#editCustomer"
                                             data-bs-whatever="@mdo">
                                             Edit info
                                         </p>
+                                        <form action="{{url('admin/order-customer-edit/'.$customer->id)}}" method="POST" enctype="multipart/form-data">
+                                            @csrf <!-- to make form active -->
+                                            @method('PUT')
+                                            <div class="modal fade" id="editCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="exampleModalLabel">Update customer info</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
 
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title" id="exampleModalLabel">Update customer info</h4>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <div class="modal-body">
+                                                                <label for="c_name"><p class="text-sm">Customer Name</p></label>
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-sm text-capitalize mb-2"
+                                                                    id="c_name"
+                                                                    name="c_name"
+                                                                    value="{{$customer->c_name}}"
+                                                                    placeholder="customer name..."
+                                                                >
+
+                                                                <label for="c_phone"><p class="text-sm">Customer Phone</p></label>
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-sm text-capitalize mb-2"
+                                                                    id="c_phone"
+                                                                    name="c_phone"
+                                                                    value="{{$customer->c_phone}}"
+                                                                    placeholder="customer phone..."
+                                                                >
+
+                                                                <label for="c_email"><p class="text-sm">Customer Email</p></label>
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-sm text-capitalize mb-2"
+                                                                    id="c_email"
+                                                                    name="c_email"
+                                                                    value="{{$customer->c_email}}"
+                                                                    placeholder="customer email..."
+                                                                >
+
+                                                                <label for="c_note"><p class="text-sm">Customer Notes</p></label>
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-sm text-capitalize mb-2"
+                                                                    id="c_note"
+                                                                    name="c_note"
+                                                                    value="{{$customer->c_note}}"
+                                                                    placeholder="customer notes..."
+                                                                    disabled
+                                                                >
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary btn-sm py-1" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary btn-sm py-1" value="submit">Save</button>
+                                                            </div>
+
                                                     </div>
-                                                    <form action="{{url('admin/order-customer-edit/'.$customer->id)}}" method="POST" enctype="multipart/form-data">
-                                                        @csrf <!-- to make form active -->
-                                                        @method('PUT')
-                                                        <div class="modal-body">
-                                                            <label for="c_name"><p class="text-sm">Customer Name</p></label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control form-control-sm text-capitalize mb-2"
-                                                                id="c_name"
-                                                                name="c_name"
-                                                                value="{{$customer->c_name}}"
-                                                                placeholder="customer name..."
-                                                            >
-
-                                                            <label for="c_phone"><p class="text-sm">Customer Phone</p></label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control form-control-sm text-capitalize mb-2"
-                                                                id="c_phone"
-                                                                name="c_phone"
-                                                                value="{{$customer->c_phone}}"
-                                                                placeholder="customer phone..."
-                                                            >
-
-                                                            <label for="c_email"><p class="text-sm">Customer Email</p></label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control form-control-sm text-capitalize mb-2"
-                                                                id="c_email"
-                                                                name="c_email"
-                                                                value="{{$customer->c_email}}"
-                                                                placeholder="customer email..."
-                                                            >
-
-                                                            <label for="c_address"><p class="text-sm">Customer Address</p></label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control form-control-sm text-capitalize mb-2"
-                                                                id="c_address"
-                                                                name="c_address"
-                                                                value="{{$customer->c_address}}"
-                                                                placeholder="customer address..."
-                                                            >
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary btn-sm py-1" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary btn-sm py-1" value="submit">Save</button>
-                                                        </div>
-                                                    </form>
                                                 </div>
                                             </div>
-                                        </div>
+
+                                            <div class="modal fade" id="editAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="exampleModalLabel">Update address info</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                            <div class="modal-body">
+                                                                <label for="c_address"><p class="text-sm">Address</p></label>
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-sm text-capitalize mb-2"
+                                                                    id="c_address"
+                                                                    name="c_address"
+                                                                    value="{{$customer->c_address}}"
+                                                                    placeholder="Street number, floor..."
+                                                                >
+
+                                                                <label for="c_city"><p class="text-sm">City/Province</p></label>
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-sm text-capitalize mb-2"
+                                                                    id="c_city"
+                                                                    name="c_city"
+                                                                    value="{{$customer->c_city}}"
+                                                                    placeholder="City/province..."
+                                                                >
+
+                                                                <label for="c_district"><p class="text-sm">District</p></label>
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-sm text-capitalize mb-2"
+                                                                    id="c_district"
+                                                                    name="c_district"
+                                                                    value="{{$customer->c_district}}"
+                                                                    placeholder="District..."
+                                                                >
+
+                                                                <label for="c_ward"><p class="text-sm">Ward</p></label>
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-sm text-capitalize mb-2"
+                                                                    id="c_ward"
+                                                                    name="c_ward"
+                                                                    value="{{$customer->c_ward}}"
+                                                                    placeholder="Ward..."
+                                                                >
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary btn-sm py-1" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary btn-sm py-1" value="submit">Save</button>
+                                                            </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -229,10 +285,27 @@
                                     </div>
                                     <div class="col-10 ps-0">
                                         <h6 class="text-sm fw-bold">Deliver to</h6>
-                                        <p class="text-sm ">Address:
+                                        <p class="text-sm ">City:
                                             <span class="text-black">
+                                                {{$customer->c_city}}
+                                            </span>
+                                        </p>
+                                        <p class="text-sm ">District/Ward:
+                                            <span class="text-black">
+                                                {{$customer->c_district}}, {{$customer->c_ward}}
+                                            </span>
+                                        </p>
+                                        <p class="text-sm ">Address:
+                                            <span class="text-black text-sm">
                                                 {{$customer->c_address}}
                                             </span>
+                                        </p>
+                                        <p class="text-sm text-primary fw-400"
+                                            type="button"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editAddress"
+                                            data-bs-whatever="@mdo">
+                                            Edit address
                                         </p>
                                     </div>
                                 </div>

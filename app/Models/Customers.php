@@ -14,6 +14,9 @@ class Customers extends Model
         'c_phone',
         'c_email',
         'c_address',
+        'c_city',
+        'c_district',
+        'c_ward',
         'c_note',
         'order_id',
 
