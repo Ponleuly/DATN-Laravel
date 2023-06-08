@@ -22,6 +22,9 @@ class AuthUserController extends Controller
             'phone' => ['required', 'string', 'max:20', /*'regex:/(01)[0-9]{9}'*/], // verify only number is acceptable
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'address' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:50'],
+            'district' => ['required', 'string', 'max:50'],
+            'ward' => ['required', 'string', 'max:50'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 

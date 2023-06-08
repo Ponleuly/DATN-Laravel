@@ -30,6 +30,9 @@ return new class extends Migration
             //$table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('address');
+            $table->string('city');
+            $table->string('district');
+            $table->string('ward');
             $table->boolean('role')->default('1');
             //$table->rememberToken()->nullable();
             $table->timestamps();

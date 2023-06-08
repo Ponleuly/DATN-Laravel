@@ -194,7 +194,7 @@
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 							@if(Auth::check() && (Auth::user()->role == 1))
-								<li><a class="dropdown-item" href="{{url('profile')}}">Profile</a></li>
+								<li><a class="dropdown-item " href="{{url('profile')}}">Profile</a></li>
 								<li><a class="dropdown-item " href="{{url('logout')}}">Log out</a></li>
 								@else
 								<li><a class="dropdown-item " href="{{url('register')}}">Register</a></li>

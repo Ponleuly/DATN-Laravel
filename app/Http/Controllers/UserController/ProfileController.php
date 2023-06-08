@@ -35,6 +35,10 @@ class ProfileController extends Controller
         $update_user->phone = $request->input('phone');
         $update_user->email = $request->input('email');
         $update_user->address = $request->input('address');
+        $update_user->city = $request->input('city');
+        $update_user->district = $request->input('district');
+        $update_user->ward = $request->input('ward');
+
         $update_user->update();
         return redirect('profile')
             ->with('success', 'Profile updated successfully !');

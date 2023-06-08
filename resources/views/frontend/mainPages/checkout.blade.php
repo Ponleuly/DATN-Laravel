@@ -98,6 +98,21 @@
 										}else{
 											$c_address =  Auth::user()->address;
 										}
+										if(Request::old('c_city')){
+											$c_city =  Request::old('c_city');
+										}else{
+											$c_city =  Auth::user()->city;
+										}
+										if(Request::old('c_district')){
+											$c_district =  Request::old('c_district');
+										}else{
+											$c_district =  Auth::user()->district;
+										}
+										if(Request::old('c_ward')){
+											$c_ward =  Request::old('c_ward');
+										}else{
+											$c_ward =  Auth::user()->ward;
+										}
 										$c_note =  Request::old('c_note');
 										$ship = Request::old('delivery_fee');
 									}
@@ -106,6 +121,9 @@
 										$c_phone =  Request::old('c_phone');
 										$c_email =  Request::old('c_email');
 										$c_address =  Request::old('c_address');
+										$c_city =  Request::old('c_city');
+										$c_district =  Request::old('c_district');
+										$c_ward =  Request::old('c_ward');
 										$c_note =  Request::old('c_note');
 										$ship = Request::old('delivery_fee');
 									}
