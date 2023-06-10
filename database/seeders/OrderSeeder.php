@@ -23,7 +23,7 @@ class OrderSeeder extends Seeder
                 'invoice_code' => '#iv' . sprintf('%04d', $i),
                 'user_id' => 0,
                 'order_status' => 'Pending',
-                'discount' =>  floatval(rand(4, 10)),
+                'discount' =>  floatval(rand(3, 5)),
                 'delivery_fee' => rand(0, 1) ? 2 : 4,
                 'payment_method' => rand(0, 1) ? 'Credit Card' : 'COD',
                 'created_at' => Carbon::now()
