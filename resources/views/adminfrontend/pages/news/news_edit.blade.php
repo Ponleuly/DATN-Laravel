@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="news_title">
-                                            <p class="text-label mt-3">News Title</p>
+                                            <p class="text-label mt-3`">News Title</p>
                                             </label>
                                             <input
                                                 type="text"
