@@ -19,7 +19,6 @@ class totalPaidSeeder extends Seeder
     public function run()
     {
         $orders = Orders::orderBy('id')->get();
-
         foreach ($orders as $order) {
             $totalAmount = 0;
             $total = 0;

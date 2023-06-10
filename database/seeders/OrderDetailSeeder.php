@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Products;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
@@ -18,26 +19,34 @@ class OrderDetailSeeder extends Seeder
     public function run()
     {
         for ($i = 1; $i <= 50; $i++) {
+            $pro_id = rand(1, 16);
+            if ($pro_id == 14 || $pro_id == 15 || $pro_id == 16) {
+                $size_id = 13;
+            } else {
+                $size_id = rand(1, 12);
+            }
+            $product = Products::where('id', $pro_id)->first();
             DB::table('orders_details')->insert([
                 'order_id' => $i,
-                'product_id' => rand(1, 16),
-                'product_price' => floatval(rand(22, 25)),
+                'product_id' => $pro_id,
+                'product_price' => floatval($product->product_saleprice),
                 'product_quantity' => rand(1, 2),
-                'size_id' => rand(1, 12),
+                'size_id' => $size_id,
                 'created_at' => Carbon::now()
 
                 //'customer_id ' => Str::random(10) . '@gmail.com',
             ]);
             if ($i % 4 == 0) {
+                $proId = rand(1, 13);
+                $product = Products::where('id', $proId)->first();
+
                 DB::table('orders_details')->insert([
                     'order_id' => $i,
-                    'product_id' => rand(1, 16),
-                    'product_price' => floatval(rand(22, 25)),
+                    'product_id' => $proId,
+                    'product_price' => floatval($product->product_saleprice),
                     'product_quantity' => rand(1, 2),
                     'size_id' => rand(1, 12),
                     'created_at' => Carbon::now()
-
-                    //'customer_id ' => Str::random(10) . '@gmail.com',
                 ]);
             }
         }

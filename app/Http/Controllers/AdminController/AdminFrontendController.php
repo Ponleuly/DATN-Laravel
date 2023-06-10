@@ -16,9 +16,9 @@ class AdminFrontendController extends Controller
 {
     public function dashboard()
     {
-        $newOrder = Orders::where('order_status', 1)->count();
+        $newOrder = Orders::where('order_status', 'Pending')->count();
         $totalOrder = Orders::all()->count();
-        $orders = Orders::where('order_status', 3)->get();
+        $orders = Orders::where('order_status', 'Delivered')->get();
         $totalIncome = 0;
         $totalProduct = Products::all()->count();
         $totalMember = User::all()->count();

@@ -34,10 +34,19 @@
             @endif
         </div>
         <!---------------End Alert ------------------------>
-
-        <div class="col-12 text-center">
-            <h4 class="text-medium mb-20">Order Details</h4>
+        <div class="row mb-10">
+            <div class="col-6">
+                <h4 class="text-medium">Order Details</h4>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <a
+                    class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
+                    href="{{url('admin/order-list/show=10/by-code=desc')}}"
+                    role="button">Back
+                </a>
+            </div>
         </div>
+
         <div class="col-lg-12">
             <div class="card-style mb-20">
                 <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
@@ -507,96 +516,9 @@
             </div>
         </div>
 
-        <form  action="" method="POST" enctype="multipart/form-data">
-            @csrf <!-- to make form active -->
-            <div class="row justify-content-center">
-                <div class="col-md-12 my-3 mb-md-0">
-                    <!------------------- Download or print invoice----------------------->
-                    <div class="row d-flex align-items-baseline">
-                        <div class="col-md-2">
-                            <h4 class="mb-2 text-black">Invoice</h4>
-                        </div>
-                        <div class="col-md-10 d-flex justify-content-end align-items-baseline">
-                            <!--
-                            <div class="row align-items-baseline px-3">
-                                    <div class="d-flex flex-row align-items-baseline">
-                                        <p class="text-sm pe-2">Update status: </p>
-                                        <select
-                                                class="form-select"
-                                                aria-label="Default select example"
-                                                id="orderStatus"
-                                                name="orderStatus"
-                                                style="width: 140px;"
-                                                {{($order->order_status == 'Canceled')? 'disabled': ''}}
-                                                >
-                                                <option
-                                                    value ="{{url('admin/order-status-action/'.$order->id .'/pending')}}"
-                                                    {{($order->order_status == 'Pending')? 'selected': ''}}
-                                                    class="text-warning"
-                                                    >
-                                                    Pending
-                                                </option>
-                                                <option
-                                                    value ="{{url('admin/order-status-action/'.$order->id .'/processing')}}"
-                                                    {{($order->order_status == 'Processing')? 'selected': ''}}
-                                                    class="text-primary"
-                                                    >
-                                                    Processing
-                                                </option>
-                                                <option
-                                                    value ="{{url('admin/order-status-action/'.$order->id .'/delivered')}}"
-                                                    {{($order->order_status == 'Delivered')? 'selected': ''}}
-                                                    class="text-success"
-                                                    >
-                                                    Delivered
-                                                </option>
-                                                <option
-                                                    value ="{{url('admin/order-status-action/'.$order->id .'/canceled')}}"
-                                                    {{($order->order_status == 'Canceled')? 'selected': ''}}
-                                                    class="text-danger"
-                                                    >
-                                                   Canceled
-                                                </option>
-                                            </select>
-                                    </div>
-                            </div>
-                            -->
-                            <div class="form-group mb-2">
-                                <!--
-                                <button
-
-                                    onclick="printDiv('printableArea')"
-                                    class="btn btn-danger rounded-0 me-2"
-                                    >
-                                    Print Invoice
-                                </button>
-
-                                <a
-                                    class="btn btn-success rounded-0 ms-auto me-2"
-                                    href="{{url('admin/download-invoice/'. $order->id)}}"
-                                    role="button"
-                                    >
-                                    Download Invoice PDF
-                                </a>
-                            -->
-                                <a
-                                    class="btn btn-outline-danger rounded-0"
-                                    href="{{url('admin/order-list/show=10/by-code=desc')}}"
-                                    role="button"
-                                    >
-                                    Back to List
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-------------------End Download or print invoice----------------------->
-
-                    <!------------------Start Invoice ------------------------>
-                    @include('adminfrontend.pages.orders.invoice')
-                    <!------------------End  Invoice ------------------------>
-                </div>
-            </div>
-        </form>
+        <!------------------Start Invoice ------------------------>
+        @include('adminfrontend.pages.orders.invoice')
+        <!------------------End  Invoice ------------------------>
     </div>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
