@@ -15,13 +15,13 @@
         @endif
         <!---------------End Alert ------------------------>
 
-        <h4 class="mt-3 text-black">General Settings Edit</h4>
         <form action="{{url('/admin/general-setting-edit')}}" method="POST" enctype="multipart/form-data">
             @csrf <!-- to make form active -->
             @method('PUT')
             <div class="row ">
                 <div class="col-md-12 my-3 mb-md-0">
-                    <div class="p-3 p-lg-4 border bg-white">
+                    <div class="card-style">
+                        <h4 class="text-medium text-center mb-20">General Settings Edit</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row mb-2">
@@ -152,22 +152,18 @@
                                             accept="image/png, image/jpeg, image/jpg"
                                             multiple
                                         >
-                                        <div class="d-flex mt-4" style="padding-top: 8px">
+
+                                        <div class="d-flex mt-4 justify-content-end">
                                             <a
-                                                class="btn btn-outline-danger rounded-0 mt-2"
+                                                class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
                                                 href="{{url('admin/general-setting')}}"
-                                                role="button"
-                                                >
-                                                Back to Setting
+                                                role="button">Back
                                             </a>
                                             <button
-                                                class="btn btn-primary rounded-0 ms-auto mt-2"
-                                                type="submit"
-                                                >
-                                                Update Setting
+                                                class="btn btn-primary rounded-1 py-1 text-sm"
+                                                group="submit">Save
                                             </button>
                                         </div>
-                                        <!--formnovalidate="formnovalidate" => for textarea input with CKeditor-->
                                     </div>
                                 </div>
                             </div>

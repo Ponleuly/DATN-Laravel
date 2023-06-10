@@ -44,16 +44,15 @@
                                                     class="form-control rounded-0 fw-500 mb-2"
                                                     id="percentage"
                                                     name="discount_percentage"
-                                                    min="1"
+                                                    min="0"
                                                     max="100"
-                                                    value="0"
                                                     placeholder="Discount percentage"
                                                     required
                                                 >
                                             </div>
-                                            <div class="col-md-2 d-flex flex-column justify-content-center text-center">
-                                                    <p class="text-label">OR</p>
-                                                    <p class="text-label">(Input one)</p>
+                                            <div class="col-md-2 px-0 mx-0 d-flex flex-column justify-content-center text-center">
+                                                <p class="text-sm">OR</p>
+                                                <p class="text-sm">(Input one)</p>
                                             </div>
                                             <div class="col-md-5">
                                                 <label for="discount_value">
@@ -65,7 +64,6 @@
                                                     name="discount_value"
                                                     min="0"
                                                     max="100"
-                                                    value="0.00"
                                                     placeholder="Discount Value"
                                                     required
                                                 >

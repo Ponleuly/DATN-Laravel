@@ -21,14 +21,14 @@
                     <!---------------End Alert ------------------------>
 
                     <div class="card-style">
-                        <h4 class="text-medium text-center">Edit News & Introducing</h4>
+                        <h4 class="text-medium text-center mb-20">Edit News & Introducing</h4>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group mb-2">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="product_imgcover">
-                                                <p class="text-label mt-3">News Image</p>
+                                                <p class="text-label">News Image</p>
                                             </label>
                                             <div class="col-md-12">
                                                 <img
@@ -41,7 +41,7 @@
                                                 <p class="text-label mt-3">Update News Image</p>
                                             </label>
                                             <input
-                                                class="form-control rounded-0 mb-2"
+                                                class="form-control form-control-sm rounded-0 mb-2"
                                                 type="file"
                                                 id="news_img"
                                                 name="news_img"
@@ -55,7 +55,7 @@
                                             </label>
                                             <input
                                                 type="text"
-                                                class="form-control rounded-0 fw-500 mb-2"
+                                                class="form-control form-control-sm rounded-0 fw-500 mb-2"
                                                 id="news_title"
                                                 name="news_title"
                                                 value="{{$new->news_title}}"
@@ -64,7 +64,7 @@
                                             >
                                             <label for="news_status" ><p class="text-label" >News Status</p></label>
                                             <select
-                                                class="form-select rounded-0 mb-2"
+                                                class="form-select  form-select-sm rounded-0 mb-2"
                                                 aria-label="category select"
                                                 name="news_status"
                                                 id="news_status"
@@ -77,7 +77,7 @@
 
                                             <label for="news_content"><p class="text-label mt-2">News Content</p></label>
                                             <textarea
-                                                class="form-control rounded-0 fw-500"
+                                                class="form-control form-control-sm rounded-0 fw-500"
                                                 placeholder="news content..."
                                                 name="news_content"
                                                 id="news_content" >{{$new->news_content}}</textarea>

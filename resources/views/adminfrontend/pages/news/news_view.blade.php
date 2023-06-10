@@ -7,13 +7,25 @@
 @extends('adminfrontend.layouts.index')
 @section('admincontent')
     <div class="container-fluid">
-        <div class="row justify-content-center">
-            <h4 class="my-3 text-black">News Details</h4>
+        <div class="row justify-content-center mt-3">
             <div class="col-md-12 my-2 mb-md-0">
-                <div class="p-3 p-lg-4 border bg-white">
+                <div class="card-style">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="text-medium">News Details</h4>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <a
+                                class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
+                                href="{{url('/admin/news-list')}}"
+                                role="button">Back
+                            </a>
+                        </div>
+                    </div>
+
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-8 text-center mb-3">
-                            <h4>{{$news->news_title}}</h4>
+                            <h3>{{$news->news_title}}</h3>
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">

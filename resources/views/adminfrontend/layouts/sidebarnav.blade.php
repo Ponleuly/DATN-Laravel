@@ -337,13 +337,13 @@
                     <ul id="ddmenu_10" class="collapse dropdown-nav">
                         <li>
                             <a  href="{{url('admin/news-list')}}"
-                                {{Request::is('admin/news-list')? 'active':''}}>
+                                class="{{Request::is('admin/news-list')? 'active':''}}">
                                 News & Introducing List
                             </a>
                         </li>
                         <li>
                             <a  href="{{url('admin/news-add')}}"
-                                {{Request::is('admin/news-add')? 'active':''}}>
+                                class="{{Request::is('admin/news-add')? 'active':''}}">
                                 News & Introducing Add
                             </a>
                         </li>
@@ -366,25 +366,26 @@
                     </a>
                     <ul id="ddmenu_11" class="collapse dropdown-nav">
                         <li>
-                            <a href="{{url('admin/general-setting')}}">
+                            <a href="{{url('admin/general-setting')}}"
+                                class="{{Request::is('admin/general-setting')? 'active':''}}">
                                 General Setting
                             </a>
                         </li>
                         <li>
                             <a  href="{{url('admin/general-setting-edit')}}"
-                                {{Request::is('admin/general-setting-edit')? 'active':''}}>
+                                class="{{Request::is('admin/general-setting-edit')? 'active':''}}">
                                 General Setting Edit
                             </a>
                         </li>
                         <li>
                             <a  href="{{url('admin/general-layout')}}"
-                                {{Request::is('admin/general-layout')? 'active':''}}>
+                                class="{{Request::is('admin/general-layout')? 'active':''}}">
                                 Layout View
                             </a>
                         </li>
                         <li>
                             <a  href="{{url('admin/contact-list')}}"
-                                {{Request::is('admin/contact-list')? 'active':''}}>
+                                class="{{Request::is('admin/contact-list')? 'active':''}}">
                                 Contacts
                             </a>
                         </li>

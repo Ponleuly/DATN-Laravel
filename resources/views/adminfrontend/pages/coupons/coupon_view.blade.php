@@ -28,15 +28,11 @@
                                         <label for="campaign_name">
                                             <p class="text-label">Campaign Name</p>
                                         </label>
-                                        <input type="text"
-                                            class="form-control rounded-0 fw-500 mb-2"
-                                            id="campaign_name"
-                                            name="campaign_name"
-                                            value="{{$coupon->campaign_name}}"
-                                            placeholder="Campaign name"
-                                            required
-                                            disabled
-                                        >
+                                        <textarea
+                                            class="form-control rounded-0 fw-bolder fs-4 mb-2"
+                                            id="exampleFormControlTextarea1" rows="2"
+                                            disabled>{{$coupon->campaign_name}}</textarea>
+
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <label for="percentage">
@@ -54,9 +50,9 @@
                                                     disabled
                                                 >
                                             </div>
-                                            <div class="col-md-2 d-flex flex-column justify-content-center text-center">
-                                                    <p class="text-label">OR</p>
-                                                    <p class="text-label">(Input one)</p>
+                                            <div class="col-md-2 px-0 mx-0 d-flex flex-column justify-content-center text-center">
+                                                <p class="text-sm">OR</p>
+                                                <p class="text-sm">(Input one)</p>
                                             </div>
                                             <div class="col-md-5">
                                                 <label for="discount_value">
@@ -70,8 +66,8 @@
                                                     max="100"
                                                     value="{{$coupon->discount_value}}"
                                                     placeholder="Discount Value"
-                                                    disabled
                                                     required
+                                                    disabled
                                                 >
                                             </div>
                                         </div>
@@ -164,7 +160,7 @@
 
                                         <div class="d-flex mt-4 justify-content-end">
                                             <a
-                                                class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
+                                                class="btn btn-outline-danger rounded-1 py-1 text-sm"
                                                 href="{{url('/admin/coupon-list')}}"
                                                 role="button">Back
                                             </a>
