@@ -188,11 +188,13 @@ class OrderController extends Controller
     public function order_delete($id)
     {
         $delete_order = Orders::where('id', $id)->first();
-        $card = Cards::where('order_code', $delete_order->invoice_code)->first();
-        $card->delete();
+        if ($delete_order->payment_method == 'Credit Card') {
+            $card = Cards::where('order_code', $delete_order->invoice_code)->first();
+            $card->delete();
+        }
         $delete_order->delete();
 
-        return redirect('admin/order-list/show=10/by-code=desc')
+        return redirect()->back()
             ->with(
                 'message',
                 'Order ' . '"' . $delete_order->invoice_code . '"' .
