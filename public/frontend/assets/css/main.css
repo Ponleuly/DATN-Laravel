@@ -893,6 +893,7 @@ h6,
 }
 .card-style-1 .card-meta .image {
   max-width: 40px;
+  max-height: 40px;
   width: 100%;
   border-radius: 50%;
   overflow: hidden;
@@ -2143,14 +2144,26 @@ h6,
   -moz-box-shadow: 0px 21px 25px rgba(218, 223, 227, 0.8);
   box-shadow: 0px 21px 25px rgba(218, 223, 227, 0.8);
   width: 40px;
-  height: 40px;
+  height:40px;
+  object-fit: cover;
   border-radius: 50%;
   margin-left: 16px;
   position: relative;
 }
+.header .header-right .profile-box .profile-info .info .image .pf{
+  border: 2px solid #f9f9f9;
+  -webkit-box-shadow: 0px 21px 25px rgba(218, 223, 227, 0.8);
+  -moz-box-shadow: 0px 21px 25px rgba(218, 223, 227, 0.8);
+  box-shadow: 0px 21px 25px rgba(218, 223, 227, 0.8);
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: relative;
+}
 .header .header-right .profile-box .profile-info .info .image .status {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   border: 2px solid #e5e5e5;
   background: #219653;
@@ -2163,7 +2176,12 @@ h6,
   width: 100%;
   border-radius: 50%;
 }
-
+.admin-profile{
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
 /* ========== Dashboards css ================= */
 @media (max-width: 767px) {
   #doughnutChart1 {
@@ -2854,6 +2872,7 @@ h6,
   -o-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
 }
+
 .sidebar-nav-wrapper .sidebar-nav ul .nav-item a span.text {
   display: flex;
   align-items: center;
@@ -2882,7 +2901,50 @@ h6,
   opacity: 1;
   visibility: visible;
 }
+/*=================Admin profile ====================*/
 
+.general-profile ul li{
+  padding: 5px 0;
+}
+.general-profile ul li a {
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 6px;
+      padding: 8px 15px;
+      display: flex;
+      align-items: center;
+      border: 1px solid transparent;
+}
+.general-profile ul li a::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: #4a6cf7;
+    border-radius: 0 3px 3px 0px;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+.general-profile ul li a:hover  {
+    color: #4a6cf7;
+    border-color: rgba(74, 108, 247, 0.15);
+    background: rgba(74, 108, 247, 0.1);
+    border-radius: 6px;
+}
+.general-profile ul li a.active {
+  color: #4a6cf7;
+  border-color: rgba(74, 108, 247, 0.15);
+  background: rgba(74, 108, 247, 0.1);
+  border-radius: 6px;
+}
+/*=====================================*/
 .overlay {
   position: fixed;
   top: 0;
@@ -5017,4 +5079,135 @@ a.view-btn:hover span {
 .icon-bg {
   padding: 10px;
   border-radius: 50%;
+}
+/*=======================================*/
+.file-upload {
+  background-color: #ffffff;
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.file-upload-btn {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #1FB264;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #15824B;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.file-upload-btn:hover {
+  background: #1AA059;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.file-upload-content {
+  display: none;
+  text-align: center;
+  position: relative;
+  border: 1px solid #D3D3D3;
+  padding: 15px 0;
+}
+.file-upload-content .file_remove {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  background: #aaa;
+  line-height: 30px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  right: -15px;
+  top: -15px;
+}
+
+.file_remove:hover {
+  background: #222;
+  transition: .2s;
+}
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 150px;
+  height: 150px;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  border: 2px dashed #D3D3D3;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover .drag-text h6{
+  color: #4169E1;
+}
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+}
+
+.drag-text h6 {
+  font-weight: 600;
+  color: grey;
+  padding: 10px 0;
+  font-size: 12px;
+}
+
+.file-upload-image {
+
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.remove-image {
+  width: 200px;
+  margin: 0;
+  color: #fff;
+  background: #cd4535;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #b02818;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.remove-image:hover {
+  background: #c13b2a;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.remove-image:active {
+  border: 0;
+  transition: all .2s ease;
 }

@@ -28,7 +28,7 @@
 					<!-- profile start -->
 					<div class="profile-box ml-15">
 						<button
-							class="dropdown-toggle bg-transparent border-0"
+							class="dropdown-toggle bg-transparent border-0  mt-1"
 							type="button"
 							id="profile"
 							data-bs-toggle="dropdown"
@@ -36,7 +36,15 @@
 							>
 							<div class="profile-info">
 								<div class="info">
-									<h6>{{Auth::user()->name}}</h6>
+									<div class="image ">
+										<img
+											src="/profile_img/{{(Auth::user()->profile_img)}}"
+											alt=""
+											class="pf"
+										/>
+										<span class="status"></span>
+									</div>
+									<h6 class="ms-2">{{Auth::user()->name}}</h6>
 								</div>
 							</div>
 							<i class="lni lni-chevron-down"></i>
@@ -44,7 +52,19 @@
 
 						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
 							<li>
-								<a href="{{url('admin/logout')}}"> <i class="lni lni-exit"></i> Log Out </a>
+								<a href="{{url('admin/profile/'.(Auth::user()->id))}}">
+									<i class="bi bi-person-fill"></i> View Profile
+								</a>
+							</li>
+							<li>
+								<a href="{{url('admin/general-setting')}}">
+									<i class="bi bi-gear-fill"></i> General Setting
+								</a>
+							</li>
+							<li>
+								<a href="{{url('admin/logout')}}">
+									<i class="bi bi-box-arrow-left"></i> Log Out
+								</a>
 							</li>
 						</ul>
 					</div>

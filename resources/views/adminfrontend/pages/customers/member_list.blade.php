@@ -88,6 +88,16 @@ use App\Models\Products_Attributes;
                                         <td><p class="text-sm text-center">{{$member->created_at->diffForHumans()}}</p></td>
                                         <td class="text-center">
                                             <a
+                                                class="text-light py-1 pb-0 px-2 rounded-0 view-btn"
+                                                href="{{url('/admin/profile/'.$member->id)}}"
+                                                role="button"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="View Details"
+                                                >
+                                                <span class="material-icons-round" style="font-size: 16px">visibility</span>
+                                            </a>
+                                            <a
                                                 class="text-light py-1 pb-0 px-2 rounded-0 delete-btn"
                                                 href="{{url('admin/customer-member-delete/'.$member->id)}}"
                                                 role="button"

@@ -5,10 +5,12 @@ namespace App\Http\Controllers\AdminController;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
+
     public function general_setting()
     {
         $settings = Settings::orderBy('id')->get();

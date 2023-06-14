@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
             */
             $table->increments('id');
+            $table->string('profile_img', 100)->nullable();
             $table->string('name');
             $table->string('phone', 20);
             $table->string('email')->unique();
@@ -34,7 +35,6 @@ return new class extends Migration
             $table->string('district');
             $table->string('ward');
             $table->boolean('role')->default('1');
-            //$table->rememberToken()->nullable();
             $table->timestamps();
         });
     }

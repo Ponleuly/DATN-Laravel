@@ -120,10 +120,16 @@ Route::controller(CartController::class)->group(function () {
 Route::controller(AuthAdminController::class)->group(function () {
    Route::get('admin', 'adminLogin')->name('admin');
    Route::post('admin/login', 'login')->name('login');
-   Route::get('admin/logout', 'adminLogout')->name('logout');;
+   Route::get('admin/logout', 'adminLogout')->name('logout');
 });
-Route::prefix('admin')->controller(AdminFrontendController::class)->group(function () {
-   Route::get('/dashboard', 'dashboard')->name('dashboard')->middleware('authAdmin');
+Route::prefix('admin')->middleware('authAdmin')->group(function () {
+   Route::controller(AdminFrontendController::class)->group(function () {
+      Route::get('/dashboard', 'dashboard')->name('dashboard');
+      Route::get('/profile/{id}', 'profile')->name('profile');
+      Route::put('/profile/{id}', 'update_profile')->name('profile');
+      Route::get('/change-password/{id}', 'change_password')->name('change-password');
+      Route::put('/change-password/{id}', 'update_password')->name('change-password');
+   });
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
    Route::controller(ProductGroupController::class)->group(function () {

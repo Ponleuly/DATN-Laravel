@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'id' => 1,
+                'profile_img' => 'admin.jpg',
                 'name' => 'Admin',
                 'phone' => '02437347941',
                 'email' => 'admin@gmail.com',
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' => 2,
+                'profile_img' => 'admin.jpg',
                 'name' => 'Ponleuly',
                 'phone' => '02437347942',
                 'email' => 'lyponleu116@gmail.com',
@@ -47,6 +49,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' => 3,
+                'profile_img' => 'admin.jpg',
                 'name' => 'User1',
                 'phone' => '02437347943',
                 'email' => 'user1@gmail.com',
@@ -60,6 +63,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' => 4,
+                'profile_img' => 'admin.jpg',
                 'name' => 'User2',
                 'phone' => '02437347944',
                 'email' => 'user2@gmail.com',
@@ -73,6 +77,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' => 5,
+                'profile_img' => 'admin.jpg',
                 'name' => 'User3',
                 'phone' => '02437347945',
                 'email' => 'user3@gmail.com',
@@ -87,6 +92,7 @@ class UserSeeder extends Seeder
 
             [
                 'id' => 6,
+                'profile_img' => 'admin.jpg',
                 'name' => 'User4',
                 'phone' => '02437347946',
                 'email' => 'user4@gmail.com',
@@ -103,6 +109,7 @@ class UserSeeder extends Seeder
 
         for ($i = 1; $i <= 50; $i++) {
             DB::table('users')->insert([
+                'profile_img' => '',
                 'name' => fake()->firstName() . ' ' . fake()->lastName(),
                 'phone' => fake()->phoneNumber(),
                 'email' => fake()->unique()->safeEmail(),

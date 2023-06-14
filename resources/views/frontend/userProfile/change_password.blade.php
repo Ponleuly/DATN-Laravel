@@ -20,7 +20,7 @@
                                                 required
                                                 autocomplete="new-password"
                                             >
-                                            @error('password')
+                                            @error('current_password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -56,10 +56,15 @@
                                             <input
                                                 id="password-confirm"
                                                 type="password"
-                                                class="form-control rounded-0"
+                                                class="form-control rounded-0 @error('password') is-invalid @enderror"
                                                 name="password_confirmation"
                                                 required autocomplete="new-password"
                                             >
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                             <label for="floatingInputValue">Comfirme New Password</label>
                                         </div>
                                     </div>

@@ -243,8 +243,6 @@ class ProductDetailController extends Controller
         //return dd($colors->toArray());
     }
 
-
-
     public function product_detail_update(Request $request, $id)
     {
         //======== Update data on table products ========//
