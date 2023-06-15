@@ -5081,12 +5081,14 @@ a.view-btn:hover span {
   border-radius: 50%;
 }
 /*=======================================*/
+/*
 .file-upload {
   background-color: #ffffff;
   width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
+
 
 .file-upload-btn {
   width: 100%;
@@ -5114,7 +5116,7 @@ a.view-btn:hover span {
   border: 0;
   transition: all .2s ease;
 }
-
+*/
 .file-upload-content {
   display: none;
   text-align: center;
@@ -5122,7 +5124,7 @@ a.view-btn:hover span {
   border: 1px solid #D3D3D3;
   padding: 15px 0;
 }
-.file-upload-content .file_remove {
+.file-upload-content .file-remove {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -5137,7 +5139,7 @@ a.view-btn:hover span {
   top: -15px;
 }
 
-.file_remove:hover {
+.file-remove:hover {
   background: #222;
   transition: .2s;
 }
@@ -5145,8 +5147,8 @@ a.view-btn:hover span {
   position: absolute;
   margin: 0;
   padding: 0;
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   outline: none;
   opacity: 0;
   cursor: pointer;
@@ -5156,9 +5158,10 @@ a.view-btn:hover span {
   border: 2px dashed #D3D3D3;
   position: relative;
 }
-
-.image-dropping,
 .image-upload-wrap:hover .drag-text h6{
+  color: #4169E1;
+}
+.image-upload-wrap:hover .drag-text svg {
   color: #4169E1;
 }
 .image-title-wrap {
@@ -5176,7 +5179,6 @@ a.view-btn:hover span {
   padding: 10px 0;
   font-size: 12px;
 }
-
 .file-upload-image {
 
   height: 150px;
@@ -5184,7 +5186,145 @@ a.view-btn:hover span {
   object-fit: cover;
   border-radius: 50%;
 }
+.file-upload-image-cover {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  padding: 0 15px;
+}
+/*=============review==============*/
+.file-upload-content-review {
+  display: none;
+  text-align: center;
+  position: relative;
+  border: 1px solid #D3D3D3;
+  padding: 15px 0;
+}
+.file-upload-content-review .file-remove-review {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  background: #aaa;
+  line-height: 30px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  right: -15px;
+  top: -15px;
+}
+.file-remove-review:hover {
+  background: #222;
+  transition: .2s;
+}
+.file-upload-input-review {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+.image-upload-wrap-review{
+  border: 2px dashed #D3D3D3;
+  position: relative;
+}
+.image-upload-wrap-review:hover .drag-text-review h6{
+  color: #4169E1;
+}
+.image-upload-wrap-review:hover .drag-text-review svg{
+  color: #4169E1;
+}
+.drag-text-review{
+  text-align: center;
+}
+.drag-text-review h6 {
+  font-weight: 600;
+  color: grey;
+  padding: 10px 0;
+  font-size: 12px;
+}
+.file-upload-image-review {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  padding: 0 15px;
+}
 
+/*=============review==============
+.file-upload-content-review-2 {
+  display: none;
+  text-align: center;
+  position: relative;
+  border: 1px solid #D3D3D3;
+  padding: 15px 0;
+}
+
+.file-upload-content-review-2 .file-remove-review-2 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  background: #aaa;
+  line-height: 30px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  right: -15px;
+  top: -15px;
+}
+
+.file-remove-review-2:hover {
+  background: #222;
+  transition: .2s;
+}
+
+.file-upload-input-review-2 {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap-review-2 {
+  border: 2px dashed #D3D3D3;
+  position: relative;
+}
+
+.image-upload-wrap-review-2:hover .drag-text-review-2 h6 {
+  color: #4169E1;
+}
+
+.image-upload-wrap-review-2:hover .drag-text-review-2 svg {
+  color: #4169E1;
+}
+
+.drag-text-review-2 {
+  text-align: center;
+}
+
+.drag-text-review-2 h6 {
+  font-weight: 600;
+  color: grey;
+  padding: 10px 0;
+  font-size: 12px;
+}
+
+.file-upload-image-review-2 {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  padding: 0 15px;
+}*/
+/*
 .remove-image {
   width: 200px;
   margin: 0;
@@ -5211,3 +5351,4 @@ a.view-btn:hover span {
   border: 0;
   transition: all .2s ease;
 }
+*/

@@ -134,7 +134,7 @@
                             <div class="file-upload-content">
                                 <img class="file-upload-image" src="#" alt="your image"/>
                                 <span
-                                    class="file_remove"
+                                    class="file-remove"
                                     type="button"
                                     onclick="removeUpload()">X
                                 </span>
@@ -176,11 +176,11 @@
                                     </span>
                                     <h6>Drag and drop an image</h6>
                                 </div>
-                                                    </div>
-                                                    <div class="file-upload-content">
+                            </div>
+                            <div class="file-upload-content">
                                 <img class="file-upload-image" src="#" alt="your image" name="profile_img"/>
                                 <span
-                                    class="file_remove"
+                                    class="file-remove"
                                     type="button"
                                     onclick="removeUpload()">X
                                 </span>
@@ -209,8 +209,6 @@
                     $('.admin-profile').hide();
                     $('.file-upload-image').attr('src', e.target.result);
                     $('.file-upload-content').show();
-                    $('.image-title').html(input.files[0].name);
-
                 };
                 reader.readAsDataURL(input.files[0]);
             } else {
@@ -219,17 +217,19 @@
         }
 
         function removeUpload() {
-            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            //$('.file-upload-input').replaceWith($('.file-upload-input').clone());
             $('.file-upload-content').hide();
             $('.image-upload-wrap').show();
             $('.admin-profile').show();
             document.querySelector('.file-upload-input').value = '';
         }
+        /*
         $('.image-upload-wrap').bind('dragover', function () {
             $('.image-upload-wrap').addClass('image-dropping');
         });
         $('.image-upload-wrap').bind('dragleave', function () {
             $('.image-upload-wrap').removeClass('image-dropping');
         });
+        */
     </script>
 @endsection()
