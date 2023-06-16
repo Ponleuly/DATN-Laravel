@@ -168,12 +168,23 @@ class ProductDetailController extends Controller
             $destinationPath = 'product_img/imgreview/';
             if (is_array($file)) {
                 foreach ($file as $part) {
-                    $filename = $part->getClientOriginalName();
-                    $part->move($destinationPath, $filename);
+                    $fileName = $part->getClientOriginalName();
+                    $newName = preg_replace("/\.[^.]+$/", "", $fileName); // remove file extension
+                    $num = count(glob($destinationPath . $newName . '*.jpg')); // count the duplicate img in directory
+                    $fileExt  = $part->getClientOriginalExtension();
+                    if (file_exists($destinationPath . $fileName)) {
+                        $part->move($destinationPath, $newName . '(' . $num . ')' . '.' . $fileExt);
+                        $input['product_imgreview'] = $newName . '(' . $num . ')' . '.' . $fileExt;
+                        $input['product_id'] = $productId;
+                        Products_Imgreviews::create($input);
+                        $num++;
+                    } else {
+                        $part->move($destinationPath, $newName . '.' . $fileExt);
 
-                    $input['product_imgreview'] = $filename;
-                    $input['product_id'] = $productId;
-                    Products_Imgreviews::create($input);
+                        $input['product_imgreview'] = $newName . '.' . $fileExt;
+                        $input['product_id'] = $productId;
+                        Products_Imgreviews::create($input);
+                    }
                 }
             }
         }
@@ -248,7 +259,6 @@ class ProductDetailController extends Controller
 
     public function product_detail_update(Request $request, $id)
     {
-        //return dd(($request->img_remove[0]));
         //======== Update data on table products ========//
         $update_product  = Products::where('id', $id)->first();
         $update_product->product_name = ucwords($request->input('product_name'));
@@ -263,10 +273,11 @@ class ProductDetailController extends Controller
 
             $destination_path = 'product_img/imgcover';
             $image = $request->file('product_imgcover');
-            if (File::exists(public_path($destination_path))) {
-                File::delete(public_path($destination_path));
-            }
             $image_name = $image->getClientOriginalName();
+
+            if (File::exists(public_path($destination_path . $image_name))) {
+                File::delete(public_path($destination_path . $image_name));
+            }
             $image->move($destination_path, $image_name);
 
             $update_product['product_imgcover'] = $image_name;
@@ -277,12 +288,11 @@ class ProductDetailController extends Controller
         //========= Update data for table products_imgreviews ======//
         $productId = $update_product->id;
         $destinationPath = 'product_img/imgreview/';
-        $imgReview = Products_Imgreviews::where('product_id', $productId)->get();
-
+        //$imgReview = Products_Imgreviews::where('product_id', $productId)->get();
+        //===== Delecte old img from DB and Directory ====//
         for ($i = 0; $i < count($request->img_remove); $i++) {
             if ($request->img_remove[$i] != '') {
                 $delete_img = Products_Imgreviews::where('id', $request->img_remove[$i])->first();
-
                 $path = 'product_img/imgreview/' . $delete_img->product_imgreview;
                 if (File::exists(public_path($path))) {
                     File::delete(public_path($path));
@@ -290,9 +300,33 @@ class ProductDetailController extends Controller
                 $delete_img->delete();
             }
         }
+        //===== Store new img if upload to DB and Directory ====//
         if ($file = $request->hasFile('product_imgreview')) {
             $file = $request->file('product_imgreview');
-            $destinationPath = 'product_img/imgreview';
+            $destinationPath = 'product_img/imgreview/';
+            if (is_array($file)) {
+                foreach ($file as $part) {
+                    $fileName = $part->getClientOriginalName();
+                    $newName = preg_replace("/\.[^.]+$/", "", $fileName); // remove file extension
+                    $num = count(glob($destinationPath . $newName . '*.jpg')); // count the duplicate img in directory
+                    $fileExt  = $part->getClientOriginalExtension();
+                    if (file_exists($destinationPath . $fileName)) {
+                        $part->move($destinationPath, $newName . '(' . $num . ')' . '.' . $fileExt);
+                        $input['product_imgreview'] = $newName . '(' . $num . ')' . '.' . $fileExt;
+                        $input['product_id'] = $productId;
+                        Products_Imgreviews::create($input);
+                        $num++;
+                    } else {
+                        $part->move($destinationPath, $newName . '.' . $fileExt);
+
+                        $input['product_imgreview'] = $newName . '.' . $fileExt;
+                        $input['product_id'] = $productId;
+                        Products_Imgreviews::create($input);
+                    }
+                }
+            }
+
+            /*
             if (is_array($file)) {
                 foreach ($file as $part) {
                     $filename = $part->getClientOriginalName();
@@ -303,7 +337,7 @@ class ProductDetailController extends Controller
                     Products_Imgreviews::create($input);
                 }
             }
-
+            */
             //====== Delete imgreview in table Product_imgreview ======/
             /*
                 for ($i = 0; $i < count($imgReview); $i++) {

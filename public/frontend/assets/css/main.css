@@ -5228,20 +5228,25 @@ a.view-btn:hover span {
   opacity: 0;
   cursor: pointer;
 }
-.image-upload-wrap-review{
+.image-upload-wrap-review,
+.image-upload-wrap-review-more{
   border: 2px dashed #D3D3D3;
   position: relative;
 }
-.image-upload-wrap-review:hover .drag-text-review h6{
+.image-upload-wrap-review:hover .drag-text-review h6,
+.image-upload-wrap-review-more:hover .drag-text-review-more h6{
   color: #4169E1;
 }
-.image-upload-wrap-review:hover .drag-text-review svg{
+.image-upload-wrap-review:hover .drag-text-review svg,
+.image-upload-wrap-review-more:hover .drag-text-review-more svg{
   color: #4169E1;
 }
-.drag-text-review{
+.drag-text-review,
+.drag-text-review-more{
   text-align: center;
 }
-.drag-text-review h6 {
+.drag-text-review h6,
+.drag-text-review-more h6 {
   font-weight: 600;
   color: grey;
   padding: 10px 0;
