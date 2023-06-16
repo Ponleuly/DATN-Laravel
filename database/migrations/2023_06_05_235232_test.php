@@ -11,12 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
+
     public function up()
     {
-        Schema::create('tests', function (Blueprint $table) {
+        Schema::create('TinTuc', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('amount');
-            $table->string('type');
+            $table->string('matintuc', 50);
+            $table->string('tieude', 255);
+            $table->longText('noidung');
+            $table->longText('matheloai');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('TinTuc');
     }
 };

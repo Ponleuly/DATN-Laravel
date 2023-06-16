@@ -228,6 +228,7 @@ class ProductDetailController extends Controller
         $categories = Categories::orderBy('id')->get();
         $subCategories = Categories_Subcategories::orderBy('id')->get();
         $products = Products::where('id', $id)->first();
+        $imgreviews = Products_Imgreviews::where('product_id', $id)->get();
         return view(
             'adminfrontend.pages.products.product_detail_edit',
             compact(
@@ -237,7 +238,8 @@ class ProductDetailController extends Controller
                 'products',
                 'subCategories',
                 'selected_group',
-                'selected_category'
+                'selected_category',
+                'imgreviews'
             )
         );
 
@@ -246,6 +248,7 @@ class ProductDetailController extends Controller
 
     public function product_detail_update(Request $request, $id)
     {
+        //return dd(($request->img_remove[0]));
         //======== Update data on table products ========//
         $update_product  = Products::where('id', $id)->first();
         $update_product->product_name = ucwords($request->input('product_name'));
@@ -276,17 +279,18 @@ class ProductDetailController extends Controller
         $destinationPath = 'product_img/imgreview/';
         $imgReview = Products_Imgreviews::where('product_id', $productId)->get();
 
-        if ($file = $request->hasFile('product_imgreview')) {
-            //====== Delete imgreview in table Product_imgreview ======/
-            for ($i = 0; $i < count($imgReview); $i++) {
-                $delete_img = Products_Imgreviews::where('product_id', $productId)->first();
-                $path = 'product_img/imgreview/' . $delete_img->product_imgreview;
+        for ($i = 0; $i < count($request->img_remove); $i++) {
+            if ($request->img_remove[$i] != '') {
+                $delete_img = Products_Imgreviews::where('id', $request->img_remove[$i])->first();
 
+                $path = 'product_img/imgreview/' . $delete_img->product_imgreview;
                 if (File::exists(public_path($path))) {
                     File::delete(public_path($path));
                 }
                 $delete_img->delete();
             }
+        }
+        if ($file = $request->hasFile('product_imgreview')) {
             $file = $request->file('product_imgreview');
             $destinationPath = 'product_img/imgreview';
             if (is_array($file)) {
@@ -299,6 +303,32 @@ class ProductDetailController extends Controller
                     Products_Imgreviews::create($input);
                 }
             }
+
+            //====== Delete imgreview in table Product_imgreview ======/
+            /*
+                for ($i = 0; $i < count($imgReview); $i++) {
+                    $delete_img = Products_Imgreviews::where('product_id', $productId)->first();
+                    $path = 'product_img/imgreview/' . $delete_img->product_imgreview;
+
+                    if (File::exists(public_path($path))) {
+                        File::delete(public_path($path));
+                    }
+                    $delete_img->delete();
+                }
+
+                $file = $request->file('product_imgreview');
+                $destinationPath = 'product_img/imgreview';
+                if (is_array($file)) {
+                    foreach ($file as $part) {
+                        $filename = $part->getClientOriginalName();
+                        $part->move($destinationPath, $filename);
+
+                        $input['product_imgreview'] = $filename;
+                        $input['product_id'] = $productId;
+                        Products_Imgreviews::create($input);
+                    }
+                }
+            */
         }
 
         //========= Update data for table products_sizes ======//

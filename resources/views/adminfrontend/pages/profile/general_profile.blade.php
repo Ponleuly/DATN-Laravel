@@ -177,7 +177,7 @@
                                     <h6>Drag and drop an image</h6>
                                 </div>
                             </div>
-                            <div class="file-upload-content">
+                            <div class="file-upload-content" >
                                 <img class="file-upload-image" src="#" alt="your image" name="profile_img"/>
                                 <span
                                     class="file-remove"

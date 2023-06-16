@@ -67,7 +67,7 @@
                                             name="product_des"
                                             id="product_des"
                                         >{{$products->product_des}}</textarea>
-
+                                    <!--
                                         <div class="row">
                                             <div class="col-6">
                                                 <label for="product_imgcover">
@@ -99,7 +99,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                    -->
                                         <!--
                                         <div class="row ">
                                             <div class="col-6">
@@ -125,10 +125,11 @@
                                             </div>
                                         </div>
                                         -->
-                                        <div class="row ">
+                                        <div class="row">
+                                            <!--================Start Image Cover ========================-->
                                             <div class="col-12">
-                                                <label for="product_imgcover"><p class="text-label">Update Image Cover (1 picture)</p></label>
-                                                <div class="image-upload-wrap">
+                                                <label for="product_imgcover"><p class="text-label mt-3">Image Cover</p></label>
+                                                <div class="image-upload-wrap" style="display: none">
                                                     <input
                                                         class="file-upload-input"
                                                         type='file'
@@ -146,8 +147,24 @@
                                                         <h6>Image cover</h6>
                                                     </div>
                                                 </div>
+                                                <div class="file-upload-content" style="display: block" id="imgCover">
+                                                    <img
+                                                        src="/product_img/imgcover/{{$products->product_imgcover}}"
+                                                        class="file-upload-image-cover"
+
+                                                    />
+                                                    <span
+                                                        class="file-remove"
+                                                        type="button"
+                                                        onclick="removeImgCover()">X
+                                                    </span>
+                                                </div>
+
                                                 <div class="file-upload-content">
-                                                    <img class="file-upload-image-cover" src="#" alt="image cover" name="category_img"/>
+                                                    <img
+                                                        class="file-upload-image-cover"
+                                                        src="" alt="image cover"
+                                                    />
                                                     <span
                                                         class="file-remove"
                                                         type="button"
@@ -155,39 +172,71 @@
                                                     </span>
                                                 </div>
                                             </div>
+                                            <!--================ End Image Cover ========================-->
 
                                             <div class="col-12">
-                                                <label for="product_imgreview"><p class="text-label mt-3">Update Images Review (4 pictures)</p></label>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="image-upload-wrap-review-1">
-                                                            <input
-                                                                class="file-upload-input-review-1"
-                                                                type='file'
-                                                                id="product_imgreview"
-                                                                name="product_imgreview[]"
-                                                                onchange="readImgReview1(this);" accept="image/*"
-                                                            />
-                                                            <div class="drag-text-review-1">
-                                                                <span class="display-3 thankyou-icon text-light mt-3 ">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
-                                                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                                                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-                                                                    </svg>
+                                                <label for="product_imgreview"><p class="text-label mt-3">Images Review (4 pictures)</p></label>
+                                                <div class="row more-img">
+                                                    @php
+                                                        $id = 0;
+                                                    @endphp
+                                                    @foreach ($imgreviews as $imgreview)
+                                                        @php
+                                                            $id++;
+                                                        @endphp
+                                                        <!--=========== Start Img review 1============---->
+                                                        <div class="col-md-6 mb-4">
+                                                            <div class="image-upload-wrap-review" id="imgreview-icon-{{$id}}" style="display: none">
+                                                                <input type="text" name="img_remove[]" value="" class="d-none" id="img-remove-{{$id}}">
+                                                                <input
+                                                                    class="file-upload-input-review"
+                                                                    type='file'
+                                                                    id="imgreview-{{$id}}"
+                                                                    name="product_imgreview[]"
+                                                                    onchange="readImgReview(this);" accept="image/*"
+                                                                />
+                                                                <div class="drag-text-review">
+                                                                    <span class="display-3 thankyou-icon text-light mt-3 ">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                                            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                                            <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                                                        </svg>
+                                                                    </span>
+                                                                    <h6>Image review {{$id}}</h6>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="file-upload-content-review" style="display: block" id="imgReview-{{$id}}">
+                                                                <img
+                                                                    src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
+                                                                    class="file-upload-image-review"
+                                                                    alt="{{$imgreview->id}}"
+                                                                    id="oldImg-{{$id}}"
+                                                                />
+                                                                <span
+                                                                    class="file-remove-review"
+                                                                    type="button"
+                                                                    id="remove-{{$id}}"
+                                                                    onclick="removeImgReview()">X
                                                                 </span>
-                                                                <h6>Image review 1</h6>
+                                                            </div>
+
+                                                            <div class="file-upload-content-review" id="upload-imgreview-{{$id}}">
+                                                                <img
+                                                                    class="file-upload-image-review"
+                                                                    src="" alt="image cover"
+                                                                    id="showImg-{{$id}}"
+                                                                />
+                                                                <span
+                                                                    class="file-remove-review"
+                                                                    type="button"
+                                                                    id="remove-{{$id}}"
+                                                                    onclick="removeImgReview()">X
+                                                                </span>
                                                             </div>
                                                         </div>
-
-                                                        <div class="file-upload-content-review-1">
-                                                            <img class="file-upload-image-review-1" src="#" alt="your image" name="category_img"/>
-                                                            <span
-                                                                class="file-remove-review-1"
-                                                                type="button"
-                                                                onclick="removeImgReview1()">X
-                                                            </span>
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
+                                                    <!--
                                                     <div class="col-md-6">
                                                         <div class="image-upload-wrap-review-2">
                                                             <input
@@ -217,8 +266,14 @@
                                                             </span>
                                                         </div>
                                                     </div>
+                                                -->
                                                 </div>
-
+                                                <a
+                                                    class="btn btn-primary rounded-1 py-1 text-sm "
+                                                    onclick="addMoreImg()">
+                                                    Add more images
+                                                </a>
+                                            <!--
                                                 <div class="row mt-4">
                                                     <div class="col-md-6">
                                                         <div class="image-upload-wrap-review-3">
@@ -279,6 +334,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            -->
                                             </div>
                                         </div>
                                     </div>
@@ -539,6 +595,8 @@
                     $('.image-upload-wrap').hide();
                     $('.file-upload-image-cover').attr('src', e.target.result);
                     $('.file-upload-content').show();
+                    $('#imgCover').hide();
+
                 };
                 reader.readAsDataURL(input.files[0]);
             } else {
@@ -548,30 +606,95 @@
         function removeImgCover() {
             $('.file-upload-content').hide();
             $('.image-upload-wrap').show();
-            document.querySelector('.file-upload-input').value = '';
+            $('#imgCover').hide();
+            document.querySelector('#product_imgcover').setAttribute("required", "");
+            document.querySelector('#product_imgcover').value = '';
         }
 
-        //================ Img Review 1 ======================//
-        function readImgReview1(input) {
+        ///================ Img Review 1 ======================//
+        function readImgReview(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('.image-upload-wrap-review-1').hide();
-                    $('.file-upload-image-review-1').attr('src', e.target.result);
-                    $('.file-upload-content-review-1').show();
+                    var imgId = input.getAttribute('id');
+                    var imgReview_cnt = $('.image-upload-wrap-review').length;
+                    for(var i=1; i<=imgReview_cnt; i++){
+                        if(imgId == 'imgreview-'+i){
+                            $('#imgreview-icon-'+i).hide();
+                            $('#showImg-'+i).attr('src', e.target.result);
+                            $('#upload-imgreview-'+i).show();
+                            $('#imgReview-'+i).hide();
+                        }
+                    }
                 };
                 reader.readAsDataURL(input.files[0]);
             } else {
-                removeImgReview1();
+                removeImgReview();
             }
         }
-        function removeImgReview1() {
-            $('.file-upload-content-review-1').hide();
-            $('.image-upload-wrap-review-1').show();
-            document.querySelector('.file-upload-input-review-1').value = '';
+        function removeImgReview() {
+            var imgReview_cnt = $('.image-upload-wrap-review').length;
+            var removeID = event.target.id;
+            for(var i=1; i<=imgReview_cnt; i++){
+                if(removeID == 'remove-'+i){
+                    $('#upload-imgreview-'+i).hide();
+                    $('#imgreview-icon-'+i).show();
+                    $('#imgReview-'+i).hide();
+                    if(i<=4){
+                        document.querySelector('#imgreview-'+i).setAttribute("required", "");
+                    }
+                    document.querySelector('#imgreview-'+i).value = '';
+                    var imgName = document.querySelector('#oldImg-'+i).alt;
+                    var oldImg = document.getElementById("img-remove-"+i);
+                        oldImg.value = imgName;
+                }
+            }
         }
 
+        function addMoreImg(){
+            var imgReview_cnt = $('.image-upload-wrap-review').length;
+            //alert(cnt);
+            var i = imgReview_cnt;
+            ++i;
+            $(".more-img").append(
+                ` <div class="col-md-6 mb-4">
+                    <div class="image-upload-wrap-review" id="imgreview-icon-${i}">
+                        <input type="text" name="img_remove[]" value="" class="d-none" id="img-remove-${i}">
+                        <input
+                            class="file-upload-input-review"
+                            type='file'
+                            id="imgreview-${i}"
+                            name="product_imgreview[]"
+                            onchange="readImgReview(this);" accept="image/*"
+                        />
+                        <div class="drag-text-review">
+                            <span class="display-3 thankyou-icon text-light mt-3 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                </svg>
+                            </span>
+                            <h6>Image review ${i}</h6>
+                        </div>
+                    </div>
 
+                    <div class="file-upload-content-review" id="upload-imgreview-${i}">
+                        <img
+                            class="file-upload-image-review"
+                            src="#" alt="your image"
+                            name="category_img"
+                            id="showImg-${i}"
+                        />
+                        <span
+                            class="file-remove-review"
+                            type="button"
+                            id="remove-${i}"
+                            onclick="removeImgReview()">X
+                        </span>
+                    </div>
+                </div>`);
+        }
+        /*
         //================ Img Review 2 ======================//
         function readImgReview2(input) {
             if (input.files && input.files[0]) {
@@ -631,5 +754,6 @@
             $('.image-upload-wrap-review-4').show();
             document.querySelector('.file-upload-input-review-4').value = '';
         }
+        */
     </script>
 @endsection()
