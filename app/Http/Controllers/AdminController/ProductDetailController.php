@@ -149,11 +149,17 @@ class ProductDetailController extends Controller
         if ($request->hasFile('product_imgcover')) {
             $destination_path = 'product_img/imgcover/';
             $image = $request->file('product_imgcover');
-
             $image_name = $image->getClientOriginalName();
-            $image->move($destination_path, $image_name);
-
-            $input['product_imgcover'] = $image_name;
+            $fileExt  = $image->getClientOriginalExtension();
+            $new_image_name = preg_replace("/\.[^.]+$/", "", $image_name); // remove file extension
+            $cnt = count(glob($destination_path . $new_image_name . '*.jpg')); // count the duplicate img in directory
+            if (file_exists($destination_path . $image_name)) {
+                $image->move($destination_path, $new_image_name . '(' .  $cnt . ')' . '.' . $fileExt);
+                $input['product_imgcover'] = $new_image_name . '(' .  $cnt . ')' . '.' . $fileExt;
+            } else {
+                $image->move($destination_path, $image_name);
+                $input['product_imgcover'] = $image_name;
+            }
         }
         Products::create($input);
         //=======================================//
@@ -268,21 +274,30 @@ class ProductDetailController extends Controller
         $update_product->product_color = $request->input('product_color');
         $update_product->product_colorname = ucwords($request->input('product_colorname'));
         $update_product->product_saleprice = $request->input('product_saleprice');
-        //========= Update data for table products ======//
-        if ($request->hasFile('product_imgcover')) {
 
-            $destination_path = 'product_img/imgcover';
+        $old_img_cover = $update_product->product_imgcover;
+        $destination_path = 'product_img/imgcover/';
+        if (File::exists(public_path($destination_path .  $old_img_cover))) {
+            File::delete(public_path($destination_path .  $old_img_cover));
+        }
+        //========= Storing new img cover for table products ======//
+        if ($request->hasFile('product_imgcover')) {
+            $destination_path = 'product_img/imgcover/';
             $image = $request->file('product_imgcover');
             $image_name = $image->getClientOriginalName();
-
-            if (File::exists(public_path($destination_path . $image_name))) {
-                File::delete(public_path($destination_path . $image_name));
+            $fileExt  = $image->getClientOriginalExtension();
+            $new_image_name = preg_replace("/\.[^.]+$/", "", $image_name); // remove file extension
+            $cnt = count(glob($destination_path . $new_image_name . '*.jpg')); // count the duplicate img in directory
+            if (file_exists($destination_path . $image_name)) {
+                $image->move($destination_path, $new_image_name . '(' .  $cnt . ')' . '.' . $fileExt);
+                $update_product['product_imgcover'] = $new_image_name . '(' .  $cnt . ')' . '.' . $fileExt;
+            } else {
+                $image->move($destination_path, $image_name);
+                $update_product['product_imgcover'] = $image_name;
             }
-            $image->move($destination_path, $image_name);
-
-            $update_product['product_imgcover'] = $image_name;
         }
         $update_product->update();
+
         //===========================================================//
 
         //========= Update data for table products_imgreviews ======//
