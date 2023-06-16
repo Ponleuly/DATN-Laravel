@@ -27,7 +27,41 @@
                         <h4 class="text-medium mb-20">Product Details</h4>
                     </div>
                     <div class="col-md-6">
-                        <img src="/product_img/imgcover/{{$product_view ->product_imgcover}}" class="img-fluid product-thumbnail">
+                        <img
+                            src="/product_img/imgcover/{{$product_view ->product_imgcover}}"
+                            class="img-fluid product-thumbnail"
+                        >
+                        @php
+                            $imgreviews = Products_Imgreviews::where('product_id', $product_view->id)->get();
+                            $slide =1;
+                        @endphp
+                        <div class="container text-center my-3 px-0">
+                            <div class="row mx-auto my-auto justify-content-center">
+                                <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        @foreach ($imgreviews as $imgreview)
+                                            <div class="carousel-item {{($loop->first)? 'active':''}}">
+                                                <div class="col-md-3 ">
+                                                    <img
+                                                        src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
+                                                        class="img-fluid product-thumbnail px-2"
+                                                    >
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
+                                        data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+                                    </a>
+                                    <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button"
+                                        data-bs-slide="next">
+                                        <span class="carousel-control-next-icon " aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--
                         <div class="container px-0">
                             <div class="row">
                                 @php
@@ -40,6 +74,7 @@
                                 @endforeach
                             </div>
                         </div>
+                    -->
                     </div>
 
                     <div class="col-md-6">
@@ -307,4 +342,21 @@
             </div>
         </div>
     </div>
+    <script>
+        let items = document.querySelectorAll('.carousel .carousel-item')
+
+            items.forEach((el) => {
+                const minPerSlide = 4
+                let next = el.nextElementSibling
+                for (var i = 1; i < minPerSlide; i++) {
+                    if (!next) {
+                        // wrap carousel by using first child
+                        next = items[0]
+                    }
+                    let cloneChild = next.cloneNode(true)
+                    el.appendChild(cloneChild.children[0])
+                    next = next.nextElementSibling
+                }
+            })
+    </script>
 @endsection()

@@ -5259,101 +5259,38 @@ a.view-btn:hover span {
   padding: 0 15px;
 }
 
-/*=============review==============
-.file-upload-content-review-2 {
-  display: none;
-  text-align: center;
-  position: relative;
-  border: 1px solid #D3D3D3;
-  padding: 15px 0;
-}
+/*=============Carousel slider==============*/
+ @media (max-width: 767px) {
+   .carousel-inner .carousel-item>div {
+     display: none;
+   }
 
-.file-upload-content-review-2 .file-remove-review-2 {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  background: #aaa;
-  line-height: 30px;
-  color: #fff;
-  font-size: 12px;
-  cursor: pointer;
-  right: -15px;
-  top: -15px;
-}
+   .carousel-inner .carousel-item>div:first-child {
+     display: block;
+   }
+ }
 
-.file-remove-review-2:hover {
-  background: #222;
-  transition: .2s;
-}
+ .carousel-inner .carousel-item.active,
+ .carousel-inner .carousel-item-next,
+ .carousel-inner .carousel-item-prev {
+   display: flex;
+ }
 
-.file-upload-input-review-2 {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  opacity: 0;
-  cursor: pointer;
-}
+ /* medium and up screens */
+ @media (min-width: 768px) {
 
-.image-upload-wrap-review-2 {
-  border: 2px dashed #D3D3D3;
-  position: relative;
-}
+   .carousel-inner .carousel-item-end.active,
+   .carousel-inner .carousel-item-next {
+     transform: translateX(25%);
+   }
 
-.image-upload-wrap-review-2:hover .drag-text-review-2 h6 {
-  color: #4169E1;
-}
+   .carousel-inner .carousel-item-start.active,
+   .carousel-inner .carousel-item-prev {
+     transform: translateX(-25%);
+   }
+ }
 
-.image-upload-wrap-review-2:hover .drag-text-review-2 svg {
-  color: #4169E1;
-}
-
-.drag-text-review-2 {
-  text-align: center;
-}
-
-.drag-text-review-2 h6 {
-  font-weight: 600;
-  color: grey;
-  padding: 10px 0;
-  font-size: 12px;
-}
-
-.file-upload-image-review-2 {
-  height: 200px;
-  width: 100%;
-  object-fit: cover;
-  padding: 0 15px;
-}*/
-/*
-.remove-image {
-  width: 200px;
-  margin: 0;
-  color: #fff;
-  background: #cd4535;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  border-bottom: 4px solid #b02818;
-  transition: all .2s ease;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.remove-image:hover {
-  background: #c13b2a;
-  color: #ffffff;
-  transition: all .2s ease;
-  cursor: pointer;
-}
-
-.remove-image:active {
-  border: 0;
-  transition: all .2s ease;
-}
-*/
+ .carousel-inner .carousel-item-end,
+ .carousel-inner .carousel-item-start {
+   transform: translateX(0);
+ }

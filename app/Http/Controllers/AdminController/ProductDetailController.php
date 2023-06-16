@@ -275,13 +275,14 @@ class ProductDetailController extends Controller
         $update_product->product_colorname = ucwords($request->input('product_colorname'));
         $update_product->product_saleprice = $request->input('product_saleprice');
 
-        $old_img_cover = $update_product->product_imgcover;
-        $destination_path = 'product_img/imgcover/';
-        if (File::exists(public_path($destination_path .  $old_img_cover))) {
-            File::delete(public_path($destination_path .  $old_img_cover));
-        }
         //========= Storing new img cover for table products ======//
         if ($request->hasFile('product_imgcover')) {
+            $old_img_cover = $update_product->product_imgcover;
+            $destination_path = 'product_img/imgcover/';
+            if (File::exists(public_path($destination_path .  $old_img_cover))) {
+                File::delete(public_path($destination_path .  $old_img_cover));
+            }
+
             $destination_path = 'product_img/imgcover/';
             $image = $request->file('product_imgcover');
             $image_name = $image->getClientOriginalName();
