@@ -90,14 +90,12 @@ class ProductDetailController extends Controller
         $allStock = $product_view->product_stock;
         $headCode = trim($code, " 0..9");
         $productCode = Products::where('product_code', 'LIKE', '%' . $headCode . '%')->get();
-        //$sizeStock = 0;
-        //==== Calculate total quantity of each size ====//
-        /*
-        foreach ($productSize as $row) {
-            $sizeStock += $row->size_quantity;
-        }
-        $stockLeft = $sizeStock;
-        */
+        // Join table Product and Products_Imgreviews to get all images reviews with the same product_code
+        $allImgReviews = Products::join('Products_Imgreviews', 'products_imgreviews.product_id', '=', 'products.id')
+            ->where('products.product_code', 'LIKE', '%' . $headCode . '%')
+            ->get(['products_imgreviews.*']);
+        $imgReviews = Products_Imgreviews::where('product_id', $productId)->get();
+
         $stockLeft = $product_view->product_stockleft;
         $status = Products::where('product_code', $code)->first();
         //===== Update product status if product stock sold out ======//
@@ -117,11 +115,14 @@ class ProductDetailController extends Controller
                 'product_view',
                 'productCode',
                 'productGroups',
-                'productCategory'
+                'productCategory',
+                'allImgReviews',
+                'imgReviews'
             )
 
         );
     }
+
     public function product_detail_add()
     {
         $sizes = Sizes::orderBy('size_number')->get();

@@ -31,16 +31,12 @@
                             src="/product_img/imgcover/{{$product_view ->product_imgcover}}"
                             class="img-fluid product-thumbnail"
                         >
-                        @php
-                            $imgreviews = Products_Imgreviews::where('product_id', $product_view->id)->get();
-                            $slide =1;
-                        @endphp
                         <div class="container text-center my-3 px-0">
                             <div class="row mx-auto my-auto justify-content-center">
                                 <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner" role="listbox">
-                                        @foreach ($imgreviews as $imgreview)
-                                            <div class="carousel-item {{($loop->first)? 'active':''}}">
+                                        @foreach ($imgReviews as $imgreview)
+                                             <div class="carousel-item {{($loop->first)? 'active':''}}">
                                                 <div class="col-md-3 ">
                                                     <img
                                                         src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
@@ -48,6 +44,20 @@
                                                     >
                                                 </div>
                                             </div>
+                                        @endforeach
+                                        @foreach ($allImgReviews as $allimgreview)
+                                            @if($allimgreview->product_id == $product_view->id)
+                                                @continue
+                                            @else
+                                                <div class="carousel-item ">
+                                                    <div class="col-md-3 ">
+                                                        <img
+                                                            src="/product_img/imgreview/{{$allimgreview->product_imgreview}}"
+                                                            class="img-fluid product-thumbnail px-2"
+                                                        >
+                                                    </div>
+                                                </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                     <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
@@ -61,20 +71,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--
-                        <div class="container px-0">
-                            <div class="row">
-                                @php
-                                    $imgreviews = Products_Imgreviews::where('product_id', $product_view->id)->get();
-                                @endphp
-                                @foreach ($imgreviews as $imgreview)
-                                    <div class="col-sm py-3">
-                                        <img src="/product_img/imgreview/{{$imgreview->product_imgreview}}" class="img-fluid product-thumbnail">
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    -->
                     </div>
 
                     <div class="col-md-6">
