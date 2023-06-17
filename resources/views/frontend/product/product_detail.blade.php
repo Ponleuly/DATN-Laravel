@@ -79,10 +79,33 @@
                     <!-- Start first colume section -->
                     <div class="col-md-6 mb-5 mb-md-0">
 						<div class="img-container">
-                            <img
-                                src="/product_img/imgcover/{{$productDetails->product_imgcover}}"
-                                class="img-fluid product-thumbnail {{($stockLeft == 0)? 'opacity-50':''}}"
-                            >
+                            <div id="carouselExampleControlsNoTouching" class="carousel slide px-1" data-bs-touch="false" data-bs-interval="false">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img
+                                            src="/product_img/imgcover/{{$productDetails->product_imgcover}}"
+                                            class="img-fluid product-thumbnail mb-3 {{($stockLeft == 0)? 'opacity-50':''}}"
+                                        >
+                                    </div>
+                                    @foreach ($imgReviews as $imgreview)
+                                        <div class="carousel-item">
+                                            <img
+                                                src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
+                                                class="img-fluid product-thumbnail mb-3 "
+                                            >
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+
                             @if($productDetails->product_status == 1)
 								<h6 class="text-new bg-danger">New Arrival</h6>
 								@elseif($productDetails->product_price > $productDetails->product_saleprice)
@@ -92,22 +115,44 @@
                             @if($stockLeft == 0)
 								<h4 class="text-sold-out bg-secondary">Sold Out</h4>
                             @endif
-						</div>
-                        <div class="container px-0">
-                            <div class="row">
-                                @php
-                                    $imgreviews = Products_Imgreviews::where('product_id', $productDetails->id)->get();
-                                @endphp
-                                @foreach ($imgreviews as $imgreview)
-                                    <div class="col-sm py-3">
-                                        <img
-                                            src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
-                                            class="img-fluid product-thumbnail"
-                                        >
-                                    </div>
-                                @endforeach
+
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @foreach ($imgReviews as $imgreview)
+                                        <div class="carousel-item {{($loop->first)? 'active':''}} " id="carousel-item-1" data-bs-interval="2000">
+                                            <div class="col-md-3 ">
+                                                <img
+                                                    src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
+                                                    class="img-fluid product-thumbnail px-1"
+                                                >
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($allImgReviews as $allimgreview)
+                                        @if($allimgreview->product_id == $productDetails->id)
+                                            @continue
+                                        @else
+                                            <div class="carousel-item " id="carousel-item-1" data-bs-interval="2000">
+                                                <div class="col-md-3 ">
+                                                    <img
+                                                        src="/product_img/imgreview/{{$allimgreview->product_imgreview}}"
+                                                        class="img-fluid product-thumbnail px-1"
+                                                    >
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
-                        </div>
+						</div>
                     </div>
                     <!-- End first colume section -->
 
@@ -179,7 +224,7 @@
                                 <!--------------------End  Color ------------------------>
 
                                 <!-------------------- Size and Quantity------------------------>
-                                <hr>
+                                <hr class="border-0">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h6 class="mb-2 text-black fw-bold py-2">SIZE</h6>
@@ -384,4 +429,21 @@
 		    <!--------------End </form> ---------------------->
 		</div>
     </div>
+    <script>
+        let items = document.querySelectorAll('#carousel-item-1')
+
+            items.forEach((el) => {
+                const minPerSlide = 4
+                let next = el.nextElementSibling
+                for (var i = 1; i < minPerSlide; i++) {
+                    if (!next) {
+                        // wrap carousel by using first child
+                        next = items[0]
+                    }
+                    let cloneChild = next.cloneNode(true)
+                    el.appendChild(cloneChild.children[0])
+                    next = next.nextElementSibling
+                }
+            })
+    </script>
 @endsection()

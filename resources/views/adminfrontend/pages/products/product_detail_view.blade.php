@@ -27,49 +27,68 @@
                         <h4 class="text-medium mb-20">Product Details</h4>
                     </div>
                     <div class="col-md-6">
-                        <img
-                            src="/product_img/imgcover/{{$product_view ->product_imgcover}}"
-                            class="img-fluid product-thumbnail"
-                        >
-                        <div class="container text-center my-3 px-0">
-                            <div class="row mx-auto my-auto justify-content-center">
-                                <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-inner" role="listbox">
-                                        @foreach ($imgReviews as $imgreview)
-                                             <div class="carousel-item {{($loop->first)? 'active':''}}">
-                                                <div class="col-md-3 ">
-                                                    <img
-                                                        src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
-                                                        class="img-fluid product-thumbnail px-2"
-                                                    >
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        @foreach ($allImgReviews as $allimgreview)
-                                            @if($allimgreview->product_id == $product_view->id)
-                                                @continue
-                                            @else
-                                                <div class="carousel-item ">
-                                                    <div class="col-md-3 ">
-                                                        <img
-                                                            src="/product_img/imgreview/{{$allimgreview->product_imgreview}}"
-                                                            class="img-fluid product-thumbnail px-2"
-                                                        >
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                    <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
-                                        data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon " aria-hidden="true"></span>
-                                    </a>
-                                    <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button"
-                                        data-bs-slide="next">
-                                        <span class="carousel-control-next-icon " aria-hidden="true"></span>
-                                    </a>
+                        <div id="carouselExampleControlsNoTouching" class="carousel slide px-1" data-bs-touch="false" data-bs-interval="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img
+                                        src="/product_img/imgcover/{{$product_view ->product_imgcover}}"
+                                        class="img-fluid product-thumbnail mb-3"
+                                    >
                                 </div>
+                                @foreach ($imgReviews as $imgreview)
+                                    <div class="carousel-item ">
+                                        <img
+                                            src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
+                                            class="img-fluid product-thumbnail mb-3 "
+                                        >
+                                    </div>
+                                @endforeach
                             </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" id="carousel-1">
+                            <div class="carousel-inner">
+                                @foreach ($imgReviews as $imgreview)
+                                    <div class="carousel-item {{($loop->first)? 'active':''}}" id="carousel-item-1" data-bs-interval="2000">
+                                        <div class="col-md-3 ">
+                                            <img
+                                                src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
+                                                class="img-fluid product-thumbnail px-1"
+                                            >
+                                        </div>
+                                    </div>
+                                @endforeach
+                                @foreach ($allImgReviews as $allimgreview)
+                                    @if($allimgreview->product_id == $product_view->id)
+                                        @continue
+                                    @else
+                                        <div class="carousel-item " id="carousel-item-1" data-bs-interval="2000">
+                                            <div class="col-md-3 ">
+                                                <img
+                                                    src="/product_img/imgreview/{{$allimgreview->product_imgreview}}"
+                                                    class="img-fluid product-thumbnail px-1"
+                                                >
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
                     </div>
 
@@ -245,7 +264,7 @@
                                             <div class="col-md-2 mx-0 py-1">
                                                 <div
                                                     class="py-1 text-center text-sm"
-                                                    style="background: {{$product_view->product_color}}; width: 65px"
+                                                    style="background: {{$product_view->product_color}}; width: 65px ;"
                                                     >
                                                     <a
                                                         href="{{url('/admin/product-detail-view/'.$product_view->product_code)}}"
@@ -339,7 +358,7 @@
         </div>
     </div>
     <script>
-        let items = document.querySelectorAll('.carousel .carousel-item')
+        let items = document.querySelectorAll('#carousel-item-1')
 
             items.forEach((el) => {
                 const minPerSlide = 4

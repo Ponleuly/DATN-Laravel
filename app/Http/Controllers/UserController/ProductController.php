@@ -4,6 +4,7 @@ namespace App\Http\Controllers\UserController;
 
 use App\Models\Groups;
 use App\Models\Products;
+use App\Models\Products_Imgreviews;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Models\Products_Sizes;
@@ -51,6 +52,11 @@ class ProductController extends Controller
         $headCode = trim($code, "0..9");
         $productCode = Products::where('product_code', 'LIKE', '%' . $headCode . '%')->get();
 
+        // Join table Product and Products_Imgreviews to get all images reviews with the same product_code
+        $allImgReviews = Products::join('Products_Imgreviews', 'products_imgreviews.product_id', '=', 'products.id')
+            ->where('products.product_code', 'LIKE', '%' . $headCode . '%')
+            ->get(['products_imgreviews.*']);
+        $imgReviews = Products_Imgreviews::where('product_id', $productId)->orderBy('id', 'desc')->get();
         foreach ($productSizes as $row) {
             $sizeStock += $row->size_quantity;
         }
@@ -63,7 +69,9 @@ class ProductController extends Controller
                 'productCode',
                 'productGroups',
                 'productSizes',
-                'productAttribute'
+                'productAttribute',
+                'imgReviews',
+                'allImgReviews'
             )
         );
     }

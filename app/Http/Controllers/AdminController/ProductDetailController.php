@@ -94,7 +94,7 @@ class ProductDetailController extends Controller
         $allImgReviews = Products::join('Products_Imgreviews', 'products_imgreviews.product_id', '=', 'products.id')
             ->where('products.product_code', 'LIKE', '%' . $headCode . '%')
             ->get(['products_imgreviews.*']);
-        $imgReviews = Products_Imgreviews::where('product_id', $productId)->get();
+        $imgReviews = Products_Imgreviews::where('product_id', $productId)->orderBy('id', 'desc')->get();
 
         $stockLeft = $product_view->product_stockleft;
         $status = Products::where('product_code', $code)->first();
