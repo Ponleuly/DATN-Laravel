@@ -160,7 +160,7 @@
                     @else
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="image-upload-wrap">
+                            <div class="image-upload-wrap ">
                                 <input
                                     class="file-upload-input"
                                     type='file'

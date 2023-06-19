@@ -51,13 +51,13 @@
                                 <div class="file-upload-content">
                                     <img class="file-upload-image-category" src="#" alt="your image" name="category_img"/>
                                     <span
-                                        class="file_remove"
+                                        class="file-remove"
                                         type="button"
                                         onclick="removeUpload()">X
                                     </span>
                                 </div>
 
-                                <label for="category_name"><p class="text-label mt-2">Category name</p></label>
+                                <label for="category_name"><p class="text-label mt-3">Category name</p></label>
                                 <input
                                     type="text"
                                     class="form-control rounded-0 fw-500 mb-2"

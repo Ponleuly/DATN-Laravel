@@ -5186,6 +5186,12 @@ a.view-btn:hover span {
   object-fit: cover;
   border-radius: 50%;
 }
+.file-upload-image-category {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  padding: 0 15px;
+}
 .file-upload-image-cover {
   height: 300px;
   width: 100%;

@@ -1057,3 +1057,138 @@ tr.admin-table {
 .carousel-inner .carousel-item-start {
   transform: translateX(0);
 }
+/*===========Profile img ======*/
+.file-upload-content {
+  display: none;
+  text-align: center;
+  position: relative;
+  border: 1px solid #D3D3D3;
+  padding: 15px 0;
+}
+
+.file-upload-content .file-remove {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  background: #aaa;
+  line-height: 30px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  right: -15px;
+  top: -15px;
+}
+
+.file-remove:hover {
+  background: #222;
+  transition: .2s;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 150px;
+  height: 150px;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  border: 2px dashed #D3D3D3;
+  position: relative;
+}
+
+.image-upload-wrap:hover .drag-text h6 {
+  color: #4169E1;
+}
+
+.image-upload-wrap:hover .drag-text svg {
+  color: #4169E1;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+  cursor: pointer;
+}
+
+.drag-text h6 {
+  font-weight: 600;
+  color: grey;
+  padding: 10px 0;
+  font-size: 12px;
+}
+
+.file-upload-image {
+
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.file-upload-image-category {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  padding: 0 15px;
+}
+
+.file-upload-image-cover {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  padding: 0 15px;
+}
+.admin-profile{
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.pf-container{
+  position: relative;
+}
+.middle-icon {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.pf-container:hover .admin-profile {
+  opacity: 0.6;
+}
+
+.pf-container:hover .middle-icon {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.icon-color {
+  color: white;
+  font-size: 20px;
+  padding: 16px 32px;
+}
+.icon-color:hover {
+  opacity: 0.8;
+  transition: .5s ease;
+}
+.list-group-item.active{
+    border-radius: 6px;
+}
+.list-group-item-action:hover{
+  border-radius: 6px;
+}

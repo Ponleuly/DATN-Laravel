@@ -71,8 +71,8 @@
 
         </div>
 
-        <div class="d-grid gap-2 my-2">
-            <button class="btn btn-primary rounded-0" type="submit">Update Profile</button>
+        <div class="text-end my-2 text-sm">
+            <button class="btn btn-primary btn-sm rounded-1" type="submit">Update Profile</button>
         </div>
     </form>
 @endsection

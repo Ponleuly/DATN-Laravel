@@ -65,17 +65,15 @@
                             {{($order->order_status == 'Processing')?  'text-primary' : ''}}
                             {{($order->order_status == 'Delivered')?  'text-success' : ''}}
                             {{($order->order_status == 'Canceled')?  'text-danger' : ''}}
-                                                    ">
-                                                    {{$order->order_status}}
-                                                </td>
-                                                <td class="text-center">
-                                                    <a
-                            class="btn btn-info  py-1 px-2 btn-sm"
-                            href="{{url('purchase-order-detail/'. $order->id)}}"
-                            role="button"
-                            >
-                            Details
-                            </a>
+                            ">
+                            {{$order->order_status}}
+                        </td>
+                        <td class="text-center">
+                            <a
+                                class="btn btn-info  py-1 px-2 btn-sm"
+                                href="{{url('purchase-order-detail/'. $order->id)}}"
+                                role="button"
+                            >Details</a>
                         </td>
                     </tr>
                 @endforeach

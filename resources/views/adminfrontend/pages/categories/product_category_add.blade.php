@@ -26,16 +26,6 @@
                                     <label for="category_img">
                                         <p class="text-label mt-3">Category Image</p>
                                     </label>
-                                    <!--
-                                    <input
-                                        class="form-control rounded-0 mb-2"
-                                        type="file"
-                                        id="category_img"
-                                        name="category_img"
-                                        accept="image/png, image/jpeg, image/jpg"
-                                        required
-                                    >
-                                    -->
                                     <div class="image-upload-wrap">
                                         <input
                                             class="file-upload-input"
@@ -57,7 +47,7 @@
                                     <div class="file-upload-content">
                                         <img class="file-upload-image-category" src="#" alt="your image" name="category_img"/>
                                         <span
-                                            class="file_remove"
+                                            class="file-remove"
                                             type="button"
                                             onclick="removeUpload()">X
                                         </span>
@@ -152,19 +142,11 @@
         }
 
         function removeUpload() {
-            //$('.file-upload-input').replaceWith($('.file-upload-input').clone());
             $('.file-upload-content').hide();
             $('.image-upload-wrap').show();
             $('.admin-profile').show();
             document.querySelector('.file-upload-input').value = '';
         }
-        /*
-        $('.image-upload-wrap').bind('dragover', function () {
-            $('.image-upload-wrap').addClass('image-dropping');
-        });
-        $('.image-upload-wrap').bind('dragleave', function () {
-            $('.image-upload-wrap').removeClass('image-dropping');
-        });
-        */
+
     </script>
 @endsection()

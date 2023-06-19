@@ -7,6 +7,7 @@ use App\Models\Orders;
 use App\Models\Contacts;
 use App\Models\Settings;
 use App\Models\Customers;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\Orders_Details;
 use App\Http\Controllers\Controller;
@@ -38,7 +39,17 @@ class ProfileController extends Controller
         $update_user->city = $request->input('city');
         $update_user->district = $request->input('district');
         $update_user->ward = $request->input('ward');
+        if ($request->hasFile('profile_img')) {
+            $destination_path = 'profile_img/';
+            $image = $request->file('profile_img');
+            if (File::exists(public_path($destination_path))) {
+                File::delete(public_path($destination_path));
+            }
+            $image_name = $image->getClientOriginalName();
+            $image->move($destination_path, $image_name);
 
+            $update_user['profile_img'] = $image_name;
+        }
         $update_user->update();
         return redirect('profile')
             ->with('success', 'Profile updated successfully !');
