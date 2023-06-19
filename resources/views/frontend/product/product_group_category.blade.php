@@ -45,7 +45,7 @@
 					@endphp
 					@foreach ($products as $product)
 						<!-- Start Column 1 -->
-						<div class="col-12 col-md-4 col-lg-3">
+						<div class="col-12 col-md-4 col-lg-3 mb-4">
 							<a class="product-item" href="{{url('product-detail/'.$product->product_code)}}">
 								<div class="img-container">
 									<img
@@ -71,7 +71,7 @@
 					@endforeach
 				@endforeach
 			</div>
-			<div class="row mt-4">
+			<div class="row">
 				<div class="d-flex justify-content-center">
 					<!--- To show data by pagination --->
 					{{$group_categories->links()}}

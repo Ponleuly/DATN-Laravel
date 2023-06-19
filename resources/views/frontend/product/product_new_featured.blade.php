@@ -36,7 +36,7 @@
 		<div class="row">
 			@foreach ($products as $product)
 			<!-- Start Column 1 -->
-			<div class="col-12 col-md-4 col-lg-3">
+			<div class="col-12 col-md-4 col-lg-3 mb-4">
 				<a class="product-item" href="{{url('product-detail/'.$product->product_code)}}">
 					<div class="img-container">
 						<img
