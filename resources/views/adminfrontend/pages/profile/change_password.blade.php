@@ -50,11 +50,11 @@
                         <input
                             id="password-confirm"
                             type="password"
-                            class="form-control form-control-sm rounded-1 @error('password') is-invalid @enderror"
+                            class="form-control form-control-sm rounded-1 @error('password_confirmation') is-invalid @enderror"
                             name="password_confirmation"
                             autocomplete="new-password"
                         >
-                        @error('password')
+                        @error('password_confirmation')
                             <span class="invalid-feedback text-sm" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

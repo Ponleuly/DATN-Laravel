@@ -7,11 +7,12 @@ use App\Models\Orders;
 use App\Models\Contacts;
 use App\Models\Settings;
 use App\Models\Customers;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\Orders_Details;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -24,44 +25,52 @@ class ProfileController extends Controller
     public function profile_update(Request $request, $id)
     {
         //return dd($request->toArray());
-        $update_user = User::where('id', $id)->first();
-        if ($request->hasFile('profile_img')) {
-            $destination_path = 'profile_img/';
-            $image = $request->file('profile_img');
-            if (File::exists(public_path($destination_path))) {
-                File::delete(public_path($destination_path));
-            }
-            $image_name = $image->getClientOriginalName();
-            $image->move($destination_path, $image_name);
-            $update_user['profile_img'] = $image_name;
-            $update_user->update();
-        } else {
-
+        if ($request->form_type == 'update_profile') {
             $update_user = User::where('id', $id)->first();
-            $input = $this->validate($request, [
-                'name' => ['required', 'string', 'max:50'],
-                'phone' => ['required', 'string', 'max:20', 'phone:VN,BE', 'unique:users'], /*'regex:/(01)[0-9]{9}'*/ // verify only number is acceptable
-                'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-                'address' => ['required', 'string', 'max:100'],
-                'city' => ['required', 'string', 'max:50'],
-                'district' => ['required', 'string', 'max:50'],
-                'ward' => ['required', 'string', 'max:50'],
-            ]);
-            if ($input) {
-                $update_user->name = $input['name'];
-                $update_user->phone = $input['phone'];
-                $update_user->email = $input['email'];
-                $update_user->address = $input['address'];
-                $update_user->city = $input['city'];
-                $update_user->district = $input['district'];
-                $update_user->ward = $input['ward'];
+            if ($request->hasFile('profile_img')) {
+                $destination_path = 'profile_img/';
+                $image = $request->file('profile_img');
+                if (File::exists(public_path($destination_path))) {
+                    File::delete(public_path($destination_path));
+                }
+                $image_name = $image->getClientOriginalName();
+                $image->move($destination_path, $image_name);
+                $update_user['profile_img'] = $image_name;
+                $update_user->update();
+            } else {
+                //return dd($request->toArray());
+                $update_user = User::where('id', $id)->first();
+                $input = $this->validate($request, [
+                    'name' => ['required', 'string', 'max:50'],
+                    'phone' => ['required', 'string', 'max:15', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'phone:VN,BE', Rule::unique('users', 'phone')->ignore(Auth::user()->id)], /*'regex:/(01)[0-9]{9}'*/ // verify only number is acceptable
+                    'email' => ['required', 'string',  'max:50', Rule::unique('users', 'email')->ignore(Auth::user()->id)],
+                    'address' => ['required', 'string', 'max:100'],
+                    'city' => ['required', 'string', 'max:50'],
+                    'district' => ['required', 'string', 'max:50'],
+                    'ward' => ['required', 'string', 'max:50'],
+                ]);
+                if ($input) {
+                    $update_user->name = $input['name'];
+                    $update_user->phone = $input['phone'];
+                    $update_user->email = $input['email'];
+                    $update_user->address = $input['address'];
+                    $update_user->city = $input['city'];
+                    $update_user->district = $input['district'];
+                    $update_user->ward = $input['ward'];
+                    $update_user->update();
+                } else {
+                    return redirect('profile')
+                        ->with('error', 'Please check your information again !');
+                }
             }
-            $update_user->create();
+
+            return redirect('profile')
+                ->with('success', 'Profile updated successfully !');
+        } else if ($request->form_type == 'update_password') {
+            $this->update_password($request, $id);
+            return redirect('profile')
+                ->with('success', 'Password has been changed successfully !');
         }
-
-        return redirect('profile')
-            ->with('success', 'Profile updated successfully !');
-
 
         //return dd($request->toArray());
     }
@@ -70,15 +79,16 @@ class ProfileController extends Controller
         return view('frontend.userProfile.change_password');
     }
 
-
     public function update_password(Request $request, $id)
     {
-
         $password_validate = $this->validate($request, [
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'password_confirmation' => ['required', 'string', 'min:8'],
-            'current_password' => ['required', 'string', 'min:8', 'current_password'],
-
+            'current_password' => ['required', 'string', 'min:8', function ($attribute, $value, $fail) {
+                if (!Hash::check($value, Auth::user()->password)) {
+                    return $fail(__('The current password is incorrect.'));
+                }
+            }],
         ]);
 
         if ($password_validate) {
@@ -88,15 +98,8 @@ class ProfileController extends Controller
             if (Hash::check($input['current_password'], $password)) {
                 $user['password'] = bcrypt($input['password']);
                 $user->update();
-            } else {
-                return redirect()->back()->with('error', 'Current password does not matched !');
             }
-        } else {
-            return redirect()->back();
         }
-
-        return redirect('profile')
-            ->with('success', 'Password has been changed successfully !');
     }
 
     public function purchase_history()
