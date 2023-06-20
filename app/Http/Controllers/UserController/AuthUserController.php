@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Propaganistas\LaravelPhone\Rules\Phone;
 
 class AuthUserController extends Controller
 {
@@ -17,11 +18,12 @@ class AuthUserController extends Controller
     }
     public function userRegister(Request $request)
     {
+        //return dd($request->toArray());
         $input = $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:20', /*'regex:/(01)[0-9]{9}'*/], // verify only number is acceptable
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'address' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:50'],
+            'phone' => ['required', 'string', 'max:20', 'phone:VN,BE', 'unique:users'], /*'regex:/(01)[0-9]{9}'*/ // verify only number is acceptable
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'address' => ['required', 'string', 'max:100'],
             'city' => ['required', 'string', 'max:50'],
             'district' => ['required', 'string', 'max:50'],
             'ward' => ['required', 'string', 'max:50'],
@@ -57,8 +59,8 @@ class AuthUserController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email'   => 'required|email',
-            'password' => 'required|min:8'
+            'email' => ['required', 'string', 'email', 'max:50'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
         $arr = [

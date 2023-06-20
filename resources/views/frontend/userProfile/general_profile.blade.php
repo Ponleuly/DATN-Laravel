@@ -26,12 +26,17 @@
             <div class="form-floating">
                 <input
                     type="text"
-                    class="form-control rounded-0"
+                    class="form-control rounded-0  @error('phone') is-invalid @enderror"
                     id="floatingInputValue"
                     name="phone"
                     placeholder="xxx xx xx xxx"
                     value="{{Auth::user()->phone}}">
                 <label for="floatingInputValue">Phone Number</label>
+                @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
         </div>
     </div>

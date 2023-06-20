@@ -86,6 +86,7 @@ class RegisterController extends Controller
     {
         return view('auth.register', ['route' => route('admin.register-view'), 'title' => 'Admin']);
     }
+    /*
     protected function createAdmin(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -100,4 +101,5 @@ class RegisterController extends Controller
         //return dd($request->toArray());
         return redirect()->intended('admin');
     }
+    */
 }

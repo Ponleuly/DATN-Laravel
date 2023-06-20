@@ -23,22 +23,8 @@ class ProfileController extends Controller
 
     public function profile_update(Request $request, $id)
     {
-        /*
-        $input = $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:11', 'regex:/(01)[0-9]{9}/'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'address' => ['required', 'string', 'max:255'],
-        ]);
-        */
+        //return dd($request->toArray());
         $update_user = User::where('id', $id)->first();
-        $update_user->name = $request->input('name');
-        $update_user->phone = $request->input('phone');
-        $update_user->email = $request->input('email');
-        $update_user->address = $request->input('address');
-        $update_user->city = $request->input('city');
-        $update_user->district = $request->input('district');
-        $update_user->ward = $request->input('ward');
         if ($request->hasFile('profile_img')) {
             $destination_path = 'profile_img/';
             $image = $request->file('profile_img');
@@ -47,10 +33,32 @@ class ProfileController extends Controller
             }
             $image_name = $image->getClientOriginalName();
             $image->move($destination_path, $image_name);
-
             $update_user['profile_img'] = $image_name;
+            $update_user->update();
+        } else {
+
+            $update_user = User::where('id', $id)->first();
+            $input = $this->validate($request, [
+                'name' => ['required', 'string', 'max:50'],
+                'phone' => ['required', 'string', 'max:20', 'phone:VN,BE', 'unique:users'], /*'regex:/(01)[0-9]{9}'*/ // verify only number is acceptable
+                'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+                'address' => ['required', 'string', 'max:100'],
+                'city' => ['required', 'string', 'max:50'],
+                'district' => ['required', 'string', 'max:50'],
+                'ward' => ['required', 'string', 'max:50'],
+            ]);
+            if ($input) {
+                $update_user->name = $input['name'];
+                $update_user->phone = $input['phone'];
+                $update_user->email = $input['email'];
+                $update_user->address = $input['address'];
+                $update_user->city = $input['city'];
+                $update_user->district = $input['district'];
+                $update_user->ward = $input['ward'];
+            }
+            $update_user->create();
         }
-        $update_user->update();
+
         return redirect('profile')
             ->with('success', 'Profile updated successfully !');
 
@@ -69,7 +77,7 @@ class ProfileController extends Controller
         $password_validate = $this->validate($request, [
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'password_confirmation' => ['required', 'string', 'min:8'],
-            'current_password' => ['required', 'string', 'min:8'],
+            'current_password' => ['required', 'string', 'min:8', 'current_password'],
 
         ]);
 
