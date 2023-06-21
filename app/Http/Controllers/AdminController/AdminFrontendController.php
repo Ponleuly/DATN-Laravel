@@ -5,10 +5,12 @@ namespace App\Http\Controllers\AdminController;
 use App\Models\User;
 use App\Models\Orders;
 use App\Models\Products;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Customers;
 use App\Models\Subscribers;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class AdminFrontendController extends Controller
@@ -56,7 +58,33 @@ class AdminFrontendController extends Controller
     public function update_profile(Request $request, $id)
     {
         //return dd($request->toArray());
-
+        $update_profile = User::where('id', $id)->first();
+        $input = $this->validate($request, [
+            'name' => [
+                'required', 'string', 'max:50'
+            ],
+            'phone' => ['required', 'string', 'max:15', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'phone:VN,BE', Rule::unique('users', 'phone')->ignore(Auth::user()->id)], /*'regex:/(01)[0-9]{9}'*/ // verify only number is acceptable
+            'email' => ['required', 'string',  'max:50', Rule::unique('users', 'email')->ignore(Auth::user()->id)],
+            'address' => ['required', 'string', 'max:100'],
+            'city' => [
+                'required', 'string', 'max:50'
+            ],
+            'district' => ['required', 'string', 'max:50'],
+            'ward' => [
+                'required', 'string', 'max:50'
+            ],
+        ]);
+        if ($input) {
+            $update_profile->name = $input['name'];
+            $update_profile->phone = $input['phone'];
+            $update_profile->email = $input['email'];
+            $update_profile->address = $input['address'];
+            $update_profile->city = $input['city'];
+            $update_profile->district = $input['district'];
+            $update_profile->ward = $input['ward'];
+            $update_profile->update();
+        }
+        /*
         $update_profile = User::where('id', $id)->first();
         $update_profile->name = $request->input('name');
         $update_profile->phone = $request->input('phone');
@@ -65,6 +93,7 @@ class AdminFrontendController extends Controller
         $update_profile->city = $request->input('city');
         $update_profile->district = $request->input('district');
         $update_profile->ward = $request->input('ward');
+        */
         if ($request->current_password != '') {
             app('App\Http\Controllers\UserController\ProfileController')->update_password($request, $id);
         }

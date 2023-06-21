@@ -10,7 +10,7 @@
                     id="floatingInputValue"
                     name="name"
                     placeholder="name@example.com"
-                    value="{{old('name')? old('name') :Auth::user()->name}}">
+                    value="{{old('name')? old('name') : Auth::user()->name}}">
                 <label for="floatingInputValue">Full Name</label>
                 @error('name')
                     <span class="invalid-feedback" role="alert">

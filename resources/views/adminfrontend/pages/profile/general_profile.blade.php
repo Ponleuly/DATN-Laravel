@@ -13,12 +13,18 @@
                             <label for="name" class="form-label text-sm">Full name</label>
                             <input
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control form-control-sm
+                                @error('name') is-invalid @enderror"
                                 id="name"
                                 name="name"
-                                value="{{$user->name}}"
-                                placeholder="Jonh Nathan"
+                                value="{{old('name')? old('name') : $user->name}}"
+                                placeholder="Enter name"
                             >
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -37,12 +43,18 @@
                             <label for="email" class="form-label text-sm">Email</label>
                             <input
                                 type="email"
-                                class="form-control form-control-sm"
+                                class="form-control form-control-sm
+                                @error('email') is-invalid @enderror"
                                 id="email"
                                 name="email"
-                                value="{{$user->email}}"
+                                value="{{old('email')? old('email') : $user->email}}"
                                 placeholder="example@gmail.com"
                             >
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -50,12 +62,18 @@
                             <label for="phone" class="form-label text-sm">Phone</label>
                             <input
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control form-control-sm
+                                @error('phone') is-invalid @enderror"
                                 id="phone"
                                 name="phone"
-                                value="{{$user->phone}}"
+                                value="{{old('phone')? old('phone') : $user->phone}}"
                                 placeholder="+84 454 456 56"
                             >
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -66,12 +84,18 @@
                             <label for="address" class="form-label text-sm">Address</label>
                             <input
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control form-control-sm
+                                @error('address') is-invalid @enderror"
                                 id="address"
                                 name="address"
-                                value="{{$user->address}}"
+                                value="{{old('address')? old('address') : $user->address}}"
                                 placeholder="23 Ta Quang Buu,..."
                             >
+                            @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -79,12 +103,18 @@
                             <label for="city" class="form-label text-sm">City/Province</label>
                             <input
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control form-control-sm
+                                @error('city') is-invalid @enderror"
                                 id="city"
                                 name="city"
-                                value="{{$user->city}}"
+                                value="{{old('city')? old('city') : $user->city}}"
                                 placeholder="Ha Noi"
                             >
+                            @error('city')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -94,12 +124,18 @@
                             <label for="district" class="form-label text-sm">District</label>
                             <input
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control form-control-sm
+                                @error('district') is-invalid @enderror"
                                 id="district"
                                 name="district"
-                                value="{{$user->district}}"
+                                value="{{old('district')? old('district') : $user->district}}"
                                 placeholder="Hai Ba Trung..."
                             >
+                            @error('district')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -107,12 +143,18 @@
                             <label for="city" class="form-label text-sm">Ward</label>
                             <input
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control form-control-sm
+                                @error('ward') is-invalid @enderror"
                                 id="ward"
                                 name="ward"
-                                value="{{$user->ward}}"
+                                value="{{old('ward')? old('ward') : $user->ward}}"
                                 placeholder="Bach Khoa"
                             >
+                            @error('ward')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>
