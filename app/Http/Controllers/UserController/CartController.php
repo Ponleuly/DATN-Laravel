@@ -49,7 +49,6 @@ class CartController extends Controller
 
     public function add_to_cart(Request $request, $id)
     {
-
         //========== If User Sign in then save to Carts table============== //
         if (Auth::check() && Auth::user()->role == 1) {
             $user_id = Auth::user()->id;
@@ -95,7 +94,6 @@ class CartController extends Controller
                     $input['size_id'] = $request->size_id;
                     $input['product_quantity'] = $request->product_quantity;
                     $input['product_price'] =  $product->product_saleprice;
-
                     Carts::create($input);
                 }
             }
@@ -169,6 +167,8 @@ class CartController extends Controller
 
     public function update_cart(Request $request, $cartId)
     {
+        //return dd($request->size_id);
+
         if (Auth::check() && Auth::user()->role == 1) {
             //return dd($request->toArray());
             $item = Carts::where('id', $cartId)->first();
@@ -183,9 +183,14 @@ class CartController extends Controller
                             ' products left with size ' . $pro_size_qty->rela_product_size->size_number . '.',
                     );
             } else {
-                $item->size_id = $request->size_id;
-                $item->product_quantity = $request->product_quantity;
-                $item->update();
+                if ($item->size_id ==  $request->size_id) {
+                    $item->product_quantity = $request->product_quantity;
+                    $item->update();
+                } else {
+                    $item->size_id = $request->size_id;
+                    $item->product_quantity = $request->product_quantity;
+                    $item->update();
+                }
             }
 
             /*
@@ -196,7 +201,6 @@ class CartController extends Controller
             $update_cart->update();
             */
         } else {
-
             $item = Cart::content()->where('rowId', $cartId);
             //return dd($cart->rowId);
             foreach ($item as $key => $value) {
