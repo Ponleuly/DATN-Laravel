@@ -72,6 +72,7 @@
 						$total = 0;
 						$discount = 0;
 						$discount  =  Session::get('discount');
+						$btn = 0;
 					@endphp
 					<!---------------------->
 
@@ -79,6 +80,7 @@
 						<!--*session('cart') as $id => $details-->
 						@foreach ($carts as $cart)
 							@php
+								$btn++;
 								//--- Check if user is guest or sign in to display img from db ---//
 								if(Auth::check() && Auth::user()->role == 1){
 									$cartId = $cart->id;
@@ -156,7 +158,7 @@
 										action="{{url('update-cart/'.$cartId)}}"
 										method="POST"
 										enctype="multipart/form-data"
-										id="update-cart"
+										id="update-cart-{{$btn}}"
 										>
                 						@csrf <!-- to make form active -->
 										@method('PUT')
@@ -176,6 +178,7 @@
 															$sizeLeft = Products_Sizes::where('product_id',  $productId)
 																->where('size_id', $productSize->size_id)->first();
 														@endphp
+
 														<option
 															class="{{($sizeLeft->size_quantity == 0)? 'text-danger' : ''}}"
 															value="{{$productSize->size_id}}"
@@ -189,11 +192,14 @@
 													@endforeach
 												</select>
 											</div>
-											<div class="col-md-3">
+											<div class="col-md-4">
 												<label class="text-black">Quantity</label>
+												<!--
 												<div class="cinput-group quantity-container ">
+
 													<input
 														type="number"
+														max="10" min="1"
 														id="quantity"
 														name="product_quantity"
 														class="form-control form-control-sm rounded-0"
@@ -203,6 +209,36 @@
 														aria-describedby="button-addon1"
 														onchange="this.form.submit()"
 													>
+												</div>
+												-->
+												<div class="input-group quantity-container">
+													<button
+														class="btn btn-outline-primary btn-sm rounded-0"
+														type="button"
+														id="minus-btn-{{$btn}}"
+														onclick="updateQty(event)"
+														><i class="bi bi-dash-lg"></i>
+													</button>
+													<input
+														class="form-control form-control-sm bg-white text-center "
+														type="number"
+														max="10" min="1"
+														name="product_quantity"
+														id="qty-input-{{$btn}}"
+														value="{{$quantity}}"
+														required
+														aria-label="Example text with button addon"
+														aria-describedby="button-addon"
+														onchange="this.form.submit()"
+														readonly
+													>
+													<button
+														class="btn btn-outline-secondary btn-sm rounded-0"
+														type="button"
+														id="plus-btn-{{$btn}}"
+														onclick="updateQty(event)"
+														><i class="bi bi-plus-lg"></i>
+													</button>
 												</div>
 											</div>
 											<!--
@@ -404,4 +440,50 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" ></script>
+    <script>
+        var btn = $('.quantity-container').length;
+		function updateQty(event) {
+            let btnType = event.currentTarget.id;
+			//alert(btnType);
+			for(var i=1 ; i<=btn; i++){
+				if(btnType == 'plus-btn-'+i){
+					$('#qty-input-'+i).val(parseInt($('#qty-input-'+i).val()) + 1 );
+                    if ($('#qty-input-'+i).val() > 9) {
+                        $('#qty-input-'+i).val(10);
+                    }
+					$('#update-cart-'+i).submit();
+				}
+			}
+			for(var j=1 ; j<=btn; j++){
+				if(btnType == 'minus-btn-'+j){
+					$('#qty-input-'+j).val(parseInt($('#qty-input-'+j).val()) - 1 );
+                    if ($('#qty-input-'+j).val() == 0) {
+                        $('#qty-input-'+j).val(1);
+                    }
+					$('#update-cart-'+j).submit();
+				}
+			}
+
+
+        }
+
+			/*
+        	$(document).ready(function(){
+                $('#plus-btn').click(function(){
+                    $('#qty_input').val(parseInt($('#qty_input').val()) + 1 );
+                    if ($('#qty_input').val() > 9) {
+                        $('#qty_input').val(10);
+                    }
+
+                });
+                $('#minus-btn').click(function(){
+                    $('#qty_input').val(parseInt($('#qty_input').val()) - 1 );
+                    if ($('#qty_input').val() == 0) {
+                        $('#qty_input').val(1);
+                    }
+                });
+            });
+			*/
+    </script>
 @endsection()

@@ -229,7 +229,7 @@
                                     <div class="col-md-6">
                                         <h6 class="mb-2 text-black fw-bold py-2">SIZE</h6>
                                         <select
-                                            class="form-select form-control bg-transparent rounded-0"
+                                            class="form-select form-control  bg-transparent rounded-0"
                                             aria-label="Default select example"
                                             name="size_id"
                                             required
@@ -252,6 +252,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <h6 class="mb-2 text-black fw-bold py-2">Quantity</h6>
+                                        <!--
                                         <div class="form-outline">
                                             <input
                                                 class="form-control bg-transparent rounded-0"
@@ -261,6 +262,31 @@
                                                 value="" max="10" min="1"
                                                 required
                                             >
+
+                                        </div>-->
+                                        <div class="input-group mb-3">
+                                            <button
+                                                class="btn btn-outline-primary rounded-0"
+                                                type="button" id="minus-btn"
+                                                ><i class="bi bi-dash-lg"></i>
+                                            </button>
+                                            <input
+                                                class="form-control bg-transparent rounded-0 text-center"
+                                                type="number"
+                                                name="product_quantity"
+                                                id="qty_input"
+                                                value="1"
+                                                max="10" min="1"
+                                                required
+                                                aria-label="Example text with button addon"
+                                                aria-describedby="button-addon"
+                                                readonly
+                                            >
+                                            <button
+                                                class="btn btn-outline-secondary rounded-0"
+                                                type="button" id="plus-btn"
+                                                ><i class="bi bi-plus-lg"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -429,6 +455,7 @@
 		    <!--------------End </form> ---------------------->
 		</div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" ></script>
     <script>
         let items = document.querySelectorAll('#carousel-item-1')
 
@@ -445,5 +472,20 @@
                     next = next.nextElementSibling
                 }
             })
+        	$(document).ready(function(){
+                //$('#qty_input').prop('disabled', true);
+                $('#plus-btn').click(function(){
+                    $('#qty_input').val(parseInt($('#qty_input').val()) + 1 );
+                    if ($('#qty_input').val() > 9) {
+                        $('#qty_input').val(10);
+                    }
+                });
+                $('#minus-btn').click(function(){
+                    $('#qty_input').val(parseInt($('#qty_input').val()) - 1 );
+                    if ($('#qty_input').val() == 0) {
+                        $('#qty_input').val(1);
+                    }
+                });
+            });
     </script>
 @endsection()

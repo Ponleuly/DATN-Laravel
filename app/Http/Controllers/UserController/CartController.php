@@ -29,11 +29,12 @@ class CartController extends Controller
     public function cart()
     {
         if (Auth::check() && Auth::user()->role == 1) {
-            $carts = Carts::where('user_id', Auth::user()->id)->get();
+            $carts = Carts::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
             $carts_count = $carts->count();
         } else {
-            $carts = Cart::content();
+            $carts = Cart::content()->sortByDesc('rowId');
             $carts_count = $carts->count();
+            //return dd($carts);
         }
         //return dd($carts);
         return view(
@@ -49,6 +50,7 @@ class CartController extends Controller
 
     public function add_to_cart(Request $request, $id)
     {
+        //return dd($request->toArray());
         //========== If User Sign in then save to Carts table============== //
         if (Auth::check() && Auth::user()->role == 1) {
             $user_id = Auth::user()->id;
