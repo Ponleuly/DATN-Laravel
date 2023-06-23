@@ -156,6 +156,7 @@
 										action="{{url('update-cart/'.$cartId)}}"
 										method="POST"
 										enctype="multipart/form-data"
+										id="update-cart"
 										>
                 						@csrf <!-- to make form active -->
 										@method('PUT')
@@ -168,6 +169,7 @@
 													aria-label="Default select example"
 													id="size"
 													name="size_id"
+													onchange="this.form.submit()"
 													>
 													@foreach ($productSizes as $productSize)
 														@php
@@ -192,15 +194,18 @@
 												<div class="cinput-group quantity-container ">
 													<input
 														type="number"
+														id="quantity"
 														name="product_quantity"
 														class="form-control form-control-sm rounded-0"
 														value="{{$quantity}}" max="10" min="1"
 														placeholder=""
 														aria-label="Example text with button addon"
 														aria-describedby="button-addon1"
+														onchange="this.form.submit()"
 													>
 												</div>
 											</div>
+											<!--
 											<div class="col-md-3 mt-auto">
 												<div class="cinput-group quantity-container ">
 													<button
@@ -211,6 +216,7 @@
 													</button>
 												</div>
 											</div>
+										-->
 										</div>
 									</form>
 									<!------ End Form update Size and Quantity -------->

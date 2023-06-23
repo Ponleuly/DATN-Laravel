@@ -167,7 +167,7 @@ class CartController extends Controller
 
     public function update_cart(Request $request, $cartId)
     {
-        //return dd($request->size_id);
+        //return dd($request->toArray());
 
         if (Auth::check() && Auth::user()->role == 1) {
             //return dd($request->toArray());
@@ -183,18 +183,21 @@ class CartController extends Controller
                             ' products left with size ' . $pro_size_qty->rela_product_size->size_number . '.',
                     );
             } else {
-                $find_cart = Carts::where('user_id', Auth::user()->id)
+                $item->size_id = $request->size_id;
+                $item->product_quantity = $request->product_quantity;
+                $item->update();
+                $carts = Carts::where('user_id', $item->user_id)
                     ->where('product_id', $item->product_id)
-                    ->where('size_id', $request->size_id)->first();
-                if ($find_cart) {
+                    ->where('size_id', $request->size_id)->get();
+                if (count($carts) == 2) {
                     $item->delete();
-                    $find_cart->product_quantity = $request->product_quantity;
-                    $find_cart->update();
-                } else {
-                    $item->size_id = $request->size_id;
-                    $item->product_quantity = $request->product_quantity;
-                    $item->update();
+                    $update_cart = Carts::where('user_id', Auth::user()->id)
+                        ->where('product_id', $item->product_id)
+                        ->where('size_id', $request->size_id)->first();
+                    $update_cart->product_quantity = $request->product_quantity;
+                    $update_cart->update();
                 }
+                //return dd(count($carts));
             }
         } else {
             //return dd($request->toArray());
