@@ -217,6 +217,7 @@
 														type="button"
 														id="minus-btn-{{$btn}}"
 														onclick="updateQty(event)"
+														{{($quantity == 1)? 'disabled':''}}
 														><i class="bi bi-dash-lg"></i>
 													</button>
 													<input
@@ -229,14 +230,14 @@
 														required
 														aria-label="Example text with button addon"
 														aria-describedby="button-addon"
-														onchange="this.form.submit()"
-														readonly
+														onchange="(this.value == 0) ? this.value={{$quantity}}:this.form.submit()"
 													>
 													<button
 														class="btn btn-outline-secondary btn-sm rounded-0"
 														type="button"
 														id="plus-btn-{{$btn}}"
 														onclick="updateQty(event)"
+														{{($quantity == 10)? 'disabled':''}}
 														><i class="bi bi-plus-lg"></i>
 													</button>
 												</div>

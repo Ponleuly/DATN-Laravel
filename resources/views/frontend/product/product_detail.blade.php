@@ -280,7 +280,7 @@
                                                 required
                                                 aria-label="Example text with button addon"
                                                 aria-describedby="button-addon"
-                                                readonly
+                                                onchange="(this.value == 0) ? this.value=1:''"
                                             >
                                             <button
                                                 class="btn btn-outline-secondary rounded-0"
@@ -474,16 +474,29 @@
             })
         	$(document).ready(function(){
                 //$('#qty_input').prop('disabled', true);
+                $('#minus-btn').prop('disabled', true);
                 $('#plus-btn').click(function(){
                     $('#qty_input').val(parseInt($('#qty_input').val()) + 1 );
                     if ($('#qty_input').val() > 9) {
                         $('#qty_input').val(10);
+                    }
+                    if ($('#qty_input').val() > 1) {
+                        $('#minus-btn').prop('disabled', false);
+                    }
+                    if($('#qty_input').val() == 10){
+                        $('#plus-btn').prop('disabled', true);
                     }
                 });
                 $('#minus-btn').click(function(){
                     $('#qty_input').val(parseInt($('#qty_input').val()) - 1 );
                     if ($('#qty_input').val() == 0) {
                         $('#qty_input').val(1);
+                    }
+                    if ($('#qty_input').val() == 1) {
+                        $('#minus-btn').prop('disabled', true);
+                    }
+                    if($('#qty_input').val() < 10){
+                        $('#plus-btn').prop('disabled', false);
                     }
                 });
             });
