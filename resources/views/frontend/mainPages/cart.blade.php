@@ -326,14 +326,20 @@
 											href="{{url('remove-all-cart/0')}}"
 											class="btn btn-danger btn-sm btn-block rounded-1 px-3 fw-semibold disabled"
 											>
-											Delete all
+											<span class="material-icons-outlined"
+												style="vertical-align: middle; font-size: 24px">delete
+											</span>
+											<span style="vertical-align: middle">Delete all</span>
 										</a>
 										@else
 											<a
 												href="{{url('remove-all-cart/0')}}"
 												class="btn btn-danger btn-sm rounded-1 px-3"
 												>
-												Delete all
+												<span class="material-icons-outlined"
+													style="vertical-align: middle; font-size: 24px">delete
+												</span>
+												<span style="vertical-align: middle">Delete all</span>
 											</a>
 									@endif
 								</div>
@@ -342,7 +348,9 @@
 										href="{{url('shop')}}"
 										class="btn btn-danger btn-sm rounded-1 px-3"
 										>
-										Continue shopping
+										<span style="vertical-align: middle">Continue shopping</span>
+											<span class="material-icons-outlined ms-1"
+										style="vertical-align: middle; font-size: 24px">add_shopping_cart</span>
 									</a>
 								</div>
 							</div>
@@ -452,9 +460,11 @@
 										class="btn btn-danger btn-sm py-2 rounded-1
 											{{($carts_count == 0)? 'disabled':'' }}"
 										href="{{url('checkout/dis='.number_format($discount, 2))}}"
+
 										>
-										<span class="fw-bold">CHECKOUT</span>
-										<span class="material-icons-outlined ms-2" style="vertical-align:middle">shopping_cart_checkout</span>
+										<span class="fw-bold" style="vertical-align: middle;">CHECKOUT</span>
+										<span class="material-icons-outlined ms-1"
+											style="vertical-align: middle; font-size: 24px">shopping_cart_checkout</span>
 									</a>
 								</div>
 		                	</div>

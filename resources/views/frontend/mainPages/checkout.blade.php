@@ -471,9 +471,11 @@
 											<div class="col-md-6 mt-3">
 												<a
 													href="{{url('cart')}}"
-													class="btn btn-outline-danger btn-sm fw-semibold rounded-1"
+													class="btn btn-danger btn-sm fw-semibold rounded-1"
 													>
-													Back
+													<span class="material-icons-outlined"
+														style="vertical-align: middle; font-size: 20px">arrow_back</span>
+													<span style="vertical-align: middle;">Back</span>
 												</a>
 											</div>
 											<div class="col-md-6 d-flex justify-content-end mt-3">
@@ -483,7 +485,10 @@
 													value="placeorder"
 													id="btn-submit"
 													>
-													Place Order
+													<span style="vertical-align: middle;">Place Order</span>
+													<span class="material-icons-outlined ms-1"
+														style="vertical-align: middle; font-size: 24px">shopping_bag
+													</span>
 												</button>
 											</div>
 										</div>
