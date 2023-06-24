@@ -135,8 +135,8 @@
 
 			<!-----========= Start Menu icon ===============--->
 			<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-4 me-4">
-				<li class="nav-item me-0 ">
-					<a class="nav-link" href="{{url('like')}}">
+				<li class="nav-item me-0">
+					<a class="nav-link text-dark" href="{{url('like')}}">
 						<span
 							class="material-icons-outlined
 							{{Request::is('like')? 'active':''}}"
@@ -156,7 +156,7 @@
 					</a>
                 </li>
 				<li class="nav-item">
-					<span class="fs-6 nav-link text-danger mt-1 ps-0">
+					<span class="fs-6 nav-link text-dark mt-1 ps-0 {{Request::is('cart')? 'active':''}}">
 						@php
 							if (Auth::check() && Auth::user()->role == 1){
 								$cart_count = Carts::where('user_id', Auth::user()->id)->count();
@@ -167,19 +167,38 @@
 						({{$cart_count}})
 					</span>
 				</li>
-						<!--
-						<li class="nav-item">
-							<a href="" class="nav-link">
-								<div class="profile">
-									<img src="frontend/images/person_1.jpg" class="img-fluid">
-								</div>
-							</a>
-						</li>
-						-->
+				@if(Auth::check() && (Auth::user()->role == 1))
 				<li class="nav-item">
 					<div class="dropdown position-static">
 						<a
 							class="nav-link"
+							href="{{url('profile')}}"
+							role="button"
+							id="dropdownMenuLink"
+							aria-expanded="false"
+							>
+							@if(Auth::user()->profile_img == '')
+							<span class="material-icons-round text-secondary pt-0 {{Request::is('profile')? 'active':''}}"
+								style="font-size: 30px;">
+								account_circle
+							</span>
+							@else
+							<div class="profile">
+								<img src="/profile_img/{{Auth::user()->profile_img}}" class="img-fluid user-pf">
+							</div>
+							@endif
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<li><a class="dropdown-item " href="{{url('profile')}}">Profile</a></li>
+							<li><a class="dropdown-item " href="{{url('logout')}}">Log out</a></li>
+						</ul>
+					</div>
+				</li>
+				@else
+				<li class="nav-item">
+					<div class="dropdown position-static">
+						<a
+							class="nav-link text-dark"
 							href="{{url('profile')}}"
 							role="button"
 							id="dropdownMenuLink"
@@ -193,16 +212,12 @@
 							</span>
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							@if(Auth::check() && (Auth::user()->role == 1))
-								<li><a class="dropdown-item " href="{{url('profile')}}">Profile</a></li>
-								<li><a class="dropdown-item " href="{{url('logout')}}">Log out</a></li>
-								@else
-								<li><a class="dropdown-item " href="{{url('register')}}">Register</a></li>
-								<li><a class="dropdown-item " href="{{url('login')}}">Log In</a></li>
-							@endif
+							<li><a class="dropdown-item " href="{{url('register')}}">Register</a></li>
+							<li><a class="dropdown-item " href="{{url('login')}}">Log in</a></li>
 						</ul>
 					</div>
 				</li>
+				@endif
 			</ul>
 			<!-----========= Start Menu icon ===============--->
 			<form class="d-flex col-lg-3 ms-5" action="{{url('search-product')}}">

@@ -30,29 +30,42 @@ a {
     color: #2f2f2f;
     text-decoration: none; }
   a.more {
-    font-weight: 600; }
-
+    font-weight: 600;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+  color: #fff;
+}
 .custom-navbar {
   background: #FFFFFF !important;
   padding-top: 20px;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  }
   .custom-navbar .navbar-brand {
+    color: #CC2936;
     font-size: 32px;
-    font-weight: 600; }
+    font-weight: 600;
+    }
+    .custom-navbar .navbar-brand:hover{
+      color: #000;
+      transition: .5s;
+    }
     .custom-navbar .navbar-brand > span {
-      opacity: .4; }
-  .custom-navbar .navbar-toggler {
-    border-color: transparent; }
+      opacity: .4;
+    }
+    .custom-navbar .navbar-toggler {
+      border-color: transparent;
+    }
     .custom-navbar .navbar-toggler:active, .custom-navbar .navbar-toggler:focus {
       -webkit-box-shadow: none;
       box-shadow: none;
-      outline: none; }
+      outline: none;
+    }
 
-  @media (min-width: 992px) {
+@media (min-width: 992px) {
     .custom-navbar .custom-navbar-nav li {
       margin-left: 15px;
       margin-right: 15px; } }
-  .custom-navbar .custom-navbar-nav li a {
+  .custom-navbar .custom-navbar-nav li a{
     font-weight: 600;
     color: #000 !important;
     opacity: 1;
@@ -62,8 +75,8 @@ a {
     position: relative;
 
   }
-  .custom-navbar .custom-navbar-nav li a:hover {
-    font-weight: 600;
+
+  .custom-navbar .custom-navbar-nav li a:hover{
     color: #CC2936 !important;
     opacity: 1;
     -webkit-transition: .3s all ease;
@@ -72,7 +85,7 @@ a {
     position: relative;
 
   }
-  /*
+
   .custom-navbar .custom-navbar-nav li.active a {
     font-weight: 600;
     color: #CC2936 !important;
@@ -82,7 +95,6 @@ a {
     transition: .3s all ease;
     position: relative;
   }
-  */
   .custom-navbar .custom-navbar-nav li a h5{
     padding-top: 6px;
   }
@@ -129,11 +141,37 @@ a {
     .custom-navbar .custom-navbar-cta li {
       margin-left: 0px;
       margin-right: 0px; }
+      /*
       .custom-navbar .custom-navbar-cta li:first-child {
         margin-right: 20px;
       }
+      */
       .custom-navbar .custom-navbar-cta li a span{
         padding: 5px;
+      }
+      .custom-navbar .custom-navbar-cta li a span.active {
+        color: #CC2936 !important;
+        opacity: 1;
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+        position: relative;
+      }
+      .custom-navbar .custom-navbar-cta li a:hover span{
+        color: #CC2936 !important;
+        opacity: 1;
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+        position: relative;
+      }
+      .custom-navbar .custom-navbar-cta li span.active {
+        color: #CC2936 !important;
+        opacity: 1;
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+        position: relative;
       }
 
 .hero {
@@ -200,12 +238,9 @@ a {
         .hero .hero-img-wrap:after {
           top: -40px; } }
     */
-
+/*
 .btn {
-  /*
-  font-weight: 600;
-  padding: 12px 30px;
-  border-radius: 30px;*/
+
   color: #ffffff;
   background: #CC2936;
   border-color: #CC2936;
@@ -251,7 +286,7 @@ a {
     .btn.btn-white-outline:hover {
       border-color: white;
       color: #ffffff; }
-
+*/
 .section-title {
   color: #000; }
 
@@ -931,10 +966,16 @@ textarea {
   background: #CC2936;
 }
 .profile img{
-  max-width: 35px;
+  max-width: 40px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+.user-pf {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
   border-radius: 50%;
 }
-
 img.icon-over  {
   display: block;
   position: relative;
@@ -1194,6 +1235,24 @@ tr.admin-table {
 .list-group-item.active{
     border-radius: 6px;
 }
-.list-group-item-action:hover{
+.list-group-item-action.active{
   border-radius: 6px;
+  background-color: #CC2936;
+  color: #fff !important;
+  border: 1px solid #CC2936;
+  opacity: 1;
+}
+.list-group-item-action:hover {
+  border-radius: 6px;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

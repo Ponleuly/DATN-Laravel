@@ -2,7 +2,6 @@
 	use App\Models\Products_Sizes;
 	use App\Models\Products_Imgreviews;
 	use App\Models\Likes;
-
 ?>
 @extends('index')
 @section('content')
@@ -45,6 +44,7 @@
 
     <div class="untree_co-section">
 		<div class="container">
+            <!---======== Start Alert =======-->
             @if(Session::has('error'))
 				<script>
 					var type = 'error';
@@ -71,6 +71,7 @@
 						</script>
 						<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
             @endif
+            <!---======== End Alert =======-->
 
 		    <!--------------Start </form> ---------------------->
             <form action="{{url('add-to-cart/'.$productDetails->id)}}" method="POST" enctype="multipart/form-data">
@@ -190,7 +191,7 @@
                                 </div>
                                 <!---------------------End Price ------------------------>
 
-                                <!--------------------- Color ------------------------>
+                                <!---------------------Start Color ------------------------>
                                 <hr>
                                 <div class="row py-2 px-2">
                                     <div class="col-md-1">
@@ -221,13 +222,13 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <!--------------------End  Color ------------------------>
+                                <!--------------------End Color ------------------------>
 
                                 <!-------------------- Size and Quantity------------------------>
-                                <hr class="border-0">
+                                <hr>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h6 class="mb-2 text-black fw-bold py-2">SIZE</h6>
+                                        <h6 class="mb-2 text-black fw-bold py-2">Size</h6>
                                         <select
                                             class="form-select form-control  bg-transparent rounded-0"
                                             aria-label="Default select example"
@@ -266,7 +267,7 @@
                                         </div>-->
                                         <div class="input-group mb-3">
                                             <button
-                                                class="btn btn-outline-primary rounded-0"
+                                                class="btn btn-outline-danger border-2 rounded-1"
                                                 type="button" id="minus-btn"
                                                 ><i class="bi bi-dash-lg"></i>
                                             </button>
@@ -283,7 +284,7 @@
                                                 onchange="(this.value == 0) ? this.value=1:''"
                                             >
                                             <button
-                                                class="btn btn-outline-secondary rounded-0"
+                                                class="btn btn-danger border-2 rounded-1"
                                                 type="button" id="plus-btn"
                                                 ><i class="bi bi-plus-lg"></i>
                                             </button>
@@ -300,7 +301,7 @@
                                                     type="submit"
                                                     name="action"
                                                     value="addtocart"
-                                                    class="btn btn-block py-3 fw-semibold cart-add  rounded-0">
+                                                    class="btn btn-dark py-3 fw-semibold cart-add  rounded-0">
                                                     ADD TO CART
                                                 </button>
                                             </div>
@@ -321,14 +322,16 @@
                                                 @if($isLiked)
                                                     <a
                                                         href="{{url('add-like/'.$productDetails->id.'/'.$userId)}}"
-                                                        class="btn btn-outline-danger px-4 py-2 rounded-0"
+                                                        class="btn btn-danger px-4 py-2 rounded-0"
+                                                        title="Remove from favouirte"
                                                         >
-                                                        <span class="material-icons-outlined py-2">favorite</span>
+                                                        <span class="material-icons-outlined py-2 ">favorite</span>
                                                     </a>
                                                 @elseif($isLiked == 0)
                                                     <a
                                                         href="{{url('add-like/'.$productDetails->id.'/'.$userId)}}"
-                                                        class="btn btn-outline-danger px-4 py-2 rounded-0 cart-add"
+                                                        class="btn btn-dark px-4 py-2 rounded-0 cart-add"
+                                                        title="Add to favouirte"
                                                         >
                                                         <span class="material-icons-outlined py-2">favorite</span>
                                                     </a>
@@ -342,7 +345,7 @@
                                             type="submit"
                                             name="action"
                                             value="buynow"
-                                            class="btn btn-block px-4 py-3 fw-semibold  rounded-0"
+                                            class="btn btn-danger    px-4 py-3 fw-semibold  rounded-0"
                                             >
                                             BUY NOW
                                         </button>

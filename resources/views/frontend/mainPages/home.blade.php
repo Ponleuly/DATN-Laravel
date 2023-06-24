@@ -91,7 +91,7 @@
 								<p>
 									<a
 										href="{{url('shop')}}"
-										class="btn btn-secondary me-2 rounded-pill px-4 py-2 fw-semibold"
+										class="btn btn-warning me-2 rounded-pill px-4 py-2 fw-semibold"
 										>
 										Shop Now
 									</a>

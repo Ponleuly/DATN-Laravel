@@ -33,7 +33,7 @@
 								<input
 									type="text"
 									name="s_name"
-									class="form-control  rounded-0"
+									class="form-control form-control-sm  rounded-0"
 									placeholder="Enter your name"
 									required
 								>
@@ -42,7 +42,7 @@
 								<input
 									type="email"
 									name="s_email"
-									class="form-control  rounded-0"
+									class="form-control form-control-sm rounded-0"
 									placeholder="Enter your email"
 									required
 								>
@@ -50,11 +50,9 @@
 							<div class="col-auto">
 								<button
 									type="submit"
-									class="btn btn-primary
-									px-3
-									rounded-0 border-1"
+									class="btn btn-danger btn-sm  rounded-1 border-1"
 									>
-									<span class="fw-bold">SUB</span>
+									<span class="text-light">Send</span>
 								</button>
 							</div>
 						</form>
@@ -70,7 +68,7 @@
 			<div class="col-lg-4">
 				<div class="mb-2 footer-logo-wrap">
 					<a href="{{url("home")}}" class="footer-logo fw-bold">
-						{{$setting->website_name}}<span>.</span>
+						{{$setting->website_name}}<span class=" opacity-50">.</span>
 					</a>
 				</div>
 				<p class="text-danger fw-bold text-capitalize">

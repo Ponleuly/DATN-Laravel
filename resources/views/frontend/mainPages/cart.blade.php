@@ -18,7 +18,7 @@
 	</nav>
 	<!-- End breabcrumb Section -->
 
-	<div class="untree_co-section">
+	<div class="untree_co-section	">
 		<div class="container">
 			<!--------------- Alert ------------------------>
 			@if(Session::has('error'))
@@ -167,7 +167,7 @@
 											<div class="col-md-3  mt-auto d-grid">
 												<label class="text-black" for="size">Size</label>
 												<select
-													class="form-select form-control form-select-sm rounded-0"
+													class="form-select form-control form-select-sm rounded-1 border-2"
 													aria-label="Default select example"
 													id="size"
 													name="size_id"
@@ -192,7 +192,7 @@
 													@endforeach
 												</select>
 											</div>
-											<div class="col-md-4">
+											<div class="col-md-3">
 												<label class="text-black">Quantity</label>
 												<!--
 												<div class="cinput-group quantity-container ">
@@ -213,7 +213,7 @@
 												-->
 												<div class="input-group quantity-container">
 													<button
-														class="btn btn-outline-primary btn-sm rounded-0"
+														class="btn btn-outline-danger btn-sm rounded-1 border-2"
 														type="button"
 														id="minus-btn-{{$btn}}"
 														onclick="updateQty(event)"
@@ -221,7 +221,7 @@
 														><i class="bi bi-dash-lg"></i>
 													</button>
 													<input
-														class="form-control form-control-sm bg-white text-center "
+														class="form-control form-control-sm  text-center "
 														type="number"
 														max="10" min="1"
 														name="product_quantity"
@@ -232,8 +232,9 @@
 														aria-describedby="button-addon"
 														onchange="(this.value == 0) ? this.value={{$quantity}}:this.form.submit()"
 													>
+
 													<button
-														class="btn btn-outline-secondary btn-sm rounded-0"
+														class="btn btn-danger btn-sm rounded-1 border-2 "
 														type="button"
 														id="plus-btn-{{$btn}}"
 														onclick="updateQty(event)"
@@ -323,25 +324,25 @@
 									@if($carts_count == 0 )
 										<a
 											href="{{url('remove-all-cart/0')}}"
-											class="btn btn-black btn-sm btn-block rounded-0 px-5 py-2 fw-semibold disabled"
+											class="btn btn-danger btn-sm btn-block rounded-1 px-3 fw-semibold disabled"
 											>
-											Remove All
+											Delete all
 										</a>
 										@else
 											<a
 												href="{{url('remove-all-cart/0')}}"
-												class="btn btn-black btn-sm btn-block rounded-0 px-5 py-2 fw-semibold"
+												class="btn btn-danger btn-sm rounded-1 px-3"
 												>
-												Remove All
+												Delete all
 											</a>
 									@endif
 								</div>
 								<div class="col-md-6 d-flex justify-content-end">
 									<a
 										href="{{url('shop')}}"
-										class="btn btn-outline-black btn-sm btn-block rounded-0 px-5 py-2 fw-semibold"
+										class="btn btn-danger btn-sm rounded-1 px-3"
 										>
-										Continue Shopping
+										Continue shopping
 									</a>
 								</div>
 							</div>
@@ -374,6 +375,7 @@
 										enctype="multipart/form-data"
 										>
 										@csrf <!-- to make form active -->
+										<!--
 										<div class="input-group mb-2">
 											<input
 												type="text"
@@ -386,11 +388,31 @@
 												{{($carts_count == 0)? 'disabled':'' }}
 											>
 											<button
-												class="btn btn-outline-secondary px-3 fw-semibold rounded-0 "
+												class="btn btn-danger px-3 fw-semibold rounded-1 "
 												type="submit"
 												id="button-addon2"
 												>
 												Apply
+											</button>
+										</div>
+										-->
+										<div class="input-group mb-2">
+											<input
+												type="text"
+												class="form-control rounded-0 text-uppercase rounded-start"
+												id="coupon"
+												name="code"
+												placeholder="Enter your promo code"
+												aria-label="coupon"
+												aria-describedby="button-addon2"
+												{{($carts_count == 0)? 'disabled':'' }}
+												required
+											>
+											<button
+												class="btn btn-outline-danger px-3  rounded-end "
+												type="submit"
+												id="button-addon2"
+												>Apply
 											</button>
 										</div>
 									</form>
@@ -427,11 +449,12 @@
 
 								<div class="d-grid">
 									<a
-										class="btn btn-block px-4 py-2 fw-semibold rounded-0
+										class="btn btn-danger btn-sm py-2 rounded-1
 											{{($carts_count == 0)? 'disabled':'' }}"
 										href="{{url('checkout/dis='.number_format($discount, 2))}}"
 										>
-										CHECKOUT
+										<span class="fw-bold">CHECKOUT</span>
+										<span class="material-icons-outlined ms-2" style="vertical-align:middle">shopping_cart_checkout</span>
 									</a>
 								</div>
 		                	</div>
@@ -465,26 +488,6 @@
 					$('#update-cart-'+j).submit();
 				}
 			}
-
-
         }
-
-			/*
-        	$(document).ready(function(){
-                $('#plus-btn').click(function(){
-                    $('#qty_input').val(parseInt($('#qty_input').val()) + 1 );
-                    if ($('#qty_input').val() > 9) {
-                        $('#qty_input').val(10);
-                    }
-
-                });
-                $('#minus-btn').click(function(){
-                    $('#qty_input').val(parseInt($('#qty_input').val()) - 1 );
-                    if ($('#qty_input').val() == 0) {
-                        $('#qty_input').val(1);
-                    }
-                });
-            });
-			*/
     </script>
 @endsection()

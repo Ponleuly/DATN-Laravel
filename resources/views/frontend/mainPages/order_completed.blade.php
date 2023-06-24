@@ -74,7 +74,7 @@
                                 <!--<span class="text-danger">See your invoice below.</span>-->
                             </p>
                     @endif
-				    <p><a href="{{url("shop")}}" class="btn btn-sm btn-outline-black">Continue Shopping</a></p>
+				    <p><a href="{{url("shop")}}" class="btn btn-sm btn-danger">Continue shopping</a></p>
 				</div>
 			</div>
 		</div>

@@ -471,7 +471,7 @@
 											<div class="col-md-6 mt-3">
 												<a
 													href="{{url('cart')}}"
-													class="btn btn-block px-4 py-2 fw-semibold  rounded-0"
+													class="btn btn-outline-danger btn-sm fw-semibold rounded-1"
 													>
 													Back
 												</a>
@@ -479,9 +479,8 @@
 											<div class="col-md-6 d-flex justify-content-end mt-3">
 												<button
 													type="submit"
-													class="btn btn-block px-4 py-2 fw-semibold  rounded-0"
+													class="btn btn-danger px-3 py-1 fw-semibold  rounded-1"
 													value="placeorder"
-
 													id="btn-submit"
 													>
 													Place Order

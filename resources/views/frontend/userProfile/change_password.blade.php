@@ -64,7 +64,7 @@
         <div class="row">
             <div class="text-end text-sm">
                 <button
-                    class="btn btn-primary btn-sm rounded-1"
+                    class="btn btn-danger btn-sm rounded-1"
                     type="submit"
                     name="form_type"
                     value="update_password">Update Password
