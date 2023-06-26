@@ -78,7 +78,7 @@
                 @csrf <!-- to make form active -->
                 <div class="row">
                     <!-- Start first colume section -->
-                    <div class="col-md-6 mb-5 mb-md-0">
+                    <div class="col-md-7 mb-5 mb-md-0">
 						<div class="img-container">
                             <div id="carouselExampleControlsNoTouching" class="carousel slide px-1" data-bs-touch="false" data-bs-interval="false">
                                 <div class="carousel-inner">
@@ -158,10 +158,10 @@
                     <!-- End first colume section -->
 
                     <!-- End second colume section -->
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="row mb-2 ms-4">
                             <div class="col-md-12">
-                                <h3 class="mb-2 text-black fw-bold">{{$productDetails->product_name}}</h3>
+                                <h4 class="mb-2 text-black fw-bold">{{$productDetails->product_name}}</h4>
                                 <p class="text-black py-1 my-0">
                                     @foreach ($productGroups as $group)
                                         {{$group->rela_product_group->group_name}}
@@ -227,8 +227,9 @@
                                 <!-------------------- Size and Quantity------------------------>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <h6 class="mb-2 text-black fw-bold py-2">Size</h6>
+                                        <!--
                                         <select
                                             class="form-select form-control  bg-transparent rounded-0"
                                             aria-label="Default select example"
@@ -250,29 +251,45 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h6 class="mb-2 text-black fw-bold py-2">Quantity</h6>
-                                        <!--
-                                        <div class="form-outline">
-                                            <input
-                                                class="form-control bg-transparent rounded-0"
-                                                type="number"
-                                                name="product_quantity"
-                                                id="quantity"
-                                                value="" max="10" min="1"
-                                                required
-                                            >
+                                    --> @foreach ($productSizes as $size)
+                                            <div class="btn-group rounded-0 " role="group" aria-label="Basic radio toggle button group">
 
-                                        </div>-->
-                                        <div class="input-group mb-3">
+                                                @php
+                                                    $quantity = Products_Sizes::where('product_id',  $productDetails->id)
+                                                        ->where('size_id', $size->size_id)->first();
+                                                @endphp
+                                                <input
+                                                    type="radio"
+                                                    class="btn-check"
+                                                    name="size_id"
+                                                    id="{{$size->size_id}}"
+                                                    value="{{$size->size_id}}"
+                                                    autocomplete="off"
+                                                    {{($quantity->size_quantity == 0)? 'disabled':''}}
+                                                    required
+                                                >
+                                                <label
+                                                    class="btn btn-outline-secondary rounded-0 mb-1" style="width: 90px;"
+                                                    for="{{$size->size_id}}"
+                                                    >{{$size->rela_product_size->size_number}}
+                                                    {{($size->rela_product_size->size_number == 'free')? '':' EU'}}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--------------------End  Size and Quantity------------------------>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="mb-2 text-black fw-bold py-2">Quantity</h6>
+                                        <div class="input-group mb-2">
                                             <button
-                                                class="btn btn-outline-danger border-2 rounded-1"
+                                                class="btn btn-outline-danger btn-sm border-2 rounded-1 "
                                                 type="button" id="minus-btn"
                                                 ><i class="bi bi-dash-lg"></i>
                                             </button>
                                             <input
-                                                class="form-control bg-transparent rounded-0 text-center"
+                                                class="form-control form-control-sm bg-transparent rounded-0 text-center border-0"
                                                 type="number"
                                                 name="product_quantity"
                                                 id="qty_input"
@@ -284,25 +301,35 @@
                                                 onchange="(this.value == 0) ? this.value=1:''"
                                             >
                                             <button
-                                                class="btn btn-danger border-2 rounded-1"
+                                                class="btn btn-danger border-2 btn-sm rounded-1"
                                                 type="button" id="plus-btn"
                                                 ><i class="bi bi-plus-lg"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <!--------------------End  Size and Quantity------------------------>
-
                                 <!-------------------- Start add to cart / like / buy now --------------->
-                                <div class="row my-4">
-                                        <div class="col-md-10">
+                                <div class="row my-3">
+                                        <div class="col-md-8">
+                                            <div class="d-grid">
+                                                <button
+                                                    type="submit"
+                                                    name="action"
+                                                    value="buynow"
+                                                    class="btn btn-danger py-2 fw-semibold  rounded-0"
+                                                    >
+                                                    BUY NOW
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
                                             <div class="d-grid">
                                                 <button
                                                     type="submit"
                                                     name="action"
                                                     value="addtocart"
-                                                    class="btn btn-dark py-3 fw-semibold cart-add  rounded-0">
-                                                    ADD TO CART
+                                                    class="btn btn-dark px-4 py-1 rounded-0 cart-add">
+                                                    <span class="material-icons-outlined">add_shopping_cart</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -340,16 +367,7 @@
                                         </div>
                                 </div>
                                 <div class="row my-4">
-                                    <div class="d-grid">
-                                        <button
-                                            type="submit"
-                                            name="action"
-                                            value="buynow"
-                                            class="btn btn-danger    px-4 py-3 fw-semibold  rounded-0"
-                                            >
-                                            BUY NOW
-                                        </button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
