@@ -194,23 +194,6 @@
 											</div>
 											<div class="col-md-3">
 												<label class="text-black">Quantity</label>
-												<!--
-												<div class="cinput-group quantity-container ">
-
-													<input
-														type="number"
-														max="10" min="1"
-														id="quantity"
-														name="product_quantity"
-														class="form-control form-control-sm rounded-0"
-														value="{{$quantity}}" max="10" min="1"
-														placeholder=""
-														aria-label="Example text with button addon"
-														aria-describedby="button-addon1"
-														onchange="this.form.submit()"
-													>
-												</div>
-												-->
 												<div class="input-group quantity-container">
 													<button
 														class="btn btn-outline-danger btn-sm rounded-1 border-2"
@@ -221,7 +204,7 @@
 														><i class="bi bi-dash-lg"></i>
 													</button>
 													<input
-														class="form-control form-control-sm  text-center "
+														class="form-control form-control-sm text-center"
 														type="number"
 														max="10" min="1"
 														name="product_quantity"
@@ -232,7 +215,6 @@
 														aria-describedby="button-addon"
 														onchange="(this.value == 0) ? this.value={{$quantity}}:this.form.submit()"
 													>
-
 													<button
 														class="btn btn-danger btn-sm rounded-1 border-2 "
 														type="button"
@@ -243,18 +225,6 @@
 													</button>
 												</div>
 											</div>
-											<!--
-											<div class="col-md-3 mt-auto">
-												<div class="cinput-group quantity-container ">
-													<button
-														type="submit"
-														class="btn btn-danger btn-sm rounded-0"
-														>
-														Update
-													</button>
-												</div>
-											</div>
-										-->
 										</div>
 									</form>
 									<!------ End Form update Size and Quantity -------->
@@ -266,40 +236,30 @@
 										<h5 class="text-dark">${{$price}} x {{$quantity}}</h5>
 									</div>
 									<div class="row mt-auto justify-content-end">
-										<div class="col-md-6 d-grid">
+										<div class="col-md-6 d-grid text-end">
 											@php
-                                            	if(Auth::check() && Auth::user()->role == 1){
-                                                    $userId = Auth::user()->id;
-                                                    $isLiked = Likes::where('product_id', $productId)->where('user_id',  $userId)->first();
+										    	if(Auth::check() && Auth::user()->role == 1){
+										            $userId = Auth::user()->id;
+										            $isLiked = Likes::where('product_id', $productId)->where('user_id',  $userId)->first();
 
-                                                }else{
-                                                    $userId = 0;
-                                                    $isLiked = 0;
-                                                }
-                                            @endphp
-                                            @if($isLiked)
-												<a
-													href="{{url('add-like/'.$productId.'/'.$userId)}}"
-													class="btn btn-danger rounded-0 btn-sm mb-2 pb-0 pt-1"
-													role="button"
-													>
-													<span class="material-icons-outlined" style="font-size: 20px">favorite</span>
-												</a>
-                                            @elseif($isLiked == 0)
-												<a
-													href="{{url('add-like/'.$productId.'/'.$userId)}}"
-													class="btn btn-danger rounded-0 btn-sm mb-2 pb-0 pt-1 cart-add"
-													role="button"
-													>
-													<span class="material-icons-outlined" style="font-size: 20px">favorite</span>
-												</a>
-                                            @endif
+										        }else{
+										            $userId = 0;
+										            $isLiked = 1;
+										        }
+										    @endphp
 											<a
-												href="{{url('remove-from-cart/'.$cartId)}}"
-												class="btn btn-danger rounded-0 btn-sm pb-0 pt-1"
+												href="{{url('add-like/'.$productId.'/'.$userId)}}"
+												class="mb-2 pb-0 {{($isLiked == '')? 'text-secondary':'text-danger'}}"
 												role="button"
 												>
-                            					<span class="material-icons-outlined"  style="font-size: 20px">delete</span>
+												<span class="material-icons-outlined">favorite</span>
+											</a>
+											<a
+												href="{{url('remove-from-cart/'.$cartId)}}"
+												class=" pb-0"
+												role="button"
+												>
+                            					<span class="material-icons-outlined">delete</span>
 											</a>
 										</div>
 									</div>
@@ -321,27 +281,15 @@
 						<div class="col-md-">
 							<div class="row mb-5">
 								<div class="col-md-6 mb-3 mb-md-0"> <!--remove-all-cart/0 ==> 0 is condiction to show question--->
-									@if($carts_count == 0 )
-										<a
-											href="{{url('remove-all-cart/0')}}"
-											class="btn btn-danger btn-sm btn-block rounded-1 px-3 fw-semibold disabled"
-											>
-											<span class="material-icons-outlined"
-												style="vertical-align: middle; font-size: 24px">delete
-											</span>
-											<span style="vertical-align: middle">Delete all</span>
-										</a>
-										@else
-											<a
-												href="{{url('remove-all-cart/0')}}"
-												class="btn btn-danger btn-sm rounded-1 px-3"
-												>
-												<span class="material-icons-outlined"
-													style="vertical-align: middle; font-size: 24px">delete
-												</span>
-												<span style="vertical-align: middle">Delete all</span>
-											</a>
-									@endif
+									<a
+										href="{{url('remove-all-cart/0')}}"
+										class="btn btn-danger btn-sm btn-block rounded-1 px-3 {{($carts_count == 0)? 'disabled':''}}"
+										>
+										<span class="material-icons-outlined"
+											style="vertical-align: middle; font-size: 24px">delete
+										</span>
+										<span style="vertical-align: middle">Delete all</span>
+									</a>
 								</div>
 								<div class="col-md-6 d-flex justify-content-end">
 									<a
@@ -370,11 +318,11 @@
 								<h5 class="mb-2 text-black">Coupon</h5>
 								<div class="d-grid col-md-12">
 									@php
-                                        if(Auth::check() && Auth::user()->role == 1){
-                                            $userId = Auth::user()->id;
-                                        }else{
-                                            $userId = 0;
-                                        }
+										if(Auth::check() && Auth::user()->role == 1){
+										    $userId = Auth::user()->id;
+										}else{
+										    $userId = 0;
+										}
                                     @endphp
 									<!---------------- Form to appy coupon ------------------->
 									<form
@@ -383,27 +331,6 @@
 										enctype="multipart/form-data"
 										>
 										@csrf <!-- to make form active -->
-										<!--
-										<div class="input-group mb-2">
-											<input
-												type="text"
-												class="form-control rounded-0 text-uppercase"
-												id="coupon"
-												name="code"
-												placeholder="Enter your promo code"
-												aria-label="coupon"
-												aria-describedby="button-addon2"
-												{{($carts_count == 0)? 'disabled':'' }}
-											>
-											<button
-												class="btn btn-danger px-3 fw-semibold rounded-1 "
-												type="submit"
-												id="button-addon2"
-												>
-												Apply
-											</button>
-										</div>
-										-->
 										<div class="input-group mb-2">
 											<input
 												type="text"

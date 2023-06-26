@@ -471,10 +471,10 @@
 											<div class="col-md-6 mt-3">
 												<a
 													href="{{url('cart')}}"
-													class="btn btn-danger btn-sm fw-semibold rounded-1"
+													class="btn btn-danger btn-sm py-1 fw-semibold rounded-1"
 													>
 													<span class="material-icons-outlined"
-														style="vertical-align: middle; font-size: 20px">arrow_back</span>
+														style="vertical-align: middle; font-size: 24px">arrow_back</span>
 													<span style="vertical-align: middle;">Back</span>
 												</a>
 											</div>
