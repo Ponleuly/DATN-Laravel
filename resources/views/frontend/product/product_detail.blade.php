@@ -309,35 +309,38 @@
                                     </div>
                                 </div>
                                 <!-------------------- Start add to cart / like / buy now --------------->
-                                <div class="row my-3">
-                                        <div class="col-md-8">
+                                <div class="row my-3" style="margin-left: 2px">
+                                        <div class="col-md-8 border p-1 border-dark">
                                             <div class="d-grid">
                                                 <button
                                                     type="submit"
                                                     name="action"
                                                     value="buynow"
-                                                    class="btn btn-danger py-2 fw-semibold rounded-5"
+                                                    class="btn btn-dark py-2 fw-semibold rounded-0 btn-buy-now"
                                                     {{($productDetails->product_stockleft == 0)? 'disabled':''}}
                                                     >
                                                     BUY NOW
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="d-grid text-end">
+                                        <div class="col-md-2 px-1">
+                                            <div class="text-end">
                                                 <button
                                                     type="submit"
                                                     name="action"
                                                     value="addtocart"
                                                     class="btn btn-outline-dark px-2 py-2 rounded-0"
                                                     {{($productDetails->product_stockleft == 0)? 'disabled':''}}>
-                                                    <span class="material-icons-outlined" style="vertical-align: middle">add_shopping_cart</span>
+                                                    <span class="material-icons-outlined" 
+                                                        style="vertical-align: middle">
+                                                        add_shopping_cart
+                                                    </span>
                                                 </button>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-2">
-                                            <div class="d-grid">
+                                        <div class="col-md-2 px-1">
+                                            <div class="text-start">
                                                 @php
                                                     if(Auth::check() && Auth::user()->role == 1){
                                                         $userId = Auth::user()->id;
@@ -354,7 +357,11 @@
                                                         class="btn btn-outline-dark px-2 py-2 rounded-0"
                                                         title="Remove from favouirte"
                                                         >
-                                                        <span class="material-icons-outlined ms-0" style="vertical-align: middle">favorite</span>
+                                                        <span 
+                                                            class="material-icons-outlined" 
+                                                            style="vertical-align: middle"
+                                                            >favorite
+                                                        </span>
                                                     </a>
                                                 @elseif($isLiked == 0)
                                                     <a
@@ -362,7 +369,10 @@
                                                         class="btn btn-outline-dark px-2 py-2 ms-0 rounded-0"
                                                         title="Add to favouirte"
                                                         >
-                                                        <span class="material-icons-outlined " style="vertical-align: middle">favorite</span>
+                                                        <span class="material-icons-outlined"
+                                                            style="vertical-align: middle">
+                                                            favorite_border
+                                                        </span>
                                                     </a>
                                                 @endif
                                             </div>
