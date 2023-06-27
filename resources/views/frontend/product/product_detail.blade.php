@@ -329,7 +329,7 @@
                                                     type="submit"
                                                     name="action"
                                                     value="addtocart"
-                                                    class="btn btn-dark px-4 py-2 rounded-5 cart-add"
+                                                    class="btn btn-outline-dark px-2 py-2 rounded-0"
                                                     {{($productDetails->product_stockleft == 0)? 'disabled':''}}>
                                                     <span class="material-icons-outlined" style="vertical-align: middle">add_shopping_cart</span>
                                                 </button>
@@ -351,7 +351,7 @@
                                                 @if($isLiked)
                                                     <a
                                                         href="{{url('add-like/'.$productDetails->id.'/'.$userId)}}"
-                                                        class="btn btn-danger px-4 py-2 rounded-5"
+                                                        class="btn btn-outline-dark px-2 py-2 rounded-0"
                                                         title="Remove from favouirte"
                                                         >
                                                         <span class="material-icons-outlined ms-0" style="vertical-align: middle">favorite</span>
@@ -359,7 +359,7 @@
                                                 @elseif($isLiked == 0)
                                                     <a
                                                         href="{{url('add-like/'.$productDetails->id.'/'.$userId)}}"
-                                                        class="btn btn-dark px-4 py-2 ms-0 rounded-5 cart-add"
+                                                        class="btn btn-outline-dark px-2 py-2 ms-0 rounded-0"
                                                         title="Add to favouirte"
                                                         >
                                                         <span class="material-icons-outlined " style="vertical-align: middle">favorite</span>
