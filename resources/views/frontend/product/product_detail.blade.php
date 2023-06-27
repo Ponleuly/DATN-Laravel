@@ -316,20 +316,22 @@
                                                     type="submit"
                                                     name="action"
                                                     value="buynow"
-                                                    class="btn btn-danger py-2 fw-semibold  rounded-0"
+                                                    class="btn btn-danger py-2 fw-semibold rounded-5"
+                                                    {{($productDetails->product_stockleft == 0)? 'disabled':''}}
                                                     >
                                                     BUY NOW
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="d-grid">
+                                            <div class="d-grid text-end">
                                                 <button
                                                     type="submit"
                                                     name="action"
                                                     value="addtocart"
-                                                    class="btn btn-dark px-4 py-1 rounded-0 cart-add">
-                                                    <span class="material-icons-outlined">add_shopping_cart</span>
+                                                    class="btn btn-dark px-4 py-2 rounded-5 cart-add"
+                                                    {{($productDetails->product_stockleft == 0)? 'disabled':''}}>
+                                                    <span class="material-icons-outlined" style="vertical-align: middle">add_shopping_cart</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -349,18 +351,18 @@
                                                 @if($isLiked)
                                                     <a
                                                         href="{{url('add-like/'.$productDetails->id.'/'.$userId)}}"
-                                                        class="btn btn-danger px-4 py-2 rounded-0"
+                                                        class="btn btn-danger px-4 py-2 rounded-5"
                                                         title="Remove from favouirte"
                                                         >
-                                                        <span class="material-icons-outlined py-2 ">favorite</span>
+                                                        <span class="material-icons-outlined ms-0" style="vertical-align: middle">favorite</span>
                                                     </a>
                                                 @elseif($isLiked == 0)
                                                     <a
                                                         href="{{url('add-like/'.$productDetails->id.'/'.$userId)}}"
-                                                        class="btn btn-dark px-4 py-2 rounded-0 cart-add"
+                                                        class="btn btn-dark px-4 py-2 ms-0 rounded-5 cart-add"
                                                         title="Add to favouirte"
                                                         >
-                                                        <span class="material-icons-outlined py-2">favorite</span>
+                                                        <span class="material-icons-outlined " style="vertical-align: middle">favorite</span>
                                                     </a>
                                                 @endif
                                             </div>
