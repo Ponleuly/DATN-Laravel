@@ -92,7 +92,7 @@
                                         <div class="carousel-item">
                                             <img
                                                 src="/product_img/imgreview/{{$imgreview->product_imgreview}}"
-                                                class="img-fluid product-thumbnail mb-3 "
+                                                class="img-fluid product-thumbnail mb-3 {{($stockLeft == 0)? 'opacity-50':''}}"
                                             >
                                         </div>
                                     @endforeach
@@ -111,12 +111,14 @@
 								<h6 class="text-new bg-danger">New Arrival</h6>
 								@elseif($productDetails->product_price > $productDetails->product_saleprice)
 									<h6 class="text-new bg-black">Sale Off</h6>
-
+                                @elseif($stockLeft == 0)
+									<h6 class="text-new bg-secondary">Sold Out</h6>
 							@endif
+                            <!--
                             @if($stockLeft == 0)
 								<h4 class="text-sold-out bg-secondary">Sold Out</h4>
                             @endif
-
+                            -->
                             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     @foreach ($imgReviews as $imgreview)
@@ -192,13 +194,15 @@
                                 <!---------------------End Price ------------------------>
 
                                 <!---------------------Start Color ------------------------>
-                                <hr>
-                                <div class="row py-2 px-2">
+                                <hr class="border-dark">
+                                <div class="row py-2 pe-2">
                                     <div class="col-md-1">
                                         <a href="{{url('product-detail/'.$productDetails->product_code)}}">
                                             <span
-                                                class="product-color"
-                                                style="background-color:{{$productDetails->product_color}};"
+                                                class="product-color "
+                                                style="background-color:{{$productDetails->product_color}};
+                                                    border: 1px solid #000;
+                                                    box-shadow: 3px 3px 5px gray"
                                                 >
                                             </span>
                                         </a>
@@ -225,10 +229,10 @@
                                 <!--------------------End Color ------------------------>
 
                                 <!-------------------- Size and Quantity------------------------>
-                                <hr>
+                                <hr class="border-dark">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <h6 class="mb-2 text-black fw-bold py-2">Size</h6>
+                                    <div class="col-md-8">
+                                        <h6 class="mb-2 text-black fw-semibold py-2">Size</h6>
                                         <!--
                                         <select
                                             class="form-select form-control  bg-transparent rounded-0"
@@ -251,7 +255,8 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                    --> @foreach ($productSizes as $size)
+                                         -->
+                                        @foreach ($productSizes as $size)
                                             <div class="btn-group rounded-0 " role="group" aria-label="Basic radio toggle button group">
 
                                                 @php
@@ -269,27 +274,26 @@
                                                     required
                                                 >
                                                 <label
-                                                    class="btn btn-outline-secondary rounded-0 mb-1" style="width: 90px;"
+                                                    class="btn btn-outline-dark rounded-0 mb-1 fw-semibold btn-sm" style="width: 60px;"
                                                     for="{{$size->size_id}}"
                                                     >{{$size->rela_product_size->size_number}}
-                                                    {{($size->rela_product_size->size_number == 'free')? '':' EU'}}
+                                                    <!--{{($size->rela_product_size->size_number == 'free')? '':' EU'}}-->
                                                 </label>
                                             </div>
                                         @endforeach
                                     </div>
-                                </div>
-                                <!--------------------End  Size and Quantity------------------------>
-                                <div class="row">
+
                                     <div class="col-md-4">
-                                        <h6 class="mb-2 text-black fw-bold py-2">Quantity</h6>
+                                        <h6 class="mb-2 text-black fw-semibold py-2">Quantity</h6>
                                         <div class="input-group mb-2">
                                             <button
-                                                class="btn btn-outline-danger btn-sm border-2 rounded-1 "
+                                                class="btn btn-outline-dark btn-sm border-1 rounded-0"
                                                 type="button" id="minus-btn"
                                                 ><i class="bi bi-dash-lg"></i>
                                             </button>
                                             <input
-                                                class="form-control form-control-sm bg-transparent rounded-0 text-center border-0"
+                                                class="form-control form-control-sm bg-transparent
+                                                    rounded-0 text-center border-1 border-dark mx-1 fw-semibold"
                                                 type="number"
                                                 name="product_quantity"
                                                 id="qty_input"
@@ -301,37 +305,46 @@
                                                 onchange="(this.value == 0) ? this.value=1:''"
                                             >
                                             <button
-                                                class="btn btn-danger border-2 btn-sm rounded-1"
+                                                class="btn btn-dark border-1 btn-sm rounded-0"
                                                 type="button" id="plus-btn"
                                                 ><i class="bi bi-plus-lg"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
+                                <!--------------------End  Size and Quantity------------------------>
+
                                 <!-------------------- Start add to cart / like / buy now --------------->
-                                <div class="row my-3" style="margin-left: 2px">
+                                <div class="row my-4" style="margin-left: 2px">
                                         <div class="col-md-8 border p-1 border-dark">
-                                            <div class="d-grid">
+                                            <div class="d-grid ">
+
                                                 <button
                                                     type="submit"
                                                     name="action"
                                                     value="buynow"
-                                                    class="btn btn-dark py-2 fw-semibold rounded-0 btn-buy-now"
+                                                    class="btn btn-dark py-2 fw-semibold rounded-0 btn-buy-now text-center d-flex justify-content-between"
                                                     {{($productDetails->product_stockleft == 0)? 'disabled':''}}
                                                     >
+                                                    <span class="material-icons-outlined opacity-0"
+                                                        style="vertical-align: middle">east
+                                                    </span>
                                                     BUY NOW
+                                                    <span class="material-icons-outlined "
+                                                        style="vertical-align: middle">east
+                                                    </span>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 px-1">
-                                            <div class="text-end">
+                                        <div class="col-md-2 pe-1">
+                                            <div class="text-end d-grid">
                                                 <button
                                                     type="submit"
                                                     name="action"
                                                     value="addtocart"
                                                     class="btn btn-outline-dark px-2 py-2 rounded-0"
                                                     {{($productDetails->product_stockleft == 0)? 'disabled':''}}>
-                                                    <span class="material-icons-outlined" 
+                                                    <span class="material-icons-outlined"
                                                         style="vertical-align: middle">
                                                         add_shopping_cart
                                                     </span>
@@ -339,8 +352,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-2 px-1">
-                                            <div class="text-start">
+                                        <div class="col-md-2 ps-1">
+                                            <div class="text-start d-grid">
                                                 @php
                                                     if(Auth::check() && Auth::user()->role == 1){
                                                         $userId = Auth::user()->id;
@@ -357,8 +370,8 @@
                                                         class="btn btn-outline-dark px-2 py-2 rounded-0"
                                                         title="Remove from favouirte"
                                                         >
-                                                        <span 
-                                                            class="material-icons-outlined" 
+                                                        <span
+                                                            class="material-icons-outlined"
                                                             style="vertical-align: middle"
                                                             >favorite
                                                         </span>
@@ -377,9 +390,6 @@
                                                 @endif
                                             </div>
                                         </div>
-                                </div>
-                                <div class="row my-4">
-
                                 </div>
                             </div>
                         </div>

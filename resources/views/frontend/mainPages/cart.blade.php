@@ -167,7 +167,7 @@
 											<div class="col-md-3  mt-auto d-grid">
 												<label class="text-black" for="size">Size</label>
 												<select
-													class="form-select form-control form-select-sm rounded-1 border-2"
+													class="form-select form-control form-select-sm bg-transparent rounded-0	 border-1 border-dark"
 													aria-label="Default select example"
 													id="size"
 													name="size_id"
@@ -192,11 +192,11 @@
 													@endforeach
 												</select>
 											</div>
-											<div class="col-md-3">
+											<div class="col-md-4">
 												<label class="text-black">Quantity</label>
 												<div class="input-group quantity-container">
 													<button
-														class="btn btn-outline-danger btn-sm rounded-1 border-2"
+														class="btn btn-outline-dark btn-sm rounded-0 border-1"
 														type="button"
 														id="minus-btn-{{$btn}}"
 														onclick="updateQty(event)"
@@ -204,7 +204,7 @@
 														><i class="bi bi-dash-lg"></i>
 													</button>
 													<input
-														class="form-control form-control-sm text-center"
+														class="form-control form-control-sm bg-transparent text-center border-dark mx-1"
 														type="number"
 														max="10" min="1"
 														name="product_quantity"
@@ -216,7 +216,7 @@
 														onchange="(this.value == 0) ? this.value={{$quantity}}:this.form.submit()"
 													>
 													<button
-														class="btn btn-danger btn-sm rounded-1 border-2 "
+														class="btn btn-dark btn-sm rounded-0 border-1 "
 														type="button"
 														id="plus-btn-{{$btn}}"
 														onclick="updateQty(event)"
@@ -241,15 +241,17 @@
 										    	if(Auth::check() && Auth::user()->role == 1){
 										            $userId = Auth::user()->id;
 										            $isLiked = Likes::where('product_id', $productId)->where('user_id',  $userId)->first();
-
+													//$isLiked = 1;
+													$logIn = 1;
 										        }else{
 										            $userId = 0;
 										            $isLiked = 1;
+													$logIn = 0;
 										        }
 										    @endphp
 											<a
 												href="{{url('add-like/'.$productId.'/'.$userId)}}"
-												class="mb-2 pb-0 {{($isLiked == '')? 'text-secondary':'text-danger'}}"
+												class="mb-2 pb-0 {{($isLiked != '' && $logIn==1)? 'text-danger':'text-secondary'}}"
 												role="button"
 												>
 												<span class="material-icons-outlined">favorite</span>

@@ -1263,6 +1263,10 @@ input[type=number] {
   color: #fff;
 }
 .btn-buy-now{
-  margin-top: -7px;
+  margin-top: -9px;
   margin-left: -7px;
+}
+.box-shadow-outline{
+  margin-top: -10px;
+  margin-left: -2px;
 }
