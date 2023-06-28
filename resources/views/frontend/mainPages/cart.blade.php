@@ -167,7 +167,7 @@
 											<div class="col-md-3  mt-auto d-grid">
 												<label class="text-black" for="size">Size</label>
 												<select
-													class="form-select form-control form-select-sm bg-transparent rounded-0	 border-1 border-dark"
+													class="form-select form-control form-select-sm bg-transparent rounded-0 border-1 border-dark"
 													aria-label="Default select example"
 													id="size"
 													name="size_id"

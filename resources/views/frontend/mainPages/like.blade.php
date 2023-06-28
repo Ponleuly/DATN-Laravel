@@ -105,7 +105,7 @@
                                     <div class="col-md-3 pt-3">
 										<h6 class="text-black fw-semibold">Size</h6>
 										<select
-										    class="form-select form-select-sm rounded-1 border-2"
+										    class="form-select form-select-sm bg-transparent rounded-0 border-1 border-dark"
 										    aria-label="Default select example"
 										    id="size"
 										    name="size_id"
@@ -131,14 +131,14 @@
 										<h6 class="text-black fw-semibold">Quantity</h6>
 										<div class="input-group quantity-container">
 											<button
-												class="btn btn-outline-danger btn-sm rounded-1 border-2"
+												class="btn btn-outline-dark btn-sm rounded-0 border-1 border-dark"
 												type="button"
 												id="minus-btn-{{$btn}}"
 												onclick="updateQty(event)"
 												><i class="bi bi-dash-lg"></i>
 											</button>
 											<input
-												class="form-control form-control-sm  text-center "
+												class="form-control form-control-sm bg-transparent border-1 border-dark mx-1 text-center "
 												type="number"
 												max="10" min="1"
 												name="product_quantity"
@@ -150,7 +150,7 @@
 												onchange="(this.value == 0) ? this.value={{$quantity}}:this.form.submit()"
 											>
 											<button
-												class="btn btn-danger btn-sm rounded-1 border-2 "
+												class="btn btn-dark btn-sm rounded-0 border-1 border-dark "
 												type="button"
 												id="plus-btn-{{$btn}}"
 												onclick="updateQty(event)"

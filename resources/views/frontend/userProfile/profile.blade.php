@@ -82,7 +82,8 @@
                                                     {{(Request::is('purchase*') || Request::is('change-password'))? 'd-none':''}}"
                                                     onclick="$('.file-upload-input').trigger( 'click' )" id="middle-icon">
                                                     <div class="icon-color">
-                                                        <span class="material-icons-round">edit</span>
+                                                        <span class="h6">Edit</span>
+                                                        <!--<span class="material-icons-round">edit</span>-->
                                                     </div>
                                                 </div>
                                             </div>
