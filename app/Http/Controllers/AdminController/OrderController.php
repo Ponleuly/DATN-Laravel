@@ -142,14 +142,15 @@ class OrderController extends Controller
         $contacts = Contacts::orderBy('id')->get();
         $shopName = Settings::all()->first();
         $card = Cards::where('order_code', $order->invoice_code)->first();
-        $data = [ 
+        //return dd($card->toArray());
+        $data = [
             'count' => $count,
             'order' =>  $order,
             'customer' => $customer,
             'orderDetails' => $orderDetails,
             'contacts' => $contacts,
             'shopName' => $shopName,
-            'card'=> $card,
+            'card' => $card,
         ];
         $pdf = Pdf::loadView('adminfrontend.pages.orders.order_invoice', $data);
 

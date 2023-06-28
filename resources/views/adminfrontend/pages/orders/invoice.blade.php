@@ -97,8 +97,8 @@
         </div>
     </div>
 
-    <div class="my-2 justify-content-center border rounded-2">
-        <table class="table mb-5">
+    <div class="my-2 justify-content-center card rounded-2 p-1">
+        <table class="table mb-4">
             <thead>
                 <tr class="text-center text-sm" >
                     <th scope="col" style="border-radius: 6px;">
@@ -156,114 +156,13 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <!--
-            <table class="table table-borderless text-end">
-                <tr>
-                    <td colspan="4" class="text-start">  
-                        <p class=" fs-6 fw-bold mb-1 text-muted">Payment method :
-                            <span class="text-danger fs-6">
-                            {{$order->payment_method}}
-                            </span>
-                        </p>
-                    </td>
-                </tr>
-                @if($order->payment_method == 'Credit Card')
-                    <tr>
-                        <td colspan="4" class="text-start">
-                            <div class="d-inline-flex">
-                                @if(strtolower($card->card_brand) == 'visa')
-                                    <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
-                                        <img src="/frontend/images/visa1.png" class="img-fluid rounded-start-1" alt="...">
-                                    </div>
-                                    @elseif(strtolower($card->card_brand) == 'mastercard')
-                                    <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
-                                        <img src="/frontend/images/mastercard.png" class="img-fluid rounded-start-1" alt="...">
-                                    </div>
-
-                                    @elseif(strtolower($card->card_brand) == 'american express')
-                                    <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
-                                        <img src="/frontend/images/amex1.png" class="img-fluid rounded-start-1" alt="...">
-                                    </div>
-                                    @else
-                                    <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
-                                        <img src="/frontend/images/creditcard.png" class="img-fluid rounded-start-1" alt="...">
-                                    </div>
-                                @endif
-                                <div class="py-0 ps-1">
-                                    {{ucfirst($card->card_brand)}} **** **** {{$card->card_digit}}
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" class="text-start">
-                            <p class="card-text text-sm">Holder's name:
-                                <span class="text-black">
-                                    {{$card->holder_name}}
-                                </span>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" class="text-start">
-                            <p class="card-text text-sm">Email:
-                                <span class="text-black">
-                                    {{$card->holder_email}}
-                                </span>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="7" class="text-start">
-                            <p class="card-text text-sm">Payment ID:
-                                <span class="text-black">
-                                    {{$card->payment_id}}
-                                </span>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="7" class="text-start">
-                            <p class="card-text text-sm">Payment status:
-                                <span class="text-{{($card->payment_status == 'charge.refunded')? 'danger':'success' }}">
-                                    {{$card->payment_status}}
-                                </span>
-                            </p>
-                        </td>
-                    </tr>
-                @endif
-            </table>
-            <table class="table table-borderless text-end">
-                <tr>
-                    <td colspan="2">Sub total :</td>
-                    <td class="text-muted text-end">$ {{number_format($totalAmount, 2)}}</td>
-                </tr>
-                <tr>
-                    <td colspan="2">Delivery fee :</td>
-                    <td class="text-muted ">$ {{$order->delivery_fee}}</td>
-                </tr>
-                <tr>
-                    <td colspan="2">Discount :</td>
-                    <td class="text-muted ">$ {{number_format($order->discount, 2)}}</td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="text-muted fs-6 fw-bold">Total paid :</td>
-                    <td class="fs-5 fw-bold text-danger ">
-                        @php
-                            $totalPaid = ($totalAmount + $order->delivery_fee) - ($order->discount);
-                        @endphp
-                        $ {{number_format($totalPaid, 2)}}
-                    </td>
-                </tr>
-            </table>
-            -->
             @php
                 if($order->payment_method == 'Credit Card') $isCard = 1;
                 else $isCard = 0;
             @endphp
             <table class="table table-borderless text-end">
                 <tr>
-                    <td colspan="7" class="text-start">  
+                    <td colspan="7" class="text-start">
                         <p class=" fs-6 fw-bold mb-1 text-muted">Payment method :
                         <span class="text-danger fs-6">
                            {{$order->payment_method}}
@@ -298,7 +197,7 @@
                                 {{ucfirst($card->card_brand)}} **** **** {{$card->card_digit}}
                             </div>
                         </div>
-                        @else 
+                        @else
                         @endif
                     </td>
                     <td colspan="2">Delivery fee :</td>
@@ -312,7 +211,7 @@
                                 {{$card->holder_name}}
                             </span>
                         </p>
-                        @else 
+                        @else
                         @endif
                     </td>
                     <td colspan="2">Discount :</td>
@@ -326,7 +225,7 @@
                                 {{$card->holder_email}}
                             </span>
                         </p>
-                        @else 
+                        @else
                         @endif
                     </td>
                     <td colspan="2" class="text-muted fs-6 fw-bold">Total paid :</td>
@@ -345,7 +244,7 @@
                                 {{$card->payment_id}}
                             </span>
                         </p>
-                        @else 
+                        @else
                         @endif
                     </td>
                 </tr>
@@ -357,7 +256,7 @@
                                 {{$card->payment_status}}
                             </span>
                         </p>
-                        @else 
+                        @else
                         @endif
                     </td>
                 </tr>
@@ -366,7 +265,7 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-xl-10 text-danger">
+        <div class="col-md-10 text-danger">
             <p>Thanks for your purchase !</p>
         </div>
     </div>

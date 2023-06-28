@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Orders_Details;
 use Illuminate\Support\Carbon;
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Products_Attributes;
 use App\Http\Controllers\Controller;
 use App\Models\Contacts;
@@ -584,6 +583,8 @@ class CartController extends Controller
         );
         //return dd($customer);
     }
+
+
     public function order_canceled($code)
     {
         $order = Orders::where('invoice_code', '#' . $code)->first();
@@ -595,29 +596,6 @@ class CartController extends Controller
         return view(
             'frontend.mainPages.order_completed',
         );
-    }
-
-    //====================== Download Invoice ============================//
-    public function download_invoice($id)
-    {
-        $order = Orders::where('id', $id)->first();
-        $customer = Customers::where('id', $order->id)->first();
-        $orderDetails = Orders_Details::where('order_id', $id)->get();
-        $count = 1;
-        $contacts = Contacts::orderBy('id')->get();
-        $shopName = Settings::all()->first();
-
-        $data = [
-            'count' => $count,
-            'order' =>  $order,
-            'customer' => $customer,
-            'orderDetails' => $orderDetails,
-            'contacts' => $contacts,
-            'shopName' => $shopName,
-        ];
-        $pdf = Pdf::loadView('adminfrontend.pages.orders.order_invoice', $data);
-
-        return $pdf->download($order->invoice_code . '.pdf');
     }
 
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProfileController extends Controller
 {
@@ -132,6 +133,8 @@ class ProfileController extends Controller
             )
         );
     }
+
+
     public function purchase_order_detail($orderId)
     {
         $order = Orders::where('id', $orderId)->first();
@@ -153,5 +156,29 @@ class ProfileController extends Controller
                 'card'
             )
         );
+    }
+
+    //====================== Download Invoice ============================//
+    public function download_invoice($id)
+    {
+        $order = Orders::where('id', $id)->first();
+        $customer = Customers::where('id', $order->id)->first();
+        $orderDetails = Orders_Details::where('order_id', $id)->get();
+        $count = 1;
+        $contacts = Contacts::orderBy('id')->get();
+        $shopName = Settings::all()->first();
+        $card = Cards::where('order_code', $order->invoice_code)->first();
+        $data = [
+            'count' => $count,
+            'order' =>  $order,
+            'customer' => $customer,
+            'orderDetails' => $orderDetails,
+            'contacts' => $contacts,
+            'shopName' => $shopName,
+            'card' => $card,
+        ];
+        $pdf = Pdf::loadView('adminfrontend.pages.orders.order_invoice', $data);
+
+        return $pdf->download($order->invoice_code . '.pdf');
     }
 }

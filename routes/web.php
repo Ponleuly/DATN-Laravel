@@ -69,6 +69,7 @@ Route::middleware('authUser')->group(function () {
       //Route::put('change-password/{id}', 'update_password')->name('change-password');
       Route::get('purchase-history', 'purchase_history')->name('purchase-history');
       Route::get('purchase-order-detail/{orderId}', 'purchase_order_detail')->name('purchase-order-detail');
+      Route::get('download-invoice/{id}', 'download_invoice')->name('download-invoice');
    });
 });
 //==============Like Route with Middleware =====================//
@@ -102,12 +103,9 @@ Route::controller(CartController::class)->group(function () {
    Route::get('remove-from-cart/{id}', 'remove_from_cart')->name('remove-from-cart');
    Route::get('remove-all-cart/{num}', 'remove_all_cart')->name('remove-all-cart');
    //=================================================================//
-
-
    Route::group(['middleware' => 'prevent-back-history'], function () {
       Route::get('checkout/dis={discount}', 'checkout')->name('checkout');
       Route::post('place-order', 'place_order')->name('place-order');
-      Route::get('download-invoice/{id}', 'download_invoice')->name('download-invoice');
       Route::get('order-completed/invoice={code}', 'order_completed')->name('order-completed');
       Route::get('order-canceled/invoice={code}', 'order_canceled')->name('order-canceled');
    });

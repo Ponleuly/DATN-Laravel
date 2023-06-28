@@ -181,7 +181,7 @@
                             @endphp
                             <table class="table table-borderless text-end">
                                 <tr>
-                                    <td colspan="7" class="text-start">  
+                                    <td colspan="7" class="text-start">
                                         <p class=" fs-6 fw-bold mb-1 text-muted">Payment method :
                                         <span class="text-danger fs-6">
                                            {{$order->payment_method}}
@@ -196,27 +196,27 @@
                                         <div class="d-inline-flex">
                                             @if(strtolower($card->card_brand) == 'visa')
                                                 <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
-                                                    <img src="/frontend/images/visa1.png" class="img-fluid rounded-start-1" alt="">
+                                                    <img src="{{public_path('/frontend/images/visa1.png')}}" class="img-fluid rounded-start-1" alt="">
                                                 </div>
                                                 @elseif(strtolower($card->card_brand) == 'mastercard')
                                                 <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
                                                     <img src="/frontend/images/mastercard.png" class="img-fluid rounded-start-1" alt="">
                                                 </div>
-                
+
                                                 @elseif(strtolower($card->card_brand) == 'american express')
                                                 <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
-                                                    <img src="/frontend/images/amex1.png" class="img-fluid rounded-start-1" alt="">
+                                                    <img src="{{public_path('/frontend/images/amex1.png')}}" class="img-fluid rounded-start-1" alt="">
                                                 </div>
                                                 @else
                                                 <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
-                                                    <img src="/frontend/images/creditcard.png" class="img-fluid rounded-start-1" alt="">
+                                                    <img src="{{public_path('/frontend/images/creditcard.png')}}" class="img-fluid rounded-start-1" alt="">
                                                 </div>
                                             @endif
                                             <div class="py-0 ps-1">
                                                 {{ucfirst($card->card_brand)}} **** **** {{$card->card_digit}}
                                             </div>
                                         </div>
-                                        @else 
+                                        @else
                                         @endif
                                     </td>
                                     <td colspan="2">Delivery fee :</td>
@@ -230,7 +230,7 @@
                                                 {{$card->holder_name}}
                                             </span>
                                         </p>
-                                        @else 
+                                        @else
                                         @endif
                                     </td>
                                     <td colspan="2">Discount :</td>
@@ -244,7 +244,7 @@
                                                 {{$card->holder_email}}
                                             </span>
                                         </p>
-                                        @else 
+                                        @else
                                         @endif
                                     </td>
                                     <td colspan="2" class="text-muted fs-6 fw-bold">Total paid :</td>
@@ -263,7 +263,7 @@
                                                 {{$card->payment_id}}
                                             </span>
                                         </p>
-                                        @else 
+                                        @else
                                         @endif
                                     </td>
                                 </tr>
@@ -275,7 +275,7 @@
                                                 {{$card->payment_status}}
                                             </span>
                                         </p>
-                                        @else 
+                                        @else
                                         @endif
                                     </td>
                                 </tr>
