@@ -356,7 +356,7 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-8">
+                            <div class="col-md-8" >
                                 <div class="card">
                                     <div class="card-body p-0">
                                         <!----------------------\\ Start product order table //-------------------->

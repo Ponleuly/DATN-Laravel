@@ -1270,3 +1270,13 @@ input[type=number] {
   margin-top: -10px;
   margin-left: -2px;
 }
+.card-content .card-img{
+  vertical-align: middle;
+  padding: 0;
+  width: 30px;
+  height: 20px
+}
+.card-content .card-img,
+.card-content>span {
+  display: inline-block;
+}

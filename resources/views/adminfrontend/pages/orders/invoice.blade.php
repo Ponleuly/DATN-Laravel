@@ -10,18 +10,13 @@
                 </li>
                 @foreach ($contacts as $contact)
                 <li class="text-muted">
-                    <p class="text-muted fw-bold mb-0">
+                    <p class="text-muted mb-0">
                         <span class="fw-normal">{{$contact->contact_info}}</span>
                     </p>
                 </li>
                 @endforeach
             </ul>
         </div>
-        <!--
-        <div class="col-xl-8">
-            <h2 class="pt-0 text-black fw-bold text-danger mb-1">{{$shopName->website_name}}</h2>
-        </div>
-        -->
     </div>
     <!------------------ End Invoice header ---------------------- -->
     <hr class="border-2">
@@ -33,6 +28,7 @@
             <span class="text-muted fw-bold">{{$order->invoice_code}}</span>
         </div>
     </div>
+    <!--
     <div class="row">
         <div class="col-md-8 mb-2">
             <ul class="list-unstyled">
@@ -96,7 +92,78 @@
             </ul>
         </div>
     </div>
-
+    -->
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <table class="table table-borderless text-start">
+                <tr>
+                    <td colspan="2" class="col-8"><span class="fs-6 fw-semibold text-muted">CUSTOMER</span></td>
+                    <td class="col-4"><span class="fs-6 fw-semibold text-muted">ORDER</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="pb-0">
+                        <span class="text-muted fw-normal">Name :
+                            <span class="fw-semibold text-dark text-sm">{{$customer->c_name}}</span>
+                        </span>
+                    </td>
+                    <td class="pb-0">
+                        <span class="fw-normal text-muted">Code :
+                            <span class="fw-semibold text-dark text-sm">{{$order->invoice_code}}</span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="pb-0">
+                        <span class="text-muted fw-normal">Phone :
+                            <span class="fw-semibold text-dark text-sm">{{$customer->c_phone}}</span>
+                        </span>
+                    </td>
+                    <td class="pb-0">
+                        <span class="fw-normal text-muted">Date :
+                            <span class="fw-semibold text-sm text-dark" style="font-size: 12px">
+                                {{$order->created_at->toDayDateTimeString();}}
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="pb-0">
+                        <span class="text-muted fw-normal">Email :
+                            <span class="fw-semibold text-dark text-sm">{{$customer->c_email}}</span>
+                        </span>
+                    </td>
+                    <td class="pb-0">
+                        <span class="fw-normal text-muted">Status :
+                            <span class="fw-semibold text-sm
+                                    {{($order->order_status == 'Pending')?  'text-warning' : ''}}
+                                    {{($order->order_status == 'Processing')?  'text-primary' : ''}}
+                                    {{($order->order_status == 'Delivered')?  'text-success' : ''}}
+                                    {{($order->order_status == 'Canceled')?  'text-danger' : ''}}
+                                ">
+                                {{$order->order_status}}
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="pb-0">
+                        <span class="text-muted fw-normal">Address :
+                            <span class="fw-semibold text-dark text-sm">{{$customer->c_address}}</span>
+                        </span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="pb-0">
+                        <span class="text-muted fw-normal">Note :
+                            <span class="fw-semibold text-dark text-sm">{{$customer->c_note}}</span>
+                        </span>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <div class="my-2 justify-content-center card rounded-2 p-1">
         <table class="table mb-4">
             <thead>
@@ -163,39 +230,39 @@
             <table class="table table-borderless text-end">
                 <tr>
                     <td colspan="7" class="text-start">
-                        <p class=" fs-6 fw-bold mb-1 text-muted">Payment method :
+                        <span class=" fs-6 fw-semibold text-muted">Payment method :
                         <span class="text-danger fs-6">
                            {{$order->payment_method}}
                         </span>
-                    </p></td>
+                    </span></td>
                     <td>Sub total :</td>
                     <td class="text-muted text-end">$ {{number_format($totalAmount, 2)}}</td>
                 </tr>
                 <tr>
                     <td colspan="6" class="text-start">
                         @if($isCard==1)
-                        <div class="d-inline-flex">
+                        <div class="card-content">
                             @if(strtolower($card->card_brand) == 'visa')
-                                <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
+                                <div class="card-img">
                                     <img src="/frontend/images/visa1.png" class="img-fluid rounded-start-1" alt="...">
                                 </div>
                                 @elseif(strtolower($card->card_brand) == 'mastercard')
-                                <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
+                                <div class="card-img">
                                     <img src="/frontend/images/mastercard.png" class="img-fluid rounded-start-1" alt="...">
                                 </div>
 
                                 @elseif(strtolower($card->card_brand) == 'american express')
-                                <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
+                                <div class="card-img">
                                     <img src="/frontend/images/amex1.png" class="img-fluid rounded-start-1" alt="...">
                                 </div>
                                 @else
-                                <div style="vertical-align: middle; padding: 0px 0px 0px 0; width: 30px; height:20px">
+                                <div class="card-img">
                                     <img src="/frontend/images/creditcard.png" class="img-fluid rounded-start-1" alt="...">
                                 </div>
                             @endif
-                            <div class="py-0 ps-1">
+                            <span class="py-0 ps-1">
                                 {{ucfirst($card->card_brand)}} **** **** {{$card->card_digit}}
-                            </div>
+                            </span>
                         </div>
                         @else
                         @endif
@@ -228,7 +295,7 @@
                         @else
                         @endif
                     </td>
-                    <td colspan="2" class="text-muted fs-6 fw-bold">Total paid :</td>
+                    <td colspan="2" class="text-muted fs-6 fw-semibold">Total paid :</td>
                     <td class="fs-5 fw-bold text-danger ">
                         @php
                             $totalPaid = ($totalAmount + $order->delivery_fee) - ($order->discount);
