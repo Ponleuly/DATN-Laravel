@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UserController;
 
 use App\Models\User;
+use App\Models\Cards;
 use App\Models\Orders;
 use App\Models\Contacts;
 use App\Models\Settings;
@@ -139,7 +140,7 @@ class ProfileController extends Controller
         $count = 1;
         $shopName = Settings::all()->first();
         $contacts = Contacts::orderBy('id')->get();
-
+        $card = Cards::where('order_code', $order->invoice_code)->first();
         return view(
             'frontend.userProfile.order_history',
             compact(
@@ -148,7 +149,8 @@ class ProfileController extends Controller
                 'customer',
                 'orderDetails',
                 'shopName',
-                'contacts'
+                'contacts',
+                'card'
             )
         );
     }

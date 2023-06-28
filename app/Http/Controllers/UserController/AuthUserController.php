@@ -68,7 +68,8 @@ class AuthUserController extends Controller
             'password' => $request->password
         ];
         if (Auth::attempt($arr) && Auth::user()->role == 1) {
-            return redirect('home');
+            return redirect('home')
+            ->with('success', 'You are loged in.');
         } else {
             return redirect('login')
                 ->with('error', 'Login failed ! Invalid email or password.');
@@ -77,6 +78,6 @@ class AuthUserController extends Controller
     public function userLogout()
     {
         Auth::logout();
-        return redirect('home');
+        return redirect('home')->with('success', 'You are loged out.');;
     }
 }

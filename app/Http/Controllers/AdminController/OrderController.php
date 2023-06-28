@@ -117,7 +117,7 @@ class OrderController extends Controller
         $count = 1;
         $contacts = Contacts::orderBy('id')->get();
         $shopName = Settings::all()->first();
-
+        $card = Cards::where('order_code', $order->invoice_code)->first();
         return view(
             'adminfrontend.pages.orders.order_invoice',
             compact(
@@ -126,7 +126,8 @@ class OrderController extends Controller
                 'customer',
                 'orderDetails',
                 'contacts',
-                'shopName'
+                'shopName',
+                'card'
             )
         );
     }
@@ -140,13 +141,15 @@ class OrderController extends Controller
         $count = 1;
         $contacts = Contacts::orderBy('id')->get();
         $shopName = Settings::all()->first();
-        $data = [
+        $card = Cards::where('order_code', $order->invoice_code)->first();
+        $data = [ 
             'count' => $count,
             'order' =>  $order,
             'customer' => $customer,
             'orderDetails' => $orderDetails,
             'contacts' => $contacts,
             'shopName' => $shopName,
+            'card'=> $card,
         ];
         $pdf = Pdf::loadView('adminfrontend.pages.orders.order_invoice', $data);
 

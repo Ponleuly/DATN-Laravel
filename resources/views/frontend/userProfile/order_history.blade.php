@@ -31,16 +31,20 @@
                 <button
                     type="submit"
                     onclick="printDiv('printableArea')"
-                    class="btn btn-danger rounded-0 me-2"
+                    class="btn btn-outline-primary rounded-2 me-2"
                     >
-                    Print Invoice
+                    <span class="material-icons-outlined">
+                        print
+                    </span>
                 </button>
                 <a
-                    class="btn btn-success rounded-0 ms-auto"
+                    class="btn btn-danger rounded-2 ms-auto"
                     href="{{url('download-invoice/'. $order->id)}}"
                     role="button"
                     >
-                    Download Invoice PDF
+                    <span class="material-icons-outlined">
+                        picture_as_pdf
+                    </span>
                 </a>
             </div>
         </div>

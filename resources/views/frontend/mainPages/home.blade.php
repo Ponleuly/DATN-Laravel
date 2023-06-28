@@ -10,40 +10,39 @@
 			$setting = Settings::all()->first();
 			$coupons = Coupons::where('coupon_status', 1)->get();
 		@endphp
+		<!--------------- Alert ------------------------>
+		@if(Session::has('error'))
+		<script>
+			var type = 'error';
+			var text = "<?php echo Session::get('error'); ?>";
+		</script>
+		<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+		@elseif(Session::has('info'))
+			<script>
+				var type = 'info';
+				var text = "<?php echo Session::get('info'); ?>";
+			</script>
+			<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+
+			@elseif(Session::has('success'))
+				<script>
+					var type = 'success';
+					var text = "<?php echo Session::get('success'); ?>";
+				</script>
+				<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+			@elseif(Session::has('question'))
+				<script>
+					var type = 'question';
+					var text = "<?php echo Session::get('question'); ?>";
+				</script>
+				<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+		@endif
+		<!------------------End Alert ------------------------>
 		<!----- Check if there is any active coupon to show ----->
 		@if(count($coupons) != 0)
 			<!-- Start Testimonial Slider -->
 			<div class="coupon-section">
 				<div class="container">
-					<!--------------- Alert ------------------------>
-					@if(Session::has('error'))
-						<script>
-							var type = 'error';
-							var text = "<?php echo Session::get('error'); ?>";
-						</script>
-						<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
-						@elseif(Session::has('info'))
-							<script>
-								var type = 'info';
-								var text = "<?php echo Session::get('info'); ?>";
-							</script>
-							<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
-
-							@elseif(Session::has('success'))
-								<script>
-									var type = 'success';
-									var text = "<?php echo Session::get('success'); ?>";
-								</script>
-								<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
-							@elseif(Session::has('question'))
-								<script>
-									var type = 'question';
-									var text = "<?php echo Session::get('question'); ?>";
-								</script>
-								<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
-					@endif
-					<!------------------End Alert ------------------------>
-
 					<div class="row justify-content-center">
 						<div class="col-lg-12">
 							<div class="coupon-slider-wrap text-center">
@@ -295,4 +294,5 @@
 			</div>
 		</div>
 		<!-- End Testimonial Slider -->
+
 @endsection()

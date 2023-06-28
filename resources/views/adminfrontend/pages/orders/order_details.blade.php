@@ -51,7 +51,6 @@
             <div class="card-style mb-20">
                 <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
                     <div class="col-md-12">
-
                         <!--------------------\\ Start Date and Status //------------------------>
                         <div class="row">
                             <div class="col-md-6">
@@ -227,52 +226,51 @@
                                                             <h4 class="modal-title" id="exampleModalLabel">Update address info</h4>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                            <div class="modal-body">
-                                                                <label for="c_address"><p class="text-sm">Address</p></label>
-                                                                <input
-                                                                    type="text"
-                                                                    class="form-control form-control-sm text-capitalize mb-2"
-                                                                    id="c_address"
-                                                                    name="c_address"
-                                                                    value="{{$customer->c_address}}"
-                                                                    placeholder="Street number, floor..."
-                                                                >
+                                                        <div class="modal-body">
+                                                            <label for="c_address"><p class="text-sm">Address</p></label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control form-control-sm text-capitalize mb-2"
+                                                                id="c_address"
+                                                                name="c_address"
+                                                                value="{{$customer->c_address}}"
+                                                                placeholder="Street number, floor..."
+                                                            >
 
-                                                                <label for="c_city"><p class="text-sm">City/Province</p></label>
-                                                                <input
-                                                                    type="text"
-                                                                    class="form-control form-control-sm text-capitalize mb-2"
-                                                                    id="c_city"
-                                                                    name="c_city"
-                                                                    value="{{$customer->c_city}}"
-                                                                    placeholder="City/province..."
-                                                                >
+                                                            <label for="c_city"><p class="text-sm">City/Province</p></label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control form-control-sm text-capitalize mb-2"
+                                                                id="c_city"
+                                                                name="c_city"
+                                                                value="{{$customer->c_city}}"
+                                                                placeholder="City/province..."
+                                                            >
 
-                                                                <label for="c_district"><p class="text-sm">District</p></label>
-                                                                <input
-                                                                    type="text"
-                                                                    class="form-control form-control-sm text-capitalize mb-2"
-                                                                    id="c_district"
-                                                                    name="c_district"
-                                                                    value="{{$customer->c_district}}"
-                                                                    placeholder="District..."
-                                                                >
+                                                            <label for="c_district"><p class="text-sm">District</p></label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control form-control-sm text-capitalize mb-2"
+                                                                id="c_district"
+                                                                name="c_district"
+                                                                value="{{$customer->c_district}}"
+                                                                placeholder="District..."
+                                                            >
 
-                                                                <label for="c_ward"><p class="text-sm">Ward</p></label>
-                                                                <input
-                                                                    type="text"
-                                                                    class="form-control form-control-sm text-capitalize mb-2"
-                                                                    id="c_ward"
-                                                                    name="c_ward"
-                                                                    value="{{$customer->c_ward}}"
-                                                                    placeholder="Ward..."
-                                                                >
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary btn-sm py-1" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary btn-sm py-1" value="submit">Save</button>
-                                                            </div>
-
+                                                            <label for="c_ward"><p class="text-sm">Ward</p></label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control form-control-sm text-capitalize mb-2"
+                                                                id="c_ward"
+                                                                name="c_ward"
+                                                                value="{{$customer->c_ward}}"
+                                                                placeholder="Ward..."
+                                                            >
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary btn-sm py-1" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm py-1" value="submit">Save</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
