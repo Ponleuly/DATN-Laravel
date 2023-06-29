@@ -32,10 +32,10 @@ class OrderController extends Controller
             $orders = Orders::orderBy('created_at', $sort)->paginate($res);
         } elseif ($title == 'customer') {
             /*
-            $orders = Customers::join('orders', 'orders.id', '=', 'customers.order_id')
-            ->orderBy('customers.c_name', $sort)
-            ->paginate($res,['orders.*','customers.c_name']); // get orders table with column c_name
-        */
+                $orders = Customers::join('orders', 'orders.id', '=', 'customers.order_id')
+                ->orderBy('customers.c_name', $sort)
+                ->paginate($res,['orders.*','customers.c_name']); // get orders table with column c_name
+            */
             //==== Join orders table and customers table by order_id
             // then sort join_table by c_name with 'asc' or 'desc'
             // then get orders table that sorted by c_name with paginate =====//
@@ -169,21 +169,21 @@ class OrderController extends Controller
         $orderStatus['order_status'] = ucfirst($statusName);
         $orderStatus->update();
         /*
-        if (ucfirst($statusName) == 'Delivered') {
-            $deliveryFee = $orderStatus->delivery_fee;
-            $discount = $orderStatus->discount;
-            $totalAmount = 0;
-            $total = 0;
-            $orderDetails = Orders_Details::where('order_id', $orderStatus->id)->get();
-            foreach ($orderDetails as  $orderDetail) {
-                $price = $orderDetail->product_price;
-                $qty = $orderDetail->product_quantity;
-                $totalAmount += $price * $qty;
+            if (ucfirst($statusName) == 'Delivered') {
+                $deliveryFee = $orderStatus->delivery_fee;
+                $discount = $orderStatus->discount;
+                $totalAmount = 0;
+                $total = 0;
+                $orderDetails = Orders_Details::where('order_id', $orderStatus->id)->get();
+                foreach ($orderDetails as  $orderDetail) {
+                    $price = $orderDetail->product_price;
+                    $qty = $orderDetail->product_quantity;
+                    $totalAmount += $price * $qty;
+                }
+                $total = $totalAmount + $deliveryFee - $discount;
+                $orderStatus['total_paid'] = $total;
+                $orderStatus->update();
             }
-            $total = $totalAmount + $deliveryFee - $discount;
-            $orderStatus['total_paid'] = $total;
-            $orderStatus->update();
-        }
         */
         return redirect()->back()
             ->with('message', 'Order with invoice code ' . $orderStatus->invoice_code  . ' updated status successfully !');

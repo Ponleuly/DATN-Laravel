@@ -12,6 +12,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use App\Http\Controllers\UserController\ProfileController;
 
 class AdminFrontendController extends Controller
 {
@@ -95,7 +96,9 @@ class AdminFrontendController extends Controller
         $update_profile->ward = $request->input('ward');
         */
         if ($request->current_password != '') {
-            app('App\Http\Controllers\UserController\ProfileController')->update_password($request, $id);
+            $profileController = new ProfileController();
+            $profileController->update_password($request, $id);
+            //app('App\Http\Controllers\UserController\ProfileController')->update_password($request, $id);
         }
         if ($request->hasFile('profile_img')) {
             $destination_path = 'profile_img/';
@@ -128,7 +131,9 @@ class AdminFrontendController extends Controller
     }
     public function update_password(Request $request, $id)
     {
-        app('App\Http\Controllers\UserController\ProfileController')->update_password($request, $id);
+        $profileController = new ProfileController();
+        $profileController->update_password($request, $id);
+        //app('App\Http\Controllers\UserController\ProfileController')->update_password($request, $id);
         return redirect()->back()
             ->with(
                 'message',

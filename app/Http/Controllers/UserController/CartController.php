@@ -517,37 +517,41 @@ class CartController extends Controller
         //===================== Update product stock after ordered =======================//
         $placeOrder = Orders::latest()->first();
         $orderId = $placeOrder->id;
-        app('App\Http\Controllers\AdminController\OrderController')->pro_qty_sub($orderId);
+        //===== Calll OrderController =====//
+        $orderController = new OrderController();
+        $orderController->pro_qty_sub($orderId);
+        //app('App\Http\Controllers\AdminController\OrderController')->pro_qty_sub($orderId); //** Can use this replace of 2 lines above */
+        //=================================//
         /*
-        $orderDetails = Orders_Details::where('order_id', $orderId)->get();
-        foreach ($orderDetails as $orderDetail) {
-            $sizeId = $orderDetail->size_id;
-            $quantity = $orderDetail->product_quantity;
-            $productId = $orderDetail->product_id;
-            $productSize_qty = Products_Sizes::where('product_id', $productId)
-                ->where('size_id', $sizeId)->first();
-            /*
-            $stock_qty = ($productSize_qty->size_quantity) - $quantity;
-            // If total quantity of order bigger than or equal to size stock ==> stock = 0
-            if ($stock_qty <= 0) {
-                $productSize_qty->size_quantity = 0;
-            } else {
-                $productSize_qty->size_quantity = ($productSize_qty->size_quantity) - $quantity;
-            }
-            $productSize_qty->update();
+            $orderDetails = Orders_Details::where('order_id', $orderId)->get();
+            foreach ($orderDetails as $orderDetail) {
+                $sizeId = $orderDetail->size_id;
+                $quantity = $orderDetail->product_quantity;
+                $productId = $orderDetail->product_id;
+                $productSize_qty = Products_Sizes::where('product_id', $productId)
+                    ->where('size_id', $sizeId)->first();
+                /*
+                $stock_qty = ($productSize_qty->size_quantity) - $quantity;
+                // If total quantity of order bigger than or equal to size stock ==> stock = 0
+                if ($stock_qty <= 0) {
+                    $productSize_qty->size_quantity = 0;
+                } else {
+                    $productSize_qty->size_quantity = ($productSize_qty->size_quantity) - $quantity;
+                }
+                $productSize_qty->update();
 
-            //============ Update product stockleft after order==============//
-            $stockLeft = 0;
-            $productSize = Products_Sizes::where('product_id', $productId)->get();
-            foreach ($productSize as $row) {
-                $stockLeft  += $row->size_quantity;
-            }
+                //============ Update product stockleft after order==============//
+                $stockLeft = 0;
+                $productSize = Products_Sizes::where('product_id', $productId)->get();
+                foreach ($productSize as $row) {
+                    $stockLeft  += $row->size_quantity;
+                }
 
-            //============ Update product stockleft after order ==============//
-            $pro_stockleft = Products::where('id', $productId)->first();
-            $pro_stockleft->product_stockleft = $stockLeft;
-            $pro_stockleft->update();
-        }
+                //============ Update product stockleft after order ==============//
+                $pro_stockleft = Products::where('id', $productId)->first();
+                $pro_stockleft->product_stockleft = $stockLeft;
+                $pro_stockleft->update();
+            }
         */
         //================= Payment Credit Card =======================//
         if ($request->payment == 'Credit Card') {
@@ -593,7 +597,11 @@ class CartController extends Controller
         $order = Orders::where('invoice_code', '#' . $code)->first();
         $orderId = $order->id;
         //============ Update product size qty ===========//
-        app('App\Http\Controllers\AdminController\OrderController')->pro_qty_plus($orderId);
+        //===== Calll OrderController =====//
+        $orderController = new OrderController();
+        $orderController->pro_qty_plus($orderId);
+        //app('App\Http\Controllers\AdminController\OrderController')->pro_qty_plus($orderId);
+        /**================================= */
         // ========== Delete order if credit card is canceled ===========//
         $order->delete();
         return view(
