@@ -1273,8 +1273,8 @@ input[type=number] {
 .card-content .card-img{
   vertical-align: middle;
   padding: 0;
-  width: 30px;
-  height: 20px
+  width: 50px;
+  height: 30px
 }
 .card-content .card-img,
 .card-content>span {

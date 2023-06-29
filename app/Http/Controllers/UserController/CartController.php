@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\UserController;
 
+use App\Models\Cards;
 use App\Models\Carts;
-use App\Models\Products_Sizes;
 use App\Models\Orders;
 use App\Models\Coupons;
+use App\Models\Contacts;
+use App\Models\Payments;
 use App\Models\Products;
+use App\Models\Settings;
 use App\Models\Customers;
 use App\Models\Deliveries;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Orders_Details;
+use App\Models\Products_Sizes;
 use Illuminate\Support\Carbon;
 use App\Models\Products_Attributes;
 use App\Http\Controllers\Controller;
-use App\Models\Contacts;
-use App\Models\Payments;
-use App\Models\Settings;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\AdminController\OrderController;
@@ -570,6 +571,7 @@ class CartController extends Controller
         $count = 1;
         $contacts = Contacts::orderBy('id')->get();
         $shopName = Settings::all()->first();
+        $card = Cards::where('order_code', $order->invoice_code)->first();
         return view(
             'frontend.mainPages.order_completed',
             compact(
@@ -578,7 +580,8 @@ class CartController extends Controller
                 'customer',
                 'orderDetails',
                 'contacts',
-                'shopName'
+                'shopName',
+                'card'
             )
         );
         //return dd($customer);
