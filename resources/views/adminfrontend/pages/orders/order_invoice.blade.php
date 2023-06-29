@@ -118,7 +118,7 @@
             </div>
 
             <div class="my-2 justify-content-center border rounded-2">
-                <table class="table mb-4 ">
+                <table class="table mb-4">
                     <thead>
                         <tr class="text-center text-sm" >
                             <th scope="col" style="border-radius: 6px;">
@@ -188,64 +188,69 @@
                                 {{$order->payment_method}}
                                 </span>
                             </span></td>
-                            <td>Sub total :</td>
-                            <td class="text-muted text-end">$ {{number_format($totalAmount, 2)}}</td>
+                            <td class="text-muted">Sub total :</td>
+                            <td class="text-end">
+                                <span class="fw-semibold text-dark">$ {{number_format($totalAmount, 2)}}</span>
+                            </td>
                         </tr>
                         <tr>
-                            <td colspan="6" class="text-start">
+                            <td colspan="6" class="text-start py-0">
                                 @if($isCard==1)
                                     <div class="card-content">
                                         @if(strtolower($card->card_brand) == 'visa')
                                             <img src="{{public_path('/frontend/images/visa1.png')}}" class="img-fluidrounded-start-1 pt-1" alt=""
-                                            style="vertical-align: middle;padding: 0;width: 30px;height: 20px"
+                                            style="vertical-align: middle;padding: 0;width: 50px;height: 30px"
                                             >
-
                                         @elseif(strtolower($card->card_brand) == 'mastercard')
-                                            <img src="/frontend/images/mastercard.png" class="img-fluid rounded-start-1" alt=""
-                                            style="vertical-align: middle;padding: 0;width: 30px;height: 20px">
+                                            <img src="{{public_path('/frontend/images/mastercard.png')}}" class="img-fluid rounded-start-1" alt=""
+                                            style="vertical-align: middle;padding: 0;width: 50px;height: 30px">
                                         @elseif(strtolower($card->card_brand) == 'american express')
                                             <img src="{{public_path('/frontend/images/amex1.png')}}" class="img-fluid rounded-start-1" alt=""
-                                            style="vertical-align: middle;padding: 0;width: 30px;height: 20px">
+                                            style="vertical-align: middle;padding: 0;width: 50px;height: 30px">
                                         @else
                                             <img src="{{public_path('/frontend/images/creditcard.png')}}" class="img-fluid rounded-start-1" alt=""
-                                            style="vertical-align: middle;padding: 0;width: 30px;height: 20px">
+                                            style="vertical-align: middle;padding: 0;width: 50px;height: 30px">
                                         @endif
-                                        <span>
+                                        <span  style="vertical-align: middle;">
                                             {{ucfirst($card->card_brand)}} **** **** {{$card->card_digit}}
                                         </span>
                                     </div>
                                 @else
                                 @endif
                             </td>
-                            <td colspan="2">Delivery fee :</td>
-                            <td class="text-muted ">$ {{$order->delivery_fee}}</td>
+                            <td colspan="2" class="text-muted">Delivery fee :</td>
+                            <td class="text-end">
+                                <span class="fw-semibold text-dark">$ {{$order->delivery_fee}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="6" class="text-start">
                                 @if($isCard==1)
                                 <p class="card-text text-sm text-muted">Holder's name:
-                                    <span class="text-black fw-normal text-sm" >
+                                    <span class="text-dark fw-normal text-sm" >
                                         {{$card->holder_name}}
                                     </span>
                                 </p>
                                 @else
                                 @endif
                             </td>
-                            <td colspan="2">Discount :</td>
-                            <td class="text-muted ">$ {{number_format($order->discount, 2)}}</td>
+                            <td colspan="2" class="text-muted">Discount :</td>
+                            <td class="text-end">
+                                <span class="fw-semibold text-dark">$ {{number_format($order->discount, 2)}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="6" class="text-start">
                                 @if($isCard==1)
                                 <p class="card-text text-sm text-muted">Email:
-                                    <span class="text-black">
+                                    <span class="text-dark">
                                         {{$card->holder_email}}
                                     </span>
                                 </p>
                                 @else
                                 @endif
                             </td>
-                            <td colspan="2" class="text-muted fs-6 fw-semibold">Total paid :</td>
+                            <td colspan="2" class="text-dark fs-6 fw-semibold">Total paid :</td>
                             <td class="fs-5 fw-bold text-danger ">
                                 @php
                                     $totalPaid = ($totalAmount + $order->delivery_fee) - ($order->discount);
@@ -257,7 +262,7 @@
                             <td colspan="7" class="text-start">
                                 @if($isCard==1)
                                 <p class="card-text text-sm text-muted">Payment ID:
-                                    <span class="text-black">
+                                    <span class="text-dark">
                                         {{$card->payment_id}}
                                     </span>
                                 </p>

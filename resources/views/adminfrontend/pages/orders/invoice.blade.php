@@ -235,11 +235,13 @@
                            {{$order->payment_method}}
                         </span>
                     </span></td>
-                    <td>Sub total :</td>
-                    <td class="text-muted text-end">$ {{number_format($totalAmount, 2)}}</td>
+                    <td class="text-muted">Sub total :</td>
+                    <td class="text-dark text-end">
+                        <span class="fw-semibold">$ {{number_format($totalAmount, 2)}}</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="6" class="text-start">
+                    <td colspan="6" class="text-start py-0">
                         @if($isCard==1)
                         <div class="card-content">
                             @if(strtolower($card->card_brand) == 'visa')
@@ -260,15 +262,17 @@
                                     <img src="/frontend/images/creditcard.png" class="img-fluid rounded-start-1" alt="...">
                                 </div>
                             @endif
-                            <span class="py-0 ps-1">
+                            <span style="vertical-align: middle;">
                                 {{ucfirst($card->card_brand)}} **** **** {{$card->card_digit}}
                             </span>
                         </div>
                         @else
                         @endif
                     </td>
-                    <td colspan="2">Delivery fee :</td>
-                    <td class="text-muted ">$ {{$order->delivery_fee}}</td>
+                    <td colspan="2"  class="text-muted ">Delivery fee :</td>
+                    <td>
+                        <span class="fw-semibold text-dark">$ {{$order->delivery_fee}}</span>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="text-start">
@@ -281,8 +285,10 @@
                         @else
                         @endif
                     </td>
-                    <td colspan="2">Discount :</td>
-                    <td class="text-muted ">$ {{number_format($order->discount, 2)}}</td>
+                    <td colspan="2" class="text-muted ">Discount :</td>
+                    <td>
+                        <span class="fw-semibold text-dark">$ {{number_format($order->discount, 2)}}</span>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="text-start">
@@ -295,7 +301,7 @@
                         @else
                         @endif
                     </td>
-                    <td colspan="2" class="text-muted fs-6 fw-semibold">Total paid :</td>
+                    <td colspan="2" class="text-dark fs-6 fw-semibold">Total paid :</td>
                     <td class="fs-5 fw-bold text-danger ">
                         @php
                             $totalPaid = ($totalAmount + $order->delivery_fee) - ($order->discount);
