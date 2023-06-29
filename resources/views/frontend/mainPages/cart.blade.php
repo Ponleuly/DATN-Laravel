@@ -285,7 +285,7 @@
 								<div class="col-md-6 mb-3 mb-md-0"> <!--remove-all-cart/0 ==> 0 is condiction to show question--->
 									<a
 										href="{{url('remove-all-cart/0')}}"
-										class="btn btn-danger btn-sm btn-block rounded-1 px-3 {{($carts_count == 0)? 'disabled':''}}"
+										class="btn btn-danger btn-sm shadow rounded-1 px-3 {{($carts_count == 0)? 'disabled':''}}"
 										>
 										<span class="material-icons-outlined"
 											style="vertical-align: middle; font-size: 24px">delete
@@ -296,7 +296,7 @@
 								<div class="col-md-6 d-flex justify-content-end">
 									<a
 										href="{{url('shop')}}"
-										class="btn btn-danger btn-sm rounded-1 px-3"
+										class="btn btn-danger btn-sm shadow rounded-1 px-3"
 										>
 										<span style="vertical-align: middle">Continue shopping</span>
 											<span class="material-icons-outlined ms-1"
@@ -359,7 +359,7 @@
 									<tbody>
 										<tr>
 											<td class="text-black font-weight-bold border-bottom-0">
-												<strong>Subtotal</strong>
+												<strong>Sub total</strong>
 											</td>
 											<td class="text-black text-end border-bottom-0">
 												<strong>$ {{number_format($subtotal, 2)}}</strong>
@@ -386,7 +386,7 @@
 
 								<div class="d-grid">
 									<a
-										class="btn btn-danger btn-sm py-2 rounded-1
+										class="btn btn-danger btn-sm shadow py-2 rounded-1
 											{{($carts_count == 0)? 'disabled':'' }}"
 										href="{{url('checkout/dis='.number_format($discount, 2))}}"
 

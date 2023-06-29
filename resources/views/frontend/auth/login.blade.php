@@ -90,7 +90,7 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <button type="submit" class="btn btn-primary btn-sm">
+                                        <button type="submit" class="btn btn-danger shadow btn-sm">
                                             {{ __('Login') }}
                                         </button>
                                     </div>

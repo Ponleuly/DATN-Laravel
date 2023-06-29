@@ -50,7 +50,7 @@
 							<div class="col-auto">
 								<button
 									type="submit"
-									class="btn btn-danger btn-sm  rounded-1 border-1"
+									class="btn btn-danger btn-sm shadow rounded-1 border-1"
 									>
 									<span class="text-light">Send</span>
 								</button>

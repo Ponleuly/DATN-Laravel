@@ -203,7 +203,7 @@
                             <div class="col-md-6 offset-md-4">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <button type="submit" class="btn btn-primary btn-sm">
+                                        <button type="submit" class="btn btn-danger shadow btn-sm">
                                             {{ __('Register') }}
                                         </button>
                                     </div>

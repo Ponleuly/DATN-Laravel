@@ -383,7 +383,7 @@
 											<tbody>
 													<tr>
 														<td class="text-black font-weight-bold border-bottom-0 ">
-															<strong>Subtotal</strong>
+															<strong>Sub total</strong>
 														</td>
 														<td class="border-bottom-0"></td>
 														<td class="border-bottom-0"></td>
@@ -395,7 +395,7 @@
 
 													<tr>
 														<td class="text-black font-weight-bold border-bottom-0">
-															<strong>Delivery Fee</strong>
+															<strong>Delivery fee</strong>
 														</td>
 														<td class="border-bottom-0"></td>
 														<td class="border-bottom-0"></td>
@@ -471,7 +471,7 @@
 											<div class="col-md-6 mt-3">
 												<a
 													href="{{url('cart')}}"
-													class="btn btn-dark btn-sm py-1 fw-semibold rounded-1"
+													class="btn btn-dark btn-sm shadow py-1 fw-semibold rounded-1"
 													>
 													<span class="material-icons-outlined me-2"
 														style="vertical-align: middle; font-size: 24px"
@@ -483,7 +483,7 @@
 											<div class="col-md-6 d-flex justify-content-end mt-3">
 												<button
 													type="submit"
-													class="btn btn-danger px-3 py-1 fw-semibold  rounded-1"
+													class="btn btn-danger shadow px-3 py-1 fw-semibold  rounded-1"
 													value="placeorder"
 													id="btn-submit"
 													>
