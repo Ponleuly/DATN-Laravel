@@ -6,10 +6,6 @@
 ?>
 @extends('index')
 @section('content')
-		@php
-			$setting = Settings::all()->first();
-			$coupons = Coupons::where('coupon_status', 1)->get();
-		@endphp
 		<!--------------- Alert ------------------------>
 		@if(Session::has('error'))
 		<script>

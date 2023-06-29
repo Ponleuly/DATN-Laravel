@@ -20,6 +20,17 @@ class CouponController extends Controller
         $coupons = Coupons::orderByDesc('id')->paginate(4);
         $count = 1;
         $search_text = '';
+        $this->coupon_date();
+        return view(
+            'adminfrontend.pages.coupons.coupon_list',
+            compact(
+                'coupons',
+                'count',
+                'search_text'
+            )
+        );
+    }
+    public function coupon_date(){
         $allCoupon = Coupons::orderByDesc('id')->get();
         $currentTime = Carbon::now();
         foreach($allCoupon as $coupon){
@@ -36,16 +47,8 @@ class CouponController extends Controller
             $coupon->coupon_status = $status;
             $coupon->update();
         }
-        return view(
-            'adminfrontend.pages.coupons.coupon_list',
-            compact(
-                'coupons',
-                'count',
-                'search_text'
-            )
-        );
+        return $allCoupon;
     }
-
     public function coupon_search()
     {
         $search_text = $_GET['search_coupon'];

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\UserController;
 
+use App\Http\Controllers\AdminController\CouponController;
+use App\Models\News;
+use App\Models\Coupons;
 use App\Models\Products;
+use App\Models\Settings;
 use App\Models\Categories;
+use App\Models\Subscribers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\News;
-use App\Models\Subscribers;
 
 class HomeController extends Controller
 {
@@ -17,15 +20,22 @@ class HomeController extends Controller
         $categories = Categories::orderBy('id')->get();
         $news = News::where('news_status', 1)->get();
         $newProduct_count = $newProducts->count();
+        $setting = Settings::all()->first();
+		$coupons = Coupons::where('coupon_status', 1)->get();
+        //=== Updade coupon date =====//
+        $couponController = new CouponController();
+        $couponController->coupon_date();
         return view(
             'frontend.mainPages.home',
             compact(
                 'newProducts',
                 'categories',
                 'newProduct_count',
-                'news'
+                'news',
+                'setting',
+                'coupons'
             )
-        );
+        ); 
     }
 
     public function subscriber_store(Request $request)
