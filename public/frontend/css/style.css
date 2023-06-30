@@ -17,7 +17,10 @@ body {
   /*line-height: 28px;*/
   color: #6a6a6a;
   font-size: 14px;
-  background-color: #eff2f1; }
+  /*background-color: #eff2f1;
+  */
+  background-color: #fff;
+  }
 
 a {
   text-decoration: none;
@@ -715,7 +718,7 @@ a {
   padding: 3rem 0 12rem 0 !important; }
 
 .blog-section {
-  padding: 4rem 0 4rem 0; }
+  padding: 2rem 0 2rem 0; }
   .blog-section .post-entry a {
     text-decoration: none; }
     .blog-section .post-entry a:hover {
@@ -913,7 +916,8 @@ textarea {
   border-bottom-width: 1px !important; }
 
 .site-block-order-table td, .site-block-order-table th {
-  color: #000000; }
+  color: #000000;
+ }
 .couponcode-wrap input {
   border-radius: 10px !important; }
 /*

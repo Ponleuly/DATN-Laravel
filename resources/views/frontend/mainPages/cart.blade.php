@@ -313,7 +313,7 @@
 		        <div class="col-md-4">
 		          	<div class="row mb-5">
 		            	<div class="col-md-12">
-		              		<div class="p-3 p-lg-4 border bg-white">
+		              		<div class="p-3 p-lg-4 border rounded-0">
 								<h4 class="mb-3 text-black fw-bold">ORDER SUMMARY</h4>
 								<hr>
 
@@ -336,7 +336,7 @@
 										<div class="input-group mb-2">
 											<input
 												type="text"
-												class="form-control rounded-0 text-uppercase rounded-start"
+												class="form-control bg-transparent rounded-1 text-uppercase rounded-end-0"
 												id="coupon"
 												name="code"
 												placeholder="Enter your promo code"
@@ -346,7 +346,7 @@
 												required
 											>
 											<button
-												class="btn btn-outline-danger px-3  rounded-end "
+												class="btn btn-outline-danger px-3 rounded-1 rounded-start-0"
 												type="submit"
 												id="button-addon2"
 												>Apply

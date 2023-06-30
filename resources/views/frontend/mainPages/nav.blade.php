@@ -221,14 +221,24 @@
 			</ul>
 			<!-----========= Start Menu icon ===============--->
 			<form class="d-flex col-lg-3 ms-5" action="{{url('search-product')}}">
-				<input
-					class="form-control ds-input me-2 ms-2 rounded-0"
-					type="text"
-					name="search_product"
-					placeholder="Search here"
-					aria-label="Search"
-				>
+				<div class="input-group">
+					<input
+						type="text"
+						name="search_product"
+						class="form-control form-control-sm rounded-1 rounded-end-0"
+						placeholder="Search here..."
+						aria-label="Recipient's username"
+						aria-describedby="button-addon2"
+					>
+					<button
+						class="btn btn-outline-dark btn-sm rounded-1 rounded-start-0"
+						type="submit"
+						id="button-addon2"
+						><i class="bi bi-search"></i>
+					</button>
+				</div>
 			</form>
+
 		</div>
 	</div>
 </nav>

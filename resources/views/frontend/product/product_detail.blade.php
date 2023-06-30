@@ -270,7 +270,6 @@
                                                     id="{{$size->size_id}}"
                                                     value="{{$size->size_id}}"
                                                     autocomplete="off"
-                                                    {{($quantity->size_quantity == 0)? 'disabled':''}}
                                                     required
                                                 >
                                                 <label
@@ -324,7 +323,7 @@
                                                     name="action"
                                                     value="buynow"
                                                     class="btn btn-dark py-2 fw-semibold rounded-0 btn-buy-now text-center d-flex justify-content-between"
-                                                    {{($productDetails->product_stockleft == 0)? 'disabled':''}}
+
                                                     >
                                                     <span class="material-icons-outlined opacity-0"
                                                         style="vertical-align: middle">east
@@ -343,7 +342,7 @@
                                                     name="action"
                                                     value="addtocart"
                                                     class="btn btn-outline-dark px-2 py-2 rounded-0"
-                                                    {{($productDetails->product_stockleft == 0)? 'disabled':''}}>
+                                                    >
                                                     <span class="material-icons-outlined"
                                                         style="vertical-align: middle">
                                                         add_shopping_cart

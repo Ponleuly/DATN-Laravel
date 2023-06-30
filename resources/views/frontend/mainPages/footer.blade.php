@@ -4,30 +4,17 @@
 	use App\Models\Settings;
 	use App\Models\Contacts;
 ?>
-<footer class="footer-section">
+<footer class="footer-section bg-light">
 	<div class="container relative">
 		<div class="row">
 			<div class="col-lg-8">
-				 <!--------------- Alert ------------------------>
-                    @if(Session::has('sub-alert'))
-                        <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
-                            {{Session::get('sub-alert')}}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @elseif(Session::has('sub-message'))
-                            <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                                {{Session::get('sub-message')}}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                    @endif
-                    <!---------------End Alert ------------------------>
 				@if(!(Auth::check() && (Auth::user()->role == 1)))
 					<div class="subscription-form">
-						<h3 class="d-flex align-items-center">
+						<h3 class="d-flex align-items-center text-dark">
 							<span>SUBSCRIBE TO GET MAIL</span>
 						</h3>
 						<form action="{{url('/subscriber')}}" method="POST" enctype="multipart/form-data" class="row g-3">
-							@csrf <!-- to make form active -->
+							@csrf
 
 							<div class="col-auto">
 								<input
@@ -50,7 +37,7 @@
 							<div class="col-auto">
 								<button
 									type="submit"
-									class="btn btn-danger btn-sm shadow rounded-1 border-1"
+									class="btn btn-dark btn-sm shadow rounded-1 border-1"
 									>
 									<span class="text-light">Send</span>
 								</button>
@@ -60,7 +47,6 @@
 				@endif
 			</div>
 		</div>
-
 		<div class="row g-5 mb-5">
 			@php
 				$setting = Settings::all()->first();

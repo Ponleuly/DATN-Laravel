@@ -74,7 +74,7 @@
 					<div class="row">
 						<!------------------------Delivery Informations--------------------------------->
 						<div class="col-md-6 mb-5 mb-md-0">
-							<div class="p-3 p-lg-4 border bg-white">
+							<div class="p-3 p-lg-4 border bg-white" >
 								<h2 class="h3 mb-3 text-black">Delivery Informations</h2>
 								@php
 									if (Auth::check() && Auth::user()->role == 1) {
