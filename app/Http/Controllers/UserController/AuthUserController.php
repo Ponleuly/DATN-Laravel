@@ -69,7 +69,7 @@ class AuthUserController extends Controller
         ];
         if (Auth::attempt($arr) && Auth::user()->role == 1) {
             return redirect('home')
-            ->with('success', 'You are loged in.');
+                ->with('success', 'You are loged in.');
         } else {
             return redirect('login')
                 ->with('error', 'Login failed ! Invalid email or password.');

@@ -231,7 +231,7 @@
 						aria-describedby="button-addon2"
 					>
 					<button
-						class="btn btn-outline-dark btn-sm rounded-1 rounded-start-0"
+						class="btn btn-outline-danger btn-sm rounded-1 rounded-start-0"
 						type="submit"
 						id="button-addon2"
 						><i class="bi bi-search"></i>

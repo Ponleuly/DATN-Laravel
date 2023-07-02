@@ -9,6 +9,9 @@
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb px-3 py-2 mb-0" style="background: #cc2936">
             <li class="breadcrumb-item ">
+				<a href="{{url("home")}}" class="text-light">Home</a>
+			</li>
+            <li class="breadcrumb-item ">
                 @foreach ( $productGroups as $group)
                     <a
                         href="{{url('product-'.strtolower($group->rela_product_group->group_name))}}"
@@ -317,7 +320,6 @@
                                 <div class="row my-4" style="margin-left: 2px">
                                         <div class="col-md-8 border p-1 border-dark">
                                             <div class="d-grid ">
-
                                                 <button
                                                     type="submit"
                                                     name="action"
@@ -330,7 +332,7 @@
                                                     </span>
                                                     BUY NOW
                                                     <span class="material-icons-outlined "
-                                                        style="vertical-align: middle">east
+                                                        style="vertical-align: middle;">east
                                                     </span>
                                                 </button>
                                             </div>
