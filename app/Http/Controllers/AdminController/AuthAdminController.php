@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminController;
 
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,8 @@ class AuthAdminController extends Controller
 {
     public function adminLogin()
     {
-        return view('adminfrontend.auth.login');
+        $setting = Settings::all()->first();
+        return view('adminfrontend.auth.login', compact('setting'));
     }
     public function login(Request $request)
     {

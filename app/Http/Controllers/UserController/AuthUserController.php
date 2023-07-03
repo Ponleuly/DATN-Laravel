@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UserController;
 
 use App\Models\User;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,8 @@ class AuthUserController extends Controller
     //================= Login  ===========================//
     public function userLogin()
     {
-        return view('frontend.auth.login');
+        $setting = Settings::all()->first();
+        return view('frontend.auth.login', compact('setting'));
     }
     public function login(Request $request)
     {

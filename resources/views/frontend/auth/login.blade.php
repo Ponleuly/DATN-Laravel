@@ -51,7 +51,7 @@
                 >
                 <h4 class="text-store py-2 ps-4 pe-3 rounded-end-5 fw-semibold
                     bg-danger text-white"
-                    >15Steps Store
+                    >{{$setting->website_name}} Store
                 </h4>
                 <!--
                 <h6 class="text-sign-up py-2 px-4 rounded-start-5 fw-semibold

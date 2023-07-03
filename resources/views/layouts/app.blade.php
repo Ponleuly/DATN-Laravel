@@ -9,26 +9,50 @@
     <!--
     <title>{{ config('app.name', 'Laravel') }}</title>
     -->
-    <title>Admin 15Steps</title>
+   <?php
+		use App\Models\Settings;
+	?>
+	@php
+		$shopName = Settings::all()->first();
+	@endphp
+	<title>Admin {{$shopName->website_name}}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+    <style>
+        body{
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-image: url("/frontend/images/login.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            object-fit: cover;
+            background-position-y: -150px;
+        }
+        .box-shadow-outline {
+            margin-top: -7px;
+            margin-left: -7px;
+        }
+    </style>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-none"><!--
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/admin/login') }}">
-                    <!--{{ config('app.name', 'Laravel') }}-->
+                <a class="navbar-brand" href="{{ url('/admin') }}">
+                    {{ config('app.name', 'Laravel') }}
                     <h3 class="fw-bold">Admin 15Steps</h3>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button>-->
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -71,10 +95,10 @@
                                 </div>
                             </li>
                         @endguest
-                        -->
+
                     </ul>
                 </div>
-            </div>
+            </div>-->
         </nav>
 
         <main class="py-4">
