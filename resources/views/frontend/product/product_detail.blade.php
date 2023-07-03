@@ -115,7 +115,7 @@
 								@elseif($productDetails->product_price > $productDetails->product_saleprice)
 									<h6 class="text-new bg-black">Sale Off</h6>
                                 @elseif($stockLeft == 0)
-									<h6 class="text-new bg-secondary">Sold Out</h6>
+									<h6 class="text-new bg-danger">Sold Out</h6>
 							@endif
                             <!--
                             @if($stockLeft == 0)

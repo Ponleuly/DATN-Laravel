@@ -77,7 +77,7 @@
 												<h6 class="text-new bg-black">Sale Off</h6>
 										@endif
 										@if($stockLeft == 0)
-										    <h6 class="text-sold-out-sm bg-secondary">Sold Out</h6>
+										    <h6 class="text-sold-out-sm bg-danger">Sold Out</h6>
 										@endif
                                     </div>
                                 </a>

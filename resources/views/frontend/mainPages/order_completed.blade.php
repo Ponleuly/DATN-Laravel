@@ -19,6 +19,22 @@
     </style>
 @extends('index')
 @section('content')
+    <!-- Start breabcrumb Section -->
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb px-3 py-2 mb-0" style="background: #cc2936">
+		  	<li class="breadcrumb-item ">
+				<a href="{{url("home")}}" class="text-light">Home</a>
+			</li>
+			<li class="breadcrumb-item ">
+				<a href="{{url("cart")}}" class="text-light">Cart</a>
+			</li>
+		  	<li class="breadcrumb-item text-light">Checkout</li>
+            <li class="breadcrumb-item text-light">
+                {{Request::is('order-completed/*')? 'Order completed':'Order canceled'}}
+            </li>
+		</ol>
+	</nav>
+	<!-- End breabcrumb Section -->
 	<div class="untree_co-section">
 		<div class="container">
             <!--------------- Alert ------------------------>
@@ -74,7 +90,7 @@
                                 <!--<span class="text-danger">See your invoice below.</span>-->
                             </p>
                     @endif
-				    <p><a href="{{url("shop")}}" class="btn btn-sm btn-danger">Continue shopping</a></p>
+				    <p><a href="{{url("shop")}}" class="btn btn-sm shadow btn-danger">Continue shopping</a></p>
 				</div>
 			</div>
 		</div>

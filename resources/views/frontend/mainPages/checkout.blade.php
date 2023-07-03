@@ -73,8 +73,8 @@
                 	@csrf <!-- to make form active -->
 					<div class="row">
 						<!------------------------Delivery Informations--------------------------------->
-						<div class="col-md-6 mb-5 mb-md-0">
-							<div class="p-3 p-lg-4 border bg-white" >
+						<div class="col-md-6 mb-5 mb-md-0" >
+							<div class="p-3 p-lg-4 border bg-white">
 								<h2 class="h3 mb-3 text-black">Delivery Informations</h2>
 								@php
 									if (Auth::check() && Auth::user()->role == 1) {
@@ -134,7 +134,7 @@
 										<label for="c_name" class="text-black mb-1">Customer Name <span class="text-danger">*</span></label>
 										<input
 											type="text"
-											class="form-control rounded-0"
+											class="form-control form-control-sm rounded-0"
 											id="c_name"
 											name="c_name"
 											value="{{$c_name}}"
@@ -149,7 +149,7 @@
 										<label for="c_phone" class="text-black mb-1">Phone Number <span class="text-danger">*</span></label>
 										<input
 											type="text"
-											class="form-control rounded-0"
+											class="form-control form-control-sm rounded-0"
 											id="c_phone"
 											name="c_phone"
 											value="{{$c_phone}}"
@@ -164,7 +164,7 @@
 										<label for="c_email" class="text-black mb-1">Email <span class="text-danger">*</span></label>
 										<input
 											type="email"
-											class="form-control rounded-0"
+											class="form-control form-control-sm rounded-0"
 											id="c_email"
 											name="c_email"
 											value="{{$c_email}}"
@@ -181,7 +181,7 @@
 												<label for="c_address" class="text-black mb-1">Address <span class="text-danger">*</span></label>
 												<input
 													type="text"
-													class="form-control rounded-0"
+													class="form-control form-control-sm rounded-0"
 													id="c_address"
 													name="c_address"
 													value="{{$c_address}}"
@@ -193,7 +193,7 @@
 												<label for="c_city" class="text-black mb-1">City/Province <span class="text-danger">*</span></label>
 												<input
 													type="text"
-													class="form-control rounded-0"
+													class="form-control form-control-sm rounded-0"
 													id="c_city"
 													name="c_city"
 													value="{{$c_city}}"
@@ -213,7 +213,7 @@
 												<label for="c_district" class="text-black mb-1">District <span class="text-danger">*</span></label>
 												<input
 													type="text"
-													class="form-control rounded-0"
+													class="form-control form-control-sm rounded-0"
 													id="c_district"
 													name="c_district"
 													value="{{$c_district}}"
@@ -225,7 +225,7 @@
 												<label for="c_ward" class="text-black mb-1">Ward <span class="text-danger">*</span></label>
 												<input
 													type="text"
-													class="form-control rounded-0"
+													class="form-control form-control-sm rounded-0"
 													id="c_ward"
 													name="c_ward"
 													value="{{$c_ward}}"
@@ -237,13 +237,13 @@
 									</div>
 								</div>
 								<div class="form-group mb-3">
-									<label for="c_note" class="text-black mb-1">Order Note</label>
+									<label for="c_note" class="text-black mb-1">Notes</label>
 									<textarea
 										name="c_note"
 										id="c_note"
 										cols="30"
 										rows="3"
-										class="form-control rounded-0"
+										class="form-control form-control-sm rounded-0"
 										placeholder="Write here..."
 										>{{$c_note}}</textarea>
 								</div>
