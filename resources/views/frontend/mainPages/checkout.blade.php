@@ -129,8 +129,7 @@
 									}
 								@endphp
 								<div class="form-group row mb-3">
-									<div class="col-md-12">
-
+									<div class="col-md-6">
 										<label for="c_name" class="text-black mb-1">Customer Name <span class="text-danger">*</span></label>
 										<input
 											type="text"
@@ -142,10 +141,7 @@
 											required
 										>
 									</div>
-								</div>
-
-								<div class="form-group row mb-3">
-									<div class="col-md-12">
+									<div class="col-md-6">
 										<label for="c_phone" class="text-black mb-1">Phone Number <span class="text-danger">*</span></label>
 										<input
 											type="text"
@@ -160,7 +156,7 @@
 								</div>
 
 								<div class="form-group row mb-3">
-									<div class="col-md-12">
+									<div class="col-md-6">
 										<label for="c_email" class="text-black mb-1">Email <span class="text-danger">*</span></label>
 										<input
 											type="email"
@@ -172,23 +168,23 @@
 											required
 										>
 									</div>
+									<div class="col-md-6">
+										<label for="c_address" class="text-black mb-1">Address <span class="text-danger">*</span></label>
+										<input
+											type="text"
+											class="form-control form-control-sm rounded-0"
+											id="c_address"
+											name="c_address"
+											value="{{$c_address}}"
+											placeholder="Street name, floor...."
+											required
+										>
+									</div>
 								</div>
 
 								<div class="form-group row mb-3">
 									<div class="col-md-12">
 										<div class="row">
-											<div class="col-8">
-												<label for="c_address" class="text-black mb-1">Address <span class="text-danger">*</span></label>
-												<input
-													type="text"
-													class="form-control form-control-sm rounded-0"
-													id="c_address"
-													name="c_address"
-													value="{{$c_address}}"
-													placeholder="Street name, floor...."
-													required
-												>
-											</div>
 											<div class="col-4">
 												<label for="c_city" class="text-black mb-1">City/Province <span class="text-danger">*</span></label>
 												<input
@@ -201,15 +197,7 @@
 													required
 												>
 											</div>
-										</div>
-
-									</div>
-								</div>
-
-								<div class="form-group row mb-3">
-									<div class="col-md-12">
-										<div class="row">
-											<div class="col-6">
+											<div class="col-4">
 												<label for="c_district" class="text-black mb-1">District <span class="text-danger">*</span></label>
 												<input
 													type="text"
@@ -221,7 +209,7 @@
 													required
 												>
 											</div>
-											<div class="col-6">
+											<div class="col-4">
 												<label for="c_ward" class="text-black mb-1">Ward <span class="text-danger">*</span></label>
 												<input
 													type="text"
@@ -234,9 +222,11 @@
 												>
 											</div>
 										</div>
+
 									</div>
 								</div>
-								<div class="form-group mb-3">
+
+								<div class="form-group mb-4">
 									<label for="c_note" class="text-black mb-1">Notes</label>
 									<textarea
 										name="c_note"
