@@ -35,12 +35,19 @@
 								>
 							</div>
 							<div class="col-auto">
-								<button
-									type="submit"
-									class="btn btn-dark btn-sm shadow rounded-1 border-1"
-									>
-									<span class="text-light">Send</span>
-								</button>
+								<div class="d-grid border p-1 border-dark">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-dark btn-sm shadow  rounded-0
+                                        box-shadow-outline text-center d-flex justify-content-between">
+
+                                        <span class="fw-semibold pe-3">{{ __('Send') }}</span>
+										<span class="material-icons-round"
+											style="vertical-align: middle; font-size: 20px">send
+										</span>
+                                       
+                                    </button>
+                                </div>
 							</div>
 						</form>
 					</div>
