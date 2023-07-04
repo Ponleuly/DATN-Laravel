@@ -39,18 +39,18 @@
                                         <input
                                             type="text"
                                             name="search_order"
-                                            class="form-control rounded-0 text-sm"
+                                            class="form-control rounded-1 rounded-end-0 text-sm"
                                             placeholder="Enter order code here..."
                                             aria-label="Sizing example input"
                                             aria-describedby="inputGroup-sizing-default"
                                             value="{{$search_text}}"
                                         >
                                         <button
-                                            class="btn btn-outline-primary rounded-0 text-sm"
+                                            class="btn btn-outline-primary btn-sm rounded-1 rounded-start-0 text-sm"
                                             type="submit"
                                             id="search"
                                             >
-                                            Search
+                                            <i class="bi bi-search"></i>
                                         </button>
                                     </div>
                                 </form>
@@ -89,28 +89,47 @@
                                 @endif
                             </div>
                             <div class="col-md-6">
-                                <div class="d-flex flex-row align-items-baseline justify-content-end">
-                                    <p class="text-sm pe-2">Sort by</p>
-                                    <select class="form-select form-select-sm"
-                                            aria-label="Default select example"
-                                            style="width: 140px"
-                                            id="sortStatus"
-                                    >
-                                        <option selected disabled>Order status</option>
-                                        <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=pending')}}"
-                                            {{($sort == 'pending')? 'selected':''}}>Pending
-                                        </option>
-                                        <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=processing')}}"
-                                            {{($sort == 'processing')? 'selected':''}}>Processing
-                                        </option>
-                                        <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=delivered')}}"
-                                            {{($sort == 'delivered')? 'selected':''}}>Delivered
-                                        </option>
-                                        <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=canceled')}}"
-                                            {{($sort == 'canceled')? 'selected':''}}>Canceled
-                                        </option>
-                                    </select>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="d-flex flex-row align-items-baseline justify-content-end">
+                                            <p class="text-sm pe-2">Sort by</p>
+                                            <input
+                                                type="date"
+                                                name="order_date"
+                                                class="form-control form-control-sm rounded-1 text-sm"
+                                                placeholder="Order date"
+                                                aria-label="Sizing example input"
+                                                aria-describedby="inputGroup-sizing-default"
+                                                style="width: 140px"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex flex-row align-items-baseline justify-content-end">
+                                            <p class="text-sm pe-2">Sort by</p>
+                                            <select class="form-select form-select-sm"
+                                                    aria-label="Default select example"
+                                                    style="width: 140px"
+                                                    id="sortStatus"
+                                            >
+                                                <option selected disabled>Order status</option>
+                                                <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=pending')}}"
+                                                    {{($sort == 'pending')? 'selected':''}}>Pending
+                                                </option>
+                                                <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=processing')}}"
+                                                    {{($sort == 'processing')? 'selected':''}}>Processing
+                                                </option>
+                                                <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=delivered')}}"
+                                                    {{($sort == 'delivered')? 'selected':''}}>Delivered
+                                                </option>
+                                                <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=canceled')}}"
+                                                    {{($sort == 'canceled')? 'selected':''}}>Canceled
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                         <!--
