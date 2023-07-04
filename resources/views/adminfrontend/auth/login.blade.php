@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center p-5">
-         @if(Session::has('alert'))
+        <div class="col-md-6 ">
+            @if(Session::has('alert'))
             <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
                 {{Session::get('alert')}}
                 <button group="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-		@endif
-        <div class="col-md-6 ">
+		    @endif
             <div class="card rounded-4">
                 <div class="row">
                     <div class="col-md-4">
