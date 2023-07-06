@@ -46,6 +46,8 @@ class OrderController extends Controller
             $orders = Orders::orderBy('payment_method', $sort)->paginate($res);
         } elseif ($title == 'status') {
             $orders = Orders::where('order_status', $sort)->paginate($res);
+        } elseif ($title == 'day') {
+            $orders = Orders::whereDate('created_at', '=', $sort)->paginate($res);
         }
         $search_text = '';
         return view(

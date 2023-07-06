@@ -95,12 +95,14 @@
                                             <p class="text-sm pe-2">Sort by</p>
                                             <input
                                                 type="date"
-                                                name="order_date"
+                                                name="sort_day"
                                                 class="form-control form-control-sm rounded-1 text-sm"
                                                 placeholder="Order date"
                                                 aria-label="Sizing example input"
                                                 aria-describedby="inputGroup-sizing-default"
                                                 style="width: 140px"
+                                                onchange="sortDay(event)"
+                                                value ="{{($sort == '')? '':$sort}}"
                                             >
                                         </div>
                                     </div>
@@ -129,7 +131,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <!--
@@ -495,9 +497,19 @@
             var url_order_status = $(this).val(); // get selected value
             if (url_order_status != '') { // require a url_order_status
                 window.location = url_order_status; // redirect
-                //alert(url_order_status);
             }
             return false;
         });
+    </script>
+    <script>
+        function sortDay(event){
+            var day_value = $("[name='sort_day']").val();
+            //alert(day_value);
+            var res = "<?php echo $res; ?>";
+            if(day_value != ''){
+                window.location.assign('by-day='+ day_value) ;
+            }
+            return false;
+        }
     </script>
 @endsection()
