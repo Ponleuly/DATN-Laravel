@@ -1,5 +1,6 @@
 @extends('adminfrontend.layouts.index')
 @section('admincontent')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <div class="container-fluid">
         <!--------------- Alert ------------------------>
         @if(Session::has('alert'))
@@ -60,16 +61,6 @@
                                         <div class="row mt-3">
                                             <div class="col-12">
                                                 <label for="product_imgcover"><p class="text-label">Image Cover</p></label>
-                                                <!--
-                                                <input
-                                                    class="form-control form-control-sm rounded-0 mb-2"
-                                                    type="file"
-                                                    id="product_imgcover"
-                                                    name="product_imgcover"
-                                                    accept="image/png, image/jpeg, image/jpg"
-                                                    required
-                                                >
-                                                -->
                                                 <div class="image-upload-wrap">
                                                     <input
                                                         class="file-upload-input"
@@ -101,17 +92,6 @@
 
                                             <div class="col-12">
                                                 <label for="product_imgreview"><p class="text-label mt-3">Images Review</p></label>
-                                                <!--
-                                                <input
-                                                    class="form-control form-control-sm rounded-0 mb-2"
-                                                    type="file"
-                                                    id="product_imgreview"
-                                                    name="product_imgreview[]"
-                                                    accept="image/png, image/jpeg, image/jpg"
-                                                    multiple
-                                                    required
-                                                >
-                                                -->
                                                 <div class="row" id="more-img">
                                                     <!--=========== Start Img review 1============---->
                                                     <div class="col-md-6 mb-4">
@@ -189,7 +169,6 @@
                                                         </div>
                                                     </div>
                                                     <!--=========== End Img review 2============---->
-
 
                                                     <!--=========== Start Img review 3============---->
                                                     <div class="col-md-6">
@@ -403,9 +382,9 @@
                                         <!-- Start Product size and quantity -->
                                         <label for="size"><p class="text-label mt-2">Product Size and Quantity</p></label><br>
                                         <div class="border border-1 rounded-0 p-3 mb-2 ">
-                                            <div class="row">
-                                                 @foreach ($sizes as $item1)
-                                                    <div class="col-md-4 mb-2">
+                                            <div class="row" id="size-col">
+                                                @foreach ($sizes as $item1)
+                                                    <div class="col-md-4 mb-2 size-col">
                                                         <div class="border border-1 rounded-0 py-2 px-2">
                                                             <div class="row mb-1">
                                                                 <div class="col-md-5">
@@ -445,6 +424,29 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
+                                                    <div class="col-md-4 mb-2">
+                                                        <div class="border border-1 rounded-0 py-2 px-2">
+                                                            <div class="row mb-1" id="test">
+                                                                <div class="col-md-12">
+                                                                    <div class="drag-text-review-more"
+                                                                        type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#addSize"
+                                                                        data-bs-whatever="@mdo"
+                                                                    >
+                                                                        <span class="display-3 thankyou-icon text-light">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width=".5em" height=".5em" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                            </svg>
+                                                                        </span>
+                                                                        <h6 class="text-sm"
+                                                                        >Add more size</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             </div>
 
                                             <div class="form-check mb-0">
@@ -455,6 +457,10 @@
                                                     onclick="javascript:sizeAll(this)"
                                                 >
                                                 <label class="form-check-label text-danger ms-1" for="size">Check All</label>
+                                            </div>
+                                            <div class="alert alert-success alert-dismissible fade show rounded-0 mt-2" role="alert" id="sizeMessage">
+                                                <span id="message"></span>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>
                                         </div>
                                         <!-- End Product size and quantity -->
@@ -478,6 +484,55 @@
                         </div>
                     </div>
                 </div>
+        </form>
+        <form action="{{url('admin/product-size-add')}}" enctype="multipart/form-data" method="post" id="form-add-size">
+            <div class="modal fade" id="addSize" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content ">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Add Size</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-start">
+                            <!-- Alert if size the same-->
+                            <div class="alert alert-danger print-error-msg text-sm" style="display:none">
+                            </div>
+                            <label for="sizeNumber"><p class="text-sm">Size Number</p></label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm text-capitalize mb-2
+                                @error('size_number') is-invalid @enderror"
+                                id="sizeNumber"
+                                name="size_number"
+                                value=""
+                                placeholder="Ex. 35"
+                            >
+
+                            @error('size_number')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-size">{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-secondary btn-sm py-1 px-2"
+                                data-bs-dismiss="modal"
+                                id="close-form"
+                                >Close
+                            </button>
+                            <button
+                                type="submit"
+                                class="btn btn-primary btn-sm py-1 px-2"
+                                value="submit"
+                                id="btn-add-size"
+                                >Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
@@ -608,5 +663,86 @@
                 </div>`);
         }
 
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $("#sizeMessage").hide();
+        var size_col_cnt = $('.size-col').length;
+        var i = size_col_cnt;
+        ++i;
+        $("#btn-add-size").click(function(e){
+            e.preventDefault();
+            var sizeNumber = $("#sizeNumber").val();
+
+            $.ajax({
+            type:'POST',
+            url:"{{ url('/admin/product-size-add') }}",
+            data: {size_number:sizeNumber},
+            success:function(data){
+                    if($.isEmptyObject(data.error)){
+                        //alert(size_col_cnt);
+                        // location.reload();
+                        $('#addSize').modal('hide');
+                        var sizeId = data.id;
+                        var sizeNum = data.size_number;
+
+                        $("#size-col .col-md-4:last").before(
+                            `
+                            <div class="col-md-4 mb-2 size-col">
+                                <div class="border border-1 rounded-0 py-2 px-2">
+                                    <div class="row mb-1">
+                                        <div class="col-md-5">
+                                            <label for="size"><p class="text-label">Size: </p></label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input
+                                                type="checkbox"
+                                                class="form-check-input sizeAll"
+                                                id="size${sizeId}"
+                                                value="${sizeId}"
+                                                name="size_id[${sizeId}]"
+
+                                            >
+                                            <label class="form-check-label fw-500" for="size${sizeId}">
+                                                ${sizeNum}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label for="size_quantity"><p class="text-label">Qty: </p></label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input
+                                                class="form-control form-control-sm rounded-0 w-100"
+                                                type="number"
+                                                min="0"
+                                                name="size_quantity[${sizeId}]"
+                                                id="size_quantity"
+                                                placeholder="00"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `
+                        );
+                        $("#sizeMessage").show();
+                        $('#message').html(data.message);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            });
+        });
+        function printErrorMsg (msg) {
+            $(".print-error-msg").css('display','block');
+            $(".print-error-msg").html(msg);
+        }
     </script>
 @endsection()

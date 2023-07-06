@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\AdminController;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Sizes;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class ProductSizeController extends Controller
 {
@@ -62,10 +64,30 @@ class ProductSizeController extends Controller
      */
     public function product_size_store(Request $request)
     {
-        $input = $request->all();
-        Sizes::create($input);
-        return redirect('/admin/product-size-add')
-            ->with('message', 'Product size ' . $request->size_number . ' is added successfully!');
+        if ($request->ajax()) {
+            $validator = Validator::make($request->all(), [
+                'size_number' => 'required|unique:sizes',
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'error' => $validator->errors()->all()
+                ]);
+            }
+            Sizes::create([
+                'size_number' => $request->size_number,
+            ]);
+            $size = Sizes::latest()->first();
+            return response()->json([
+                'id' => $size->id,
+                'size_number' => $size->size_number,
+                'message' => 'Size number ' . $size->size_number . ' is added.'
+            ]);
+        } else {
+            $input = $request->all();
+            Sizes::create($input);
+            return redirect('/admin/product-size-add')
+                ->with('message', 'Product size ' . $request->size_number . ' is added successfully!');
+        }
     }
 
     /**

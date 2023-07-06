@@ -5316,3 +5316,6 @@ a.view-btn:hover span {
 .card-content>span {
   display: inline-block;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
