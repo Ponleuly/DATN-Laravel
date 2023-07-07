@@ -5258,6 +5258,18 @@ a.view-btn:hover span {
   padding: 10px 0;
   font-size: 12px;
 }
+.drag-text-add-size h6 {
+  font-weight: 600;
+  color: grey;
+  padding: 0;
+  font-size: 12px;
+}
+.drag-text-add-size svg{
+  font-size: 85px;
+}
+.drag-text-add-size:hover svg, .drag-text-add-size:hover h6 {
+  color: #4169E1;
+}
 .file-upload-image-review {
   height: 200px;
   width: 100%;
