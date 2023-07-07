@@ -27,7 +27,7 @@
                             </div>
                             <div class="right">
                                 <a
-                                    class="btn btn-outline-danger rounded-0 py-1"
+                                    class="btn btn-outline-danger shadow rounded-1 py-1"
                                     href="{{url('admin/general-setting-edit')}}"
                                     role="button">
                                     <p class="text-sm">Edit Settings</p>

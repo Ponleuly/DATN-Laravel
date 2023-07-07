@@ -160,9 +160,15 @@
 
                                         <div class="d-flex mt-4 justify-content-end">
                                             <a
-                                                class="btn btn-outline-danger rounded-1 py-1 text-sm"
+                                                class="btn btn-outline-danger shadow rounded-1 py-1 me-2 text-sm"
                                                 href="{{url('/admin/coupon-list')}}"
                                                 role="button">Back
+                                            </a>
+                                            <a
+                                                class="btn btn-primary shadow rounded-1 py-1 text-sm"
+                                                href="{{url('/admin/coupon-edit/'.$coupon->id)}}"
+                                                role="button">
+                                                <p class="text-sm">Edit</p>
                                             </a>
                                         </div>
                                     </div>

@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
                             <a
-                                class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
+                                class="btn btn-outline-danger shadow rounded-1 py-1 me-2 text-sm"
                                 href="{{url('/admin/news-list')}}"
                                 role="button">Back
                             </a>

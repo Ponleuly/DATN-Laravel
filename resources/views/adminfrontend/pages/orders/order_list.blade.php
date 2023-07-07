@@ -39,7 +39,7 @@
                                         <input
                                             type="text"
                                             name="search_order"
-                                            class="form-control rounded-1 rounded-end-0 text-sm"
+                                            class="form-control rounded-1 rounded-end-0 text-sm text-capitalize"
                                             placeholder="Enter order code here..."
                                             aria-label="Sizing example input"
                                             aria-describedby="inputGroup-sizing-default"

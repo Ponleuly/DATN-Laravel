@@ -34,33 +34,33 @@
                         </div>
                         <div class="col-md-6">
                             <div class="right">
-                                <div class="row">
-                                    <div class="col-md-4 mb-2 ">
+                                <div class="row justify-content-end">
+                                    <div class="col-md-3 mb-2 ">
                                         <a
-                                            class="btn btn-outline-primary rounded-0 py-1"
+                                            class="btn btn-outline-primary shadow rounded-1 py-1"
                                             href="{{url('/admin/product-category-add')}}"
                                             role="button">
                                             <p class="text-sm">Add Category</p>
                                         </a>
                                     </div>
-                                    <div class="col-md-8 ">
+                                    <div class="col-md-6">
                                         <form  action="{{url('admin/product-category-search')}}">
                                             <div class="input-group input-group-sm w-100">
                                                 <input
                                                     type="text"
                                                     name="search_category"
-                                                    class="form-control rounded-0 text-sm"
+                                                    class="form-control rounded-1 rounded-end-0 text-sm text-capitalize"
                                                     placeholder="Enter category name here..."
                                                     aria-label="Sizing example input"
                                                     aria-describedby="inputGroup-sizing-default"
                                                     value="{{$search_text}}"
                                                 >
                                                 <button
-                                                    class="btn btn-outline-primary rounded-0 text-sm"
+                                                    class="btn btn-outline-primary btn-sm rounded-1 rounded-start-0 text-sm"
                                                     type="submit"
                                                     id="search"
                                                     >
-                                                    Search
+                                                    <i class="bi bi-search"></i>
                                                 </button>
                                             </div>
                                         </form>

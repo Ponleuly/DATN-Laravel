@@ -31,33 +31,33 @@
                                 <h4 class="text-medium mb-20">Products List</h4>
                             </div>
                             <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-3 mb-2 ">
+                                <div class="row justify-content-end">
+                                    <div class="col-md-3 mb-2">
                                         <a
-                                            class="btn btn-outline-primary rounded-0 py-1"
+                                            class="btn btn-outline-primary shadow rounded-1 py-1"
                                             href="{{url('/admin/product-detail-add')}}"
                                             role="button">
                                             <p class="text-sm">Add Product</p>
                                         </a>
                                     </div>
-                                    <div class="col-md-9 ">
+                                    <div class="col-md-6">
                                         <form  action="{{url('admin/product-search/show='.(($res>20)? 'all':$res).'/by-'.$title.'='.$sort)}}">
                                             <div class="input-group input-group-sm w-100">
                                                 <input
                                                     type="text"
                                                     name="search_product"
-                                                    class="form-control rounded-0 text-sm"
+                                                    class="form-control rounded-1 rounded-end-0 text-sm text-capitalize"
                                                     placeholder="Enter product name here..."
                                                     aria-label="Sizing example input"
                                                     aria-describedby="inputGroup-sizing-default"
                                                     value="{{$search_text}}"
                                                 >
                                                 <button
-                                                    class="btn btn-outline-primary rounded-0 text-sm"
+                                                    class="btn btn-outline-primary btn-sm rounded-1 rounded-start-0 text-sm"
                                                     type="submit"
                                                     id="search"
                                                     >
-                                                    Search
+                                                    <i class="bi bi-search"></i>
                                                 </button>
                                             </div>
                                         </form>
