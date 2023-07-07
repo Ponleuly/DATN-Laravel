@@ -6,6 +6,7 @@
 	use App\Models\Orders_Statuses;
 	use App\Models\Customers;
 ?>
+
 @extends('adminfrontend.layouts.index')
 @section('admincontent')
     <div class="container-fluid">
@@ -114,6 +115,7 @@
                                                     style="width: 140px"
                                                     id="sortStatus"
                                             >
+
                                                 <option selected disabled>Order status</option>
                                                 <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=pending')}}"
                                                     {{($sort == 'pending')? 'selected':''}}>Pending
@@ -366,15 +368,24 @@
                                         <td class="text-center">
                                             <button
                                                 type="button"
-                                                class="btn btn-sm py-1 px-2
+                                                class="btn btn-sm py-1 px-1
                                                     {{($order->order_status == 'Pending')?  'btn-warning' : ''}}
                                                     {{($order->order_status == 'Processing')?  'btn-primary' : ''}}
                                                     {{($order->order_status == 'Delivered')?  'btn-success' : ''}}
                                                     {{($order->order_status == 'Canceled')?  'btn-danger' : ''}}
                                                 "
-                                                style="width: 90px;"
+                                                style="width: 115px;"
                                                 >
-                                                {{$order->order_status}}
+                                                @if($order->order_status == 'Pending')
+                                                    <i class="bi bi-arrow-clockwise me-1"></i>
+                                                @elseif($order->order_status == 'Processing')
+                                                    <i class="bi bi-truck"></i>
+                                                @elseif($order->order_status == 'Delivered')
+                                                    <i class="bi bi-bag-check me-1"></i>
+                                                @elseif($order->order_status == 'Canceled')
+                                                    <i class="bi bi-x-circle me-1"></i>
+                                                @endif
+                                                <span class="ms-1">{{$order->order_status}}</span>
                                             </button>
                                         </td>
                                         <td class="text-center">
