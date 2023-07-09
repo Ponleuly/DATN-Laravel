@@ -284,16 +284,41 @@
                                         <td>
                                             <button
                                                 type="button"
-                                                class="btn btn-sm py-1 px-0
+                                                class="btn btn-sm py-1 px-1
                                                     {{($product->product_status == 1)?  'btn-primary' : ''}}
                                                     {{($product->product_status == 2)?  'btn-success' : ''}}
                                                     {{($product->product_status == 3)?  'btn-danger' : ''}}
                                                     "
-                                                    style="width: 65px;"
+                                                    style="width: 100px;"
                                                 >
-                                                {{($product->product_status == 1)?  'New' : ''}}
-                                                {{($product->product_status == 2)?  'Selling' : ''}}
-                                                {{($product->product_status == 3)?  'Sold Out' : ''}}
+                                                @if($product->product_status == 1)
+                                                <div class="row px-2">
+                                                    <div class="col-sm-3">
+                                                        <i class="bi bi-cart-plus"></i>
+                                                    </div>
+                                                    <div class="col-sm-9 ">
+                                                        New
+                                                    </div>
+                                                </div>
+                                                @elseif($product->product_status == 2)
+                                                    <div class="row px-2">
+                                                        <div class="col-sm-3">
+                                                            <i class="bi bi-cart-check"></i>
+                                                        </div>
+                                                        <div class="col-sm-9 ">
+                                                            Selling
+                                                        </div>
+                                                    </div>
+                                                @elseif($product->product_status == 3)
+                                                    <div class="row px-2">
+                                                        <div class="col-sm-3">
+                                                            <i class="bi bi-cart-x"></i>
+                                                        </div>
+                                                        <div class="col-sm-9 ">
+                                                            Soldout
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             </button>
                                         </td>
                                         <td>
