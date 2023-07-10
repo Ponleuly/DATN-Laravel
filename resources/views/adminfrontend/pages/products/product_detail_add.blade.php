@@ -23,7 +23,8 @@
                         <div class="col-12 text-center">
                             <h4 class="text-medium mb-20">Add Product</h4>
                         </div>
-                        <div class="row">
+                        <!---==== Old form -====-->
+                        {{-- <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row mb-2">
                                     <div class="col-md-12">
@@ -483,6 +484,525 @@
                                     </div>
                                 </div>
                             </div>
+                        </div> --}}
+                        <!---==== Old form -====-->
+
+                        <!--- Test -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row mt-2">
+                                    <div class="form-group mb-2">
+                                        <!-- Start Product size and quantity -->
+                                        <label for="size"><p class="text-label mt-2">Product Colors</p></label><br>
+                                        <div class="border border-1 rounded-0 p-3 mb-2 ">
+                                            <div class="row" id="color-col">
+                                                    <div class="col-md-6 mb-2 color-col">
+                                                        <div class="border border-1 rounded-0 py-2 px-2">
+                                                            <div class="row mb-1">
+                                                                <div class="col-md-4">
+                                                                    <label for="size"><p class="text-label">Color 1: </p></label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-2">
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                class="form-check-input sizeAll"
+                                                                                id="color-check-1"
+                                                                                value=""
+                                                                                name="color_check[]"
+                                                                            >
+                                                                        </div>
+                                                                        <div class="col-sm-10 d-grid">
+                                                                            <label class="form-check-label" for="color-check-1">
+                                                                            <input
+                                                                                type="color"
+                                                                                class="form-control form-control-color w-100 form-control-sm rounded-0"
+                                                                                id="color-1"
+                                                                                value="#c5c5c5"
+                                                                                onchange="colorValue(event)"
+                                                                                placeholder="product name..."
+                                                                            >
+                                                                        </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="size_quantity"><p class="text-label">Name: </p></label>
+                                                                </div>
+                                                                <div class="col-md-8 d-flex justify-content-end">
+                                                                    <input
+                                                                        type="text"
+                                                                        class="form-control form-control-sm w-100 rounded-0 text-sm text-capitalize"
+                                                                        id="colorname"
+                                                                        name="colorname[]"
+                                                                        placeholder="color name"
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 mb-2 color-col">
+                                                        <div class="border border-1 rounded-0 py-2 px-2">
+                                                            <div class="row mb-1">
+                                                                <div class="col-md-4">
+                                                                    <label for="size"><p class="text-label">Color 2: </p></label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-2">
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                class="form-check-input sizeAll"
+                                                                                id="color-check-2"
+                                                                                value=""
+                                                                                name="color_check[]"
+                                                                            >
+                                                                        </div>
+                                                                        <div class="col-sm-10 d-grid">
+                                                                            <label class="form-check-label" for="color-check-2">
+                                                                            <input
+                                                                                type="color"
+                                                                                class="form-control form-control-color w-100 form-control-sm rounded-0"
+                                                                                id="color-2"
+                                                                                value="#c5c5c5"
+                                                                                onchange="colorValue(event)"
+                                                                                placeholder="product name..."
+                                                                            >
+                                                                        </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="size_quantity"><p class="text-label">Name: </p></label>
+                                                                </div>
+                                                                <div class="col-md-8 d-flex justify-content-end">
+                                                                    <input
+                                                                        type="text"
+                                                                        class="form-control form-control-sm w-100 rounded-0 text-sm text-capitalize"
+                                                                        id="colorname"
+                                                                        name="colorname[]"
+                                                                        onchange="colorValue(event)"
+                                                                        placeholder="color name"
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 mb-2 color-col">
+                                                        <div class="border border-1 rounded-0 py-2 px-2">
+                                                            <div class="row mb-1">
+                                                                <div class="col-md-4">
+                                                                    <label for="size"><p class="text-label">Color 3: </p></label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-2">
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                class="form-check-input sizeAll"
+                                                                                id="color-check-3"
+                                                                                value=""
+                                                                                name="color_check[]"
+                                                                            >
+                                                                        </div>
+                                                                        <div class="col-sm-10 d-grid">
+                                                                            <label class="form-check-label" for="color-check-3">
+                                                                            <input
+                                                                                type="color"
+                                                                                class="form-control form-control-color w-100 form-control-sm rounded-0"
+                                                                                id="color-3"
+                                                                                value="#c5c5c5"
+                                                                                onchange="colorValue(event)"
+                                                                                placeholder="product name..."
+                                                                            >
+                                                                        </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label for="size_quantity"><p class="text-label">Name: </p></label>
+                                                                </div>
+                                                                <div class="col-md-8 d-flex justify-content-end">
+                                                                    <input
+                                                                        type="text"
+                                                                        class="form-control form-control-sm w-100 rounded-0 text-sm text-capitalize"
+                                                                        id="colorname"
+                                                                        name="colorname[]"
+                                                                        placeholder="color name"
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <!---============ Add more color btn==============-->
+                                                <div class="col-md-6 mb-2">
+                                                    <div class="border border-1 rounded-0" onclick="addMoreColor()">
+                                                        <div class="row mb-1">
+                                                            <div class="col-md-12">
+                                                                <div class="drag-text-add-size py-0 text-center"
+                                                                    type="button"
+                                                                    >
+                                                                    <span class="text-light pt-2">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width=".5em" height=".5em" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                        </svg>
+                                                                    </span>
+                                                                    <h6 class="text-sm pt-0 pb-0"
+                                                                    >Add more color</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-check mb-0">
+                                                <input
+                                                    type="checkbox"
+                                                    class="form-check-input"
+                                                    id="size"
+                                                    onclick="javascript:sizeAll(this)"
+                                                >
+                                                <label class="form-check-label text-danger ms-1" for="size">Check All</label>
+                                            </div>
+                                            <!--======== Success add new size message=======-->
+                                            <div class="alert alert-success alert-dismissible fade show rounded-0 mt-2 " role="alert" id="sizeMessage">
+                                                <span id="message"></span>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-2">
+                                    <div class="col-md-12">
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <label for="product_imgcover"><p class="text-label">Image Cover</p></label>
+                                                <div class="image-upload-wrap">
+                                                    <input
+                                                        class="file-upload-input"
+                                                        type='file'
+                                                        id="product_imgcover"
+                                                        name="product_imgcover"
+                                                        onchange="readImgCover(this);" accept="image/*"
+                                                        required
+                                                    />
+                                                    <div class="drag-text">
+                                                        <span class="display-3 thankyou-icon text-light mt-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                                            </svg>
+                                                        </span>
+                                                        <h6>Image cover</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="file-upload-content">
+                                                    <img class="file-upload-image-cover" src="#" alt="image cover" name="category_img"/>
+                                                    <span
+                                                        class="file-remove"
+                                                        type="button"
+                                                        onclick="removeImgCover()">X
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="product_imgreview"><p class="text-label mt-3">Images Review</p></label>
+                                                <div class="row" id="more-img">
+                                                    <!--=========== Start Img review 1============---->
+                                                    <div class="col-md-6 mb-4">
+                                                        <div class="image-upload-wrap-review" id="imgreview-icon-1">
+                                                            <input
+                                                                class="file-upload-input-review"
+                                                                type='file'
+                                                                id="imgreview-1"
+                                                                name="product_imgreview[]"
+                                                                onchange="readImgReview(this);" accept="image/*"
+                                                                required
+                                                            />
+                                                            <div class="drag-text-review">
+                                                                <span class="display-3 thankyou-icon text-light mt-3 ">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                                                    </svg>
+                                                                </span>
+                                                                <h6>Image review 1</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="file-upload-content-review" id="upload-imgreview-1">
+                                                            <img
+                                                                class="file-upload-image-review"
+                                                                src="#" alt="your image"
+                                                                name="category_img"
+                                                                id="showImg-1"
+                                                            />
+                                                            <span
+                                                                class="file-remove-review"
+                                                                type="button"
+                                                                id="remove-1"
+                                                                onclick="removeImgReview()">X
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!--=========== End Img review 1============---->
+                                                {{--
+                                                    <!--=========== Start Img review 2============---->
+                                                    <div class="col-md-6">
+                                                        <div class="image-upload-wrap-review" id="imgreview-icon-2">
+                                                            <input
+                                                                class="file-upload-input-review"
+                                                                type='file'
+                                                                id="imgreview-2"
+                                                                name="product_imgreview[]"
+                                                                onchange="readImgReview(this);" accept="image/*"
+                                                                required
+                                                            />
+                                                            <div class="drag-text-review">
+                                                                <span class="display-3 thankyou-icon text-light mt-3 ">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                                                    </svg>
+                                                                </span>
+                                                                <h6>Image review 2</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="file-upload-content-review" id="upload-imgreview-2">
+                                                            <img
+                                                                class="file-upload-image-review"
+                                                                src="#" alt="your image" name="category_img"
+                                                                id="showImg-2"
+                                                            />
+                                                            <span
+                                                                class="file-remove-review"
+                                                                type="button"
+                                                                id="remove-2"
+                                                                onclick="removeImgReview()">X
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!--=========== End Img review 2============---->
+
+                                                    <!--=========== Start Img review 3============---->
+                                                    <div class="col-md-6">
+                                                        <div class="image-upload-wrap-review" id="imgreview-icon-3">
+                                                            <input
+                                                                class="file-upload-input-review"
+                                                                type='file'
+                                                                id="imgreview-3"
+                                                                name="product_imgreview[]"
+                                                                onchange="readImgReview(this);" accept="image/*"
+                                                                required
+                                                            />
+                                                            <div class="drag-text-review">
+                                                                <span class="display-3 thankyou-icon text-light mt-3 ">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                                                    </svg>
+                                                                </span>
+                                                                <h6>Image review 3</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="file-upload-content-review" id="upload-imgreview-3">
+                                                            <img
+                                                                class="file-upload-image-review"
+                                                                src="#" alt="your image"
+                                                                name="category_img"
+                                                                id="showImg-3"
+                                                            />
+                                                            <span
+                                                                class="file-remove-review"
+                                                                type="button"
+                                                                id="remove-3"
+                                                                onclick="removeImgReview()">X
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!--=========== End Img review 3============---->
+
+                                                    <!--=========== Start Img review 4============---->
+                                                    <div class="col-md-6">
+                                                        <div class="image-upload-wrap-review" id="imgreview-icon-4">
+                                                            <input
+                                                                class="file-upload-input-review"
+                                                                type='file'
+                                                                id="imgreview-4"
+                                                                name="product_imgreview[]"
+                                                                onchange="readImgReview(this);" accept="image/*"
+                                                                required
+                                                            />
+                                                            <div class="drag-text-review">
+                                                                <span class="display-3 thankyou-icon text-light mt-3 ">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                                                    </svg>
+                                                                </span>
+                                                                <h6>Image review 4</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="file-upload-content-review" id="upload-imgreview-4">
+                                                            <img
+                                                                class="file-upload-image-review"
+                                                                src="#" alt="your image"
+                                                                name="category_img"
+                                                                id="showImg-4"
+                                                            />
+                                                            <span
+                                                                class="file-remove-review"
+                                                                type="button"
+                                                                id="remove-4"
+                                                                onclick="removeImgReview()">X
+                                                            </span>
+                                                        </div>
+                                                    </div> --}}
+
+                                                    <div class="col-md-6 mt-4">
+                                                        <div class="image-upload-wrap-review-more" onclick="addMoreImg()">
+                                                            <div class="drag-text-review-more">
+                                                                <span class="display-3 thankyou-icon text-light mt-3 ">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                    </svg>
+                                                                </span>
+                                                                <h6 class="text-sm">Add more images</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--=========== End Img review 4============---->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="col-md-12 mb-2">
+                                    <div class="form-group mb-2">
+                                        <!-- Start Product size and quantity -->
+                                        <label for="size"><p class="text-label mt-2">Product Size and Quantity</p></label><br>
+                                        <div class="border border-1 rounded-0 p-3 mb-2 ">
+                                            <div class="row" id="size-col">
+                                                @foreach ($sizes as $item1)
+                                                    <div class="col-md-4 mb-2 size-col">
+                                                        <div class="border border-1 rounded-0 py-2 px-2">
+                                                            <div class="row mb-1">
+                                                                <div class="col-md-5">
+                                                                    <label for="size"><p class="text-label">Size: </p></label>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        class="form-check-input sizeAll"
+                                                                        id="size{{$item1->size_number}}"
+                                                                        value="{{$item1->id}}"
+                                                                        name="size_id[{{$item1->id}}]"
+                                                                        @if ($loop->first)
+                                                                            checked
+                                                                        @endif
+                                                                    >
+                                                                    <label class="form-check-label fw-500" for="size{{$item1->size_number}}">
+                                                                        {{$item1->size_number}}
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-5">
+                                                                    <label for="size_quantity"><p class="text-label">Qty: </p></label>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <input
+                                                                        class="form-control form-control-sm rounded-0 w-100"
+                                                                        type="number"
+                                                                        min="0"
+                                                                        name="size_quantity[{{$item1->id}}]"
+                                                                        id="size_quantity"
+                                                                        placeholder="00"
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <!---============ Add more size btn==============-->
+                                                <div class="col-md-4 mb-2">
+                                                    <div class="border border-1 rounded-0">
+                                                        <div class="row mb-1" id="test">
+                                                            <div class="col-md-12">
+                                                                <div class="drag-text-add-size py-0 text-center"
+                                                                    type="button"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#addSize"
+                                                                    data-bs-whatever="@mdo"
+                                                                    >
+                                                                    <span class="text-light pt-2">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width=".5em" height=".5em" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                        </svg>
+                                                                    </span>
+                                                                    <h6 class="text-sm pt-0 pb-0"
+                                                                    >Add more size</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-check mb-0">
+                                                <input
+                                                    type="checkbox"
+                                                    class="form-check-input"
+                                                    id="size"
+                                                    onclick="javascript:sizeAll(this)"
+                                                >
+                                                <label class="form-check-label text-danger ms-1" for="size">Check All</label>
+                                            </div>
+                                            <!--======== Success add new size message=======-->
+                                            <div class="alert alert-success alert-dismissible fade show rounded-0 mt-2 " role="alert" id="sizeMessage">
+                                                <span id="message"></span>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                        <!-- End Product size and quantity -->
+                                        <div class="col-md-12 mt-4">
+                                            <div class="mb-2 d-flex justify-content-end">
+                                                <a
+                                                    class="btn btn-outline-danger shadow rounded-1 py-1 me-2"
+                                                    href="{{url('admin/product-detail-list/show=10/by-name=asc')}}"
+                                                    role="button">
+                                                    <p class="text-sm">Back</p>
+                                                </a>
+                                                <button
+                                                    class="btn btn-primary shadow rounded-1 py-1 text-sm"
+                                                    type="submit">Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -538,6 +1058,7 @@
             </div>
         </form>
     </div>
+    <!----======== Texty area with ckeditor ==========-->
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
@@ -546,6 +1067,9 @@
                 console.error( error );
             } );
     </script>
+    <!----========End Texty area with ckeditor ==========-->
+
+    <!----======== Check all box size ==========-->
     <script>
         function sizeAll(o) {
             var boxes = document.getElementsByClassName("sizeAll");
@@ -568,7 +1092,9 @@
             }
         }
     </script>
+    <!----========End Check all box size ==========-->
 
+    <!----======== Preview img cover/img_review upload ==========-->
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script>
         //================ Img Cover ======================//
@@ -667,6 +1193,9 @@
         }
 
     </script>
+    <!----========End Preview img cover/img_review upload ==========-->
+
+    <!----======== Add more size to page and dbbase with ajax ==========-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
     <script type="text/javascript">
         $.ajaxSetup({
@@ -748,4 +1277,83 @@
             $(".print-error-msg").html(msg);
         }
     </script>
+    <!----========End  Add more size to page and dbbase with ajax ==========-->
+
+    <!----======== Add more color ==========-->
+    <script>
+        function addMoreColor(){
+            var color_col_cnt = $('.color-col').length;
+            var i = color_col_cnt;
+            ++i;
+            $("#color-col .col-md-6:last").before(
+                `
+                    <div class="col-md-6 mb-2 color-col">
+                        <div class="border border-1 rounded-0 py-2 px-2">
+                            <div class="row mb-1">
+                                <div class="col-md-4">
+                                    <label for="size"><p class="text-label">Color ${i}: </p></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <input
+                                                type="checkbox"
+                                                class="form-check-input sizeAll"
+                                                id="color-check-${i}"
+                                                value=""
+                                                name="color_check[]"
+                                            >
+                                        </div>
+                                        <div class="col-sm-10 d-grid">
+                                            <label class="form-check-label" for="color-1">
+                                            <input
+                                                type="color"
+                                                class="form-control form-control-color w-100 form-control-sm rounded-0"
+                                                id="color-${i}"
+                                                value="#c5c5c5"
+                                                onchange="colorValue(event)"
+                                                placeholder="product name..."
+                                            >
+                                        </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="size_quantity"><p class="text-label">Name: </p></label>
+                                </div>
+                                <div class="col-md-8 d-flex justify-content-end">
+                                    <input
+                                        type="text"
+                                        class="form-control form-control-sm w-100 rounded-0 text-sm text-capitalize"
+                                        id="colorname"
+                                        name="colorname[]"
+                                        placeholder="color name"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            );
+            //alert(i);
+        }
+        function colorValue(e){
+            var color_col_cnt = $('.color-col').length;
+            var color_id = event.currentTarget.id;
+            for(var i=1 ; i<=color_col_cnt; i++){
+				if(color_id == 'color-'+i){
+                    var colorValue = $('#color-' +i).val();
+                    var colorValue = $('#color-' +i).val();
+                    $('#color-check-'+i).val(colorValue);
+                }else{
+                    return false;
+                }
+            }
+        }
+
+    </script>
+    <!----========End Add more color ==========-->
+
 @endsection()
