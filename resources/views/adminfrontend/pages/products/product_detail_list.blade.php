@@ -94,7 +94,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="d-flex flex-row align-items-baseline justify-content-end">
-                                    <p class="text-sm pe-2">Sort by</p>
+                                    <p class="text-sm pe-2">Filter by</p>
                                     <select class="form-select form-select-sm"
                                             aria-label="Default select example"
                                             style="width: 150px"
@@ -161,6 +161,7 @@
                                             </span>
                                         </a>
                                     </th>
+                                    <!--
                                     <th class="min-width">
                                         <a
                                             href="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-stock='.(($sort=='asc')? 'desc':'asc'))}}"
@@ -179,12 +180,13 @@
                                             </span>
                                         </a>
                                     </th>
+                                -->
                                     <th class="min-width">
                                         <a
                                             href="{{url('admin/product-detail-list/show='.(($res>20)? 'all':$res).'/by-stockleft='.(($sort=='asc')? 'desc':'asc'))}}"
                                             class="d-inline-flex align-items-center"
                                             >
-                                            <h6 class="text-medium">Stock Left</h6>
+                                            <h6 class="text-medium">StockLeft</h6>
                                             <span class="text-black-50 ms-3
                                                 {{Request::is('admin/product-detail-list/show=*/by-stockleft*')? 'text-danger':''}}">
                                                 @if($title=='stockleft' && $sort=='asc')
@@ -279,7 +281,7 @@
                                         </td>
                                         -->
                                         <td><p class="text-sm">$ {{$product->product_saleprice}}</p></td>
-                                        <td><p class="text-sm">{{$product->product_stock}}</p></td>
+                                        <!--<td><p class="text-sm">{{$product->product_stock}}</p></td>-->
                                         <td><p class="text-sm">{{$product->product_stockleft}}</p></td>
                                         <td>
                                             <button
@@ -294,7 +296,7 @@
                                                 @if($product->product_status == 1)
                                                 <div class="row px-2">
                                                     <div class="col-sm-3">
-                                                        <i class="bi bi-cart-plus"></i>
+                                                        <i class="bi bi-cart-plus-fill"></i>
                                                     </div>
                                                     <div class="col-sm-9 ">
                                                         New
@@ -303,16 +305,16 @@
                                                 @elseif($product->product_status == 2)
                                                     <div class="row px-2">
                                                         <div class="col-sm-3">
-                                                            <i class="bi bi-cart-check"></i>
+                                                            <i class="bi bi-cart-check-fill"></i>
                                                         </div>
-                                                        <div class="col-sm-9 ">
+                                                        <div class="col-sm-9">
                                                             Selling
                                                         </div>
                                                     </div>
                                                 @elseif($product->product_status == 3)
                                                     <div class="row px-2">
                                                         <div class="col-sm-3">
-                                                            <i class="bi bi-cart-x"></i>
+                                                            <i class="bi bi-cart-x-fill"></i>
                                                         </div>
                                                         <div class="col-sm-9 ">
                                                             Soldout
@@ -352,34 +354,34 @@
                                         <td><p class="text-sm">{{$product->created_at->diffForHumans()}}</p></td>
                                         <td style="width:125px">
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 view-btn"
+                                                class="btn btn-outline-primary btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/product-detail-view/'.$product->product_code)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="View Details"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">visibility</span>
+                                                <i class="bi bi-eye-fill"></i>
                                             </a>
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 edit-btn"
+                                                class="btn btn-outline-success btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/product-detail-edit/'.$product->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="Edit Product"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">edit</span>
+                                                <i class="bi bi-pencil-fill"></i>
                                             </a>
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 delete-btn"
+                                                class="btn btn-outline-danger btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/product-detail-delete/'.$product->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="Delete Product"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">delete</span>
+                                                <i class="bi bi-trash3-fill"></i>
                                             </a>
                                         </td>
                                     </tr>

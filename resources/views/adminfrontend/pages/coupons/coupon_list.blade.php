@@ -125,41 +125,45 @@
                                                     "
                                                     style="width: 90px"
                                                 >
-                                                {{($coupon->coupon_status == 0)? 'Expired':''}}
-                                                {{($coupon->coupon_status == 1)? 'Active':''}}
-                                                {{($coupon->coupon_status == 2)? 'Future':''}}
+                                                @if($coupon->coupon_status == 0)
+                                                <i class="bi bi-exclamation-circle-fill pe-2"></i>Expired
+                                                @elseif($coupon->coupon_status == 1)
+                                                <i class="bi bi-check-circle-fill pe-2"></i>Active
+                                                @elseif($coupon->coupon_status == 2)
+                                                <i class="bi bi-clock-fill pe-2"></i>Future
+                                                @endif
                                             </button>
                                         </td>
                                         <td style="width:125px">
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 view-btn"
+                                                class="btn btn-outline-primary btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/coupon-view/'.$coupon->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="View Details"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">visibility</span>
+                                                <i class="bi bi-eye-fill"></i>
                                             </a>
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 edit-btn"
+                                                class="btn btn-outline-success btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/coupon-edit/'.$coupon->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Edit coupon"
+                                                title="Edit Product"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">edit</span>
+                                                <i class="bi bi-pencil-fill"></i>
                                             </a>
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 delete-btn"
+                                                class="btn btn-outline-danger btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/coupon-delete/'.$coupon->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Delete coupon"
+                                                title="Delete Product"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">delete</span>
+                                                <i class="bi bi-trash3-fill"></i>
                                             </a>
                                         </td>
                                     </tr>

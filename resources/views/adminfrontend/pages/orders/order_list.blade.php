@@ -93,7 +93,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="d-flex flex-row align-items-baseline justify-content-end">
-                                            <p class="text-sm pe-2">Sort by</p>
+                                            <p class="text-sm pe-2">Filter by</p>
                                             <input
                                                 type="date"
                                                 name="sort_day"
@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="d-flex flex-row align-items-baseline justify-content-end">
-                                            <p class="text-sm pe-2">Sort by</p>
+                                            <p class="text-sm pe-2">Filter by</p>
                                             <select class="form-select form-select-sm"
                                                     aria-label="Default select example"
                                                     style="width: 140px"
@@ -136,89 +136,6 @@
 
                             </div>
                         </div>
-                        <!--
-                        <div class="col-6">
-                            <div class="left">
-                                <h4 class="text-medium mb-20">Orders List</h4>
-                                <div class="row align-items-baseline">
-                                    <div class="col-3 d-flex flex-row align-items-baseline" style="min-width:200px">
-                                        <p class="text-sm pe-2">Show </p>
-                                        <select class="form-select form-select-sm"
-                                                style="width:65px"
-                                                aria-label="Default select example"
-                                                id="showResult"
-                                            >
-                                            <option value ="{{url('admin/order-list/show=5/by-'. $title.'='.$sort)}}"
-                                                {{($title == 5)? 'selected':''}}>5
-                                            </option>
-                                            <option value ="{{url('admin/order-list/show=10/by-'.$title.'='.$sort)}}"
-                                                {{($res==10)? 'selected':''}}>10
-                                            </option>
-                                            <option value ="{{url('admin/order-list/show=20/by-'.$title.'='.$sort)}}"
-                                                {{($res==20)? 'selected':''}}>20
-                                            </option>
-                                            <option value ="{{url('admin/order-list/show=all/by-'.$title.'='.$sort)}}"
-                                                {{Request::is('admin/order-list/show=all/*')? 'selected':''}}
-                                                >All
-                                            </option>
-                                        </select>
-                                        <p class="text-sm px-2">entries </p>
-                                    </div>
-                                    <div class="col-7 d-flex flex-row align-items-baseline justify-content-end">
-                                        <p class="text-sm pe-2">Sort by</p>
-                                        <select class="form-select form-select-sm"
-                                                aria-label="Default select example"
-                                                style="width: 140px"
-                                                id="sortStatus"
-                                            >
-                                            <option selected disabled>Order status</option>
-                                            <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=pending')}}"
-                                                {{($sort == 'pending')? 'selected':''}}>Pending
-                                            </option>
-                                            <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=processing')}}"
-                                                {{($sort == 'processing')? 'selected':''}}>Processing
-                                            </option>
-                                            <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=delivered')}}"
-                                                {{($sort == 'delivered')? 'selected':''}}>Delivered
-                                            </option>
-                                            <option value ="{{url('admin/order-list/show='.(($res>20)? 'all':$res).'/by-status=canceled')}}"
-                                                {{($sort == 'canceled')? 'selected':''}}>Canceled
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                @if($search_text!='')
-                                    <p class="text-md mt-2">Found
-                                        <strong class="text-danger">{{$orders->count()}}</strong> orders for your search:
-                                    </p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-6 d-flex justify-content-end">
-                            <div class="right">
-                                <form  action="{{url('admin/order-search/show='.(($res>20)? 'all':$res).'/by-'.$title.'='.$sort)}}">
-                                    <div class="input-group input-group-sm w-100 ">
-                                        <input
-                                            type="text"
-                                            name="search_order"
-                                            class="form-control rounded-0 text-sm"
-                                            placeholder="Enter order code here..."
-                                            aria-label="Sizing example input"
-                                            aria-describedby="inputGroup-sizing-default"
-                                            value="{{$search_text}}"
-                                        >
-                                        <button
-                                            class="btn btn-outline-primary rounded-0 text-sm"
-                                            type="submit"
-                                            id="search"
-                                            >
-                                            Search
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    -->
                     </div>
                     <hr>
                     <div class="table-responsive">
@@ -381,9 +298,9 @@
                                                 @elseif($order->order_status == 'Processing')
                                                     <i class="bi bi-truck"></i>
                                                 @elseif($order->order_status == 'Delivered')
-                                                    <i class="bi bi-bag-check me-1"></i>
+                                                    <i class="bi bi-bag-check-fill me-1"></i>
                                                 @elseif($order->order_status == 'Canceled')
-                                                    <i class="bi bi-x-circle me-1"></i>
+                                                    <i class="bi bi-x-circle-fill me-1"></i>
                                                 @endif
                                                 <span class="ms-1">{{$order->order_status}}</span>
                                             </button>
@@ -424,24 +341,24 @@
                                         </td>
                                         <td style="width:100px">
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 view-btn"
+                                                class="btn btn-outline-primary btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('admin/order-details/'. $order->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="View Details"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">visibility</span>
+                                                <i class="bi bi-eye-fill"></i>
                                             </a>
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 delete-btn"
-                                                 href="{{url('/admin/order-delete/'.$order->id)}}"
+                                                class="btn btn-outline-danger btn-sm py-1 px-2 rounded-0"
+                                                href="{{url('/admin/order-delete/'.$order->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Delete Order"
+                                                title="Edit Product"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">delete</span>
+                                                <i class="bi bi-trash3-fill"></i>
                                             </a>
                                         </td>
                                     </tr>

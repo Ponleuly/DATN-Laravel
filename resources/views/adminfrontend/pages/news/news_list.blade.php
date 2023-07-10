@@ -77,6 +77,7 @@
                                     <th><h6 class="text-sm text-medium">#</h6></th>
                                     <th class="min-width"><h6 class="text-sm text-medium">Title</h6></th>
                                     <th class="min-width text-center"><h6 class="text-sm text-medium">Status</h6></th>
+                                    <th class="min-width"><h6 class="text-sm text-medium">Status Actions</h6></th>
                                     <th class="min-width text-center"><h6 class="text-sm text-medium">Date</h6></th>
                                     <th class="min-width text-center"><h6 class="text-sm text-medium">Actions</h6></th>
                                 </tr>
@@ -90,46 +91,72 @@
                                             <button
                                                 type="button"
                                                 class="btn btn-sm py-1 px-2
-                                                    {{($new->news_status == 1)?  'btn-warning' : ''}}
+                                                    {{($new->news_status == 1)?  'btn-success' : ''}}
                                                     {{($new->news_status == 0)?  'btn-danger' : ''}}
                                                     "
-                                                    style="width: 90px"
+                                                    style="width: 100px"
                                                 >
-                                                {{($new->news_status == 1)? 'Active':''}}
-                                                {{($new->news_status == 0)? 'Inactive':''}}
+                                                @if($new->news_status == 1)
+                                                <i class="bi bi-check-circle-fill pe-2"></i>Active
+                                                @elseif($new->news_status == 0)
+                                                <i class="bi bi-exclamation-circle-fill pe-2"></i>Inactive
+                                                @endif
                                             </button>
+                                        </td>
+                                        <td class="d-flex justify-content-center">
+                                            <select
+                                                class="form-select form-select-sm"
+                                                aria-label="Default select example"
+                                                id="newsStatus"
+                                                name="newsStatus"
+                                                style="width: 100px"
+                                                >
+                                                <option
+                                                    value ="{{url('admin/news-update-status/'.$new->id.'/1')}}"
+                                                    {{ ($new->news_status == 1)? 'selected':''}}
+                                                    >
+                                                    Active
+                                                </option>
+                                                <option
+                                                    value ="{{url('admin/news-update-status/'.$new->id.'/0')}}"
+                                                    {{($new->news_status == 0)? 'selected':''}}
+                                                    >
+                                                    Inactive
+                                                </option>
+                                                
+                                            </select>
                                         </td>
                                         <td><p class="text-sm text-center">{{$new->created_at->diffForHumans()}}</p></td>
                                         <td class="text-center" style="width: 125px">
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 view-btn"
+                                                class="btn btn-outline-primary btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/news-view/'.$new->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="View Details"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">visibility</span>
+                                                <i class="bi bi-eye-fill"></i>
                                             </a>
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 edit-btn"
+                                                class="btn btn-outline-success btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/news-edit/'.$new->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="Edit Product"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">edit</span>
+                                                <i class="bi bi-pencil-fill"></i>
                                             </a>
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 delete-btn"
+                                                class="btn btn-outline-danger btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/news-delete/'.$new->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="Delete Product"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">delete</span>
+                                                <i class="bi bi-trash3-fill"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -155,4 +182,15 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        // Get "id" of select option, if there are only one select
+        $('#newsStatus').on('change', function () { // bind change event to select
+            var url_show_page = $(this).val(); // get selected value
+            if (url_show_page != '') { // require a url_show_page
+                window.location = url_show_page; // redirect
+            }
+            return false;
+        });
+    </script>
 @endsection()

@@ -274,6 +274,7 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::put('/news-edit/{id}', 'news_update');
       Route::get('/news-delete/{id}', 'news_delete');
       Route::get('/news-search', 'news_search')->name('news-search');
+      Route::get('/news-update-status/{news_id}/{status}', 'news_update_status')->name('news-update-status');
    });
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
