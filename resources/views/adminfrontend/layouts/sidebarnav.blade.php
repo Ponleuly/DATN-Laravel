@@ -397,8 +397,8 @@
         </nav>
         <div class="promo-box">
             <a  href="{{url('admin/logout')}}"
-                class="main-btn primary-btn btn-hover">
-                Log Out
+                class="main-btn primary-btn btn-hover" style=" font-size: 18px">
+                <i class="bi bi-box-arrow-left pe-2" ></i>Log out
             </a>
         </div>
     </aside>
