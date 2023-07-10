@@ -21,7 +21,7 @@ class HomeController extends Controller
         $news = News::where('news_status', 1)->get();
         $newProduct_count = $newProducts->count();
         $setting = Settings::all()->first();
-		$coupons = Coupons::where('coupon_status', 1)->get();
+		$coupons = Coupons::where('coupon_status', 1)->orWhere('coupon_status', 2)->get();
         //=== Updade coupon date =====//
         $couponController = new CouponController();
         $couponController->coupon_date();

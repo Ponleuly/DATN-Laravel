@@ -69,8 +69,11 @@ Route::middleware('authUser')->group(function () {
       //Route::put('change-password/{id}', 'update_password')->name('change-password');
       Route::get('purchase-history', 'purchase_history')->name('purchase-history');
       Route::get('purchase-order-detail/{orderId}', 'purchase_order_detail')->name('purchase-order-detail');
-      Route::get('download-invoice/{id}', 'download_invoice')->name('download-invoice');
+      //Route::get('download-invoice/{id}', 'download_invoice')->name('download-invoice');
    });
+});
+Route::controller(ProfileController::class)->group(function () {
+   Route::get('download-invoice/{id}', 'download_invoice')->name('download-invoice');
 });
 //==============Like Route with Middleware =====================//
 

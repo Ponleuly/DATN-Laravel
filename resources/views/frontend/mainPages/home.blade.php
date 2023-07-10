@@ -37,7 +37,7 @@
 		<!----- Check if there is any active coupon to show ----->
 		@if(count($coupons) != 0)
 			<!-- Start Testimonial Slider -->
-			<div class="coupon-section">
+			<div class="coupon-section bg-light">
 				<div class="container">
 					<div class="row justify-content-center">
 						<div class="col-lg-12">
