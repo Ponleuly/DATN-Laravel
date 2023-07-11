@@ -142,7 +142,7 @@ class ProductDetailController extends Controller
 
     public function product_detail_store(Request $request)
     {
-        return dd($request->toArray());
+        //return dd($request->toArray());
         $input  = $request->all();
         $input['product_name'] = ucwords($request->product_name);
         $input['product_colorname'] = ucwords($request->product_colorname);
