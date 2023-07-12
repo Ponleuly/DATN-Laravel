@@ -23,6 +23,7 @@ class NewsController extends Controller
             )
         );
     }
+
     public function news_view($id)
     {
         $news = News::where('id', $id)->first();
@@ -33,6 +34,7 @@ class NewsController extends Controller
             )
         );
     }
+
     public function news_search()
     {
         $search_text = $_GET['search_news'];
@@ -48,6 +50,7 @@ class NewsController extends Controller
             )
         );
     }
+
     public function news_add()
     {
         return view('adminfrontend.pages.news.news_add');
@@ -66,7 +69,7 @@ class NewsController extends Controller
             $input['news_img'] = $image_name;
         }
         News::create($input);
-        return redirect('admin/news-add')
+        return redirect('admin/news-list')
             ->with('message', 'News & Introducing is added successfully !');
     }
 

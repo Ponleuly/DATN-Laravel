@@ -27,27 +27,50 @@
                                 <div class="form-group mb-2">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="product_imgcover">
-                                                <p class="text-label">News Image</p>
-                                            </label>
                                             <div class="col-md-12">
-                                                <img
-                                                    src="/product_img/imgnews/{{$new->news_img}}"
-                                                    class="img-fluid product-thumbnail"
-                                                >
+                                                <label for="product_imgcover"><p class="text-label">News Image</p></label>
+                                                <div class="image-upload-wrap" style="display: none">
+                                                    <input
+                                                        class="file-upload-input"
+                                                        type='file'
+                                                        id="news-img"
+                                                        name="news_img"
+                                                        onchange="readImgCover(this);" accept="image/*"
+                                                    />
+                                                    <div class="drag-text">
+                                                        <span class="display-3 thankyou-icon text-light mt-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                                            </svg>
+                                                        </span>
+                                                        <h6>News image</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="file-upload-content px-3" style="display: block" id="imgNews">
+                                                    <img
+                                                        src="/product_img/imgnews/{{$new->news_img}}"
+                                                        class="img-fluid product-thumbnail"
+                                                    />
+                                                    <span
+                                                        class="file-remove"
+                                                        type="button"
+                                                        onclick="removeImgCover()">X
+                                                    </span>
+                                                </div>
+    
+                                                <div class="file-upload-content">
+                                                    <img
+                                                        class="file-upload-image-cover"
+                                                        src="" alt="image cover"
+                                                    />
+                                                    <span
+                                                        class="file-remove"
+                                                        type="button"
+                                                        onclick="removeImgCover()">X
+                                                    </span>
+                                                </div>
                                             </div>
-
-                                            <label for="news_img">
-                                                <p class="text-label mt-3">Update News Image</p>
-                                            </label>
-                                            <input
-                                                class="form-control form-control-sm rounded-0 mb-2"
-                                                type="file"
-                                                id="news_img"
-                                                name="news_img"
-                                                accept="image/png, image/jpeg, image/jpg"
-                                            >
-
                                         </div>
                                         <div class="col-md-6">
                                             <label for="news_title">
@@ -113,5 +136,32 @@
                 console.error( error );
             } );
 
+    </script>
+
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+        //================ Img Cover ======================//
+        function readImgCover(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.image-upload-wrap').hide();
+                    $('.file-upload-image-cover').attr('src', e.target.result);
+                    $('.file-upload-content').show();
+                    $('#imgNews').hide();
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                removeImgCover();
+            }
+        }
+        function removeImgCover() {
+            $('.file-upload-content').hide();
+            $('.image-upload-wrap').show();
+            $('#imgNews').hide();
+            document.querySelector('#news-img').setAttribute("required", "");
+            document.querySelector('#news-img').value = '';
+        }
     </script>
 @endsection()

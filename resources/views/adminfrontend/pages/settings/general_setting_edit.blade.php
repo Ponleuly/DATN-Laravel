@@ -58,26 +58,52 @@
                                             name="home_pageText"
                                             id="home_pagetext">{{$settings->home_pageText}}</textarea>
 
-                                        <label for="pageimage">
-                                            <p class="text-label mt-3">Home Page Image</p>
-                                        </label>
                                         <div class="col-md-12">
-                                            <img
-                                                src="/product_img/imghomepage/{{$settings->home_pageImage}}"
-                                                class="img-fluid product-thumbnail"
-                                            >
-                                        </div>
+                                            <label for="product_imgcover"><p class="text-label mt-3">Home Page Image</p></label>
+                                            <div class="image-upload-wrap" id="image-upload-wrap-home" style="display: none">
+                                                <input
+                                                    class="file-upload-input"
+                                                    type='file'
+                                                    id="home-page-image"
+                                                    name="home_pageImage"
+                                                    onchange="imgHome(this);" 
+                                                    accept="image/png, image/jpeg, image/jpg"
+                                                />
+                                                <div class="drag-text">
+                                                    <span class="display-3 thankyou-icon text-light mt-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                            <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                                        </svg>
+                                                    </span>
+                                                    <h6>Home page image</h6>
+                                                </div>
+                                            </div>
+                                            <div class="file-upload-content px-3"  style="display: block" id="homepageImg">
+                                                <img
+                                                    src="/product_img/imghomepage/{{$settings->home_pageImage}}"
+                                                    class="img-fluid product-thumbnail"
+                                                />
+                                                <span
+                                                    class="file-remove"
+                                                    type="button"
+                                                    onclick="removeImgHome()">X
+                                                </span>
+                                            </div>
 
-                                        <label for="home_pageimage">
-                                            <p class="text-label mt-3">Update Home Page Image</p>
-                                        </label>
-                                        <input
-                                            class="form-control rounded-0 mb-2"
-                                            type="file"
-                                            id="home_pageimage"
-                                            name="home_pageImage"
-                                            accept="image/png, image/jpeg, image/jpg"
-                                        >
+                                            <div class="file-upload-content" id="file-upload-content-home">
+                                                <img
+                                                    class="file-upload-image-cover"
+                                                    id="file-upload-image-cover-home"
+                                                    src="" alt="image cover"
+                                                />
+                                                <span
+                                                    class="file-remove"
+                                                    type="button"
+                                                    onclick="removeImgHome()">X
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -125,33 +151,58 @@
                                         </label>
                                         <input
                                             type="text"
-                                            class="form-control rounded-0 fw-500 mb-2"
+                                            class="form-control rounded-0 fw-500"
                                             id="tiktok_link"
                                             name="tiktok_link"
                                             placeholder="tiktok link..."
                                             value="{{$settings->tiktok_link}}"
                                         >
-                                        <label for="pageimage">
-                                            <p class="text-label mt-2">Section Page Banner</p>
-                                        </label>
-                                        <div class="col-md-12 mb-2">
-                                            <img
-                                                src="/product_img/imghomepage/{{$settings->section_pageImage}}"
-                                                class="img-fluid product-thumbnail"
-                                            >
-                                        </div>
+                                      
+                                       
+                                        <label for="product_imgcover"><p class="text-label mt-3">Section Page Banner</p></label>
+                                            <div class="image-upload-wrap" id="image-upload-wrap-section" style="display: none">
+                                                <input
+                                                    class="file-upload-input"
+                                                    type='file'
+                                                    id="section-image"
+                                                    name="section_pageImage"
+                                                    accept="image/png, image/jpeg, image/jpg"
+                                                    onchange="imgSection(this);" 
+                                                />
+                                                <div class="drag-text">
+                                                    <span class="display-3 thankyou-icon text-light mt-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                            <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                                        </svg>
+                                                    </span>
+                                                    <h6>Home page image</h6>
+                                                </div>
+                                            </div>
+                                            <div class="file-upload-content px-3" style="display: block" id="sectionImg">
+                                                <img
+                                                    src="/product_img/imghomepage/{{$settings->section_pageImage}}"
+                                                    class="img-fluid product-thumbnail"
+                                                />
+                                                <span
+                                                    class="file-remove"
+                                                    type="button"
+                                                    onclick="removeImgSection()">X
+                                                </span>
+                                            </div>
 
-                                        <label for="section_pageimage">
-                                            <p class="text-label mt-2">Update Section Page Banner</p>
-                                        </label>
-                                        <input
-                                            class="form-control rounded-0 mb-2"
-                                            type="file"
-                                            id="section_pageimage"
-                                            name="section_pageImage"
-                                            accept="image/png, image/jpeg, image/jpg"
-                                            multiple
-                                        >
+                                            <div class="file-upload-content" id="file-upload-content-section">
+                                                <img
+                                                    class="file-upload-image-cover"
+                                                    id="file-upload-image-cover-section"
+                                                    src="" alt="image cover"
+                                                />
+                                                <span
+                                                    class="file-remove"
+                                                    type="button"
+                                                    onclick="removeImgSection()">X
+                                                </span>
+                                            </div>
 
                                         <div class="d-flex mt-4 justify-content-end">
                                             <a
@@ -173,4 +224,54 @@
             </div>
         </form>
     </div>
+
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+        function imgHome(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#image-upload-wrap-home').hide();
+                    $('#file-upload-image-cover-home').attr('src', e.target.result);
+                    $('#file-upload-content-home').show();
+                    $('#homepageImg').hide();
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                removeImgHome();
+            }
+        }
+        function removeImgHome() {
+            $('#file-upload-content-home').hide();
+            $('#image-upload-wrap-home').show();
+            $('#homepageImg').hide();
+            document.querySelector('#home-page-image').setAttribute("required", "");
+            document.querySelector('#home-page-image').value = '';
+        }
+    </script>
+    <script>
+        function imgSection(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#image-upload-wrap-section').hide();
+                    $('#file-upload-image-cover-section').attr('src', e.target.result);
+                    $('#file-upload-content-section').show();
+                    $('#sectionImg').hide();
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                removeImgSection();
+            }
+        }
+        function removeImgSection() {
+            $('#file-upload-content-section').hide();
+            $('#image-upload-wrap-section').show();
+            $('#sectionImg').hide();
+            document.querySelector('#section-image').setAttribute("required", "");
+            document.querySelector('#section-image').value = '';
+        }
+    </script>
 @endsection()
