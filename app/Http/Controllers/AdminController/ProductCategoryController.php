@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\File;
 
 class ProductCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function product_category_list()
     {
         $categories = Categories::orderBy('category_name')->get();
@@ -31,6 +27,7 @@ class ProductCategoryController extends Controller
             )
         );
     }
+
     public function product_category_search()
     {
         $search_text = $_GET['search_category'];
@@ -59,6 +56,7 @@ class ProductCategoryController extends Controller
             )
         );
     }
+
     public function product_subcategory_search()
     {
         $search_text = $_GET['search_subcategory'];
@@ -73,6 +71,7 @@ class ProductCategoryController extends Controller
             )
         );
     }
+
     public function product_category_view($id)
     {
         $category = Categories::where('id', $id)->first();
@@ -88,11 +87,7 @@ class ProductCategoryController extends Controller
             )
         );
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function product_category_add()
     {
         $groups = Groups::orderBy('id')->get();
@@ -104,12 +99,7 @@ class ProductCategoryController extends Controller
         );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function product_category_store(Request $request)
     {
         $category_cmp = Categories::where('category_name', ucfirst($request->category_name))->first();
@@ -155,13 +145,7 @@ class ProductCategoryController extends Controller
         //return dd($explode_id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function product_category_edit($id)
     {
         $category = Categories::where('id', $id)->first();
@@ -186,12 +170,6 @@ class ProductCategoryController extends Controller
         //return dd($subCategory->toArray());
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function product_category_update(Request $request, $id)
     {
         $category_cmp = Categories::where('category_name', ucfirst($request->category_name))->first();
@@ -215,38 +193,38 @@ class ProductCategoryController extends Controller
             }
             $update_category_name->update();
 
-            $categoryId = $update_category_name->id;
-            $category_count = Categories_Groups::where('category_id', $categoryId)->count();
-            //===== Table categories_groups =====///
-            for ($i = 0; $i < $category_count; $i++) {
-                $delete_cate = Categories_Groups::where('category_id', $categoryId)->first();
-                $delete_cate->delete();
-            }
+            // $categoryId = $update_category_name->id;
+            // $category_count = Categories_Groups::where('category_id', $categoryId)->count();
+            // //===== Table categories_groups =====///
+            // for ($i = 0; $i < $category_count; $i++) {
+            //     $delete_cate = Categories_Groups::where('category_id', $categoryId)->first();
+            //     $delete_cate->delete();
+            // }
 
-            $categoryId = $update_category_name->id;
-            $groupId = $request->group_id;
-            for ($i = 0; $i < count($groupId); $i++) {
+            // $categoryId = $update_category_name->id;
+            // $groupId = $request->group_id;
+            // for ($i = 0; $i < count($groupId); $i++) {
 
-                $update['category_id'] = $categoryId;
-                $update['group_id'] = $groupId[$i];
-                Categories_Groups::create($update);
-            }
+            //     $update['category_id'] = $categoryId;
+            //     $update['group_id'] = $groupId[$i];
+            //     Categories_Groups::create($update);
+            // }
             //================================================//
 
             //===== Table categories_subcategories =====///
-            $subcategory_count = Categories_Subcategories::where('category_id', $categoryId)->get();
-            foreach ($subcategory_count as $row) {
-                $delete_sub = Categories_Subcategories::where('category_id', $row->category_id)->first();
-                $delete_sub->delete();
-            }
-            $sub_request = explode(',', $request->sub_category);
-            $subCategory = preg_replace('/\s+/', '', $sub_request); // eliminate whitespace from input form
+            // $subcategory_count = Categories_Subcategories::where('category_id', $categoryId)->get();
+            // foreach ($subcategory_count as $row) {
+            //     $delete_sub = Categories_Subcategories::where('category_id', $row->category_id)->first();
+            //     $delete_sub->delete();
+            // }
+            // $sub_request = explode(',', $request->sub_category);
+            // $subCategory = preg_replace('/\s+/', '', $sub_request); // eliminate whitespace from input form
 
-            for ($j = 0; $j < count($subCategory); $j++) {
-                $sub['category_id'] = $categoryId;
-                $sub['sub_category'] = $subCategory[$j];
-                Categories_Subcategories::create($sub);
-            }
+            // for ($j = 0; $j < count($subCategory); $j++) {
+            //     $sub['category_id'] = $categoryId;
+            //     $sub['sub_category'] = $subCategory[$j];
+            //     Categories_Subcategories::create($sub);
+            // }
 
             return redirect('/admin/product-category-list')
                 ->with(
@@ -255,27 +233,9 @@ class ProductCategoryController extends Controller
                         ' is updated successfully !'
                 );
         }
-        //return dd($sub_category);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function product_category_delete($id)
     {
         $delete_category = Categories::where('id', $id)->first();

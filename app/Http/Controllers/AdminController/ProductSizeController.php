@@ -10,14 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductSizeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function product_size_list()
     {
-        $sizes = Sizes::orderBy('size_number')->paginate(8);
+        $sizes = Sizes::orderBy('size_number', 'desc')->paginate(10);
         $count = 1;
         $search_text = '';
         return view(
@@ -30,6 +26,7 @@ class ProductSizeController extends Controller
             )
         );
     }
+
     public function product_size_search()
     {
         $search_text = $_GET['search_size'];
@@ -45,23 +42,13 @@ class ProductSizeController extends Controller
             )
         );
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+    
     public function product_size_add()
     {
         return view('adminfrontend.pages.sizes.product_size_add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function product_size_store(Request $request)
     {
         if ($request->ajax()) {
@@ -83,30 +70,25 @@ class ProductSizeController extends Controller
                 'message' => 'Size number ' . $size->size_number . ' is added.'
             ]);
         } else {
+            $find_size = Sizes::where('size_number', $request->size_number)->first();
+            if($find_size){
+                return redirect('/admin/product-size-add')
+                    ->with('alert', 'Product size ' . '"' .$request->size_number . '"' . ' already existed !');
+            }
             $input = $request->all();
             Sizes::create($input);
-            return redirect('/admin/product-size-add')
+            return redirect('/admin/product-size-list')
                 ->with('message', 'Product size ' . $request->size_number . ' is added successfully!');
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function product_size_edit($id)
     {
         $sizes = Sizes::where('id', $id)->first();
@@ -117,15 +99,14 @@ class ProductSizeController extends Controller
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function product_size_update(Request $request, $id)
     {
+        $find_size = Sizes::where('size_number', $request->size_number)->first();
+            if($find_size){
+                return redirect('/admin/product-size-edit/'.$id)
+                    ->with('alert', 'Product size ' . '"' .$request->size_number . '"' . ' already existed !');
+            }
         $update_size = Sizes::where('id', $id)->first();
         $update_size->size_number = $request->input('size_number');
         $update_size->update();
@@ -138,12 +119,7 @@ class ProductSizeController extends Controller
             );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function product_size_delete($id)
     {
         $delete_size = Sizes::where('id', $id)->first();

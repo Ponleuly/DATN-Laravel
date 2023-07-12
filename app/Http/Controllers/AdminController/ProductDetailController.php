@@ -215,14 +215,7 @@ class ProductDetailController extends Controller
         $stock->product_stock = $total_stock;
         $stock->product_stockleft = $total_stock;
         $stock->update();
-        //========= Storing data for table products_attributes ======//
-        /*
-        foreach ($request->group_id as  $row => $value) {
-            $group['group_id'] = $value;
-            $group['product_id'] = $productId;
-            Products_Groups::create($group);
-        }
-        */
+       
         foreach ($request->group_id as  $row => $value) {
             $attribute['product_id'] = $productId;
             $attribute['subcategory_id'] = $request->subcategory_id;
@@ -233,7 +226,6 @@ class ProductDetailController extends Controller
         return redirect('/admin/product-detail-add')
             ->with('message', 'Product ' . $request->product_name . ' is added successfully!');
 
-        //return dd($total_stock);
     }
 
 
