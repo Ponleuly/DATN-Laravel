@@ -112,40 +112,46 @@ class ProductCategoryController extends Controller
      */
     public function product_category_store(Request $request)
     {
-        $input = $request->all();
-        if ($request->hasFile('category_img')) {
-            $destination_path = 'product_img/imgcategory/';
-            $image = $request->file('category_img');
+        $category_cmp = Categories::where('category_name', ucfirst($request->category_name))->first();
+        if($category_cmp){
+            return redirect('/admin/product-category-add')
+                    ->with('alert', 'Product catrgory ' . '"' .ucfirst($request->category_name) . '"' . ' already existed !');
+        }else{
+            $input = $request->all();
+            if ($request->hasFile('category_img')) {
+                $destination_path = 'product_img/imgcategory/';
+                $image = $request->file('category_img');
 
-            $image_name = $image->getClientOriginalName();
-            $image->move($destination_path, $image_name);
+                $image_name = $image->getClientOriginalName();
+                $image->move($destination_path, $image_name);
 
-            $input['category_img'] = $image_name;
-        }
-        // Storing category_name data to table categories
-        Categories::create($input);
-
-        // Storing category_id and group_id to table product_group_cate
-        $category = Categories::latest()->first();
-        $categoryId = $category->id;
-        $groupId = $request->group_id;
-        for ($i = 0; $i < count($groupId); $i++) {
-            $save['category_id'] = $categoryId;
-            $save['group_id'] = $groupId[$i];
-            Categories_Groups::create($save);
-        }
-        if($request->sub_category != null){
-            $subCategory = explode(',', $request->sub_category);
-            for ($j = 0; $j < count($subCategory); $j++) {
-                $sub['category_id'] = $categoryId;
-                $sub['sub_category'] = $subCategory[$j];
-                Categories_Subcategories::create($sub);
+                $input['category_img'] = $image_name;
             }
-        }
-        // After inputed -> go back to category pages
-        return redirect('/admin/product-category-add')
-            ->with('message', 'Product category ' . $request->category_name . ' successfully!');
+            // Storing category_name data to table categories
+            $input['category_name'] = ucfirst($request->category_name);
+            Categories::create($input);
 
+            // Storing category_id and group_id to table product_group_cate
+            $category = Categories::latest()->first();
+            $categoryId = $category->id;
+            $groupId = $request->group_id;
+            for ($i = 0; $i < count($groupId); $i++) {
+                $save['category_id'] = $categoryId;
+                $save['group_id'] = $groupId[$i];
+                Categories_Groups::create($save);
+            }
+            if($request->sub_category != null){
+                $subCategory = explode(',', $request->sub_category);
+                for ($j = 0; $j < count($subCategory); $j++) {
+                    $sub['category_id'] = $categoryId;
+                    $sub['sub_category'] = $subCategory[$j];
+                    Categories_Subcategories::create($sub);
+                }
+            }
+            // After inputed -> go back to category pages
+            return redirect('/admin/product-category-list')
+                ->with('message', 'Product category ' . $request->category_name . ' successfully!');
+            }
         //return dd($explode_id);
     }
 
@@ -188,62 +194,67 @@ class ProductCategoryController extends Controller
      */
     public function product_category_update(Request $request, $id)
     {
+        $category_cmp = Categories::where('category_name', ucfirst($request->category_name))->first();
+        if($category_cmp){
+            return redirect('/admin/product-category-edit/'.$id)
+                    ->with('alert', 'Product catrgory ' . '"' .ucfirst($request->category_name) . '"' . ' already existed !');
+        }else{
 
-        $update_category_name = Categories::where('id', $id)->first();
-        $update_category_name->category_name = $request->input('category_name');
-        if ($request->hasFile('category_img')) {
-            $destination_path = 'product_img/imgcategory';
-            $image = $request->file('category_img');
-            if (File::exists(public_path($destination_path))) {
-                File::delete(public_path($destination_path));
+            $update_category_name = Categories::where('id', $id)->first();
+            $update_category_name->category_name = ucfirst($request->input('category_name'));
+            if ($request->hasFile('category_img')) {
+                $destination_path = 'product_img/imgcategory';
+                $image = $request->file('category_img');
+                if (File::exists(public_path($destination_path))) {
+                    File::delete(public_path($destination_path));
+                }
+                $image_name = $image->getClientOriginalName();
+                $image->move($destination_path, $image_name);
+
+                $update_category_name['category_img'] = $image_name;
             }
-            $image_name = $image->getClientOriginalName();
-            $image->move($destination_path, $image_name);
+            $update_category_name->update();
 
-            $update_category_name['category_img'] = $image_name;
+            $categoryId = $update_category_name->id;
+            $category_count = Categories_Groups::where('category_id', $categoryId)->count();
+            //===== Table categories_groups =====///
+            for ($i = 0; $i < $category_count; $i++) {
+                $delete_cate = Categories_Groups::where('category_id', $categoryId)->first();
+                $delete_cate->delete();
+            }
+
+            $categoryId = $update_category_name->id;
+            $groupId = $request->group_id;
+            for ($i = 0; $i < count($groupId); $i++) {
+
+                $update['category_id'] = $categoryId;
+                $update['group_id'] = $groupId[$i];
+                Categories_Groups::create($update);
+            }
+            //================================================//
+
+            //===== Table categories_subcategories =====///
+            $subcategory_count = Categories_Subcategories::where('category_id', $categoryId)->get();
+            foreach ($subcategory_count as $row) {
+                $delete_sub = Categories_Subcategories::where('category_id', $row->category_id)->first();
+                $delete_sub->delete();
+            }
+            $sub_request = explode(',', $request->sub_category);
+            $subCategory = preg_replace('/\s+/', '', $sub_request); // eliminate whitespace from input form
+
+            for ($j = 0; $j < count($subCategory); $j++) {
+                $sub['category_id'] = $categoryId;
+                $sub['sub_category'] = $subCategory[$j];
+                Categories_Subcategories::create($sub);
+            }
+
+            return redirect('/admin/product-category-list')
+                ->with(
+                    'message',
+                    'Product category ' . '"' . $update_category_name->category_name . '"' .
+                        ' is updated successfully !'
+                );
         }
-        $update_category_name->update();
-
-        $categoryId = $update_category_name->id;
-        $category_count = Categories_Groups::where('category_id', $categoryId)->count();
-        //===== Table categories_groups =====///
-        for ($i = 0; $i < $category_count; $i++) {
-            $delete_cate = Categories_Groups::where('category_id', $categoryId)->first();
-            $delete_cate->delete();
-        }
-
-        $categoryId = $update_category_name->id;
-        $groupId = $request->group_id;
-        for ($i = 0; $i < count($groupId); $i++) {
-
-            $update['category_id'] = $categoryId;
-            $update['group_id'] = $groupId[$i];
-            Categories_Groups::create($update);
-        }
-        //================================================//
-
-        //===== Table categories_subcategories =====///
-        $subcategory_count = Categories_Subcategories::where('category_id', $categoryId)->get();
-        foreach ($subcategory_count as $row) {
-            $delete_sub = Categories_Subcategories::where('category_id', $row->category_id)->first();
-            $delete_sub->delete();
-        }
-        $sub_request = explode(',', $request->sub_category);
-        $subCategory = preg_replace('/\s+/', '', $sub_request); // eliminate whitespace from input form
-
-        for ($j = 0; $j < count($subCategory); $j++) {
-            $sub['category_id'] = $categoryId;
-            $sub['sub_category'] = $subCategory[$j];
-            Categories_Subcategories::create($sub);
-        }
-
-        return redirect('/admin/product-category-list')
-            ->with(
-                'message',
-                'Product category ' . '"' . $update_category_name->category_name . '"' .
-                    ' is updated successfully !'
-            );
-
         //return dd($sub_category);
     }
 

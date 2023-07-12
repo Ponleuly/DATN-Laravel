@@ -6,12 +6,19 @@
             @method('PUT')
             <div class="row justify-content-center">
                 <div class="col-md-12 my-3 mb-md-0">
+                     <!--------------- Alert ------------------------>
                     @if(Session::has('alert'))
-                        <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                            {{Session::get('alert')}}
+                    <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
+                        {{Session::get('alert')}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-		            @endif
+                    @elseif(Session::has('message'))
+                        <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
+                            {{Session::get('message')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    <!---------------End Alert ------------------------>
 
                     <div class="card-style">
                         <h4 class="text-medium text-center">Edit Category</h4>
@@ -60,11 +67,12 @@
                                 <label for="category_name"><p class="text-label mt-3">Category name</p></label>
                                 <input
                                     type="text"
-                                    class="form-control rounded-0 fw-500 mb-2"
+                                    class="form-control rounded-0 fw-500 mb-2 text-capitalize"
                                     id="category_name"
                                     name="category_name"
                                     value="{{$category->category_name}}"
-                                    placeholder="category name..." required
+                                    placeholder="Ex. Shoes"
+                                    required
                                 >
 
                                 <label for="sub_category">
@@ -123,7 +131,10 @@
             </div>
         </form>
     </div>
-
+    <!--============= tag input =================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+    <!--=========================================-->
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script>
         function readURL(input) {

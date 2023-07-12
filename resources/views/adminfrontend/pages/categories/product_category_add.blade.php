@@ -55,11 +55,12 @@
 
                                     <label for="category_name"><p class="text-label mt-3">Category Name</p></label>
                                     <input type="text"
-                                        class="form-control rounded-0 fw-500 mb-2"
+                                        class="form-control rounded-0 fw-500 mb-2 text-capitalize"
                                         id="category_name"
                                         name="category_name"
-                                        placeholder="category name..."
+                                        placeholder="Ex. Shoes"
                                         required
+                                        
                                     >
 
                                     <label for="sub_category">
