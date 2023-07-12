@@ -88,23 +88,25 @@ use App\Models\Products_Attributes;
                                         <td><p class="text-sm text-center">{{$member->created_at->diffForHumans()}}</p></td>
                                         <td class="text-center">
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 view-btn"
+                                                class="btn btn-outline-primary btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/profile/'.$member->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="View Details"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">visibility</span>
+                                                <i class="bi bi-eye-fill"></i>
                                             </a>
+                                            
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 delete-btn"
+                                                class="btn btn-outline-danger btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('admin/customer-member-delete/'.$member->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Delete Member">
-                                                <span class="material-icons-round" style="font-size: 16px">delete</span>
+                                                title="Delete from list"
+                                                >
+                                                <i class="bi bi-trash3-fill"></i>
                                             </a>
                                         </td>
                                     </tr>

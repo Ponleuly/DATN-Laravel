@@ -369,7 +369,7 @@
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Edit Product"
+                                                title="Edit Details"
                                                 >
                                                 <i class="bi bi-pencil-fill"></i>
                                             </a>
@@ -379,7 +379,7 @@
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Delete Product"
+                                                title="Delete from list"
                                                 >
                                                 <i class="bi bi-trash3-fill"></i>
                                             </a>

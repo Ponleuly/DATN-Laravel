@@ -37,12 +37,12 @@
                                         >
                                         <div class="d-flex mt-4 justify-content-end">
                                             <a
-                                                class="btn btn-outline-danger rounded-1 py-1 me-2 text-sm"
+                                                class="btn btn-outline-danger shadow rounded-1 py-1 me-2 text-sm"
                                                 href="{{url('/admin/contact-list')}}"
                                                 role="button">Back
                                             </a>
                                             <button
-                                                class="btn btn-primary rounded-1 py-1 text-sm"
+                                                class="btn btn-primary shadow rounded-1 py-1 text-sm"
                                                 group="submit">Add
                                             </button>
                                         </div>

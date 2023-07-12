@@ -470,7 +470,7 @@
                                                 </div>
                                             @endif
 
-                                            <div class="col-md-10" style="padding: 12px 5px">
+                                            <div class="col-md-9" style="padding: 12px 5px">
                                                 <p class="text-black text-sm">{{ucfirst($card->card_brand)}} **** **** {{$card->card_digit}}</p>
                                             </div>
                                         </div>

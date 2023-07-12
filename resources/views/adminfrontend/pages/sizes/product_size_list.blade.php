@@ -91,24 +91,24 @@
                                         <td><p class="text-sm">{{$row->created_at->diffForHumans()}}</p></td>
                                         <td>
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 edit-btn"
+                                                class="btn btn-outline-success btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/product-size-edit/'.$row->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Edit Product"
+                                                title="Edit Details"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">edit</span>
+                                                <i class="bi bi-pencil-fill"></i>
                                             </a>
                                             <a
-                                                class="text-light py-1 pb-0 px-2 rounded-0 delete-btn"
+                                                class="btn btn-outline-danger btn-sm py-1 px-2 rounded-0"
                                                 href="{{url('/admin/product-size-delete/'.$row->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="Delete Product"
+                                                title="Delete from list"
                                                 >
-                                                <span class="material-icons-round" style="font-size: 16px">delete</span>
+                                                <i class="bi bi-trash3-fill"></i>
                                             </a>
                                         </td>
                                     </tr>
