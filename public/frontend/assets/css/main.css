@@ -2182,6 +2182,13 @@ h6,
   object-fit: cover;
   border-radius: 50%;
 }
+.member-profile{
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 /* ========== Dashboards css ================= */
 @media (max-width: 767px) {
   #doughnutChart1 {

@@ -232,6 +232,8 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::get('/customer-search', 'customer_search')->name('customer-search');
       Route::get('/customer-member-search', 'member_search')->name('customer-member-search');
       Route::get('/customer-subscriber-search', 'subscriber_search')->name('customer-subscriber-search');
+      Route::get('/member-profile/{id}', 'member_profile')->name('member-profile');
+      Route::get('/customer-profile/{id}', 'customer_profile')->name('customer-profile');
    });
 });
 Route::prefix('admin')->middleware('authAdmin')->group(function () {

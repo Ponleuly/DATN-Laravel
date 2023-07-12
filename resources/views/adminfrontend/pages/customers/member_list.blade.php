@@ -89,7 +89,7 @@ use App\Models\Products_Attributes;
                                         <td class="text-center">
                                             <a
                                                 class="btn btn-outline-primary btn-sm py-1 px-2 rounded-0"
-                                                href="{{url('/admin/profile/'.$member->id)}}"
+                                                href="{{url('/admin/member-profile/'.$member->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"

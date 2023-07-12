@@ -96,7 +96,7 @@
                                         <td class="text-center" style="width:125px">
                                             <a
                                                 class="btn btn-outline-primary btn-sm py-1 px-2 rounded-0"
-                                                href="{{url('/admin/profile/'.$customer->id)}}"
+                                                href="{{url('/admin/customer-profile/'.$customer->id)}}"
                                                 role="button"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-placement="top"

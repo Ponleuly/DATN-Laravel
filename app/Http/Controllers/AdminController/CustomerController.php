@@ -25,6 +25,16 @@ class CustomerController extends Controller
 
         );
     }
+    public function customer_profile($id)
+    {
+        $customer = Customers::where('id', $id)->first();
+        return view(
+            'adminfrontend.pages.customers.customer_profile',
+            compact(
+                'customer'
+            )
+        );
+    }
     public function customer_edit($id)
     {
         $customer = Customers::where('id', $id)->first();
@@ -89,6 +99,16 @@ class CustomerController extends Controller
                 'search_text'
             )
 
+        );
+    }
+    public function member_profile($id)
+    {
+        $user = User::where('id', $id)->first();
+        return view(
+            'adminfrontend.pages.customers.member_profile',
+            compact(
+                'user'
+            )
         );
     }
     public function member_search()

@@ -98,13 +98,13 @@
                                 <div class="col-md-12 mt-3">
                                     <div class="mb-2 d-flex justify-content-end">
                                         <a
-                                            class="btn btn-outline-danger rounded-1 py-1 me-2"
+                                            class="btn btn-outline-danger shadow rounded-1 py-1 me-2"
                                             href="{{url('admin/customer-list')}}"
                                             role="button">
                                             <p class="text-sm">Back </p>
                                         </a>
                                         <button
-                                            class="btn btn-primary rounded-1 py-1 text-sm"
+                                            class="btn btn-primary shadow rounded-1 py-1 text-sm"
                                             type="submit">Save
                                         </button>
                                     </div>

@@ -84,14 +84,15 @@ use App\Models\Products_Attributes;
                                         <td><p class="text-sm text-center">{{$subscriber->created_at->diffForHumans()}}</p></td>
                                         <td class="text-center">
                                             <a
-                                            class="text-light py-1 pb-0 px-2 rounded-0 delete-btn"
-                                            href="{{url('admin/customer-subscriber-delete/'.$subscriber->id)}}"
-                                            role="button"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            title="Delete Member">
-                                            <span class="material-icons-round" style="font-size: 16px">delete</span>
-                                        </a>
+                                                class="btn btn-outline-danger btn-sm py-1 px-2 rounded-0"
+                                                href="{{url('admin/customer-subscriber-delete/'.$subscriber->id)}}"
+                                                role="button"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="Delete from list"
+                                                >
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
