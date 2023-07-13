@@ -69,6 +69,32 @@ class CouponSeeder extends Seeder
                 'coupon_status' => 2,
                 'created_at' => Carbon::now()
             ],
+            [
+                'id' => 5,
+                'campaign_name' => "Middle year offered 6$ for all shoes products.",
+                'code' => 'MIDYEAR6',
+                'discount_percentage' => 0,
+                'discount_value' => 6,
+                'start_date' => '2023-06-01 00:00:00',
+                'end_date' => '2023-07-31 00:00:00',
+                'category_id' => 1,
+                'subcategory_id' => null,
+                'coupon_status' => 2,
+                'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 6,
+                'campaign_name' => "Shop's Birthday, get your discount 15% now for all shoes items.",
+                'code' => 'JULY15',
+                'discount_percentage' => 15,
+                'discount_value' => 0,
+                'start_date' => '2023-07-015 00:00:00',
+                'end_date' => '2023-07-31 00:00:00',
+                'category_id' => 1,
+                'subcategory_id' => null,
+                'coupon_status' => 2,
+                'created_at' => Carbon::now()
+            ],
 
         ]);
     }

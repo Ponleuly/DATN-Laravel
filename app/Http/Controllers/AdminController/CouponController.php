@@ -17,7 +17,7 @@ class CouponController extends Controller
 
     public function coupon_list()
     {
-        $coupons = Coupons::orderByDesc('id')->paginate(4);
+        $coupons = Coupons::orderByDesc('id')->paginate(10);
         $count = 1;
         $search_text = '';
         $this->coupon_date();
@@ -127,7 +127,7 @@ class CouponController extends Controller
             $input = $request->all();
             $input['coupon_status'] = $status;
             Coupons::create($input);
-            return redirect()->back()
+            return redirect('/admin/coupon-list')
                 ->with('message', 'Coupon ' . $request->campaign_name . ' is added successfully!');
         }
     }

@@ -31,7 +31,7 @@
                                             class="form-control rounded-0 fw-500 mb-2"
                                             id="campaign_name"
                                             name="campaign_name"
-                                            placeholder="Campaign name"
+                                            placeholder="Ex. Chrismas discount"
                                             required
                                         >
 
@@ -44,15 +44,16 @@
                                                     class="form-control rounded-0 fw-500 mb-2"
                                                     id="percentage"
                                                     name="discount_percentage"
+                                                    value="0"
                                                     min="0"
                                                     max="100"
-                                                    placeholder="Discount percentage"
+                                                    placeholder="Ex. 15 (%)"
                                                     required
                                                 >
                                             </div>
                                             <div class="col-md-2 px-0 mx-0 d-flex flex-column justify-content-center text-center">
-                                                <p class="text-sm">OR</p>
-                                                <p class="text-sm">(Input one)</p>
+                                                <p class="text-sm">Fill one</p>
+                                                <p class="text-sm">(% or $)</p>
                                             </div>
                                             <div class="col-md-5">
                                                 <label for="discount_value">
@@ -62,9 +63,10 @@
                                                     class="form-control rounded-0 fw-500 mb-2"
                                                     id="discount_value"
                                                     name="discount_value"
+                                                    value="0"
                                                     min="0"
                                                     max="100"
-                                                    placeholder="Discount Value"
+                                                    placeholder="Ex. 7 ($)"
                                                     required
                                                 >
                                             </div>
@@ -105,7 +107,7 @@
                                             class="form-control rounded-0 fw-500 mb-2"
                                             id="campaign_code"
                                             name="code"
-                                            placeholder="Campaign code"
+                                            placeholder="Ex. CS23"
                                             required
                                         >
 
