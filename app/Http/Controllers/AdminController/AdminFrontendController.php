@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\AdminController;
 
 use App\Models\User;
+use Nette\Utils\Json;
 use App\Models\Orders;
 use App\Models\Products;
 use App\Models\Customers;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -31,6 +34,45 @@ class AdminFrontendController extends Controller
         }
         $orders = Orders::orderByDesc('id')->paginate(10); // Showing only 10 ordered per page
         $count = 1;
+
+        //========== Order Status Chart ============//
+        $pending = Orders::where('order_status', 'Pending')->count();
+        $processing = Orders::where('order_status', 'Processing')->count();
+        $delivered = Orders::where('order_status', 'Delivered')->count();
+        $canceled = Orders::where('order_status', 'Canceled')->count();
+        $order_chart = "";
+        $order_chart = 
+            "['Processing'," .$processing."],"
+            . "['Canceled'," .$canceled."],"
+            . "['Pending'," .$pending."],"
+            . "['Delivered'," .$delivered."]";
+        //========= Order Amount ======//
+        $order_select = Orders::select('id', 'created_at')
+            ->get()
+            ->groupBy(function ($date) {
+                return Carbon::parse($date->created_at)->format('m');
+            });
+    
+        $order_count = [];
+        $order_amount = [];
+    
+        foreach ($order_select as $key => $value) {
+            $order_count[(int)$key] = count($value);
+        }
+    
+        $month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($order_count[$i])) {
+                $order_amount[$i]['count'] = $order_count[$i];
+            } else {
+                $order_amount[$i]['count'] = 0;
+            }
+            $order_amount[$i]['month'] = $month[$i - 1];
+            //$order_amount =   "['". $month[$i]. "'," .$order_count[$i][$i]."],";
+        }
+        //return dd($order_amount[1]['month']);
+    
         return view(
             'adminfrontend.pages.dashboard',
             compact(
@@ -42,7 +84,9 @@ class AdminFrontendController extends Controller
                 'totalCustomer',
                 'totalSubscriber',
                 'count',
-                'orders'
+                'orders',
+                'order_chart',
+                'order_amount'
             )
         );
     }

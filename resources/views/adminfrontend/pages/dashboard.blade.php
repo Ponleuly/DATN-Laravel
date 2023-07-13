@@ -22,7 +22,20 @@
                 </div>
             </div>
         </div>
+        
+        <div class="row px-3 py-4">
+            <div class="col-md-12">
+                <div class="row">
+            <div class="col-md-6 p-3 me-4 border rounded-2 bg-white d-flex justify-content-center">
+                {{-- <div id="chart_div"></div>  --}}
+                <div id="top_x_div" style="width: 100%; height: 500px;"></div>
+            </div>
+            <div class="col-md-5 p-3 border rounded-2 bg-white d-flex justify-content-center">
+                <div id="piechart" style="width: 100%; height: 500px;"></div>
 
+            </div>
+        </div></div>
+        </div>
         <!-- ========== title-wrapper end ========== -->
         <div class="row">
             <div class="col-xl-3 col-lg-4 col-sm-6">
@@ -273,4 +286,73 @@
             return false;
         });
     </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            <?php echo $order_chart?>
+        ]);
+
+        var options = {
+            title: 'Order Status',
+            titleTextStyle:{ 
+                color: '#4A6CF7',
+                fontSize: '20',
+                bold: true,
+                },
+            //is3D: true,
+            chartArea:{left:50,top:40,width:'100%',height:'100%'},
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+    
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawStuff);
+  
+        function drawStuff() {
+          var data = new google.visualization.arrayToDataTable([
+            ['Opening Move', 'Order'],
+            //==== order amount in each month from db ===//
+            <?php 
+                for ($i=1 ; $i<=12; $i++){
+                    echo "['".$order_amount[$i]['month']."',".$order_amount[$i]['count']."],";
+                }
+            ?>
+          ]);
+  
+          var options = {
+            title: 'Order Amount',
+            titleTextStyle:{ 
+                color: 'red',
+                fontSize: '24',
+                bold: true,
+                },
+            //width: 900,
+            legend: { position: 'none' },
+            chart: { title: 'Order Amount',
+                     subtitle: 'Total orders = <?php echo $totalOrder?>', 
+                    },
+            bars: 'vertical', // Required for Material Bar Charts.
+            axes: {
+              x: {
+                0: { side: 'bottom', label: 'Total amount each month',} // Top x-axis.
+              }
+            },
+            bar: { groupWidth: "90%" }
+          };
+  
+          var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+          chart.draw(data, options);
+        };
+      </script>
 @endsection()
