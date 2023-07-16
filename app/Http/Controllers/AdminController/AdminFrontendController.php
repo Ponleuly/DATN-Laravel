@@ -47,32 +47,42 @@ class AdminFrontendController extends Controller
             . "['Pending'," .$pending."],"
             . "['Delivered'," .$delivered."]";
         //========= Order Amount ======//
-        $order_select = Orders::select('id', 'created_at')
+        $order_select = Orders::select('id', 'created_at', 'order_status', 'total_paid')
             ->get()
             ->groupBy(function ($date) {
                 return Carbon::parse($date->created_at)->format('m');
             });
-    
         $order_count = [];
-        $order_amount = [];
-    
+        $order_monthly = [];
+        $order_income = [];
+        $total = 0;
         foreach ($order_select as $key => $value) {
-            $order_count[(int)$key] = count($value);
+            $order_count[(int)$key] = count($value);//==== Store total order per month to array===//
+            foreach($value as $row){
+                if($row['order_status'] == 'Delivered'){//==== Get only order that Delivered ===//
+                    $total += $row['total_paid'];
+                }
+            }
+            $order_income[(int)$key] = $total; //==== Store total paid per month to array===//
+            $total = 0;
+
         }
-    
+        
         $month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         
         for ($i = 1; $i <= 12; $i++) {
             if (!empty($order_count[$i])) {
-                $order_amount[$i]['count'] = $order_count[$i];
+                $order_monthly[$i]['order'] = $order_count[$i];
+                $order_monthly[$i]['income'] = $order_income[$i];
             } else {
-                $order_amount[$i]['count'] = 0;
+                $order_monthly[$i]['order'] = 0;
+                $order_monthly[$i]['income'] = 0;
             }
-            $order_amount[$i]['month'] = $month[$i - 1];
+            $order_monthly[$i]['month'] = $month[$i - 1];
             //$order_amount =   "['". $month[$i]. "'," .$order_count[$i][$i]."],";
         }
-        //return dd($order_amount[1]['month']);
-    
+        //return dd($order_amount);
+        
         return view(
             'adminfrontend.pages.dashboard',
             compact(
@@ -86,7 +96,7 @@ class AdminFrontendController extends Controller
                 'count',
                 'orders',
                 'order_chart',
-                'order_amount'
+                'order_monthly'
             )
         );
     }

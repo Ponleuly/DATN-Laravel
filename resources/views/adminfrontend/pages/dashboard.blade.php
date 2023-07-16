@@ -22,19 +22,28 @@
                 </div>
             </div>
         </div>
-        
-        <div class="row px-3 py-4">
-            <div class="col-md-12">
-                <div class="row">
-            <div class="col-md-6 p-3 me-4 border rounded-2 bg-white d-flex justify-content-center">
-                {{-- <div id="chart_div"></div>  --}}
-                <div id="top_x_div" style="width: 100%; height: 500px;"></div>
-            </div>
-            <div class="col-md-5 p-3 border rounded-2 bg-white d-flex justify-content-center">
-                <div id="piechart" style="width: 100%; height: 500px;"></div>
+        {{-- <div id="piechart" style="width: 100%; height: 500px;"></div> --}}
+        <div class="row pb-4 col-xl-12">
+            {{-- <div class="col-md-6">
+                <div id="curve_chart" style="width: 900px; height: 500px"></div>
 
+            </div> --}}
+            <div class="col-md-8 ">
+                {{-- <div id="chart_div"></div>  --}}
+                {{-- <div id="top_x_div" style="width: 100%; height: 500px;"></div> --}}
+                <div 
+                    id="dual_x_div" 
+                    class="p-3 border bg-white rounded-3" 
+                    style="width: 100%; height: 500px;">
+                </div>
             </div>
-        </div></div>
+            <div class="col-md-4">
+                <div 
+                    id="piechart" 
+                    class="p-1 border bg-white rounded-3" 
+                    style="width: 100%; height: 500px;">
+                </div>
+            </div>
         </div>
         <!-- ========== title-wrapper end ========== -->
         <div class="row">
@@ -288,71 +297,94 @@
     </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                <?php echo $order_chart?>
+            ]);
+            var options = {
+                title: 'Order Status',
+                titleTextStyle:{ 
+                    color: '#4A6CF7',
+                    fontSize: '20',
+                    bold: true,
+                    },
+                //is3D: true,
+                chartArea:{left:30,top:40,width:'100%',height:'100%'},
+            };
 
-      function drawChart() {
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-        var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            <?php echo $order_chart?>
-        ]);
-
-        var options = {
-            title: 'Order Status',
-            titleTextStyle:{ 
-                color: '#4A6CF7',
-                fontSize: '20',
-                bold: true,
-                },
-            //is3D: true,
-            chartArea:{left:50,top:40,width:'100%',height:'100%'},
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
+            chart.draw(data, options);
       }
     </script>
     
+
     <script type="text/javascript">
         google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawStuff);
-  
+
         function drawStuff() {
-          var data = new google.visualization.arrayToDataTable([
-            ['Opening Move', 'Order'],
-            //==== order amount in each month from db ===//
-            <?php 
-                for ($i=1 ; $i<=12; $i++){
-                    echo "['".$order_amount[$i]['month']."',".$order_amount[$i]['count']."],";
-                }
-            ?>
-          ]);
-  
-          var options = {
-            title: 'Order Amount',
-            titleTextStyle:{ 
-                color: 'red',
-                fontSize: '24',
-                bold: true,
-                },
-            //width: 900,
-            legend: { position: 'none' },
-            chart: { title: 'Order Amount',
-                     subtitle: 'Total orders = <?php echo $totalOrder?>', 
-                    },
-            bars: 'vertical', // Required for Material Bar Charts.
-            axes: {
-              x: {
-                0: { side: 'bottom', label: 'Total amount each month',} // Top x-axis.
-              }
+            var data = new google.visualization.arrayToDataTable([
+            ['Month', 'Amount', 'Income ($)'],
+                <?php 
+                    for ($i=1 ; $i<=12; $i++){
+                        echo "['".$order_monthly[$i]['month']."',".$order_monthly[$i]['order'].",".$order_monthly[$i]['income']."],";
+                    }
+                ?>
+            ]);
+
+            var options = {
+            //width: 800,
+            chart: {
+                title: 'Monthly order and income',
+                subtitle: 'Total order = <?php echo $totalOrder?>, Total income = <?php echo $totalIncome.' $' ?>',
+                titleTextStyle: {color:'red'}
             },
-            bar: { groupWidth: "90%" }
-          };
-  
-          var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-          chart.draw(data, options);
+            bars: 'vertical', // Required for Material Bar Charts.
+            series: {
+                0: { axis: 'Amount' }, // Bind series 0 to an axis named 'distance'.
+                1: { axis: 'Income' } // Bind series 1 to an axis named 'brightness'.
+            },
+            axes: {
+                x: {
+                distance: {label: 'parsecs'}, // Bottom x-axis.
+                brightness: {side: 'top', label: 'apparent magnitude'} // Top x-axis.
+                }
+            }
+            };
+
+        var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
+        chart.draw(data, options);
         };
-      </script>
+    </script>
+    
+    // <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    // <script type="text/javascript">
+    //   google.charts.load('current', {'packages':['corechart']});
+    //   google.charts.setOnLoadCallback(drawChart);
+
+    //   function drawChart() {
+
+    //     var data = google.visualization.arrayToDataTable([
+    //       ['Task', 'Hours per Day'],
+    //       ['Work',     11],
+    //       ['Eat',      2],
+    //       ['Commute',  2],
+    //       ['Watch TV', 2],
+    //       ['Sleep',    7]
+    //     ]);
+
+    //     var options = {
+    //       title: 'My Daily Activities'
+    //     };
+
+    //     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    //     chart.draw(data, options);
+    //   }
+    // </script>
+
 @endsection()
