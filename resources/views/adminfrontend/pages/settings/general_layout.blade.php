@@ -1,12 +1,7 @@
 @extends('adminfrontend.layouts.index')
 @section('admincontent')
     <div class="container-fluid">
-        @if(Session::has('alert'))
-            <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                {{Session::get('alert')}}
-                <button group="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-		@endif
+        @include('adminfrontend.pages.alert')
 
         <h4 class="mt-3 mb-2 text-black">Layout View</h4>
         <div class="border bg-white">

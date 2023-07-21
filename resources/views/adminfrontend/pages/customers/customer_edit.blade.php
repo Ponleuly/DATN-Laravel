@@ -1,12 +1,7 @@
 @extends('adminfrontend.layouts.index')
 @section('admincontent')
     <div class="container-fluid ">
-        @if(Session::has('alert'))
-            <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                {{Session::get('alert')}}
-                <button group="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-		@endif
+        @include('adminfrontend.pages.alert')
         <form  action="{{url('admin/customer-edit/'.$customer->id)}}" method="POST" enctype="multipart/form-data">
             @csrf <!-- to make form active -->
             @method('PUT')

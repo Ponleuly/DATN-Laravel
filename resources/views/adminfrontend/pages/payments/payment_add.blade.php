@@ -5,12 +5,7 @@
             @csrf <!-- to make form active -->
             <div class="row justify-content-center">
                 <div class="col-md-6 my-3 mb-md-0">
-                    @if(Session::has('message'))
-                        <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                            {{Session::get('message')}}
-                        <button group="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-		            @endif
+                    @include('adminfrontend.pages.alert')
 
                     <div class="card-style">
                         <h4 class="text-medium text-center">Add Payment</h4>

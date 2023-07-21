@@ -3,17 +3,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <div class="container-fluid">
         <!--------------- Alert ------------------------>
-        @if(Session::has('alert'))
-            <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
-                {{Session::get('alert')}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @elseif(Session::has('message'))
-            <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                {{Session::get('message')}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+        @include('adminfrontend.pages.alert')
        <!---------------End Alert ------------------------>
 
         <form action="{{url('/admin/product-detail-add')}}" method="POST" enctype="multipart/form-data">

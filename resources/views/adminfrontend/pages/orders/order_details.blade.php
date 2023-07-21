@@ -21,17 +21,7 @@
     <div class="container-fluid">
         <!--------------- Alert ------------------------>
         <div class="col-md-12 my-3 mb-md-0">
-            @if(Session::has('alert'))
-                <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
-                    {{Session::get('alert')}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @elseif(Session::has('message'))
-                    <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                        {{Session::get('message')}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-            @endif
+            @include('adminfrontend.pages.alert')
         </div>
         <!---------------End Alert ------------------------>
         <div class="row mb-10">

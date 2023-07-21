@@ -6,12 +6,7 @@
             @method('PUT')
             <div class="row justify-content-center">
                 <div class="col-md-6 my-3 mb-md-0">
-                    @if(Session::has('alert'))
-                        <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                            {{Session::get('alert')}}
-                        <button group="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-		            @endif
+                    @include('adminfrontend.pages.alert')
 
                      <div class="card-style">
                         <h4 class="text-medium text-center">Edit Payment</h4>
