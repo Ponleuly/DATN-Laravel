@@ -76,34 +76,56 @@
 			<!-- End Testimonial Slider -->
 		@endif
 		<!-- Start Hero Section -->
-			<div class="hero">
-				<div class="container">
-					<div class="row justify-content-between">
-						<div class="col-lg-5">
-							<div class="intro-excerpt text-capitalize">
-								<h1>{{$setting->home_pageSlogan}}</span></h1>
-								<p class="mb-4">{{$setting->home_pageText}}</p>
-								<p>
-									<a
-										href="{{url('shop')}}"
-										class="btn btn-warning me-2 rounded-pill px-4 py-2 fw-semibold"
-										>
-										Shop Now
-									</a>
-								</p>
-							</div>
+		<div class="hero">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-5">
+						<div class="intro-excerpt text-capitalize">
+							<h1>{{$setting->home_pageSlogan}}</span></h1>
+							<p class="mb-4">{{$setting->home_pageText}}</p>
+							<p>
+								<a
+									href="{{url('shop')}}"
+									class="btn btn-warning me-2 rounded-pill px-4 py-2 fw-semibold"
+									>
+									Shop Now
+								</a>
+							</p>
 						</div>
-						<div class="col-lg-7">
-							<div class="hero-img-wrap">
-								<img
-                                    src="/product_img/imghomepage/{{$setting->home_pageImage}}"
-                                    class="img-fluid"
-                                >
-							</div>
+					</div>
+					<div class="col-lg-7">
+						<div class="hero-img-wrap">
+							<img
+                                src="/product_img/imghomepage/{{$setting->home_pageImage}}"
+                                class="img-fluid"
+                            >
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+		{{-- <div class="row">
+			<div class="col-lg-6" style="background: #CC2936; padding: 100px;">
+				<div class="intro-excerpt text-capitalize text-white">
+					<h1>{{$setting->home_pageSlogan}}</span></h1>
+					<p class="mb-4">{{$setting->home_pageText}}</p>
+					<p>
+						<a
+							href="{{url('shop')}}"
+							class="btn btn-warning me-2 rounded-pill px-4 py-2 fw-semibold"
+							>
+							Shop Now
+						</a>
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-6 px-0">
+					<img
+						src="/product_img/imghomepage/{{$setting->home_pageImage}}"
+						class="img-fluid py-0"
+					>
+			</div>
+		</div> --}}
 		<!-- End Hero Section -->
 
 		<!-- Start Blog Section -->

@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="row justify-content-end">
-                                    <div class="col-md-3 mb-2">
+                                    <div class="col-md-4 mb-2">
                                         <a
                                             class="btn btn-outline-primary shadow rounded-1 py-1"
                                             href="{{url('/admin/product-detail-add')}}"
