@@ -18,7 +18,7 @@ use App\Http\Controllers\Controller;
 class OrderController extends Controller
 {
 
-    public function order_list_page($res, $title, $sort)
+    public function order_list($res, $title, $sort)
     {
         if ($res == 'all') {
             $orders = Orders::all()->count();

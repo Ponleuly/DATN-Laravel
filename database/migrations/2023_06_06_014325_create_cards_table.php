@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('order_id');
+            $table->foreign('order_id')
+                ->references('id')
+                ->on('orders')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('payment_id')->nullable();
             $table->string('card_digit');
             $table->string('card_brand');

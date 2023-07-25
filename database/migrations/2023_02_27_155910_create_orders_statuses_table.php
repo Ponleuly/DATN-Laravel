@@ -11,23 +11,23 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('orders_statuses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('status');
-            $table->string('status_color', 10);
-            $table->timestamps();
-        });
-    }
+    // public function up()
+    // {
+    //     Schema::create('orders_statuses', function (Blueprint $table) {
+    //         $table->increments('id');
+    //         $table->string('status');
+    //         $table->string('status_color', 10);
+    //         $table->timestamps();
+    //     });
+    // }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('orders__statuses');
-    }
+    // /**
+    //  * Reverse the migrations.
+    //  *
+    //  * @return void
+    //  */
+    // public function down()
+    // {
+    //     Schema::dropIfExists('orders__statuses');
+    // }
 };

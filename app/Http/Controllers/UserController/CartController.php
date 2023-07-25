@@ -453,7 +453,7 @@ class CartController extends Controller
                 'total_paid' => substr($request->total_paid, 2),
             ]);
             // Get customer id
-            $order = Orders::latest()->first();
+            $order = Orders::orderBy('id', 'desc')->first();
             $orderId = $order->id;
             $input = $request->all();
             $input['order_id'] = $orderId;
@@ -493,7 +493,7 @@ class CartController extends Controller
             ]);
 
             // Get order id
-            $order = Orders::latest()->first();
+            $order = Orders::orderBy('id', 'desc')->first();
             $orderId = $order->id;
             //==== Store data to table customer =====//
             $input = $request->all();
@@ -515,7 +515,7 @@ class CartController extends Controller
             Cart::destroy();
         }
         //===================== Update product stock after ordered =======================//
-        $placeOrder = Orders::latest()->first();
+        $placeOrder = Orders::orderBy('id', 'desc')->first();
         $orderId = $placeOrder->id;
         //===== Calll OrderController =====//
         $orderController = new OrderController();
@@ -560,7 +560,7 @@ class CartController extends Controller
             return redirect('order-completed/invoice=' . substr($order->invoice_code, 1));
         }
 
-        return $this->order_completed(substr($order->invoice_code, 1));
+        //return $this->order_completed(substr($order->invoice_code, 1));
         //return dd($request->toArray());
     }
 

@@ -113,6 +113,10 @@ Route::controller(CartController::class)->group(function () {
       Route::get('order-canceled/invoice={code}', 'order_canceled')->name('order-canceled');
    });
 });
+Route::get('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'paymentForm'])->name('payment');
+//Route::post('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'payment'])->name('payment');
+Route::post('webhook', [StripeController::class, 'paymentInfo'])->name('webhook');
+
 /*================================================= End User Frontend route ====================================================*/
 
 
@@ -196,7 +200,7 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
 Route::prefix('admin')->middleware('authAdmin')->group(function () {
    Route::controller(OrderController::class)->group(function () {
       //Route::get('/order-list/show={res}', 'order_list_page')->name('order-list');
-      Route::get('/order-list/show={res}/by-{title}={sort}', 'order_list_page')->name('order-list');
+      Route::get('/order-list/show={res}/by-{title}={sort}', 'order_list')->name('order-list');
       Route::get('/order-details/{id}', 'order_details')->name('order-details');
       Route::get('/order-invoice/{id}', 'order_invoice')->name('order-invoice');
       Route::get('/download-invoice/{id}', 'download_invoice')->name('download-invoice');
@@ -291,9 +295,6 @@ Route::prefix('admin')->middleware('authAdmin')->group(function () {
       Route::get('/payment-search', 'payment_search')->name('payment-search');
    });
 });
-Route::get('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'paymentForm'])->name('payment');
-//Route::post('payment/invoicecode={code}/totalpaid={total}', [StripeController::class, 'payment'])->name('payment');
-Route::post('webhook', [StripeController::class, 'paymentInfo'])->name('webhook');
 
 /*
 Route::post('webhook', function (Request $request) {

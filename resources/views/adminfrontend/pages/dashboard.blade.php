@@ -174,9 +174,9 @@
                                             $totalAmount += $price * $qty;
                                         }
                                         $total = $totalAmount + $deliveryFee - $discount;
-                                         // Get delivery statuses
-                                        $statuses = Orders_Statuses::orderBy('id')->get();
-                                        $status_name = Orders_Statuses::where('id', $order->order_status)->first();
+                                        //  // Get delivery statuses
+                                        // $statuses = Orders_Statuses::orderBy('id')->get();
+                                        // $status_name = Orders_Statuses::where('id', $order->order_status)->first();
                                     @endphp
                                     <tr class="text-center">
                                         <td>

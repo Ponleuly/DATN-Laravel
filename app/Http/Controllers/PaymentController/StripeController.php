@@ -66,7 +66,11 @@ class StripeController extends Controller
     {
         if ($request->type === 'charge.succeeded') {
             try {
+                $invoiceCode = trim($request->data['object']['description'], 'Order invoice code ');
+                $order = Orders::where('invoice_code', $invoiceCode)->first();
+                $orderId = $order->id;
                 Cards::create([
+                    'order_id' => $orderId,
                     'payment_id' => $request->data['object']['payment_method'],
                     'card_digit' => $request->data['object']['payment_method_details']['card']['last4'],
                     'card_brand' => $request->data['object']['payment_method_details']['card']['brand'],
@@ -90,21 +94,19 @@ class StripeController extends Controller
             }
         }
     }
-    /*
-    public function payment(Request $request, $invoiceCode, $totalPaid)
-    {
+    // public function payment(Request $request, $invoiceCode, $totalPaid)
+    // {
 
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        Stripe\Charge::create([
-            "amount" => ($totalPaid) * 100,
-            "currency" => "usd",
-            "source" => $request->stripeToken,
-            "description" => "Order inovice code #" . $invoiceCode,
-        ]);
+    //     Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+    //     Stripe\Charge::create([
+    //         "amount" => ($totalPaid) * 100,
+    //         "currency" => "usd",
+    //         "source" => $request->stripeToken,
+    //         "description" => "Order inovice code #" . $invoiceCode,
+    //     ]);
 
-        return redirect('order-completed/invoice=' . $invoiceCode)->with('success', 'Payment successful!');
+    //     return redirect('order-completed/invoice=' . $invoiceCode)->with('success', 'Payment successful!');
 
-        return dd($request->toArray());
-    }
-    */
+    //     //return dd($request->toArray());
+    // }
 }

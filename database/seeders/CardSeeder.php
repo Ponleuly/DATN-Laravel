@@ -22,6 +22,7 @@ class CardSeeder extends Seeder
         foreach ($orders as $order) {
             $customer = Customers::where('order_id', $order->id)->first();
             DB::table('cards')->insert([
+                'order_id' => $order->id,
                 'card_digit' => substr(fake()->creditCardNumber(), -4),
                 'card_brand' => fake()->creditCardType(),
                 'holder_name' => strtoupper($customer->c_name),

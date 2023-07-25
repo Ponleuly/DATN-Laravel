@@ -20,6 +20,7 @@
                                         class="form-control rounded-0 fw-500 mb-2"
                                         value="{{$sizes->size_number}}"
                                         min="1"
+                                        maxlength="5"
                                         id="size"
                                         name="size_number"
                                         placeholder="size number..."
