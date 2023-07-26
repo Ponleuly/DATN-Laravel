@@ -126,9 +126,9 @@ class ProductDetailController extends Controller
     public function product_detail_add()
     {
         $sizes = Sizes::orderBy('size_number')->get();
-        $groups = Groups::orderBy('id')->get();
-        $categories = Categories::orderBy('id')->get();
-        $subCategories = Categories_Subcategories::orderBy('id')->get();
+        $groups = Groups::orderBy('group_name', 'asc')->get();
+        $categories = Categories::orderBy('category_name', 'asc')->get();
+        $subCategories = Categories_Subcategories::orderBy('sub_category', 'asc')->get();
         return view(
             'adminfrontend.pages.products.product_detail_add',
             compact(

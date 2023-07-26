@@ -276,10 +276,15 @@
                                                     required
                                                 >
                                                 <label
-                                                    class="btn btn-outline-dark rounded-0 mb-1 fw-semibold btn-sm" style="width: 60px;"
+                                                    class="btn btn-outline-dark rounded-0 mb-1 fw-semibold btn-sm"
+                                                    style="width: 60px; {{($quantity->size_quantity == 0)? 'font-size:8px':''}}"
                                                     for="{{$size->size_id}}"
-                                                    >{{$size->rela_product_size->size_number}}
-                                                    <!--{{($size->rela_product_size->size_number == 'free')? '':' EU'}}-->
+                                                    >
+                                                    {{$size->rela_product_size->size_number}}
+                                                    <br>
+                                                    <p style="font-size: 6px" class="text-danger mb-0 fw-bolder">
+                                                    {{($quantity->size_quantity == 0)? 'Out-of-Stock':''}}
+                                                    </p>
                                                 </label>
                                             </div>
                                         @endforeach

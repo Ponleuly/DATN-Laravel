@@ -1,3 +1,8 @@
+<?php
+	use App\Models\Categories_Groups;
+	use App\Models\Products_Attributes;
+	use App\Models\Categories_Subcategories;
+?>
 @extends('adminfrontend.layouts.index')
 @section('admincontent')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -311,15 +316,27 @@
                                             <div class="col-6">
                                                 <label for="category_id" ><p class="text-label mt-2" >Product Category</p></label>
                                                 <select
-                                                    class="form-select form-select-sm rounded-0 mb-2 "
+                                                    class="form-select form-select-sm rounded-0 mb-2"
                                                     aria-label="category select"
                                                     name="category_id"
                                                     id="category_id"
                                                     required
                                                     >
                                                     <option selected disabled value="">Select Category</option>
-                                                    @foreach ($categories as $item2)
-                                                        <option value="{{$item2->id}}">{{$item2->category_name}}</option>
+                                                    @foreach ($categories as $category)
+                                                        @php
+                                                            $groups =  Categories_Groups::where('category_id', $category->id)->get();
+                                                        @endphp
+                                                        <option value="{{$category->id}}">
+                                                            {{$category->category_name}} -- ( 
+                                                            @foreach($groups as $group)
+                                                                <p class="text-sm">
+                                                                    {{$group->rela_category_group->group_name}}
+                                                                    {{($loop->last)? '':'&'}}
+                                                                </p>
+                                                            @endforeach
+                                                            )
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -333,8 +350,17 @@
                                                     required
                                                     >
                                                     <option selected disabled value="">Select Subcategory</option>
-                                                    @foreach ($subCategories as $item1)
-                                                        <option value="{{$item1->id}}">{{$item1->sub_category}}</option>
+                                                    @foreach ($subCategories as $sub)
+                                                        @php
+                                                            $category = Categories_Subcategories::where('id', $sub->id)->first();
+                                                        @endphp
+                                                        <option value="{{$sub->id}}">
+                                                            {{$sub->sub_category}} -- ( 
+                                                                    <p class="text-sm">
+                                                                        {{$category->rela_category_subcategory->category_name}}
+                                                                    </p>
+                                                            )
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
