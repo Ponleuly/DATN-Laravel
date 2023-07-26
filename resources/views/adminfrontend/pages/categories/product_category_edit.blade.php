@@ -77,7 +77,8 @@
                                     name="sub_category"
                                     placeholder="sub category"
                                     value="@foreach ($subCategory as $item){{$item->sub_category. ','}}@endforeach"
-                                >
+                                    required
+                                    >
                                 <label>
                                     <p class="text-label mt-2">
                                         Product group

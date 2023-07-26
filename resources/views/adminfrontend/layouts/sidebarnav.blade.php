@@ -39,7 +39,7 @@
                     </a>
                     <ul id="ddmenu_1" class="collapse dropdown-nav">
                         <li>
-                            <a  href="{{url('admin/product-detail-list/show=10/by-name=asc')}}"
+                            <a  href="{{url('admin/product-detail-list/show=10/by-date=desc')}}"
                                 class="{{Request::is('admin/product-detail-list')? 'active':''}}">
                                 Product List
                             </a>

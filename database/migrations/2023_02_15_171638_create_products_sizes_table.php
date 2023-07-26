@@ -26,7 +26,7 @@ return new class extends Migration
             $table->unsignedInteger('size_id');
             $table->foreign('size_id')
                 ->references('id')
-                ->on('Sizes')
+                ->on('sizes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->unsignedInteger('size_quantity');
