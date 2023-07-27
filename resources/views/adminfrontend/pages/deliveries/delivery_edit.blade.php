@@ -9,7 +9,7 @@
                     @include('adminfrontend.pages.alert')
 
                     <div class="card-style">
-                        <h4 class="text-medium text-center">Edit Delivery Option</h4>
+                        <h4 class="text-medium text-center text-primary">Edit Delivery Option</h4>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <div class="col-md-12">

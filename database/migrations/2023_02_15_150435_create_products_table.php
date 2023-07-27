@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('product_name', 100);
             $table->string('product_code', 20);
-            $table->string('product_des', 500)->nullable();
+            $table->string('product_des', 500);
             //$table->unsignedInteger('product_stock');
 
             $table->unsignedDecimal('product_price', 5, 2);

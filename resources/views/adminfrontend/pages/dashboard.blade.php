@@ -11,44 +11,21 @@
 @section('admincontent')
     <div class="container-fluid">
         <!-- ========== title-wrapper start ========== -->
-        <div class="title-wrapper pt-30">
+        <div class="title-wrapper pt-20">
             <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="title mb-30">
-                        <h2>Dashboard</h2>
+                <div class="col-md-6 mb-20">
+                    <div class="title">
+                        <h4 class="text-primary">Dashboard</h4>
                     </div>
-                </div>
-                <div class="col-md-6">
-                </div>
-            </div>
-        </div>
-        {{-- <div id="piechart" style="width: 100%; height: 500px;"></div> --}}
-        <div class="row pb-4 col-xl-12">
-            {{-- <div class="col-md-6">
-                <div id="curve_chart" style="width: 900px; height: 500px"></div>
-
-            </div> --}}
-            <div class="col-md-8 ">
-                {{-- <div id="chart_div"></div>  --}}
-                {{-- <div id="top_x_div" style="width: 100%; height: 500px;"></div> --}}
-                <div 
-                    id="dual_x_div" 
-                    class="p-3 border bg-white rounded-3" 
-                    style="width: 100%; height: 500px;">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div 
-                    id="piechart" 
-                    class="p-1 border bg-white rounded-3" 
-                    style="width: 100%; height: 500px;">
                 </div>
             </div>
         </div>
         <!-- ========== title-wrapper end ========== -->
+
+        <!--================ Box ===================-->
         <div class="row">
             <div class="col-xl-3 col-lg-4 col-sm-6">
-                <div class="icon-card mb-30">
+                <div class="icon-card mb-30 shadow">
                     <div class="icon purple">
                         <span class="material-icons-round">add_shopping_cart</span>
                     </div>
@@ -61,7 +38,7 @@
             </div>
             <!-- End Col -->
             <div class="col-xl-3 col-lg-4 col-sm-6">
-                <div class="icon-card mb-30">
+                <div class="icon-card mb-30 shadow">
                     <div class="icon orange">
                             <span class="material-icons-round">shopping_cart</span>
                     </div>
@@ -73,7 +50,7 @@
             </div>
             <!-- End Col -->
             <div class="col-xl-3 col-lg-4 col-sm-6">
-                <div class="icon-card mb-30">
+                <div class="icon-card mb-30 shadow">
                     <div class="icon primary">
                         <span class="material-icons-round">local_mall</span>
                     </div>
@@ -87,7 +64,7 @@
 
             <!-- End Col -->
             <div class="col-xl-3 col-lg-4 col-sm-6">
-                <div class="icon-card mb-30">
+                <div class="icon-card mb-30 shadow">
                     <div class="icon success">
                         <span class="material-icons-round">paid</span>
                     </div>
@@ -99,7 +76,7 @@
                 <!-- End Icon Cart -->
             </div>
             <!-------------------------------------------------------------------->
-            <div class="col-xl-3 col-lg-4 col-sm-6">
+            {{-- <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="icon-card mb-30">
                     <div class="icon purple  bg-warning text-light">
                         <span class="material-icons-round">account_circle</span>
@@ -110,9 +87,9 @@
                     </div>
                 </div>
                 <!-- End Icon Cart -->
-            </div>
+            </div> --}}
             <!-- End Col -->
-            <div class="col-xl-3 col-lg-4 col-sm-6">
+            {{-- <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="icon-card mb-30">
                     <div class="icon orange  bg-info text-light">
                         <span class="material-icons-round">groups</span>
@@ -122,9 +99,9 @@
                         <h3 class="text-bold mb-10">{{$totalCustomer}}</h3>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- End Col -->
-            <div class="col-xl-3 col-lg-4 col-sm-6">
+            {{-- <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="icon-card mb-30">
                     <div class="icon primary bg-danger text-light">
                         <span class="material-icons-round">contact_mail</span>
@@ -135,8 +112,8 @@
                     </div>
                 </div>
                 <!-- End Icon Cart -->
-            </div>
-            <div class="col-lg-12">
+            </div> --}}
+            {{-- <div class="col-lg-12">
                 <div class="card-style mb-30">
                     <div class="title d-flex flex-wrap align-items-center justify-content-between">
                         <div class="left">
@@ -279,6 +256,45 @@
                         </div>
                     </div>
                 </div>
+            </div> --}}
+        </div>
+        <!--================ End Box ===================-->
+
+        <!--============== CHart ===================-->
+        {{-- <div class="row pb-4 col-xl-12">
+            <div class="col-md-8 ">
+                <div 
+                    id="dual_x_div" 
+                    class="p-3 border  rounded-3 shadow" 
+                    style="width: 100%; height: 500px;">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div 
+                    id="piechart" 
+                    class="p-2 border  rounded-3 shadow" 
+                    style="width: 100%; height: 500px;">
+                </div>
+            </div>
+        </div> --}}
+        <!--==============End chart ===================-->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="p-3 border bg-white rounded-3 shadow">
+                    <h5 class="text-primary pb-3 fw-semibold">Order amount and income</h5>
+                    <div 
+                        id="dual_x_div" 
+                        class="" 
+                        style="width: 100%; height: 430px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div 
+                    id="piechart" 
+                    class="p-2 border bg-white rounded-3 shadow" 
+                    style="width: 100%; height: 500px;">
+                </div>
             </div>
         </div>
     </div>
@@ -305,10 +321,10 @@
                 <?php echo $order_chart?>
             ]);
             var options = {
-                title: 'Order Status',
+                title: 'Order status',
                 titleTextStyle:{ 
                     color: '#4A6CF7',
-                    fontSize: '20',
+                    fontSize: '16',
                     bold: true,
                     },
                 //is3D: true,
@@ -318,7 +334,7 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
             chart.draw(data, options);
-      }
+        }
     </script>
     
 
@@ -337,54 +353,26 @@
             ]);
 
             var options = {
-            //width: 800,
-            chart: {
-                title: 'Monthly order and income',
-                subtitle: 'Total order = <?php echo $totalOrder?>, Total income = <?php echo $totalIncome.' $' ?>',
-                titleTextStyle: {color:'red'}
-            },
-            bars: 'vertical', // Required for Material Bar Charts.
-            series: {
-                0: { axis: 'Amount' }, // Bind series 0 to an axis named 'distance'.
-                1: { axis: 'Income' } // Bind series 1 to an axis named 'brightness'.
-            },
-            axes: {
-                x: {
-                distance: {label: 'parsecs'}, // Bottom x-axis.
-                brightness: {side: 'top', label: 'apparent magnitude'} // Top x-axis.
+                //width: 800,
+                chart: {
+                    //title: 'Monthly order and income',
+                    //subtitle: 'Total order = <?php echo $totalOrder?>, Total income = <?php echo $totalIncome.' $' ?>',
+                },
+                
+                bars: 'vertical', // Required for Material Bar Charts.
+                series: {
+                    0: { axis: 'Amount' }, // Bind series 0 to an axis named 'distance'.
+                    1: { axis: 'Income' } // Bind series 1 to an axis named 'brightness'.
+                },
+                axes: {
+                    x: {
+                    distance: {label: 'parsecs'}, // Bottom x-axis.
+                    brightness: {side: 'top', label: 'apparent magnitude'} // Top x-axis.
+                    }
                 }
-            }
             };
-
-        var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
-        chart.draw(data, options);
+            var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
+            chart.draw(data, options);
         };
     </script>
-    
-    // <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    // <script type="text/javascript">
-    //   google.charts.load('current', {'packages':['corechart']});
-    //   google.charts.setOnLoadCallback(drawChart);
-
-    //   function drawChart() {
-
-    //     var data = google.visualization.arrayToDataTable([
-    //       ['Task', 'Hours per Day'],
-    //       ['Work',     11],
-    //       ['Eat',      2],
-    //       ['Commute',  2],
-    //       ['Watch TV', 2],
-    //       ['Sleep',    7]
-    //     ]);
-
-    //     var options = {
-    //       title: 'My Daily Activities'
-    //     };
-
-    //     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-    //     chart.draw(data, options);
-    //   }
-    // </script>
-
 @endsection()

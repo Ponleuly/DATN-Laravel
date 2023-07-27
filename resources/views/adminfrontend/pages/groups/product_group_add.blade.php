@@ -8,7 +8,7 @@
                     @include('adminfrontend.pages.alert')
 
                     <div class="card-style">
-                        <h4 class="text-medium text-center">Add Group</h4>
+                        <h4 class="text-medium text-center text-primary">Add Group</h4>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <div class="col-md-12">

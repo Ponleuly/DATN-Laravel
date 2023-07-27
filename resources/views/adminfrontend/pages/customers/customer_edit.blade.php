@@ -9,7 +9,7 @@
                 <div class="col-lg-6 my-3">
                     <div class="card-style mb-20">
                         <div class="col-12 text-center">
-                            <h4 class="text-medium mb-20 mt-10">Edit Customer</h4>
+                            <h4 class="text-medium mb-20 mt-10 text-primary">Edit Customer</h4>
                         </div>
                         <div class="form-group mb-2">
                             <div class="col-md-12">

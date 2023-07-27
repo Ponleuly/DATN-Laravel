@@ -3,7 +3,7 @@
     <div class="container-fluid">
         @include('adminfrontend.pages.alert')
 
-        <h4 class="mt-3 mb-2 text-black">Layout View</h4>
+        <h4 class="mt-3 mb-2 text-black text-primary">Layout View</h4>
         <div class="border bg-white">
             <div class="col-md-12">
                 <div class="row">

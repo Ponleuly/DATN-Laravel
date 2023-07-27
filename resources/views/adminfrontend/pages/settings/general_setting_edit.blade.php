@@ -11,7 +11,7 @@
             <div class="row ">
                 <div class="col-md-12 my-3 mb-md-0">
                     <div class="card-style">
-                        <h4 class="text-medium text-center mb-20">General Settings Edit</h4>
+                        <h4 class="text-medium text-center mb-20 text-primary">General Settings Edit</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row mb-2">

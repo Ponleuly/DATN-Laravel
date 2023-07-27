@@ -12,7 +12,7 @@
                 <div class="card-style">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="text-medium">News Details</h4>
+                            <h4 class="text-medium text-primary">News Details</h4>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
                             <a

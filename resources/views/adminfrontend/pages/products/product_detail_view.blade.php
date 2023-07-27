@@ -14,7 +14,7 @@
             <div class="card-style mb-30">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h4 class="text-medium mb-20">Product Details</h4>
+                        <h4 class="text-medium mb-20 text-primary">Product Details</h4>
                     </div>
                     <div class="col-md-6">
                         <div id="carouselExampleControlsNoTouching" class="carousel slide px-1" data-bs-touch="false" data-bs-interval="false">

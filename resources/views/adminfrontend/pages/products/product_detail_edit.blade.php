@@ -17,7 +17,7 @@
                 <div class="col-md-12 mt-15">
                     <div class="card-style mb-30">
                         <div class="col-12 text-center">
-                            <h4 class="text-medium mb-20">Edit Product</h4>
+                            <h4 class="text-medium mb-20 text-primary">Edit Product</h4>
                         </div>
                         <div class="row">
                             <div class="col-md-6">

@@ -11,7 +11,7 @@
                     <!---------------End Alert ------------------------>
 
                     <div class="card-style">
-                        <h4 class="text-medium text-center">Edit Category</h4>
+                        <h4 class="text-medium text-center text-primary">Edit Category</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="product_imgcover">

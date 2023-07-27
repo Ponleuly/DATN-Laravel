@@ -11,7 +11,7 @@
                     <!---------------End Alert ------------------------>
 
                      <div class="card-style">
-                        <h4 class="text-medium text-center mb-20">Edit Coupon</h4>
+                        <h4 class="text-medium text-center mb-20 text-primary">Edit Coupon</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-2">

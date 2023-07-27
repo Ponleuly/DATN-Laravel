@@ -9,7 +9,7 @@
             </div>
             <div class="row mb-10">
                 <div class="col-6">
-                    <h4 class="text-medium">Profile</h4>
+                    <h4 class="text-medium text-primary">Profile</h4>
                 </div>
             </div>
             <!------------------------------------------------------------------------------------>

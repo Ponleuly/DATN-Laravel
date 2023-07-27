@@ -24,6 +24,12 @@ return new class extends Migration
                 ->onUpdate('cascade');
 
             $table->unsignedInteger('product_id');
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->unsignedDecimal('product_price');
             $table->unsignedInteger('product_quantity');
             $table->unsignedInteger('size_id');

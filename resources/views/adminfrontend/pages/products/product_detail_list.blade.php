@@ -18,7 +18,7 @@
                     <div class="title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="text-medium mb-20">Products List</h4>
+                                <h4 class="text-medium mb-20 text-primary">Products List</h4>
                             </div>
                             <div class="col-md-6">
                                 <div class="row justify-content-end">

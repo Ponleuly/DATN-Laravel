@@ -26,7 +26,7 @@ class OrderSeeder extends Seeder
                 'discount' =>  floatval(rand(3, 5)),
                 'delivery_fee' => rand(0, 1) ? 2 : 4,
                 'payment_method' => rand(0, 1) ? 'Credit Card' : 'COD',
-                'created_at' => '2023-'.rand(1,12).'-'.rand(1,28). ' '.rand(1,12).':'.rand(1,59).':'.rand(1,59),
+                'created_at' => '2023-'.rand(1,7).'-'.rand(1,26). ' '.rand(1,12).':'.rand(1,59).':'.rand(1,59),
                 //'created_at' => Carbon::now()
                 //'customer_id ' => Str::random(10) . '@gmail.com',
             ]);

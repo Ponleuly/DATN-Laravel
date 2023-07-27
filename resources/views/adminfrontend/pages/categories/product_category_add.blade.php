@@ -9,7 +9,7 @@
                     @include('adminfrontend.pages.alert')
                     <!---------------End Alert ------------------------>
                     <div class="card-style">
-                        <h4 class="text-medium text-center">Add Category</h4>
+                        <h4 class="text-medium text-center text-primary">Add Category</h4>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <div class="col-md-12">

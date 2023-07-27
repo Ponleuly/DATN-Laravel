@@ -26,7 +26,7 @@
         <!---------------End Alert ------------------------>
         <div class="row mb-10">
             <div class="col-6">
-                <h4 class="text-medium">Order Details</h4>
+                <h4 class="text-medium text-primary">Order Details</h4>
             </div>
             <div class="col-md-6 d-flex justify-content-end">
                 <a

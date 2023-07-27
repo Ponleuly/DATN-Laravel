@@ -14,7 +14,7 @@
                     <div class="title d-flex flex-wrap align-items-center justify-content-between align-items-baseline">
                          <div class="col-md-6">
                             <div class="left">
-                                <h4 class="text-medium mb-20">Payments List</h4>
+                                <h4 class="text-medium mb-20 text-primary">Payments List</h4>
                             </div>
                         </div>
                         <div class="col-md-6">

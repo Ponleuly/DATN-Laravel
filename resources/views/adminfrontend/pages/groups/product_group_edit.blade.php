@@ -10,7 +10,7 @@
                     @include('adminfrontend.pages.alert')
                     <!---------------End Alert ------------------------>
                     <div class="card-style">
-                        <h4 class="text-medium mb-20 text-center">Edit Group</h4>
+                        <h4 class="text-medium mb-20 text-center text-primary">Edit Group</h4>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <div class="col-md-12">
