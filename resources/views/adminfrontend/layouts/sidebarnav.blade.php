@@ -22,7 +22,8 @@
                     </a>
                 </li>
                 <!---------------------------------------------------------->
-                <li class="nav-item nav-item-has-children {{Request::is('admin/product-detail*')? 'active':''}}">
+                <li class="nav-item nav-item-has-children 
+                    {{Request::is('admin/product-detail*') || Request::is('admin/product-size*') ? 'active':''}}">
                     <a
                         href="#0"
                         class="collapsed"
@@ -48,6 +49,18 @@
                             <a  href="{{url('admin/product-detail-add')}}"
                                 class="{{Request::is('admin/product-detail-add')? 'active':''}}">
                                 Product Add
+                            </a>
+                        </li>
+                        <li>
+                            <a  href="{{url('admin/product-size-list')}}"
+                                class="{{Request::is('admin/product-size-list')? 'active':''}}">
+                                Sizes List
+                            </a>
+                        </li>
+                        <li>
+                            <a  href="{{url('admin/product-size-add')}}"
+                                class="{{Request::is('admin/product-size-add')? 'active':''}}">
+                                Sizes Add
                             </a>
                         </li>
                     </ul>
@@ -86,7 +99,7 @@
                     </ul>
                 </li>
                 <!---------------------------------------------------------->
-                <li class="nav-item nav-item-has-children  {{Request::is('admin/product-group*')? 'active':''}}">
+                {{-- <li class="nav-item nav-item-has-children  {{Request::is('admin/product-group*')? 'active':''}}">
                     <a
                         href="#0"
                         class="collapsed"
@@ -115,9 +128,10 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <!---------------------------------------------------------->
-                <li class="nav-item nav-item-has-children   {{Request::is('admin/product-category*')? 'active':''}}">
+                <li class="nav-item nav-item-has-children  
+                    {{Request::is('admin/product-category*') || Request::is('admin/product-group*') ? 'active':'' }}">
                     <a
                         href="#0"
                         class="collapsed"
@@ -150,10 +164,22 @@
                                 Subcategories List
                             </a>
                         </li>
+                        <li>
+                            <a  href="{{url('admin/product-group-list')}}"
+                                class="{{Request::is('admin/product-group-list')? 'active':''}}">
+                                Groups List
+                            </a>
+                        </li>
+                        <li>
+                            <a  href="{{url('admin/product-group-add')}}"
+                                class="{{Request::is('admin/product-group-add')? 'active':''}}">
+                                Groups Add
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!---------------------------------------------------------->
-                <li class="nav-item nav-item-has-children   {{Request::is('admin/product-size*')? 'active':''}}">
+                {{-- <li class="nav-item nav-item-has-children   {{Request::is('admin/product-size*')? 'active':''}}">
                     <a
                         href="#0"
                         class="collapsed"
@@ -182,7 +208,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <!---------------------------------------------------------->
                 <li class="nav-item nav-item-has-children   {{Request::is('admin/delivery*')? 'active':''}}">
                     <a
@@ -295,7 +321,7 @@
                         <span class="icon">
                             <span class="material-icons-round">group</span>
                         </span>
-                        <span class="text"><strong>Customers</strong></span>
+                        <span class="text"><strong>Accounts</strong></span>
                     </a>
                     <ul id="ddmenu_9" class="collapse dropdown-nav">
                         <li>
