@@ -48,7 +48,7 @@
                         }
                         $totalPaid = $totalAmount + $deliveryFee - $discount;
                         // Get delivery statuses
-                        $status_name = Orders_Statuses::where('id', $order->order_status)->first();
+                        // $status_name = Orders_Statuses::where('id', $order->order_status)->first();
                     @endphp
                     <tr class="admin-table text-center">
                         <td class="text-start">

@@ -88,7 +88,7 @@ class CustomerController extends Controller
 
     public function member_list()
     {
-        $members = User::orderBy('id')->where('role', 1)->paginate(8);
+        $members = User::orderBy('id')->where('role', 1)->paginate(5);
         $count = 1;
         $search_text = '';
         return view(

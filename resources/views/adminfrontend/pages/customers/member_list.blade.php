@@ -103,25 +103,40 @@ use App\Models\Products_Attributes;
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="d-flex justify-content-end">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
                             @if($search_text == '')
-                                <!--- To show data by pagination --->
-                                {{$members->links()}}
-                                @else
-                                    <div class="d-flex">
-                                        <a
-                                            class="btn btn-outline-danger rounded-0 mt-2"
-                                            href="{{url('admin/customer-member-list')}}"
-                                            role="button"
-                                            >
-                                            <p class="text-sm">Back to List</p>
-                                        </a>
-                                    </div>
+                            <p class="text-sm">
+                                Showing {{($members->currentPage()-1)* $members->perPage()+($members->total() ? 1:0)}}
+                                to {{($members->currentPage()-1)*$members->perPage()+count($members)}}
+                                of {{$members->total()}}  results
+                            </p>
                             @endif
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="d-flex justify-content-end">
+                                @if($search_text == '')
+                                    <!--- To show data by pagination --->
+                                    {{$members->links()}}
+
+                                    @else
+                                        <div class="d-flex">
+                                            <a
+                                                class="btn btn-outline-danger rounded-0 mt-2"
+                                                href="{{url('admin/customer-member-list')}}"
+                                                role="button"
+                                                >
+                                                <p class="text-sm">Back to List</p>
+                                            </a>
+                                        </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
 @endsection()
