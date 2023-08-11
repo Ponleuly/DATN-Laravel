@@ -38,6 +38,7 @@ class HomeController extends Controller
         ); 
     }
 
+
     public function subscriber_store(Request $request)
     {
         $input  = $request->all();
@@ -46,6 +47,7 @@ class HomeController extends Controller
             ->with('success', 'You subscribered to get email from shop !');
     }
 
+    
     public function search_product()
     {
         $search_text = $_GET['search_product'];

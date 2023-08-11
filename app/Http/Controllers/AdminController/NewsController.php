@@ -56,6 +56,7 @@ class NewsController extends Controller
         return view('adminfrontend.pages.news.news_add');
     }
 
+
     public function news_store(Request $request)
     {
         $input  = $request->all();
@@ -111,6 +112,8 @@ class NewsController extends Controller
                 'News is updated successfully !'
             );
     }
+
+
     public function news_update_status($id, $status) {
         $news = News::where('id', $id)->first();
         $news['news_status'] = $status;
@@ -121,6 +124,8 @@ class NewsController extends Controller
         );
 
     }
+
+    
     public function news_delete($id)
     {
         $delete_new = News::where('id', $id)->first();

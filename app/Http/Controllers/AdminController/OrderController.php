@@ -36,6 +36,8 @@ class OrderController extends Controller
                 ->orderBy('customers.c_name', $sort)
                 ->paginate($res,['orders.*','customers.c_name']); // get orders table with column c_name
             */
+
+            // Sort customer by name
             //==== Join orders table and customers table by order_id
             // then sort join_table by c_name with 'asc' or 'desc'
             // then get orders table that sorted by c_name with paginate =====//
@@ -86,6 +88,7 @@ class OrderController extends Controller
 
         return dd($orders->toArray());
     }
+
     //======  Order Details =======//
     public function order_details($id)
     {
@@ -191,6 +194,7 @@ class OrderController extends Controller
             ->with('message', 'Order with invoice code ' . $orderStatus->invoice_code  . ' updated status successfully !');
     }
 
+
     public function order_delete($id)
     {
         $delete_order = Orders::where('id', $id)->first();
@@ -207,6 +211,8 @@ class OrderController extends Controller
                     ' is deleted successfully !'
             );
     }
+
+
     public function order_customer_edit(Request $request, $id)
     {
         $update_customer = Customers::where('id', $id)->first();
@@ -222,6 +228,7 @@ class OrderController extends Controller
         return redirect()->back()
             ->with('message', 'Customer details updated successfully !');
     }
+
 
     //===== update product size quantity plus ======//
     public function pro_qty_plus($orderId)
@@ -245,6 +252,7 @@ class OrderController extends Controller
         }
     }
 
+    
     //===== update product size quantity sub ======//
     public function pro_qty_sub($orderId)
     {

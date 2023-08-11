@@ -15,7 +15,7 @@ use PhpParser\Node\Stmt\TryCatch;
 
 class StripeController extends Controller
 {
-    //
+    // Payment
     public function paymentForm($invoiceCode, $totalPaid)
     {
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
@@ -24,6 +24,8 @@ class StripeController extends Controller
         $orderId = $order->id;
         $orderDetails = Orders_Details::where('order_id', $orderId)->get();
         $lineItems = [];
+
+        //==== Get order detail from DB
         foreach ($orderDetails as $orderInfo) {
             $lineItems[] = [
                 'price_data' => [
@@ -37,6 +39,8 @@ class StripeController extends Controller
                 'quantity' => $orderInfo->product_quantity,
             ];
         }
+
+        //==== Store payment to Stripe Platform
         $checkout_session = $stripe->checkout->sessions->create([
             'payment_intent_data' => [
                 'description' => 'Order invoice code #' . $invoiceCode
@@ -62,6 +66,8 @@ class StripeController extends Controller
         return redirect($checkout_session->url);
     }
 
+
+    //==== Store payment detail from Stripe to Card DB
     public function paymentInfo(Request $request)
     {
         if ($request->type === 'charge.succeeded') {
@@ -94,19 +100,21 @@ class StripeController extends Controller
             }
         }
     }
+
+
     // public function payment(Request $request, $invoiceCode, $totalPaid)
-    // {
+        // {
 
-    //     Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-    //     Stripe\Charge::create([
-    //         "amount" => ($totalPaid) * 100,
-    //         "currency" => "usd",
-    //         "source" => $request->stripeToken,
-    //         "description" => "Order inovice code #" . $invoiceCode,
-    //     ]);
+        //     Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        //     Stripe\Charge::create([
+        //         "amount" => ($totalPaid) * 100,
+        //         "currency" => "usd",
+        //         "source" => $request->stripeToken,
+        //         "description" => "Order inovice code #" . $invoiceCode,
+        //     ]);
 
-    //     return redirect('order-completed/invoice=' . $invoiceCode)->with('success', 'Payment successful!');
+        //     return redirect('order-completed/invoice=' . $invoiceCode)->with('success', 'Payment successful!');
 
-    //     //return dd($request->toArray());
+        //     //return dd($request->toArray());
     // }
 }

@@ -22,10 +22,12 @@ class ContactController extends Controller
         );
     }
 
+
     public function contact_add()
     {
         return view('adminfrontend.pages.contacts.contact_add');
     }
+
 
     public function contact_store(Request $request)
     {
@@ -34,6 +36,7 @@ class ContactController extends Controller
         return redirect('/admin/contact-add')
             ->with('message', 'Contact ' . $request->contact_info . ' is added successfully !');
     }
+
 
     public function contact_edit($id)
     {
@@ -61,6 +64,7 @@ class ContactController extends Controller
             );
     }
 
+    
     public function contact_delete($id)
     {
         $delete_contact = Contacts::where('id', $id)->first();

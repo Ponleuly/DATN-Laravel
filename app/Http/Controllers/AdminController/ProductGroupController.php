@@ -24,6 +24,7 @@ class ProductGroupController extends Controller
         );
     }
 
+
     public function product_group_search()
     {
         $search_text = $_GET['search_group'];
@@ -40,6 +41,7 @@ class ProductGroupController extends Controller
         );
     }
 
+    
     public function product_group_add()
     {
         return view('adminfrontend.pages.groups.product_group_add');

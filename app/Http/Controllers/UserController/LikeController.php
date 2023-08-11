@@ -22,6 +22,7 @@ class LikeController extends Controller
         );
     }
 
+
     public function add_like($product_id, $user_id)
     {
         if (Auth::check() && Auth::user()->role == 1) {
@@ -48,6 +49,8 @@ class LikeController extends Controller
             );
         }
     }
+
+
     public function remove_like($id)
     {
         $removeLike = Likes::where('id', $id)->first();
@@ -60,22 +63,24 @@ class LikeController extends Controller
             );
         //return dd($rowId);
     }
+
+
     public function remove_all_like($num)
-    {   if ($num == 0){
-        return redirect()->back()
-        ->with(
-            'question',
-            'remove-all-like/1',
-        );
-    }else if ($num == 1){
-        Likes::where('user_id', Auth::user()->id)->delete();
-        return redirect()->back()    
-        ->with(
-            'success',
-            'All products removed from favorite list successfully.',
-        );
-    //return dd($rowId);
-    }
-       
+    {   
+        if ($num == 0){
+            return redirect()->back()
+            ->with(
+                'question',
+                'remove-all-like/1',
+            );
+        }else if ($num == 1){
+            Likes::where('user_id', Auth::user()->id)->delete();
+            return redirect()->back()    
+            ->with(
+                'success',
+                'All products removed from favorite list successfully.',
+            );
+        //return dd($rowId);
+        }
     }
 }

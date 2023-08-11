@@ -25,6 +25,8 @@ class CustomerController extends Controller
 
         );
     }
+
+
     public function customer_profile($id)
     {
         $customer = Customers::where('id', $id)->first();
@@ -35,6 +37,8 @@ class CustomerController extends Controller
             )
         );
     }
+
+
     public function customer_edit($id)
     {
         $customer = Customers::where('id', $id)->first();
@@ -46,6 +50,8 @@ class CustomerController extends Controller
 
         );
     }
+
+
     public function customer_update(Request $request, $id)
     {
         $update_customer = Customers::where('id', $id)->first();
@@ -60,6 +66,8 @@ class CustomerController extends Controller
 
         //return dd($request->toArray());
     }
+
+
     public function customer_search()
     {
         $search_text = $_GET['search_customer'];
@@ -101,6 +109,8 @@ class CustomerController extends Controller
 
         );
     }
+
+
     public function member_profile($id)
     {
         $user = User::where('id', $id)->first();
@@ -111,6 +121,8 @@ class CustomerController extends Controller
             )
         );
     }
+
+
     public function member_search()
     {
         $search_text = $_GET['search_member'];
@@ -126,6 +138,8 @@ class CustomerController extends Controller
 
         );
     }
+
+
     public function member_delete($id)
     {
         $member = User::where('id', $id)->first();
@@ -133,7 +147,6 @@ class CustomerController extends Controller
         return redirect()->back()
             ->with('message', 'Member name : ' . $member->name . ' is deleted successfully!');
     }
-
 
 
     public function subscriber_list()
@@ -151,6 +164,8 @@ class CustomerController extends Controller
 
         );
     }
+
+
     public function subscriber_search()
     {
         $search_text = $_GET['search_subscriber'];
@@ -166,6 +181,8 @@ class CustomerController extends Controller
 
         );
     }
+
+    
     public function subscriber_delete($id)
     {
         $subscriber = Subscribers::where('id', $id)->first();

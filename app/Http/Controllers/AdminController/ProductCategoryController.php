@@ -28,6 +28,7 @@ class ProductCategoryController extends Controller
         );
     }
 
+
     public function product_category_search()
     {
         $search_text = $_GET['search_category'];
@@ -42,6 +43,8 @@ class ProductCategoryController extends Controller
             )
         );
     }
+
+
     public function product_subcategory_list()
     {
         $subcategories = Categories_Subcategories::orderBy('id')->paginate(8);
@@ -57,6 +60,7 @@ class ProductCategoryController extends Controller
         );
     }
 
+
     public function product_subcategory_search()
     {
         $search_text = $_GET['search_subcategory'];
@@ -71,6 +75,7 @@ class ProductCategoryController extends Controller
             )
         );
     }
+
 
     public function product_category_view($id)
     {
@@ -88,6 +93,7 @@ class ProductCategoryController extends Controller
         );
     }
     
+
     public function product_category_add()
     {
         $groups = Groups::orderBy('id')->get();
@@ -170,6 +176,7 @@ class ProductCategoryController extends Controller
         //return dd($subCategory->toArray());
     }
 
+    
     public function product_category_update(Request $request, $id)
     {
        

@@ -58,6 +58,7 @@ class ProductDetailController extends Controller
         );
     }
 
+
     public function product_search($res, $title, $sort)
     {
         $search_text = $_GET['search_product'];
@@ -79,6 +80,7 @@ class ProductDetailController extends Controller
         );
         //return dd($products);
     }
+
 
     public function product_detail_view($code)
     {
@@ -123,6 +125,7 @@ class ProductDetailController extends Controller
         );
     }
 
+    
     public function product_detail_add()
     {
         $sizes = Sizes::orderBy('size_number')->get();
@@ -139,6 +142,7 @@ class ProductDetailController extends Controller
             )
         );
     }
+
 
     public function product_detail_store(Request $request)
     {
@@ -255,6 +259,7 @@ class ProductDetailController extends Controller
 
         //return dd($colors->toArray());
     }
+
 
     public function product_detail_update(Request $request, $id)
     {
@@ -419,7 +424,6 @@ class ProductDetailController extends Controller
             ->with('message', 'Product ' . $request->product_name . ' is updated successfully!');
         //return dd($new_stock);
     }
-
 
     public function product_detail_delete($id)
     {

@@ -14,6 +14,7 @@ class AuthAdminController extends Controller
         $setting = Settings::all()->first();
         return view('adminfrontend.auth.login', compact('setting'));
     }
+
     public function login(Request $request)
     {
         $this->validate($request, [
@@ -32,6 +33,7 @@ class AuthAdminController extends Controller
                 ->with('alert', 'Login failed ! Invalid email or password.');
         }
     }
+    
     public function adminLogout()
     {
         Auth::logout();

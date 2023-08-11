@@ -24,6 +24,7 @@ class SettingController extends Controller
         );
     }
 
+
     public function general_layout()
     {
 
@@ -32,6 +33,7 @@ class SettingController extends Controller
         );
     }
 
+    
     public function general_setting_edit()
     {
         $settings = Settings::all()->first();

@@ -7,9 +7,6 @@ use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Propaganistas\LaravelPhone\Rules\Phone;
 
 class AuthUserController extends Controller
 {
@@ -17,6 +14,8 @@ class AuthUserController extends Controller
     {
         return view('frontend.auth.register');
     }
+
+
     public function userRegister(Request $request)
     {
         //return dd($request->toArray());
@@ -58,6 +57,8 @@ class AuthUserController extends Controller
         $setting = Settings::all()->first();
         return view('frontend.auth.login', compact('setting'));
     }
+
+
     public function login(Request $request)
     {
         $this->validate($request, [
@@ -77,6 +78,8 @@ class AuthUserController extends Controller
                 ->with('error', 'Login failed ! Invalid email or password.');
         }
     }
+
+    
     public function userLogout()
     {
         Auth::logout();

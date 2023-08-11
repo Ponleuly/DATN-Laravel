@@ -24,6 +24,7 @@ class ProfileController extends Controller
         return view('frontend.userProfile.general_profile');
     }
 
+
     public function profile_update(Request $request, $id)
     {
         //return dd($request->toArray());
@@ -76,10 +77,13 @@ class ProfileController extends Controller
 
         //return dd($request->toArray());
     }
+
+
     public function change_password()
     {
         return view('frontend.userProfile.change_password');
     }
+
 
     public function update_password(Request $request, $id)
     {
@@ -104,6 +108,7 @@ class ProfileController extends Controller
         }
     }
 
+    
     public function purchase_history()
     {
         $userId = Auth::user()->id;
@@ -158,6 +163,7 @@ class ProfileController extends Controller
         );
     }
 
+    
     //====================== Download Invoice ============================//
     public function download_invoice($id)
     {

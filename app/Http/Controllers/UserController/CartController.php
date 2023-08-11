@@ -286,6 +286,7 @@ class CartController extends Controller
         //return dd(Cart::content()->where('rowId', $cartId));
     }
 
+
     // ============================ Coupon Apply ===========================================//
     public function coupon_apply(Request $request, $userId)
     {
@@ -564,7 +565,7 @@ class CartController extends Controller
         //return dd($request->toArray());
     }
 
-    //======================================================================================================================//
+    //=============================================//
     public function order_completed($code)
     {
         //=============== Get data to display on user invoice =======================S//
@@ -631,6 +632,7 @@ class CartController extends Controller
             );
         //return dd($rowId);
     }
+
 
     public function remove_all_cart($num)
     {

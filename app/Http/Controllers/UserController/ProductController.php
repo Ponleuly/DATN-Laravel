@@ -39,7 +39,6 @@ class ProductController extends Controller
     }
 
 
-
     public function product_detail($code)
     {
         $productDetails = Products::where('product_code', $code)->first();
@@ -177,7 +176,6 @@ class ProductController extends Controller
         );
         //return dd($subcategoryName);
     }
-
 
 
     public function product_group_subcategory($group, $category, $subcategory)

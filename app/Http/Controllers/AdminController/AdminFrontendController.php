@@ -11,7 +11,6 @@ use App\Models\Subscribers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -101,6 +100,7 @@ class AdminFrontendController extends Controller
             )
         );
     }
+
     public function profile($id)
     {
         $user = User::where('id', $id)->first();
@@ -111,6 +111,7 @@ class AdminFrontendController extends Controller
             )
         );
     }
+
     public function update_profile(Request $request, $id)
     {
         //return dd($request->toArray());
@@ -140,16 +141,7 @@ class AdminFrontendController extends Controller
             $update_profile->ward = $input['ward'];
             $update_profile->update();
         }
-        /*
-        $update_profile = User::where('id', $id)->first();
-        $update_profile->name = $request->input('name');
-        $update_profile->phone = $request->input('phone');
-        $update_profile->email = $request->input('email');
-        $update_profile->address = $request->input('address');
-        $update_profile->city = $request->input('city');
-        $update_profile->district = $request->input('district');
-        $update_profile->ward = $request->input('ward');
-        */
+
         if ($request->current_password != '') {
             $profileController = new ProfileController();
             $profileController->update_password($request, $id);
@@ -174,6 +166,7 @@ class AdminFrontendController extends Controller
             );
         //return dd($request->toArray());
     }
+
     public function change_password($id)
     {
         $user = User::where('id', $id)->first();
@@ -184,6 +177,7 @@ class AdminFrontendController extends Controller
             )
         );
     }
+
     public function update_password(Request $request, $id)
     {
         $profileController = new ProfileController();
@@ -195,60 +189,5 @@ class AdminFrontendController extends Controller
                 'Password is changed successfully !'
             );
         //return dd($request->toArray());
-    }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

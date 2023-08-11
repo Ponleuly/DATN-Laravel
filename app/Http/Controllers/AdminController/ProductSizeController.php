@@ -27,6 +27,7 @@ class ProductSizeController extends Controller
         );
     }
 
+
     public function product_size_search()
     {
         $search_text = $_GET['search_size'];
@@ -42,6 +43,7 @@ class ProductSizeController extends Controller
             )
         );
     }
+   
     
     public function product_size_add()
     {
@@ -80,12 +82,6 @@ class ProductSizeController extends Controller
             return redirect('/admin/product-size-list')
                 ->with('message', 'Product size ' . $request->size_number . ' is added successfully!');
         }
-    }
-
-    
-    public function show($id)
-    {
-        //
     }
 
     

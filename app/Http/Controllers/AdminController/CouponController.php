@@ -30,6 +30,8 @@ class CouponController extends Controller
             )
         );
     }
+
+    // Phuong thuc de kiem tra thoi gian cua ma khuyen mai
     public function coupon_date(){
         $allCoupon = Coupons::orderByDesc('id')->get();
         $currentTime = Carbon::now();
@@ -49,6 +51,7 @@ class CouponController extends Controller
         }
         return $allCoupon;
     }
+
     public function coupon_search()
     {
         $search_text = $_GET['search_coupon'];
@@ -96,8 +99,6 @@ class CouponController extends Controller
             )
         );
     }
-
-
 
     public function coupon_store(Request $request)
     {
@@ -181,7 +182,6 @@ class CouponController extends Controller
                     ' is updated successfully !'
             );
     }
-
 
 
     public function coupon_delete($id)
