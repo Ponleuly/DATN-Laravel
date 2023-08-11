@@ -300,7 +300,7 @@
     </div>
     <!-- end container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script>
+    {{-- <script>
         // Get "name" of select opption if there is many selects like each order have 1 select(with many option)
         $("[name='orderStatus']").on('change', function () { // bind change event to select
             var url_order_status = $(this).val(); // get selected value
@@ -310,7 +310,7 @@
             }
             return false;
         });
-    </script>
+    </script> --}}
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
@@ -354,10 +354,10 @@
 
             var options = {
                 //width: 800,
-                chart: {
-                    //title: 'Monthly order and income',
-                    //subtitle: 'Total order = <?php echo $totalOrder?>, Total income = <?php echo $totalIncome.' $' ?>',
-                },
+                // chart: {
+                //     title: 'Monthly order and income',
+                //     subtitle: 'Total order = <?php echo $totalOrder?>, Total income = <?php echo $totalIncome.' $' ?>',
+                // },
                 
                 bars: 'vertical', // Required for Material Bar Charts.
                 series: {

@@ -32,9 +32,10 @@ class AdminFrontendController extends Controller
         foreach ($orders as $order) {
             $totalIncome += $order->total_paid;
         }
-        $orders = Orders::orderByDesc('id')->paginate(10); // Showing only 10 ordered per page
+        // Using whereBetween to get order by id from id=1 to id =20
+        // $orders = Orders::whereBetween('id', [4,20])->paginate(5); // Showing only 10 ordered per page
         $count = 1;
-
+        $orders = Orders::orderBydesc('id')->paginate(10); // Showing only 10 ordered per page
         //========== Order Status Chart ============//
         $pending = Orders::where('order_status', 'Pending')->count();
         $processing = Orders::where('order_status', 'Processing')->count();
