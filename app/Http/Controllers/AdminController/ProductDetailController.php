@@ -18,6 +18,7 @@ class ProductDetailController extends Controller
 {
     public function product_detail_list($res, $title, $sort)
     {
+        
         if ($res == 'all') {
             $products = Products::all()->count();
             $res = $products;
@@ -104,13 +105,14 @@ class ProductDetailController extends Controller
         if ($stockLeft == 0) {
             $status->product_status = 3; // is sold out
             $status->update();
-        } elseif ($stockLeft > 0 && $stockLeft < $allStock) {
-            $status->product_status = 2; // is selling
-            $status->update();
-        } else {
-            $status->product_status = 1; // is selling
-            $status->update();
-        }
+        } 
+        // elseif ($stockLeft > 0 && $stockLeft < $allStock) {
+        //     $status->product_status = 2; // is selling
+        //     $status->update();
+        // } else {
+        //     $status->product_status = 1; // is new
+        //     $status->update();
+        // }
         return view(
             'adminfrontend.pages.products.product_detail_view',
             compact(

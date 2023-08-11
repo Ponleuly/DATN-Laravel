@@ -60,6 +60,9 @@ class ProductController extends Controller
             $sizeStock += $row->size_quantity;
         }
         $stockLeft = $sizeStock;
+        // if(is_null($productDetails)){
+        //     return abort(404);
+        // }
         return view(
             'frontend.product.product_detail',
             compact(

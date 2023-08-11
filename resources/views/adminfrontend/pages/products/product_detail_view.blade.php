@@ -7,9 +7,11 @@
 @extends('adminfrontend.layouts.index')
 @section('admincontent')
     <div class="container-fluid">
-        <!--------------- Alert ------------------------>
-        @include('adminfrontend.pages.alert')
-        <!---------------End Alert ------------------------>
+        <div class="col-md-12 my-3 mb-md-0">
+            <!--------------- Alert ------------------------>
+            @include('adminfrontend.pages.alert')
+            <!---------------End Alert ------------------------>
+        </div>
         <div class="col-md-12 mt-15">
             <div class="card-style mb-30">
                 <div class="row">

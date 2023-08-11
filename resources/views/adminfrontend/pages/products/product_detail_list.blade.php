@@ -1,6 +1,7 @@
 <?php
 	use App\Models\Products_Attributes;
 	use App\Models\Products_Sizes;
+	use App\Models\Products;
 ?>
 @extends('adminfrontend.layouts.index')
 @section('admincontent')
@@ -239,6 +240,12 @@
                                         foreach ($productSize as $row) {
                                             $stockLeft  += $row->size_quantity;
                                         }
+                                        $status = Products::where('id', $product->id)->first();
+                                        //===== Update product status if product stock sold out ======//
+                                        if ($stockLeft == 0) {
+                                            $status->product_status = 3; // is sold out
+                                            $status->update();
+                                        } 
                                     @endphp
                                     <tr class="text-center">
                                         <td>

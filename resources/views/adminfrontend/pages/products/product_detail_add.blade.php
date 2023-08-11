@@ -7,9 +7,11 @@
 @section('admincontent')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <div class="container-fluid">
-        <!--------------- Alert ------------------------>
-        @include('adminfrontend.pages.alert')
-       <!---------------End Alert ------------------------>
+        <div class="col-md-12 my-3 mb-md-0">
+            <!--------------- Alert ------------------------>
+            @include('adminfrontend.pages.alert')
+            <!---------------End Alert ------------------------>
+        </div>
 
         <form action="{{url('/admin/product-detail-add')}}" method="POST" enctype="multipart/form-data">
             @csrf <!-- to make form active -->
