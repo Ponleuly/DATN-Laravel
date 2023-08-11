@@ -28,71 +28,7 @@
             <span class="text-muted fw-bold">{{$order->invoice_code}}</span>
         </div>
     </div>
-    <!--
-    <div class="row">
-        <div class="col-md-8 mb-2">
-            <ul class="list-unstyled">
-                <li><p class="fs-5 fw-semibold mb-1">CUSTOMER</p></li>
-                <li>
-                    <p class="text-muted fw-normal mb-1">Name :
-                        <span class="fw-semibold text-dark text-sm">{{$customer->c_name}}</span>
-                    </p>
-                </li>
-                <li>
-                    <p class="text-muted fw-normal mb-1">Phone :
-                        <span class="fw-semibold text-dark text-sm">{{$customer->c_phone}}</span>
-                    </p>
-                </li>
-                <li>
-                    <p class="text-muted fw-normal mb-1">Email :
-                        <span class="fw-semibold text-dark text-sm">{{$customer->c_email}}</span>
-                    </p>
-                </li>
-                <li class="col-md-8">
-                    <p class="text-muted fw-normal mb-1">Address :
-                        <span class="fw-semibold text-dark text-sm">{{$customer->c_address}}</span>
-                    </p>
-                </li>
-                <li class="text-muted col-md-8">
-                    <p class="text-muted fw-normal mb-1">Note :
-                        <span class="fw-semibold text-dark text-sm">{{$customer->c_note}}</span>
-                    </p>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <ul class="list-unstyled">
-                <li>
-                    <p class="fs-5 fw-semibold mb-1">ORDER</p>
-                </li>
-                <li>
-                    <p class="fw-normal mb-1 text-muted">Code :
-                        <span class="fw-semibold text-dark text-sm">{{$order->invoice_code}}</span>
-                    </p>
-                </li>
-                <li>
-                    <p class="fw-normal mb-1 text-muted">Date :
-                        <span class="fw-semibold text-sm text-dark">
-                            {{$order->created_at->toDayDateTimeString();}}
-                        </span>
-                    </p>
-                </li>
-                <li>
-                    <p class="fw-normal text-muted">Status :
-                        <span class="fw-semibold text-sm
-                                {{($order->order_status == 'Pending')?  'text-warning' : ''}}
-                                {{($order->order_status == 'Processing')?  'text-primary' : ''}}
-                                {{($order->order_status == 'Delivered')?  'text-success' : ''}}
-                                {{($order->order_status == 'Canceled')?  'text-danger' : ''}}
-                            ">
-                            {{$order->order_status}}
-                        </span>
-                    </p>
-                </li>
-            </ul>
-        </div>
-    </div>
-    -->
+  
     <div class="row mt-3">
         <div class="col-md-12">
             <table class="table table-borderless text-start">

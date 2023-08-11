@@ -401,6 +401,7 @@
             }
             return false;
         });
+        // Sort order by status
         $('#sortStatus').on('change', function () { // bind change event to select
             var url_sort_status = $(this).val(); // get selected value
             if (url_sort_status != '') { // require a url_sort_status
@@ -417,6 +418,8 @@
             return false;
         });
     </script>
+
+    {{-- // Sort order by day --}}
     <script>
         function sortDay(event){
             var day_value = $("[name='sort_day']").val();
