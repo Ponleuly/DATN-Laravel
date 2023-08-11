@@ -312,32 +312,7 @@
         });
     </script> --}}
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                <?php echo $order_chart?>
-            ]);
-            var options = {
-                title: 'Order status',
-                titleTextStyle:{ 
-                    color: '#4A6CF7',
-                    fontSize: '16',
-                    bold: true,
-                    },
-                //is3D: true,
-                chartArea:{left:30,top:40,width:'100%',height:'100%'},
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-            chart.draw(data, options);
-        }
-    </script>
-    
-
+    {{-- First chart order amount and income --}}
     <script type="text/javascript">
         google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawStuff);
@@ -374,5 +349,31 @@
             var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
             chart.draw(data, options);
         };
+    </script>
+
+    // Second chart order status
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                <?php echo $order_chart?>
+            ]);
+            var options = {
+                title: 'Order status',
+                titleTextStyle:{ 
+                    color: '#4A6CF7',
+                    fontSize: '16',
+                    bold: true,
+                    },
+                //is3D: true,
+                chartArea:{left:30,top:40,width:'100%',height:'100%'},
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
     </script>
 @endsection()
