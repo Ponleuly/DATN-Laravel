@@ -182,7 +182,7 @@
                                                                 <label for="c_email"><p class="text-sm">Customer Email</p></label>
                                                                 <input
                                                                     type="text"
-                                                                    class="form-control form-control-sm text-capitalize mb-2"
+                                                                    class="form-control form-control-sm mb-2"
                                                                     id="c_email"
                                                                     name="c_email"
                                                                     value="{{$customer->c_email}}"
