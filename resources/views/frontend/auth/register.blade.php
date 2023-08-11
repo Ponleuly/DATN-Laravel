@@ -13,17 +13,32 @@
 	</nav>
     <!-- End breabcrumb Section -->
     <!--------------- Alert ------------------------>
-    @if(Session::has('alert'))
-        <div class="alert alert-danger alert-dismissible fade show rounded-0" role="alert">
-            {{Session::get('alert')}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @elseif(Session::has('message'))
-            <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
-                {{Session::get('message')}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-    @endif
+        @if(Session::has('error'))
+                <script>
+                    var type = 'error';
+                    var text = "<?php echo Session::get('error'); ?>";
+                </script>
+                <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                @elseif(Session::has('info'))
+                    <script>
+                        var type = 'info';
+                        var text = "<?php echo Session::get('info'); ?>";
+                    </script>
+                    <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+
+                    @elseif(Session::has('success'))
+                        <script>
+                            var type = 'success';
+                            var text = "<?php echo Session::get('success'); ?>";
+                        </script>
+                        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+                    @elseif(Session::has('question'))
+                        <script>
+                            var type = 'question';
+                            var text = "<?php echo Session::get('question'); ?>";
+                        </script>
+                        <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+            @endif
     <!---------------End Alert ------------------------>
 <div class="container">
     <div class="row justify-content-center p-5">
@@ -37,16 +52,6 @@
                     bg-danger text-white"
                     >15Steps Store
                 </h4>
-                <!--
-                <h6 class="text-login py-2 ps-4 pe-3 rounded-start-5 fw-semibold
-                    {{Request::is('register')? 'bg-danger':'text-dark'}}"
-                    >Register
-                </h6>
-                <h6 class="text-sign-up py-2 px-4 rounded-start-5 fw-semibold
-                    {{Request::is('login')? 'bg-danger':'text-dark'}}"
-                    >Log in
-                </h6>
-            -->
             </div>
         </div>
         <div class="col-md-6 px-4  rounded-end-4 border border-start-0">
