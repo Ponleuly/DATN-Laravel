@@ -162,6 +162,7 @@
         </div>
     </div>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    {{-- Review image upload --}}
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {

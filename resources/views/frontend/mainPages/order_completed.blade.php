@@ -65,6 +65,8 @@
 							<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
             	@endif
 			<!------------------End Alert ------------------------>
+
+            {{-- Success Icon --}}
 			<div class="row">
 				<div class="col-md-12 text-center pt-2">
                     @if(Request::is('order-completed/*'))
@@ -94,6 +96,8 @@
 				</div>
 			</div>
 		</div>
+        {{-- End Success Icon --}}
+
         @if(Request::is('order-completed/*'))
             <div class="container-fluid">
                 <div class="row justify-content-center">

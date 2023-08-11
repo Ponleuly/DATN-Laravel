@@ -8,35 +8,36 @@
 @section('content')
 		<!--------------- Alert ------------------------>
 		@if(Session::has('error'))
-		<script>
-			var type = 'error';
-			var text = "<?php echo Session::get('error'); ?>";
-		</script>
-		<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
-		@elseif(Session::has('info'))
 			<script>
-				var type = 'info';
-				var text = "<?php echo Session::get('info'); ?>";
+				var type = 'error';
+				var text = "<?php echo Session::get('error'); ?>";
 			</script>
 			<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+			@elseif(Session::has('info'))
+				<script>
+					var type = 'info';
+					var text = "<?php echo Session::get('info'); ?>";
+				</script>
+				<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
 
-			@elseif(Session::has('success'))
-				<script>
-					var type = 'success';
-					var text = "<?php echo Session::get('success'); ?>";
-				</script>
-				<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
-			@elseif(Session::has('question'))
-				<script>
-					var type = 'question';
-					var text = "<?php echo Session::get('question'); ?>";
-				</script>
-				<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+				@elseif(Session::has('success'))
+					<script>
+						var type = 'success';
+						var text = "<?php echo Session::get('success'); ?>";
+					</script>
+					<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
+				@elseif(Session::has('question'))
+					<script>
+						var type = 'question';
+						var text = "<?php echo Session::get('question'); ?>";
+					</script>
+					<script src="{{url('frontend/js/sweetAlert.js')}}"></script>
 		@endif
 		<!------------------End Alert ------------------------>
+
 		<!----- Check if there is any active coupon to show ----->
 		@if(count($coupons) != 0)
-			<!-- Start Testimonial Slider -->
+			<!-- Start Coupon Slider -->
 			<div class="coupon-section bg-light">
 				<div class="container">
 					<div class="row justify-content-center">
@@ -73,9 +74,11 @@
 					</div>
 				</div>
 			</div>
-			<!-- End Testimonial Slider -->
+			<!-- End Coupon Slider -->
 		@endif
 		<!-- Start Hero Section -->
+
+		{{-- ======== Home image ========--}}
 		<div class="hero">
 			<div class="container">
 				<div class="row justify-content-between">
@@ -104,31 +107,10 @@
 				</div>
 			</div>
 		</div>
-		{{-- <div class="row">
-			<div class="col-lg-6" style="background: #CC2936; padding: 100px;">
-				<div class="intro-excerpt text-capitalize text-white">
-					<h1>{{$setting->home_pageSlogan}}</span></h1>
-					<p class="mb-4">{{$setting->home_pageText}}</p>
-					<p>
-						<a
-							href="{{url('shop')}}"
-							class="btn btn-warning me-2 rounded-pill px-4 py-2 fw-semibold"
-							>
-							Shop Now
-						</a>
-					</p>
-				</div>
-			</div>
-			<div class="col-lg-6 px-0">
-					<img
-						src="/product_img/imghomepage/{{$setting->home_pageImage}}"
-						class="img-fluid py-0"
-					>
-			</div>
-		</div> --}}
-		<!-- End Hero Section -->
+		{{-- ======== End Home image ========--}}
 
-		<!-- Start Blog Section -->
+
+		<!-- Start Categpries Section -->
 		<div class="blog-section">
 			<div class="container">
 				<div class="row mb-2">
@@ -207,9 +189,10 @@
 				</div>
 			</div>
 		</div>
-		<!-- End Blog Section -->
+		<!-- End Categpries Section -->
+
+		<!-- Start New Arrival Product Section -->
 		@if($newProduct_count > 0)
-			<!-- Start Product Section -->
 			<div class="product-section">
 				<div class="container">
 					<div class="row">
@@ -259,7 +242,9 @@
 				</div>
 			</div>
 		@endif
-		<!-- Start Testimonial Slider -->
+		<!-- End New Arrival Product Section -->
+
+		{{-- Start News Section --}}
 		<div class="testimonial-section">
 			<div class="container">
 				<div class="row">
@@ -311,6 +296,5 @@
 				</div>
 			</div>
 		</div>
-		<!-- End Testimonial Slider -->
-
+		<!-- End News Section -->
 @endsection()

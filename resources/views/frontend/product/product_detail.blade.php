@@ -80,9 +80,10 @@
             <form action="{{url('add-to-cart/'.$productDetails->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf <!-- to make form active -->
                 <div class="row">
-                    <!-- Start first colume section -->
+                    <!-- Start image section -->
                     <div class="col-md-7 mb-5 mb-md-0">
 						<div class="img-container">
+                            <!-- Start image cover section -->
                             <div id="carouselExampleControlsNoTouching" class="carousel slide px-1" data-bs-touch="false" data-bs-interval="false">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
@@ -109,6 +110,7 @@
                                     <span class="visually-hidden">Next</span>
                                 </button>
                             </div>
+                            <!-- End image cover section -->
 
                             @if($productDetails->product_status == 1)
 								<h6 class="text-new bg-danger">New Arrival</h6>
@@ -117,11 +119,8 @@
                                 @elseif($stockLeft == 0)
 									<h6 class="text-new bg-danger">Sold Out</h6>
 							@endif
-                            <!--
-                            @if($stockLeft == 0)
-								<h4 class="text-sold-out bg-secondary">Sold Out</h4>
-                            @endif
-                            -->
+                            
+                            <!-- Start image review section -->
                             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     @foreach ($imgReviews as $imgreview)
@@ -158,11 +157,12 @@
                                     <span class="visually-hidden">Next</span>
                                 </button>
                             </div>
+                            <!-- End image review section -->
 						</div>
                     </div>
-                    <!-- End first colume section -->
+                    <!-- End image section -->
 
-                    <!-- End second colume section -->
+                    <!-- Start product detail section -->
                     <div class="col-md-5">
                         <div class="row mb-2 ms-4">
                             <div class="col-md-12">
@@ -401,8 +401,10 @@
                         </div>
                         <!-------------------- End add to cart / like / buy now --------------->
 
+                        <!----------------- Product Information ------------->
                         <div class="row ms-4">
                             <div class="col-md-12">
+                                {{-- Product Detail --}}
                                 <div class="border p-3 mb-3">
                                     <div class="form-check px-5">
                                             <h6 class="mb-0">
@@ -424,7 +426,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- End Product Detail --}}
 
+                                {{-- Size chart --}}
                                 <div class="border p-3 mb-3">
                                     <div class="form-check px-5">
                                             <h6 class="mb-0">
@@ -446,7 +450,9 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                {{-- End Size chart --}}
+                                
+                                {{-- Free Delivery and Returns --}}
                                 <div class="border p-3 mb-3">
                                     <div class="form-check px-5">
                                             <h6 class="mb-0">
@@ -471,7 +477,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- End Free Delivery and Returns --}}
 
+                                {{--  Product Warranty --}}
                                 <div class="border p-3 mb-3">
                                     <div class="form-check px-5">
                                             <h6 class="mb-0">
@@ -493,8 +501,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- End Product Warranty --}}
                             </div>
                         </div>
+                        <!----------------- End Product Information ------------->
                     </div>
                     <!-- End second colume section -->
                 </div>
@@ -504,8 +514,8 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" ></script>
     <script>
-        let items = document.querySelectorAll('#carousel-item-1')
-
+            // Image slider for image review
+            let items = document.querySelectorAll('#carousel-item-1')
             items.forEach((el) => {
                 const minPerSlide = 4
                 let next = el.nextElementSibling
@@ -519,6 +529,8 @@
                     next = next.nextElementSibling
                 }
             })
+
+            // Product Quantity click increase and decrease
         	$(document).ready(function(){
                 //$('#qty_input').prop('disabled', true);
                 $('#minus-btn').prop('disabled', true);

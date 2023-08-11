@@ -7,7 +7,7 @@
 ?>
 @extends('index')
 @section('content')
-	<!-- Start breabcrumb Section -->
+	<!-- Start breabcrumb Section ==> Menu step-->
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb px-3 py-2 mb-0" style="background: #cc2936">
 		  	<li class="breadcrumb-item ">
@@ -403,9 +403,11 @@
 			</div>
 		</div>
 	</div>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" ></script>
     <script>
         var btn = $('.quantity-container').length;
+		// Update product quantity
 		function updateQty(event) {
             let btnType = event.currentTarget.id;
 			//alert(btnType);

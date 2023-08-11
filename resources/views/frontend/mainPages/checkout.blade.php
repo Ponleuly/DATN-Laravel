@@ -497,8 +497,9 @@
 	</div>
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	
+	{{-- Display delivery fee after select --}}
 	<script>
-
 		function delMethod() {
 			var delPrice = $("input[type='radio'][name='delivery_fee']:checked").val();
 			var del = document.getElementById("deliveryFee");
@@ -515,13 +516,15 @@
 			var paid = (subTotal + parseFloat(delPrice)) - discount;
 			Total.value = "$ " + paid.toFixed(2); //toFixed(2) to get .00
 		}
-
 	</script>
+
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="sweetalert2.all.min.js"></script>
 	<script src="sweetalert2.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js">
+	
+	{{-- Question check before finishing order --}}
 	<script>
 		$('#btn-submit').on('click',function(e) {
 			let name = document.forms["checkout"]["c_name"].value;

@@ -19,6 +19,7 @@
 
 	<div class="untree_co-section ">
         <div class="container">
+			{{-- Start Alert --}}
             @if(Session::has('error'))
 				<script>
 					var type = 'error';
@@ -44,6 +45,8 @@
                         </script>
                         <script src="{{url('frontend/js/sweetAlert.js')}}"></script>
             @endif
+			{{-- End Alert --}}
+
             <hr class="line-color">
 			@php
 				$btn = 0;
@@ -220,6 +223,7 @@
             </div>
         </div>
     </div>
+	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" ></script>
     <script>
         var btn = $('.quantity-container').length;
