@@ -129,7 +129,7 @@ class ProductCategoryController extends Controller
 
             // Storing category_id and group_id to table product_group_cate
             $category = Categories::latest()->first();
-            $categoryId = $category->id;
+            $categoryId = $category->id; 
             $groupId = $request->group_id;
             for ($i = 0; $i < count($groupId); $i++) {
                 $save['category_id'] = $categoryId;

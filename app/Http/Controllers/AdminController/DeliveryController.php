@@ -50,7 +50,7 @@ class DeliveryController extends Controller
     {
         $input = $request->all();
         Deliveries::create($input);
-        return redirect('admin/delivery-add')
+        return redirect('admin/delivery-list')
             ->with('message', 'Delivery option is added successfully!');
     }
 

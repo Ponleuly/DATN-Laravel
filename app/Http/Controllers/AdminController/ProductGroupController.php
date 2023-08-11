@@ -63,7 +63,7 @@ class ProductGroupController extends Controller
         Groups::create($input);
 
         // After inputed -> go back to category page
-        return redirect('/admin/product-group-add')
+        return redirect('/admin/product-group-list')
             ->with('message', 'Product group ' . ucfirst($request->group_name) . ' added successfully !');
     }
 

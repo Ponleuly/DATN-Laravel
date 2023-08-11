@@ -33,7 +33,7 @@ class ContactController extends Controller
     {
         $input  = $request->all();
         Contacts::create($input);
-        return redirect('/admin/contact-add')
+        return redirect('/admin/contact-list')
             ->with('message', 'Contact ' . $request->contact_info . ' is added successfully !');
     }
 

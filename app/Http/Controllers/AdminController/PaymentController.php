@@ -50,7 +50,7 @@ class PaymentController extends Controller
     {
         $input = $request->all();
         Payments::create($input);
-        return redirect('admin/payment-add')
+        return redirect('admin/payment-list')
             ->with('message', 'Payment method is added successfully!');
     }
 

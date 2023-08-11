@@ -179,8 +179,8 @@
         };
     </script>
 
-    // Second chart order status
     <script type="text/javascript">
+
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
