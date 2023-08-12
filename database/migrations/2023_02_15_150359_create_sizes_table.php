@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('size_number', 5);
             $table->timestamps();
+
         });
     }
 

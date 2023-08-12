@@ -14,7 +14,22 @@
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <div class="col-md-12">
-                                    <label for="group_name"><p class="text-label">Size Number</p></label>
+                                    
+                                    <label for=""><p class="text-label">Size type:</p></label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="size_type" id="size_us" value="us">
+                                        <label class="form-check-label" for="size_us">
+                                          US size
+                                        </label>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="size_type" id="size_uk" value="uk">
+                                        <label class="form-check-label" for="size_uk">
+                                          UK size
+                                        </label>
+                                    </div>
+
+                                    {{-- <label for="group_name"><p class="text-label">Enter Size Number</p></label>
                                     <input
                                         type="text&number"
                                         class="form-control rounded-0 fw-500 mb-2"
@@ -24,8 +39,7 @@
                                         name="size_number"
                                         placeholder="size number..."
                                         required
-                                    >
-
+                                    > --}}
                                     <div class="d-flex mt-4 justify-content-end">
                                         <a
                                             class="btn btn-outline-danger shadow rounded-1 py-1 me-2 text-sm"

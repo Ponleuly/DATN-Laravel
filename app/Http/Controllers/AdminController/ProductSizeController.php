@@ -13,7 +13,7 @@ class ProductSizeController extends Controller
     
     public function product_size_list()
     {
-        $sizes = Sizes::orderBy('size_number', 'desc')->paginate(10);
+        $sizes = Sizes::orderBy('size_number', 'asc')->paginate(10);
         $count = 1;
         $search_text = '';
         return view(
@@ -72,12 +72,21 @@ class ProductSizeController extends Controller
                 'message' => 'Size number ' . $size->size_number . ' is added.'
             ]);
         } else {
+           // return dd($request->toArray());
+
             $find_size = Sizes::where('size_number', $request->size_number)->first();
             if($find_size){
                 return redirect('/admin/product-size-add')
                     ->with('alert', 'Product size ' . '"' .$request->size_number . '"' . ' already existed !');
             }
             $input = $request->all();
+
+            // if($request->size_type == 'us'){
+            //     $input['size_number'] = ($request->size_number + 31.5);
+            // }else if($request->size_type == 'uk'){
+            //     $input['size_number'] = ($request->size_number + 32.5);
+            // }
+
             Sizes::create($input);
             return redirect('/admin/product-size-list')
                 ->with('message', 'Product size ' . $request->size_number . ' is added successfully!');
